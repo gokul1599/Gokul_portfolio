@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Metadata -->
+  <title>Gokul Karpurapu — AI/ML Developer & Product Builder | GOKUL LABS</title>
+  <meta name="title" content="Gokul Karpurapu — AI/ML Developer & Product Builder | GOKUL LABS">
+  <meta name="description" content="Gokul Karpurapu is a CSE AI/ML student, developer and product builder exploring AI, software and real-world problems through products like VALTORA and LifeHub.">
+  <meta name="keywords" content="Gokul Karpurapu, Gokul Labs, AI Developer, ML Engineer, Product Builder, Valtora, LifeHub, CSE AI/ML, Machine Learning Portfolio">
+  <meta name="author" content="Gokul Karpurapu">
+  <meta name="theme-color" content="#050508">
+  <link rel="canonical" href="https://gokul1599.github.io/gokul-labs/">
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://gokul1599.github.io/gokul-labs/">
+  <meta property="og:title" content="Gokul Karpurapu — AI/ML Developer & Product Builder | GOKUL LABS">
+  <meta property="og:description" content="CSE AI/ML student and product builder turning ideas into intelligent, usable products. Creator of VALTORA & LifeHub.">
+  <meta property="og:site_name" content="GOKUL LABS">
+  
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://gokul1599.github.io/gokul-labs/">
+  <meta name="twitter:title" content="Gokul Karpurapu — AI/ML Developer & Product Builder | GOKUL LABS">
+  <meta name="twitter:description" content="CSE AI/ML student and product builder turning ideas into intelligent, usable products. Creator of VALTORA & LifeHub.">
+
+  <!-- Modern Vector Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050508' stroke='%23b5ff4d' stroke-width='1.5'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='900' fill='%23b5ff4d' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+
+  <!-- Typography & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Space+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Interactive 3D WebGL Canvas Backdrop for AI Core -->
+  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Cursor Glow & Noise -->
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Primary Navigation -->
+  <header class="nav-bar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-identity" aria-label="Gokul Labs Home">
+        <span class="brand-badge">G</span>
+        <span class="brand-text">GOKUL <span class="brand-accent">LABS</span></span>
+        <span class="brand-indicator" title="System Online"></span>
+      </a>
+
+      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#intelligence" class="nav-link">Intelligence</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#stack" class="nav-link">Stack</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#journey" class="nav-link">Journey</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="cta-pill" href="#contact">
+          <span>Let's talk</span>
+          <svg class="cta-arrow" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <button class="mobile-toggle" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar bar-1"></span>
+          <span class="bar bar-2"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Pinned Cinematic Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="status-badge reveal-fade">
+            <span class="pulse-dot"></span>
+            <span class="status-label">SYSTEM ONLINE</span>
+            <span class="status-divider">/</span>
+            <span class="status-highlight">AVAILABLE TO BUILD</span>
+          </div>
+
+          <div class="positioning-kicker reveal-fade" style="--delay: 100ms;">
+            CSE • ARTIFICIAL INTELLIGENCE & MACHINE LEARNING
+          </div>
+
+          <h1 class="hero-title reveal-fade" style="--delay: 200ms;">
+            <span class="title-line">I BUILD</span>
+            <span class="title-line gradient-text">INTELLIGENT</span>
+            <span class="title-line">EXPERIENCES.</span>
+          </h1>
+
+          <p class="hero-description reveal-fade" style="--delay: 300ms;">
+            Student. Developer. Product builder. Exploring the intersection of
+            <strong>AI, software, and real-world problems</strong> — one project at a time.
+          </p>
+
+          <div class="hero-cta-group reveal-fade" style="--delay: 400ms;">
+            <a class="btn-primary" href="#work">
+              <span>EXPLORE WORK</span>
+              <svg viewBox="0 0 14 14" fill="none" class="btn-icon">
+                <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <a class="btn-ghost" href="https://github.com/gokul1599" target="_blank" rel="noopener noreferrer">
+              <span>GITHUB</span>
+              <svg viewBox="0 0 14 14" fill="none" class="btn-icon">
+                <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+
+          <!-- Hero Story Pipeline Ticker -->
+          <div class="story-pipeline reveal-fade" style="--delay: 500ms;">
+            <div class="pipeline-tag">PIPELINE</div>
+            <div class="pipeline-track">
+              <span class="step">IDEA</span>
+              <span class="arrow">→</span>
+              <span class="step">THINK</span>
+              <span class="arrow">→</span>
+              <span class="step">BUILD</span>
+              <span class="arrow">→</span>
+              <span class="step highlight">VALTORA</span>
+              <span class="arrow">→</span>
+              <span class="step highlight">LIFEHUB</span>
+              <span class="arrow">→</span>
+              <span class="step next">FUTURE BUILDS</span>
+            </div>
+          </div>
+
+          <!-- Quick Metrics -->
+          <div class="hero-metrics-bar reveal-fade" style="--delay: 600ms;">
+            <div class="metric-item">
+              <span class="metric-val">02</span>
+              <span class="metric-lbl">Featured Products</span>
+            </div>
+            <div class="metric-separator"></div>
+            <div class="metric-item">
+              <span class="metric-val">AI/ML</span>
+              <span class="metric-lbl">Core Focus</span>
+            </div>
+            <div class="metric-separator"></div>
+            <div class="metric-item">
+              <span class="metric-val">100%</span>
+              <span class="metric-lbl">Builder Mindset</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Right: Interactive Builder Terminal & 3D Singularity Anchor -->
+        <div class="hero-visual reveal-fade" style="--delay: 350ms;">
+          <!-- 3D Orbit rings background glow -->
+          <div class="orbit-visual-ring ring-1" aria-hidden="true"></div>
+          <div class="orbit-visual-ring ring-2" aria-hidden="true"></div>
+
+          <!-- Interactive Terminal Card -->
+          <div class="terminal-card tilt-card" id="hero-terminal" data-tilt="12">
+            <div class="terminal-header">
+              <div class="terminal-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-amber"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <div class="terminal-path">gokul@labs ~ /builder</div>
+              <div class="terminal-badge">LIVE REPL</div>
+            </div>
+            
+            <div class="terminal-screen">
+              <div class="scanlines" aria-hidden="true"></div>
+              <div class="code-line"><span class="line-num">01</span><span class="tok-kw">const</span> <span class="tok-var">builder</span> = {</div>
+              <div class="code-line indent"><span class="line-num">02</span><span class="tok-prop">name</span>: <span class="tok-str">"Gokul Karpurapu"</span>,</div>
+              <div class="code-line indent"><span class="line-num">03</span><span class="tok-prop">role</span>: <span class="tok-str">"CSE AI/ML Student & Builder"</span>,</div>
+              <div class="code-line indent"><span class="line-num">04</span><span class="tok-prop">focus</span>: [<span class="tok-str">"Artificial Intelligence"</span>, <span class="tok-str">"Web Apps"</span>],</div>
+              <div class="code-line indent"><span class="line-num">05</span><span class="tok-prop">shipping</span>: <span class="tok-bool">true</span>,</div>
+              <div class="code-line indent"><span class="line-num">06</span><span class="tok-prop">ideas</span>: <span class="tok-inf">Infinity</span></div>
+              <div class="code-line"><span class="line-num">07</span>};</div>
+              <div class="code-line result-line">
+                <span class="line-num">08</span>
+                <span class="repl-indicator">›</span>
+                <span class="tok-fn">system</span>.<span class="tok-method">ready</span>() <span class="terminal-cursor"></span>
+              </div>
+            </div>
+
+            <div class="terminal-footer">
+              <span class="footer-chip">NODE v24 // ES2026</span>
+              <span class="footer-status"><span class="mini-pulse"></span> READY TO SHIP</span>
+            </div>
+          </div>
+
+          <!-- Floating Ambient Lab Chips -->
+          <div class="floating-chip chip-ai">
+            <span class="chip-dot"></span>
+            <span>AI / ML RESEARCH</span>
+          </div>
+          <div class="floating-chip chip-cycle">
+            <span>BUILD → LEARN → REPEAT</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 01: THE INTELLIGENCE CORE -->
+    <section class="section-wrapper" id="intelligence">
+      <div class="section-container">
+        <div class="section-header-meta reveal">
+          <span class="section-number">01</span>
+          <span class="section-tag">HOW I BUILD</span>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="section-title-row reveal">
+          <div>
+            <h2 class="section-heading">THE INTELLIGENCE<br><span class="gradient-text">CORE.</span></h2>
+            <p class="section-subtext">
+              An engineering methodology inspired by research labs: transforming unstructured ambiguity into reliable, usable software.
+            </p>
+          </div>
+          <div class="cycle-pill-banner">
+            <span>IDEA</span> → <span>INTELLIGENCE</span> → <span>PRODUCT</span>
+          </div>
+        </div>
+
+        <!-- 4-Stage Interactive Architecture Grid -->
+        <div class="stages-container reveal">
+          <div class="stage-card tilt-card" data-stage="1">
+            <div class="stage-top">
+              <span class="stage-index">01</span>
+              <span class="stage-badge">PHASE I</span>
+            </div>
+            <h3 class="stage-title">UNDERSTAND</h3>
+            <p class="stage-desc">
+              Deconstruct the core problem. Strip away superficial symptoms to uncover root needs, user friction points, and true leverage opportunities.
+            </p>
+            <div class="stage-points">
+              <span>• Problem Discovery</span>
+              <span>• First-Principles Framing</span>
+            </div>
+            <div class="stage-indicator"></div>
+          </div>
+
+          <div class="stage-card tilt-card" data-stage="2">
+            <div class="stage-top">
+              <span class="stage-index">02</span>
+              <span class="stage-badge">PHASE II</span>
+            </div>
+            <h3 class="stage-title">RESEARCH</h3>
+            <p class="stage-desc">
+              Examine model architectures, algorithmic paradigms, and state-of-the-art developer tooling to identify the most robust technical solution.
+            </p>
+            <div class="stage-points">
+              <span>• AI/ML Literature</span>
+              <span>• Technical Feasibility</span>
+            </div>
+            <div class="stage-indicator"></div>
+          </div>
+
+          <div class="stage-card tilt-card" data-stage="3">
+            <div class="stage-top">
+              <span class="stage-index">03</span>
+              <span class="stage-badge">PHASE III</span>
+            </div>
+            <h3 class="stage-title">CHALLENGE</h3>
+            <p class="stage-desc">
+              Question default assumptions. Stress-test latency, edge cases, user cognitive load, and UX ergonomics before committing to production architecture.
+            </p>
+            <div class="stage-points">
+              <span>• Constraint Testing</span>
+              <span>• UX Refinement</span>
+            </div>
+            <div class="stage-indicator"></div>
+          </div>
+
+          <div class="stage-card tilt-card active" data-stage="4">
+            <div class="stage-top">
+              <span class="stage-index">04</span>
+              <span class="stage-badge highlight">PHASE IV</span>
+            </div>
+            <h3 class="stage-title">BUILD</h3>
+            <p class="stage-desc">
+              Translate design blueprints into working, production-grade software with modern full-stack code, reactive interfaces, and measurable impact.
+            </p>
+            <div class="stage-points">
+              <span>• Production Delivery</span>
+              <span>• Iterative Shipping</span>
+            </div>
+            <div class="stage-indicator"></div>
+          </div>
+        </div>
+
+        <!-- Continuous Builder Cycle Bar -->
+        <div class="builder-axiom-strip reveal">
+          <span class="axiom-step">LEARNING</span>
+          <span class="axiom-arrow">→</span>
+          <span class="axiom-step">BUILDING</span>
+          <span class="axiom-arrow">→</span>
+          <span class="axiom-step">TESTING</span>
+          <span class="axiom-arrow">→</span>
+          <span class="axiom-step">IMPROVING</span>
+          <span class="axiom-arrow">→</span>
+          <span class="axiom-step highlight">SHIPPING</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: ABOUT -->
+    <section class="section-wrapper" id="about">
+      <div class="section-container">
+        <div class="section-header-meta reveal">
+          <span class="section-number">02</span>
+          <span class="section-tag">ABOUT ME</span>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="about-editorial-grid">
+          <div class="about-hero-text reveal">
+            <h2 class="editorial-heading">
+              NOT JUST LEARNING<br>
+              <span class="gradient-text">TECHNOLOGY.</span><br>
+              BUILDING WITH IT.
+            </h2>
+
+            <div class="about-bio-cards">
+              <div class="bio-card">
+                <div class="bio-tag">BUILDER PERSPECTIVE</div>
+                <p class="bio-lead">
+                  I'm <strong>Gokul Karpurapu</strong>, a CSE AI/ML student who treats software engineering as an experimental craft.
+                </p>
+                <p class="bio-body">
+                  I like taking an idea, breaking down the problem, learning the technology required, and turning the concept into a usable, high-performance product. My current work spans artificial intelligence, startup intelligence platforms, modern web architecture, and user-centric software.
+                </p>
+              </div>
+
+              <div class="identity-chips-wrap">
+                <span class="id-chip">CSE AI/ML Student</span>
+                <span class="id-chip">Developer</span>
+                <span class="id-chip">Product Builder</span>
+                <span class="id-chip">AI/ML Explorer</span>
+                <span class="id-chip">Startup Experimenter</span>
+                <span class="id-chip highlight">Future Founder</span>
+              </div>
+            </div>
+
+            <div class="editorial-signature">
+              <span class="sig-monogram">GK</span>
+              <span class="sig-cross">×</span>
+              <span class="sig-brand">LABS</span>
+              <span class="sig-caption">// PERSONAL PRODUCT LABORATORY</span>
+            </div>
+          </div>
+
+          <!-- About Right: Interactive Live Lab Stats & Focus Hub -->
+          <div class="about-stats-panel reveal">
+            <div class="stat-card">
+              <div class="stat-num" data-counter="2">02</div>
+              <div class="stat-title">FEATURED PRODUCTS</div>
+              <div class="stat-desc">VALTORA (Startup AI Co-Founder) and LifeHub (Daily Operating System).</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-num">AI/ML</div>
+              <div class="stat-title">CORE DIRECTION</div>
+              <div class="stat-desc">Neural architectures, LLM automation, agentic workflows and practical applications.</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-num">24/7</div>
+              <div class="stat-title">CURIOSITY MODE</div>
+              <div class="stat-desc">Constantly dissecting how top-tier products, systems, and AI models operate.</div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-num">∞</div >
+              <div class="stat-title">FUTURE EXPERIMENTS</div>
+              <div class="stat-desc">A continuous pipeline of prototypes, experiments, and intelligent products in development.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03: TOOLKIT / STACK -->
+    <section class="section-wrapper" id="stack">
+      <div class="section-container">
+        <div class="section-header-meta reveal">
+          <span class="section-number">03</span>
+          <span class="section-tag">ENGINEERING TOOLKIT</span>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="section-title-row reveal">
+          <div>
+            <h2 class="section-heading">THE STACK<br><span class="gradient-text">BEHIND THE BUILDS.</span></h2>
+            <p class="section-subtext">
+              Technologies and mental models I use to translate concepts into working, production-grade software. No fake percentages — only real tools applied to real problems.
+            </p>
+          </div>
+          <div class="stack-badge-legend">
+            <span>LANGUAGES</span> • <span>AI/ML</span> • <span>SYSTEMS</span> • <span>PRODUCT</span>
+          </div>
+        </div>
+
+        <!-- Tech Stack Cards Constellation -->
+        <div class="stack-constellation reveal">
+          <div class="stack-card tilt-card" data-category="ai">
+            <div class="stack-top">
+              <span class="stack-num">01</span>
+              <span class="stack-badge ai">AI / ML</span>
+            </div>
+            <h3 class="stack-title">AI / Machine Learning</h3>
+            <p class="stack-desc">
+              Neural architectures, prompt engineering, heuristic models, LLM orchestration, and intelligent system workflows.
+            </p>
+            <div class="stack-tags"><span>Algorithms</span><span>Transformers</span><span>Data</span></div>
+          </div>
+
+          <div class="stack-card tilt-card" data-category="lang">
+            <div class="stack-top">
+              <span class="stack-num">02</span>
+              <span class="stack-badge lang">CORE</span>
+            </div>
+            <h3 class="stack-title">Python</h3>
+            <p class="stack-desc">
+              Primary language for machine learning, AI scripting, computational logic, data processing, and automation.
+            </p>
+            <div class="stack-tags"><span>AI Modeling</span><span>Backend</span><span>Automation</span></div>
+          </div>
+
+          <div class="stack-card tilt-card" data-category="web">
+            <div class="stack-top">
+              <span class="stack-num">03</span>
+              <span class="stack-badge web">FRONTEND</span>
+            </div>
+            <h3 class="stack-title">JavaScript / Modern Web</h3>
+            <p class="stack-desc">
+              Dynamic client interfaces, interactive state handling, asynchronous networking, and responsive web applications.
+            </p>
+            <div class="stack-tags"><span>ES6+</span><span>Async/Await</span><span>DOM APIs</span></div>
+          </div>
+
+          <div class="stack-card tilt-card" data-category="web">
+            <div class="stack-top">
+              <span class="stack-num">04</span>
+              <span class="stack-badge web">UI/UX</span>
+            </div>
+            <h3 class="stack-title">HTML5 / Modern CSS</h3>
+            <p class="stack-desc">
+              Semantic markup, CSS Grid & Flexbox, micro-interactions, responsive design systems, and glassmorphic UI.
+            </p>
+            <div class="stack-tags"><span>Glassmorphism</span><span>Animations</span><span>Responsive</span></div>
+          </div>
+
+          <div class="stack-card tilt-card" data-category="lang">
+            <div class="stack-top">
+              <span class="stack-num">05</span>
+              <span class="stack-badge lang">SYSTEMS</span>
+            </div>
+            <h3 class="stack-title">Java</h3>
+            <p class="stack-desc">
+              Object-oriented design, fundamental software engineering principles, robust typing, and core CS concepts.
+            </p>
+            <div class="stack-tags"><span>OOP</span><span>Data Structures</span><span>Clean Code</span></div>
+          </div>
+
+          <div class="stack-card tilt-card" data-category="lang">
+            <div class="stack-top">
+              <span class="stack-num">06</span>
+              <span class="stack-badge lang">ALGO</span>
+            </div>
+            <h3 class="stack-title">C++</h3>
+            <p class="stack-desc">
+              High-performance computational problem solving, memory awareness, algorithmic efficiency, and CS foundations.
+            </p>
+            <div class="stack-tags"><span>Problem Solving</span><span>Algorithms</span><span>Performance</span></div>
+          </div>
+
+          <div class="stack-card tilt-card" data-category="tools">
+            <div class="stack-top">
+              <span class="stack-num">07</span>
+              <span class="stack-badge tools">WORKFLOW</span>
+            </div>
+            <h3 class="stack-title">Git & GitHub</h3>
+            <p class="stack-desc">
+              Version control, collaborative branching, deployment workflows, and open-source codebase management.
+            </p>
+            <div class="stack-tags"><span>CI/CD</span><span>Version Control</span><span>Open Source</span></div>
+          </div>
+
+          <div class="stack-card tilt-card" data-category="product">
+            <div class="stack-top">
+              <span class="stack-num">08</span>
+              <span class="stack-badge product">FOUNDER</span>
+            </div>
+            <h3 class="stack-title">Product Thinking</h3>
+            <p class="stack-desc">
+              Idea validation, market sizing, MVP scoping, UX ergonomics, user problem-solution fit, and rapid shipping.
+            </p>
+            <div class="stack-tags"><span>MVP Scoping</span><span>UX Ergonomics</span><span>Idea to App</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: SELECTED WORK (CINEMATIC PRODUCT SHOWCASE) -->
+    <section class="section-wrapper" id="work">
+      <div class="section-container">
+        <div class="section-header-meta reveal">
+          <span class="section-number">04</span>
+          <span class="section-tag">SELECTED WORK</span>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="section-title-row reveal">
+          <div>
+            <h2 class="section-heading">TWO IDEAS.<br><span class="gradient-text">REAL PRODUCTS.</span></h2>
+            <p class="section-subtext">
+              Projects that represent how I think about software: useful, ambitious, and built around a real problem.
+            </p>
+          </div>
+          <div class="work-index-counter">
+            <span class="current">02</span> / <span>02 LIVE APPS</span>
+          </div>
+        </div>
+
+        <!-- Dynamic Projects Container (Renders projects from data/projects.js, with built-in fallback) -->
+        <div id="projects-container" class="projects-wrapper">
+          
+          <!-- PROJECT 01: VALTORA -->
+          <article class="project-card valtora-theme reveal tilt-card" data-project-id="valtora">
+            <div class="project-inner-grid">
+              <div class="project-info-pane">
+                <div class="project-header-meta">
+                  <span class="project-badge">01 // AI PRODUCT / STARTUP INTELLIGENCE</span>
+                  <span class="project-year">2026</span>
+                </div>
+
+                <div class="project-identity">
+                  <div class="project-brand-mark v-mark">V</div>
+                  <h3 class="project-title">VALTORA</h3>
+                </div>
+
+                <p class="project-tagline">Turn an idea into a company — in minutes.</p>
+                <p class="project-description">
+                  VALTORA is an analytical AI Co-Founder concept designed to help founders validate startup ideas and generate structured company strategy — from market sizing and MVP scope to technology architecture, roadmap and go-to-market planning.
+                </p>
+
+                <!-- Process Sequence -->
+                <div class="project-pipeline-flow">
+                  <div class="flow-node active">
+                    <span class="node-bullet"></span>
+                    <span>VALIDATE</span>
+                  </div>
+                  <span class="flow-separator">→</span>
+                  <div class="flow-node">
+                    <span class="node-bullet"></span>
+                    <span>ARCHITECT</span>
+                  </div>
+                  <span class="flow-separator">→</span>
+                  <div class="flow-node">
+                    <span class="node-bullet"></span>
+                    <span>LAUNCH</span>
+                  </div>
+                </div>
+
+                <div class="project-tech-tags">
+                  <span class="tech-tag">AI</span>
+                  <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">Startup Intelligence</span>
+                  <span class="tech-tag">LLM Strategy</span>
+                </div>
+
+                <div class="project-cta-group">
+                  <a class="btn-live" href="https://valtora-swart.vercel.app" target="_blank" rel="noopener noreferrer">
+                    <span>OPEN LIVE APP</span>
+                    <svg viewBox="0 0 12 12" fill="none" class="btn-arrow"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                  <a class="btn-source" href="https://github.com/gokul1599/valtora" target="_blank" rel="noopener noreferrer">
+                    <span>VIEW SOURCE</span>
+                    <svg viewBox="0 0 12 12" fill="none" class="btn-arrow"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Project 01 Visual Art: AI Neural Topology & Strategy Blueprint -->
+              <div class="project-visual-pane">
+                <div class="valtora-canvas-art">
+                  <div class="art-grid-grid" aria-hidden="true"></div>
+                  <div class="radar-scanline" aria-hidden="true"></div>
+                  
+                  <div class="singularity-core">
+                    <div class="singularity-pulse"></div>
+                    <span class="singularity-letter">V</span>
+                  </div>
+
+                  <!-- Topology Blueprint Nodes -->
+                  <div class="topology-node node-market">
+                    <div class="node-dot"></div>
+                    <div class="node-label">MARKET SIZING (TAM/SAM)</div>
+                  </div>
+
+                  <div class="topology-node node-mvp">
+                    <div class="node-dot"></div>
+                    <div class="node-label">MVP SCOPE ENGINE</div>
+                  </div>
+
+                  <div class="topology-node node-tech">
+                    <div class="node-dot"></div>
+                    <div class="node-label">TECH ARCHITECTURE</div>
+                  </div>
+
+                  <div class="topology-node node-gtm">
+                    <div class="node-dot"></div>
+                    <div class="node-label">GO-TO-MARKET VECTOR</div>
+                  </div>
+
+                  <svg class="topology-connections" viewBox="0 0 400 300" aria-hidden="true">
+                    <line x1="200" y1="150" x2="80" y2="70" stroke="rgba(181,255,77,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
+                    <line x1="200" y1="150" x2="320" y2="70" stroke="rgba(181,255,77,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
+                    <line x1="200" y1="150" x2="90" y2="230" stroke="rgba(181,255,77,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
+                    <line x1="200" y1="150" x2="310" y2="230" stroke="rgba(181,255,77,0.3)" stroke-width="1" stroke-dasharray="4 2"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Inter-Project Transition Marker -->
+          <div class="project-transition-divider reveal">
+            <span class="trans-label">01 VALTORA</span>
+            <span class="trans-bar"></span>
+            <span class="trans-label">02 LIFEHUB</span>
+          </div>
+
+          <!-- PROJECT 02: LIFEHUB -->
+          <article class="project-card lifehub-theme reveal tilt-card" data-project-id="lifehub">
+            <div class="project-inner-grid">
+              <div class="project-info-pane">
+                <div class="project-header-meta">
+                  <span class="project-badge">02 // LIFE PLATFORM</span>
+                  <span class="project-year">2026</span>
+                </div>
+
+                <div class="project-identity">
+                  <div class="project-brand-mark l-mark">L</div>
+                  <h3 class="project-title">LIFEHUB</h3>
+                </div>
+
+                <p class="project-tagline">One place for everyday life.</p>
+                <p class="project-description">
+                  A daily-life platform concept bringing schedules, reminders, motivation, expenses, weather and an AI assistant into one responsive experience.
+                </p>
+
+                <!-- Process Sequence -->
+                <div class="project-pipeline-flow">
+                  <div class="flow-node active">
+                    <span class="node-bullet cyan"></span>
+                    <span>PLAN</span>
+                  </div>
+                  <span class="flow-separator">→</span>
+                  <div class="flow-node">
+                    <span class="node-bullet cyan"></span>
+                    <span>MANAGE</span>
+                  </div>
+                  <span class="flow-separator">→</span>
+                  <div class="flow-node">
+                    <span class="node-bullet cyan"></span>
+                    <span>IMPROVE</span>
+                  </div>
+                </div>
+
+                <div class="project-tech-tags">
+                  <span class="tech-tag">Web</span>
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">Productivity</span>
+                  <span class="tech-tag">AI Assistant</span>
+                </div>
+
+                <div class="project-cta-group">
+                  <a class="btn-live cyan-btn" href="https://lifehub-sage.vercel.app" target="_blank" rel="noopener noreferrer">
+                    <span>OPEN LIVE APP</span>
+                    <svg viewBox="0 0 12 12" fill="none" class="btn-arrow"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                  <a class="btn-source" href="https://github.com/gokul1599/lifehub" target="_blank" rel="noopener noreferrer">
+                    <span>VIEW SOURCE</span>
+                    <svg viewBox="0 0 12 12" fill="none" class="btn-arrow"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </a>
+                </div>
+              </div>
+
+              <!-- Project 02 Visual Art: LifeHub Dynamic Operating Dashboard -->
+              <div class="project-visual-pane">
+                <div class="lifehub-dashboard-ui">
+                  <div class="dash-chrome">
+                    <div class="dash-title">LIFEHUB OS // CONSOLE</div>
+                    <div class="dash-clock" id="live-clock">09:41 AM</div>
+                  </div>
+
+                  <div class="dash-grid-cards">
+                    <!-- Daily Agenda Widget -->
+                    <div class="dash-widget widget-agenda">
+                      <div class="widget-label">PRIORITY SCHEDULE</div>
+                      <div class="agenda-item active">
+                        <span class="agenda-status"></span>
+                        <span class="agenda-task">Deep Learning / AI Architecture</span>
+                        <span class="agenda-time">10:00</span>
+                      </div>
+                      <div class="agenda-item">
+                        <span class="agenda-status done"></span>
+                        <span class="agenda-task">Valtora Engine Code Review</span>
+                        <span class="agenda-time">14:30</span>
+                      </div>
+                      <div class="agenda-item">
+                        <span class="agenda-status pending"></span>
+                        <span class="agenda-task">Workout & Physical Reset</span>
+                        <span class="agenda-time">18:00</span>
+                      </div>
+                    </div>
+
+                    <!-- Metrics & Weather Mini Widgets -->
+                    <div class="dash-mini-row">
+                      <div class="dash-widget widget-stat">
+                        <div class="widget-label">WEATHER</div>
+                        <div class="stat-value">26°C <span>Optimal</span></div>
+                      </div>
+                      <div class="dash-widget widget-stat">
+                        <div class="widget-label">EXPENSES</div>
+                        <div class="stat-value">TRACKED <span>On Budget</span></div>
+                      </div>
+                    </div>
+
+                    <!-- Embedded AI Assistant Card -->
+                    <div class="dash-widget widget-assistant">
+                      <div class="assistant-header">
+                        <span class="assistant-sparkle">✦</span>
+                        <span>AI LIFE ASSISTANT</span>
+                      </div>
+                      <p class="assistant-quote">
+                        "Your deep work block begins in 20 minutes. All system resources allocated."
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="dash-bottom-status">
+                    <span>● 03 OF 03 TASKS MONITORED</span>
+                    <span class="sync-text">AUTO-SYNC ACTIVE</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: JOURNEY -->
+    <section class="section-wrapper" id="journey">
+      <div class="section-container">
+        <div class="section-header-meta reveal">
+          <span class="section-number">05</span>
+          <span class="section-tag">THE TRAJECTORY</span>
+          <span class="section-line"></span>
+        </div>
+
+        <div class="journey-layout">
+          <div class="journey-lead reveal">
+            <h2 class="section-heading">LEARN.<br><span class="gradient-text">BUILD.</span><br>LEVEL UP.</h2>
+            <p class="section-subtext">
+              Engineering is not a static degree; it is a compounding loop of curiosity, experimentation, and production execution.
+            </p>
+          </div>
+
+          <!-- Vertical Interactive Timeline -->
+          <div class="timeline-container reveal">
+            <div class="timeline-stem" aria-hidden="true"></div>
+
+            <div class="timeline-milestone">
+              <div class="milestone-marker current">
+                <span class="marker-dot"></span>
+              </div>
+              <div class="milestone-content tilt-card">
+                <div class="milestone-tag">NOW // CURRENT FOCUS</div>
+                <h3 class="milestone-title">CSE — AI & Machine Learning</h3>
+                <p class="milestone-text">
+                  Building deep mathematical and computational foundations in machine learning, neural networks, data structures, algorithms, and full-stack software development.
+                </p>
+                <div class="milestone-badges">
+                  <span>Algorithms</span><span>Deep Learning</span><span>Web Engineering</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-milestone">
+              <div class="milestone-marker build">
+                <span class="marker-dot"></span>
+              </div>
+              <div class="milestone-content tilt-card">
+                <div class="milestone-tag">BUILD // SHIPPED SYSTEMS</div>
+                <h3 class="milestone-title">VALTORA + LifeHub</h3>
+                <p class="milestone-text">
+                  Turning conceptual ideas into living, deployed web products. Learning architecture, API boundaries, state management, and real-world deployment firsthand.
+                </p>
+                <div class="milestone-badges">
+                  <span>Product Prototyping</span><span>Vercel Deployments</span><span>Production Code</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-milestone">
+              <div class="milestone-marker future">
+                <span class="marker-dot"></span>
+              </div>
+              <div class="milestone-content tilt-card">
+                <div class="milestone-tag">NEXT // FORWARD HORIZON</div>
+                <h3 class="milestone-title">More Intelligent Products</h3>
+                <p class="milestone-text">
+                  Venturing further into autonomous agent frameworks, generative intelligence tools, production AI pipelines, and ambitious startup products.
+                </p>
+                <div class="milestone-badges">
+                  <span>Autonomous AI</span><span>Startup Systems</span><span>Applied Intelligence</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: WHAT'S NEXT? -->
+    <section class="section-wrapper next-horizon" id="future">
+      <div class="section-container text-center reveal">
+        <div class="section-header-meta center">
+          <span class="section-number">06</span>
+          <span class="section-tag">WHAT'S NEXT?</span>
+        </div>
+
+        <h2 class="horizon-title">
+          THE LAB NEVER<br>
+          <span class="gradient-text">STOPS RUNNING.</span>
+        </h2>
+
+        <p class="horizon-subtext">
+          Continuous ideation, rapid prototyping, and shipping intelligent tools.
+        </p>
+
+        <div class="horizon-chips-matrix">
+          <div class="matrix-chip">MORE IDEAS</div>
+          <div class="matrix-chip">MORE EXPERIMENTS</div>
+          <div class="matrix-chip">MORE INTELLIGENCE</div>
+          <div class="matrix-chip highlight">MORE PRODUCTS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07: CONTACT -->
+    <section class="section-wrapper contact-section" id="contact">
+      <div class="section-container text-center reveal">
+        <div class="section-header-meta center">
+          <span class="section-number">07</span>
+          <span class="section-tag">LET'S CONNECT</span>
+        </div>
+
+        <div class="contact-prompt-kicker">HAVE A PROBLEM WORTH BUILDING?</div>
+        
+        <h2 class="contact-main-heading">
+          Let's make<br>
+          <span class="gradient-text">something real.</span>
+        </h2>
+
+        <p class="contact-subtext">
+          I'm always interested in learning, collaborating, and turning ambitious concepts into useful, working software. Drop a line or follow along on GitHub.
+        </p>
+
+        <div class="contact-button-group">
+          <a class="btn-primary btn-large" href="mailto:gokulkarpurapu@gmail.com">
+            <span>gokulkarpurapu@gmail.com</span>
+            <svg viewBox="0 0 14 14" fill="none" class="btn-icon">
+              <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+
+          <a class="btn-ghost btn-large" href="https://github.com/gokul1599" target="_blank" rel="noopener noreferrer">
+            <span>GITHUB PROFILE</span>
+            <svg viewBox="0 0 14 14" fill="none" class="btn-icon">
+              <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand-wrap">
+        <div class="brand-identity">
+          <span class="brand-badge">G</span>
+          <span class="brand-text">GOKUL <span class="brand-accent">LABS</span></span>
+        </div>
+        <div class="footer-sublabel">CSE • ARTIFICIAL INTELLIGENCE & MACHINE LEARNING</div>
+      </div>
+
+      <div class="footer-status-pill">
+        <span class="pulse-dot"></span>
+        <span>SYSTEM ONLINE // AVAILABLE TO BUILD</span>
+      </div>
+
+      <div class="footer-meta">
+        <span>© <span id="copyright-year">2026</span> Gokul Karpurapu.</span>
+        <span class="footer-motto">BUILT WITH CURIOSITY.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Three.js (Local Vendor with CDN Fallback) -->
+  <script src="vendor/three.min.js"></script>
+  <script>
+    if (typeof THREE === 'undefined') {
+      document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>');
+    }
+  </script>
+
+  <!-- Project Registry Data -->
+  <script src="data/projects.js"></script>
+
+  <!-- Main Application Script -->
+  <script src="script.js"></script>
+</body>
+</html>
