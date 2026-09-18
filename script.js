@@ -239,12 +239,12 @@
 
       // 2. Camera Setup
       const camera = new THREE.PerspectiveCamera(
-        48,
+        46,
         window.innerWidth / window.innerHeight,
         0.1,
         180
       );
-      camera.position.set(0, 0, 26);
+      camera.position.set(0, 0, 22);
 
       // 3. Renderer with High Dynamic Range & Alpha Transparency
       const renderer = new THREE.WebGLRenderer({
@@ -263,18 +263,23 @@
       scene.add(archGroup);
 
       // 4. Lighting Rig
-      const ambientLight = new THREE.AmbientLight(0x0a0d14, 0.9);
+      const ambientLight = new THREE.AmbientLight(0x0a101d, 1.2);
       scene.add(ambientLight);
 
       // Key soft light behind typography
-      const keyLight = new THREE.DirectionalLight(0xe2e8f0, 0.85);
-      keyLight.position.set(5, 12, 18);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.6);
+      keyLight.position.set(8, 14, 18);
       scene.add(keyLight);
 
-      // Controlled rim light (subtle steel/cool cyan)
-      const rimLight = new THREE.PointLight(0x38bdf8, 0.45, 60);
-      rimLight.position.set(-15, -8, -5);
+      // Controlled rim light (electric cyan)
+      const rimLight = new THREE.PointLight(0x38bdf8, 2.8, 55);
+      rimLight.position.set(8, 2, 8);
       scene.add(rimLight);
+
+      // Deep violet accent light
+      const violetRimLight = new THREE.PointLight(0x818cf8, 1.8, 45);
+      violetRimLight.position.set(-12, -6, 6);
+      scene.add(violetRimLight);
 
       // Contact Ring Accent Light
       const contactLight = new THREE.PointLight(0xb5ff4d, 0.1, 40);
@@ -355,86 +360,194 @@
       techGrid.material.opacity = 0.22;
       archGroup.add(techGrid);
 
-      // D. Central Singularity Core & Precision Concentric Rings
+      // D. Central Singularity Core & Precision Living Architecture
       const singularityGroup = new THREE.Group();
-      singularityGroup.position.set(4, 0, -14);
       archGroup.add(singularityGroup);
 
-      // Precision Rings
-      const ringGeometries = [
-        { r: 4.8, segs: 64, color: 0x94a3b8, opacity: 0.4 },
-        { r: 7.2, segs: 72, color: 0x475569, opacity: 0.25 },
-        { r: 9.6, segs: 96, color: 0x334155, opacity: 0.18 }
+      function updateSingularityPosition() {
+        const isMobile = window.innerWidth < 900;
+        singularityGroup.position.set(isMobile ? 0 : 5.8, isMobile ? 2.2 : 0.0, 0);
+        singularityGroup.scale.setScalar(isMobile ? 0.72 : 1.0);
+      }
+      updateSingularityPosition();
+      window.addEventListener("resize", updateSingularityPosition);
+
+      // 1. Central Luminous Core & Multi-layer Glass Orb
+      const coreGeo = new THREE.SphereGeometry(1.85, 32, 32);
+      const coreMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      singularityGroup.add(coreMesh);
+
+      const corePointLight = new THREE.PointLight(0x38bdf8, 3.8, 35);
+      singularityGroup.add(corePointLight);
+
+      const coronaGeo = new THREE.SphereGeometry(2.15, 32, 32);
+      const coronaMat = new THREE.MeshBasicMaterial({
+        color: 0x93c5fd,
+        transparent: true,
+        opacity: 0.28,
+        blending: THREE.AdditiveBlending
+      });
+      const coronaMesh = new THREE.Mesh(coronaGeo, coronaMat);
+      singularityGroup.add(coronaMesh);
+
+      const glassSphereGeo = new THREE.SphereGeometry(2.45, 48, 48);
+      const glassSphereMat = new THREE.MeshPhysicalMaterial({
+        color: 0x0c1424,
+        metalness: 0.15,
+        roughness: 0.05,
+        transmission: 0.85,
+        thickness: 1.5,
+        transparent: true,
+        opacity: 0.7,
+        side: THREE.DoubleSide
+      });
+      const glassSphereMesh = new THREE.Mesh(glassSphereGeo, glassSphereMat);
+      singularityGroup.add(glassSphereMesh);
+
+      const sphereWireGeo = new THREE.WireframeGeometry(new THREE.SphereGeometry(2.48, 16, 16));
+      const sphereWireMat = new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.3 });
+      const sphereWire = new THREE.LineSegments(sphereWireGeo, sphereWireMat);
+      singularityGroup.add(sphereWire);
+
+      // 2. 3D Metallic Precision Orbit Rings with Satellites
+      const metallicRingMat = new THREE.MeshStandardMaterial({
+        color: 0xf1f5f9,
+        metalness: 0.95,
+        roughness: 0.15,
+        emissive: 0x0284c7,
+        emissiveIntensity: 0.2
+      });
+
+      const ringConfigs = [
+        { radius: 3.8, tube: 0.038, rot: [1.1, 0.35, 0.2], speed: 0.008, nodeRadius: 0.14 },
+        { radius: 5.2, tube: 0.042, rot: [-0.8, -0.45, 0.4], speed: -0.006, nodeRadius: 0.16 },
+        { radius: 6.8, tube: 0.046, rot: [0.4, 0.95, -0.3], speed: 0.005, nodeRadius: 0.18 }
       ];
 
-      const rings = [];
-      ringGeometries.forEach((rg, idx) => {
-        const ringGeo = new THREE.BufferGeometry();
-        const positions = [];
-        for (let j = 0; j <= rg.segs; j++) {
-          const theta = (j / rg.segs) * Math.PI * 2;
-          positions.push(Math.cos(theta) * rg.r, Math.sin(theta) * rg.r, 0);
-        }
-        ringGeo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-        const rLine = new THREE.Line(
-          ringGeo,
-          new THREE.LineBasicMaterial({ color: rg.color, transparent: true, opacity: rg.opacity })
-        );
-        rLine.rotation.x = Math.PI / 4 + idx * 0.2;
-        singularityGroup.add(rLine);
-        rings.push(rLine);
+      const metallicRings = [];
+      ringConfigs.forEach((cfg) => {
+        const ringHolder = new THREE.Group();
+        ringHolder.rotation.set(...cfg.rot);
+
+        const rGeo = new THREE.TorusGeometry(cfg.radius, cfg.tube, 16, 120);
+        const rMesh = new THREE.Mesh(rGeo, metallicRingMat);
+        ringHolder.add(rMesh);
+
+        // Satellite node dot
+        const nodeGeo = new THREE.SphereGeometry(cfg.nodeRadius, 16, 16);
+        const nodeMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+        const nodeMesh = new THREE.Mesh(nodeGeo, nodeMat);
+        nodeMesh.position.set(cfg.radius, 0, 0);
+        ringHolder.add(nodeMesh);
+
+        singularityGroup.add(ringHolder);
+        metallicRings.push({ group: ringHolder, speed: cfg.speed, node: nodeMesh, radius: cfg.radius });
       });
 
-      // Octagonal Inner Chamber Wireframe
-      const octGeo = new THREE.CylinderGeometry(2.6, 2.6, 3.8, 8, 1, true);
-      const octEdges = new THREE.LineSegments(
-        new THREE.EdgesGeometry(octGeo),
-        new THREE.LineBasicMaterial({ color: 0x64748b, transparent: true, opacity: 0.35 })
-      );
-      singularityGroup.add(octEdges);
+      // 3. Vertical Luminous Laser Beam Column
+      const beamCoreGeo = new THREE.CylinderGeometry(0.04, 0.04, 45, 16);
+      const beamCoreMat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.95 });
+      const beamCore = new THREE.Mesh(beamCoreGeo, beamCoreMat);
+      singularityGroup.add(beamCore);
 
-      // Vertical Luminous Laser Beam Column
-      const beamGeo = new THREE.CylinderGeometry(0.06, 0.09, 60, 16);
-      const beamMat = new THREE.MeshBasicMaterial({
+      const beamGlowGeo = new THREE.CylinderGeometry(0.24, 0.24, 45, 16);
+      const beamGlowMat = new THREE.MeshBasicMaterial({
         color: 0x38bdf8,
         transparent: true,
-        opacity: 0.65
+        opacity: 0.45,
+        blending: THREE.AdditiveBlending
       });
-      const verticalBeam = new THREE.Mesh(beamGeo, beamMat);
-      singularityGroup.add(verticalBeam);
+      const beamGlow = new THREE.Mesh(beamGlowGeo, beamGlowMat);
+      singularityGroup.add(beamGlow);
 
-      // 3D Floating Refraction Crystals & Tumbling Prisms (Matching Reference Scene)
+      const beamHaloGeo = new THREE.CylinderGeometry(0.7, 0.7, 45, 16);
+      const beamHaloMat = new THREE.MeshBasicMaterial({
+        color: 0x0284c7,
+        transparent: true,
+        opacity: 0.15,
+        blending: THREE.AdditiveBlending
+      });
+      const beamHalo = new THREE.Mesh(beamHaloGeo, beamHaloMat);
+      singularityGroup.add(beamHalo);
+
+      // 4. Floating Architectural Glass Panels in 3D
+      const slabGlassMat = new THREE.MeshPhysicalMaterial({
+        color: 0x0e1726,
+        roughness: 0.1,
+        metalness: 0.2,
+        transmission: 0.85,
+        transparent: true,
+        opacity: 0.45,
+        depthWrite: false
+      });
+      const slabEdgeMat = new THREE.LineBasicMaterial({ color: 0x64748b, transparent: true, opacity: 0.45 });
+
+      const glassSlabs = [
+        { geo: new THREE.BoxGeometry(4.2, 6.4, 0.06), pos: [-3.4, 1.2, -2.5], rot: [0.1, 0.35, -0.05] },
+        { geo: new THREE.BoxGeometry(3.6, 7.8, 0.06), pos: [3.6, -0.8, -3.0], rot: [-0.15, -0.4, 0.08] },
+        { geo: new THREE.BoxGeometry(4.8, 3.2, 0.06), pos: [0.2, -3.8, 1.6], rot: [0.3, 0.1, -0.1] }
+      ];
+
+      glassSlabs.forEach((s) => {
+        const m = new THREE.Mesh(s.geo, slabGlassMat);
+        m.position.set(...s.pos);
+        m.rotation.set(...s.rot);
+        const edge = new THREE.LineSegments(new THREE.EdgesGeometry(s.geo), slabEdgeMat);
+        m.add(edge);
+        singularityGroup.add(m);
+      });
+
+      // 5. Tumbling 3D Refraction Crystals & Prisms (6 Polyhedra)
       const crystalGroup = new THREE.Group();
       singularityGroup.add(crystalGroup);
 
-      const crystalGeo1 = new THREE.BoxGeometry(1.2, 1.5, 0.9);
-      const crystalGeo2 = new THREE.OctahedronGeometry(1.1);
       const crystalMat = new THREE.MeshPhysicalMaterial({
-        color: 0xc8e0ff,
-        metalness: 0.15,
-        roughness: 0.1,
+        color: 0xdbeafe,
+        metalness: 0.2,
+        roughness: 0.08,
+        transmission: 0.8,
+        thickness: 1.2,
         transparent: true,
-        opacity: 0.45,
-        transmission: 0.6,
-        thickness: 1.0
+        opacity: 0.65
       });
+      const crystalEdgeMat = new THREE.LineBasicMaterial({ color: 0x7dd3fc, transparent: true, opacity: 0.75 });
 
       const crystals = [
-        { mesh: new THREE.Mesh(crystalGeo1, crystalMat), pos: [-5.2, 3.8, 2.2], rotSpd: [0.012, 0.016, 0.008] },
-        { mesh: new THREE.Mesh(crystalGeo2, crystalMat), pos: [5.8, 4.4, -1.2], rotSpd: [-0.014, 0.01, 0.016] },
-        { mesh: new THREE.Mesh(crystalGeo1, crystalMat), pos: [-4.2, -3.2, 3.0], rotSpd: [0.009, -0.014, 0.012] },
-        { mesh: new THREE.Mesh(crystalGeo2, crystalMat), pos: [4.5, -2.8, 2.8], rotSpd: [-0.01, 0.015, -0.012] }
+        { mesh: new THREE.Mesh(new THREE.OctahedronGeometry(0.85), crystalMat), pos: [-4.2, 3.5, 1.8], rotSpd: [0.012, 0.016, 0.008], floatOffset: 0 },
+        { mesh: new THREE.Mesh(new THREE.IcosahedronGeometry(0.75), crystalMat), pos: [4.8, 3.8, 0.5], rotSpd: [-0.014, 0.012, 0.015], floatOffset: 1.2 },
+        { mesh: new THREE.Mesh(new THREE.BoxGeometry(0.8, 1.2, 0.8), crystalMat), pos: [-3.8, -2.8, 2.2], rotSpd: [0.009, -0.014, 0.012], floatOffset: 2.4 },
+        { mesh: new THREE.Mesh(new THREE.OctahedronGeometry(0.95), crystalMat), pos: [4.2, -2.5, 1.8], rotSpd: [-0.01, 0.015, -0.012], floatOffset: 3.6 },
+        { mesh: new THREE.Mesh(new THREE.DodecahedronGeometry(0.65), crystalMat), pos: [-1.8, 4.5, -1.0], rotSpd: [0.015, -0.01, 0.012], floatOffset: 4.8 },
+        { mesh: new THREE.Mesh(new THREE.OctahedronGeometry(0.7), crystalMat), pos: [2.5, -4.2, -0.8], rotSpd: [-0.012, -0.014, 0.01], floatOffset: 5.5 }
       ];
 
       crystals.forEach((c) => {
         c.mesh.position.set(...c.pos);
-        const edge = new THREE.LineSegments(
-          new THREE.EdgesGeometry(c.mesh.geometry),
-          new THREE.LineBasicMaterial({ color: 0x93c5fd, transparent: true, opacity: 0.65 })
-        );
+        const edge = new THREE.LineSegments(new THREE.EdgesGeometry(c.mesh.geometry), crystalEdgeMat);
         c.mesh.add(edge);
         crystalGroup.add(c.mesh);
       });
+
+      // 6. Ambient Quantum Dust / Starfield
+      const particleCount = 280;
+      const particleGeo = new THREE.BufferGeometry();
+      const particlePositions = new Float32Array(particleCount * 3);
+      for (let p = 0; p < particleCount; p++) {
+        particlePositions[p * 3] = (Math.random() - 0.5) * 45;
+        particlePositions[p * 3 + 1] = (Math.random() - 0.5) * 35;
+        particlePositions[p * 3 + 2] = (Math.random() - 0.5) * 30 - 5;
+      }
+      particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
+      const particleMat = new THREE.PointsMaterial({
+        color: 0x38bdf8,
+        size: 0.12,
+        transparent: true,
+        opacity: 0.65,
+        blending: THREE.AdditiveBlending
+      });
+      const particleSystem = new THREE.Points(particleGeo, particleMat);
+      scene.add(particleSystem);
 
       // E. Contact Architectural Precision Ring (Centrally Positioned for Section 07)
       const contactRingGeo = new THREE.BufferGeometry();
@@ -557,7 +670,10 @@
         // As we move between Valtora and LifeHub, geometry compresses into center, then blooms
         const projTransition = Math.sin(Math.max(0, Math.min(Math.PI, (smoothScroll - 0.62) * Math.PI * 4)));
         singularityGroup.scale.setScalar(1 - projTransition * 0.45);
-        singularityGroup.rotation.y = time * 0.15 + smoothScroll * Math.PI;
+        const targetTiltY = mouseX * 0.22;
+        const targetTiltX = -mouseY * 0.18;
+        singularityGroup.rotation.y += (targetTiltY - singularityGroup.rotation.y) * 0.04;
+        singularityGroup.rotation.x += (targetTiltX - singularityGroup.rotation.x) * 0.04;
 
         // 5. Contact Section & Architectural Ring (85% - 100%)
         const contactFactor = Math.max(0, Math.min(1, (smoothScroll - 0.82) * 6));
@@ -572,19 +688,29 @@
           contactLight.intensity += (0.05 - contactLight.intensity) * 0.05;
         }
 
-        // Concentric precision rings rotation
-        rings.forEach((r, idx) => {
-          r.rotation.z += 0.003 * (idx % 2 === 0 ? 1 : -1);
+        // 3D Metallic Precision Rings & Orbiting Satellites
+        metallicRings.forEach((mr, idx) => {
+          mr.group.rotation.z += mr.speed;
+          const angle = time * (0.5 + idx * 0.25);
+          mr.node.position.x = Math.cos(angle) * mr.radius;
+          mr.node.position.y = Math.sin(angle) * mr.radius;
         });
 
-        octEdges.rotation.y = time * 0.1;
+        // Core breathing & Wireframe Rotation
+        sphereWire.rotation.y = time * 0.08;
+        sphereWire.rotation.x = time * 0.04;
+        coronaMesh.scale.setScalar(1.0 + Math.sin(time * 2.0) * 0.035);
 
-        // Rotate 3D floating crystals
+        // Rotate 3D floating refraction crystals & hover sine wave
         crystals.forEach((c) => {
           c.mesh.rotation.x += c.rotSpd[0];
           c.mesh.rotation.y += c.rotSpd[1];
           c.mesh.rotation.z += c.rotSpd[2];
+          c.mesh.position.y = c.pos[1] + Math.sin(time * 1.6 + c.floatOffset) * 0.22;
         });
+
+        // Ambient particle drift
+        particleSystem.rotation.y = time * 0.015;
 
         // Dynamic light tracking
         keyLight.position.x = 5 + Math.sin(time * 0.2) * 3;
