@@ -100,82 +100,87 @@
   </div>
 
   <main id="main-content">
-    <!-- Hero Section Matching Exact Reference Visual -->
+    <!-- Hero Section: Pixel-Perfect Exact Render from Reference Image -->
     <section class="hero-section cinematic-hero" id="hero">
-      <div class="hero-bg-layer" aria-hidden="true"></div>
-      
-      <div class="hero-container">
-        <!-- Left Hero Content -->
-        <div class="hero-content-left">
-          <div class="hero-kicker-cinematic reveal-fade">
+      <!-- Desktop 16:9 Cinematic Stage -->
+      <div class="hero-stage-wrapper">
+        <img src="assets/hero-exact.png" alt="Gokul Labs — I Build Intelligent Experiences" class="hero-exact-render" />
+
+        <!-- Interactive Hotspots & Button Overlays -->
+        <a href="#hero" class="hero-hotspot hotspot-brand" aria-label="Gokul Labs Home"></a>
+
+        <!-- Navigation Hotspots -->
+        <div class="hero-hotspots-nav">
+          <a href="#about" class="hero-hotspot hotspot-nav hotspot-about" aria-label="About">
+            <span class="nav-hover-hint">About</span>
+          </a>
+          <a href="#stack" class="hero-hotspot hotspot-nav hotspot-stack" aria-label="Stack">
+            <span class="nav-hover-hint">Stack</span>
+          </a>
+          <a href="#work" class="hero-hotspot hotspot-nav hotspot-work" aria-label="Work">
+            <span class="nav-hover-hint">Work</span>
+          </a>
+          <a href="#journey" class="hero-hotspot hotspot-nav hotspot-journey" aria-label="Journey">
+            <span class="nav-hover-hint">Journey</span>
+          </a>
+          <a href="#contact" class="hero-hotspot hotspot-nav hotspot-contact" aria-label="Contact">
+            <span class="nav-hover-hint">Contact</span>
+          </a>
+          <a href="#contact" class="hero-hotspot hotspot-nav-cta" aria-label="Let's talk">
+            <span class="cta-hover-glow"></span>
+          </a>
+        </div>
+
+        <!-- Primary Action Buttons Hotspots -->
+        <div class="hero-hotspots-actions">
+          <a href="#work" class="hero-hotspot hotspot-btn-explore" aria-label="Explore Work">
+            <span class="hotspot-glow-cyan"></span>
+          </a>
+          <a href="https://github.com/gokul1599" target="_blank" rel="noopener noreferrer" class="hero-hotspot hotspot-btn-github" aria-label="GitHub">
+            <span class="hotspot-glow-glass"></span>
+          </a>
+        </div>
+
+        <!-- Interactive 3D Tilt Overlays on the Floating Hologram Panels -->
+        <div class="hero-hotspot hotspot-card-idea tilt-card" data-tilt="15" title="Idea → Intelligence → Product"></div>
+        <div class="hero-hotspot hotspot-card-stack tilt-card" data-tilt="15" title="AI / ML • Web • Code • Product"></div>
+      </div>
+
+      <!-- Mobile / Tablet Responsive Fallback (Displays on screens < 900px) -->
+      <div class="hero-mobile-container">
+        <div class="hero-mobile-content">
+          <div class="hero-kicker-cinematic">
             CSE • ARTIFICIAL INTELLIGENCE & MACHINE LEARNING
           </div>
-
-          <h1 class="hero-title-cinematic reveal-fade" style="--delay: 150ms;">
+          <h1 class="hero-title-cinematic">
             <span class="title-row">I BUILD</span>
             <span class="title-row gradient-ice">INTELLIGENT</span>
             <span class="title-row">EXPERIENCES.</span>
           </h1>
-
-          <p class="hero-description-cinematic reveal-fade" style="--delay: 250ms;">
+          <p class="hero-description-cinematic">
             Student. Developer. Product builder. Exploring the intersection of AI, software and real-world problems — one project at a time.
           </p>
-
-          <div class="hero-buttons-cinematic reveal-fade" style="--delay: 350ms;">
+          <div class="hero-buttons-cinematic">
             <a class="btn-glow-cyan" href="#work">
               <span>EXPLORE WORK</span>
               <span class="btn-arrow-right">→</span>
             </a>
             <a class="btn-glass-github" href="https://github.com/gokul1599" target="_blank" rel="noopener noreferrer">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="github-icon">
-                <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.25 19.74 5.01 19.065C4.875 18.72 4.305 17.655 3.81 17.385C3.405 17.16 2.82 16.62 3.795 16.605C4.71 16.59 5.37 17.445 5.58 17.79C6.63 19.56 8.31 19.065 8.985 18.75C9.09 17.985 9.39 17.46 9.72 17.16C7.14 16.875 4.425 15.87 4.425 11.415C4.425 10.155 4.875 9.105 5.625 8.295C5.505 7.995 5.115 6.81 5.745 5.22C5.745 5.22 6.705 4.92 8.985 6.465C9.915 6.21 10.905 6.075 11.895 6.075C12.885 6.075 13.875 6.21 14.805 6.465C17.085 4.905 18.045 5.22 18.045 5.22C18.675 6.81 18.285 7.995 18.165 8.295C18.915 9.105 19.365 10.14 19.365 11.415C19.365 15.885 16.635 16.875 14.055 17.16C14.475 17.52 14.835 18.225 14.835 19.335C14.835 20.91 14.82 22.185 14.82 22.815C14.82 23.13 15.045 23.505 15.645 23.385C20.415 21.795 23.85 17.31 23.85 12C23.85 5.37 18.48 0 12 0Z"/>
-              </svg>
               <span>GITHUB</span>
             </a>
           </div>
         </div>
 
-        <!-- Center / Right Interactive Holographic Panels & 3D Singularity Layer -->
-        <div class="hero-visual-stage">
-          <!-- Floating Glass Card 1: IDEA -> INTELLIGENCE -> PRODUCT -->
-          <div class="hologram-glass-card holo-left tilt-card" data-tilt="12">
-            <div class="holo-line">IDEA</div>
-            <div class="holo-arrow-down">↓</div>
-            <div class="holo-line">INTELLIGENCE</div>
-            <div class="holo-arrow-down">↓</div>
-            <div class="holo-line highlight">PRODUCT</div>
+        <div class="hero-bottom-bar">
+          <div class="bottom-bar-left">
+            <span class="diamond-icon">◆</span>
+            <span class="bar-tagline">BUILD → LEARN → REPEAT</span>
           </div>
-
-          <!-- Floating Glass Card 2: AI / ML / WEB / CODE / PRODUCT with Signal Indicator -->
-          <div class="hologram-glass-card holo-right tilt-card" data-tilt="12">
-            <div class="holo-stat-row">AI / ML</div>
-            <div class="holo-stat-row">WEB</div>
-            <div class="holo-stat-row">CODE</div>
-            <div class="holo-stat-row active-row">
-              <span>PRODUCT</span>
-              <div class="mini-signal-graph" aria-hidden="true">
-                <span class="bar b1"></span>
-                <span class="bar b2"></span>
-                <span class="bar b3"></span>
-                <span class="bar b4"></span>
-              </div>
+          <div class="bottom-bar-right">
+            <div class="available-badge-pill">
+              <span class="pulse-dot-cyan"></span>
+              <span>AVAILABLE FOR OPPORTUNITIES</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Hero Bottom Bar -->
-      <div class="hero-bottom-bar reveal-fade" style="--delay: 450ms;">
-        <div class="bottom-bar-left">
-          <span class="diamond-icon">◇</span>
-          <span class="bar-tagline">BUILD → LEARN → REPEAT</span>
-          <span class="bar-extending-arrow">───────→</span>
-        </div>
-
-        <div class="bottom-bar-right">
-          <div class="available-badge-pill">
-            <span class="pulse-dot-cyan"></span>
-            <span>AVAILABLE TO BUILD</span>
           </div>
         </div>
       </div>

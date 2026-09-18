@@ -232,11 +232,10 @@
     }
 
     try {
-      // 1. Scene & Deep Atmospheric Haze (Fog)
+      // 1. Scene & Deep Atmospheric Fog
       const scene = new THREE.Scene();
-      const graphiteBg = new THREE.Color(0x050608);
-      scene.background = graphiteBg;
-      scene.fog = new THREE.FogExp2(0x050608, 0.016); // Subtle atmospheric depth-of-field
+      // Transparent background so the cinematic hero environment shows through
+      scene.fog = new THREE.FogExp2(0x050608, 0.012);
 
       // 2. Camera Setup
       const camera = new THREE.PerspectiveCamera(
@@ -247,10 +246,10 @@
       );
       camera.position.set(0, 0, 26);
 
-      // 3. Renderer with High Dynamic Range & Tone Mapping
+      // 3. Renderer with High Dynamic Range & Alpha Transparency
       const renderer = new THREE.WebGLRenderer({
         canvas: canvas,
-        alpha: false,
+        alpha: true,
         antialias: true,
         powerPreference: "high-performance"
       });
