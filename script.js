@@ -59,6 +59,18 @@
       progressBar.style.width = `${globalScrollProgress * 100}%`;
     }
 
+    // Right vertical scroll tracker dot
+    const trackerDot = $("#scroll-tracker-dot");
+    if (trackerDot) {
+      trackerDot.style.top = `${globalScrollProgress * 65}px`;
+    }
+
+    // Smooth parallax on hero visual background
+    const heroBg = $(".hero-bg-layer");
+    if (heroBg && scrollTop < window.innerHeight * 1.5) {
+      heroBg.style.transform = `translate3d(0, ${scrollTop * 0.22}px, 0)`;
+    }
+
     if (navbar) {
       if (scrollTop > 30) {
         navbar.classList.add("scrolled");
@@ -67,7 +79,7 @@
       }
     }
 
-    // Active Section Indicator
+    // Active Section Indicator with Dot
     let currentSectionId = "";
     sections.forEach((section) => {
       const sectionTop = section.offsetTop - 200;
@@ -78,7 +90,7 @@
     });
 
     if (currentSectionId) {
-      navLinks.forEach((link) => {
+      $$(".nav-link-dot, .nav-link").forEach((link) => {
         if (link.getAttribute("href") === `#${currentSectionId}`) {
           link.classList.add("active");
         } else {
@@ -382,6 +394,49 @@
       );
       singularityGroup.add(octEdges);
 
+      // Vertical Luminous Laser Beam Column
+      const beamGeo = new THREE.CylinderGeometry(0.06, 0.09, 60, 16);
+      const beamMat = new THREE.MeshBasicMaterial({
+        color: 0x38bdf8,
+        transparent: true,
+        opacity: 0.65
+      });
+      const verticalBeam = new THREE.Mesh(beamGeo, beamMat);
+      singularityGroup.add(verticalBeam);
+
+      // 3D Floating Refraction Crystals & Tumbling Prisms (Matching Reference Scene)
+      const crystalGroup = new THREE.Group();
+      singularityGroup.add(crystalGroup);
+
+      const crystalGeo1 = new THREE.BoxGeometry(1.2, 1.5, 0.9);
+      const crystalGeo2 = new THREE.OctahedronGeometry(1.1);
+      const crystalMat = new THREE.MeshPhysicalMaterial({
+        color: 0xc8e0ff,
+        metalness: 0.15,
+        roughness: 0.1,
+        transparent: true,
+        opacity: 0.45,
+        transmission: 0.6,
+        thickness: 1.0
+      });
+
+      const crystals = [
+        { mesh: new THREE.Mesh(crystalGeo1, crystalMat), pos: [-5.2, 3.8, 2.2], rotSpd: [0.012, 0.016, 0.008] },
+        { mesh: new THREE.Mesh(crystalGeo2, crystalMat), pos: [5.8, 4.4, -1.2], rotSpd: [-0.014, 0.01, 0.016] },
+        { mesh: new THREE.Mesh(crystalGeo1, crystalMat), pos: [-4.2, -3.2, 3.0], rotSpd: [0.009, -0.014, 0.012] },
+        { mesh: new THREE.Mesh(crystalGeo2, crystalMat), pos: [4.5, -2.8, 2.8], rotSpd: [-0.01, 0.015, -0.012] }
+      ];
+
+      crystals.forEach((c) => {
+        c.mesh.position.set(...c.pos);
+        const edge = new THREE.LineSegments(
+          new THREE.EdgesGeometry(c.mesh.geometry),
+          new THREE.LineBasicMaterial({ color: 0x93c5fd, transparent: true, opacity: 0.65 })
+        );
+        c.mesh.add(edge);
+        crystalGroup.add(c.mesh);
+      });
+
       // E. Contact Architectural Precision Ring (Centrally Positioned for Section 07)
       const contactRingGeo = new THREE.BufferGeometry();
       const contactPositions = [];
@@ -524,6 +579,13 @@
         });
 
         octEdges.rotation.y = time * 0.1;
+
+        // Rotate 3D floating crystals
+        crystals.forEach((c) => {
+          c.mesh.rotation.x += c.rotSpd[0];
+          c.mesh.rotation.y += c.rotSpd[1];
+          c.mesh.rotation.z += c.rotSpd[2];
+        });
 
         // Dynamic light tracking
         keyLight.position.x = 5 + Math.sin(time * 0.2) * 3;

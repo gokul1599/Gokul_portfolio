@@ -52,27 +52,36 @@
   <header class="nav-bar" id="navbar">
     <div class="nav-container">
       <a href="#hero" class="brand-identity" aria-label="Gokul Labs Home">
-        <span class="brand-badge">G</span>
-        <span class="brand-text">GOKUL <span class="brand-accent">LABS</span></span>
-        <span class="brand-indicator" title="System Online"></span>
+        <span class="brand-badge-circle">
+          <svg viewBox="0 0 28 28" fill="none" class="brand-svg-mark">
+            <circle cx="14" cy="14" r="12" stroke="rgba(255,255,255,0.8)" stroke-width="1.8"/>
+            <path d="M19 14H13.5V17H19V14Z" fill="white"/>
+            <path d="M18.5 9.5C17.2 8.5 15.6 8 14 8C10.7 8 8 10.7 8 14C8 17.3 10.7 20 14 20C16.8 20 19.2 18 19.8 15.3" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+        </span>
+        <span class="brand-text-cinematic">GOKUL LABS</span>
       </a>
 
-      <nav class="nav-links" id="nav-menu" aria-label="Main Navigation">
-        <a href="#hero" class="nav-link active">Home</a>
-        <a href="#intelligence" class="nav-link">Intelligence</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#stack" class="nav-link">Stack</a>
-        <a href="#work" class="nav-link">Work</a>
-        <a href="#journey" class="nav-link">Journey</a>
-        <a href="#contact" class="nav-link">Contact</a>
+      <nav class="nav-links-centered" id="nav-menu" aria-label="Main Navigation">
+        <a href="#about" class="nav-link-dot active">About<span class="nav-dot"></span></a>
+        <a href="#stack" class="nav-link-dot">Stack<span class="nav-dot"></span></a>
+        <a href="#work" class="nav-link-dot">Work<span class="nav-dot"></span></a>
+        <a href="#journey" class="nav-link-dot">Journey<span class="nav-dot"></span></a>
+        <a href="#contact" class="nav-link-dot">Contact<span class="nav-dot"></span></a>
       </nav>
 
       <div class="nav-actions">
-        <a class="cta-pill" href="#contact">
+        <a class="cta-pill-glass" href="#contact">
+          <span class="cta-icon-nodes">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+              <circle cx="5" cy="5" r="2.5" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="11" cy="5" r="2.5" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="5" cy="11" r="2.5" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="11" cy="11" r="2.5" stroke="currentColor" stroke-width="1.4"/>
+            </svg>
+          </span>
           <span>Let's talk</span>
-          <svg class="cta-arrow" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <span class="cta-arrow">↗</span>
         </a>
         <button class="mobile-toggle" id="menu-btn" aria-label="Toggle navigation menu" aria-expanded="false">
           <span class="bar bar-1"></span>
@@ -82,132 +91,91 @@
     </div>
   </header>
 
-  <main id="main-content">
-    <!-- Pinned Cinematic Hero Section -->
-    <section class="hero-section" id="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <div class="status-badge reveal-fade">
-            <span class="pulse-dot"></span>
-            <span class="status-label">SYSTEM ONLINE</span>
-            <span class="status-divider">/</span>
-            <span class="status-highlight">AVAILABLE TO BUILD</span>
-          </div>
+  <!-- Right Vertical Scroll Tracker -->
+  <div class="vertical-scroll-tracker" aria-hidden="true">
+    <span class="tracker-text">SCROLL</span>
+    <div class="tracker-line">
+      <div class="tracker-dot" id="scroll-tracker-dot"></div>
+    </div>
+  </div>
 
-          <div class="positioning-kicker reveal-fade" style="--delay: 100ms;">
+  <main id="main-content">
+    <!-- Hero Section Matching Exact Reference Visual -->
+    <section class="hero-section cinematic-hero" id="hero">
+      <div class="hero-bg-layer" aria-hidden="true"></div>
+      
+      <div class="hero-container">
+        <!-- Left Hero Content -->
+        <div class="hero-content-left">
+          <div class="hero-kicker-cinematic reveal-fade">
             CSE • ARTIFICIAL INTELLIGENCE & MACHINE LEARNING
           </div>
 
-          <h1 class="hero-title reveal-fade" style="--delay: 200ms;">
-            <span class="title-line">I BUILD</span>
-            <span class="title-line gradient-text">INTELLIGENT</span>
-            <span class="title-line">EXPERIENCES.</span>
+          <h1 class="hero-title-cinematic reveal-fade" style="--delay: 150ms;">
+            <span class="title-row">I BUILD</span>
+            <span class="title-row gradient-ice">INTELLIGENT</span>
+            <span class="title-row">EXPERIENCES.</span>
           </h1>
 
-          <p class="hero-description reveal-fade" style="--delay: 300ms;">
-            Student. Developer. Product builder. Exploring the intersection of
-            <strong>AI, software, and real-world problems</strong> — one project at a time.
+          <p class="hero-description-cinematic reveal-fade" style="--delay: 250ms;">
+            Student. Developer. Product builder. Exploring the intersection of AI, software and real-world problems — one project at a time.
           </p>
 
-          <div class="hero-cta-group reveal-fade" style="--delay: 400ms;">
-            <a class="btn-primary" href="#work">
+          <div class="hero-buttons-cinematic reveal-fade" style="--delay: 350ms;">
+            <a class="btn-glow-cyan" href="#work">
               <span>EXPLORE WORK</span>
-              <svg viewBox="0 0 14 14" fill="none" class="btn-icon">
-                <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <span class="btn-arrow-right">→</span>
             </a>
-            <a class="btn-ghost" href="https://github.com/gokul1599" target="_blank" rel="noopener noreferrer">
+            <a class="btn-glass-github" href="https://github.com/gokul1599" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" class="github-icon">
+                <path d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.25 19.74 5.01 19.065C4.875 18.72 4.305 17.655 3.81 17.385C3.405 17.16 2.82 16.62 3.795 16.605C4.71 16.59 5.37 17.445 5.58 17.79C6.63 19.56 8.31 19.065 8.985 18.75C9.09 17.985 9.39 17.46 9.72 17.16C7.14 16.875 4.425 15.87 4.425 11.415C4.425 10.155 4.875 9.105 5.625 8.295C5.505 7.995 5.115 6.81 5.745 5.22C5.745 5.22 6.705 4.92 8.985 6.465C9.915 6.21 10.905 6.075 11.895 6.075C12.885 6.075 13.875 6.21 14.805 6.465C17.085 4.905 18.045 5.22 18.045 5.22C18.675 6.81 18.285 7.995 18.165 8.295C18.915 9.105 19.365 10.14 19.365 11.415C19.365 15.885 16.635 16.875 14.055 17.16C14.475 17.52 14.835 18.225 14.835 19.335C14.835 20.91 14.82 22.185 14.82 22.815C14.82 23.13 15.045 23.505 15.645 23.385C20.415 21.795 23.85 17.31 23.85 12C23.85 5.37 18.48 0 12 0Z"/>
+              </svg>
               <span>GITHUB</span>
-              <svg viewBox="0 0 14 14" fill="none" class="btn-icon">
-                <path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
             </a>
-          </div>
-
-          <!-- Hero Story Pipeline Ticker -->
-          <div class="story-pipeline reveal-fade" style="--delay: 500ms;">
-            <div class="pipeline-tag">PIPELINE</div>
-            <div class="pipeline-track">
-              <span class="step">IDEA</span>
-              <span class="arrow">→</span>
-              <span class="step">THINK</span>
-              <span class="arrow">→</span>
-              <span class="step">BUILD</span>
-              <span class="arrow">→</span>
-              <span class="step highlight">VALTORA</span>
-              <span class="arrow">→</span>
-              <span class="step highlight">LIFEHUB</span>
-              <span class="arrow">→</span>
-              <span class="step next">FUTURE BUILDS</span>
-            </div>
-          </div>
-
-          <!-- Quick Metrics -->
-          <div class="hero-metrics-bar reveal-fade" style="--delay: 600ms;">
-            <div class="metric-item">
-              <span class="metric-val">02</span>
-              <span class="metric-lbl">Featured Products</span>
-            </div>
-            <div class="metric-separator"></div>
-            <div class="metric-item">
-              <span class="metric-val">AI/ML</span>
-              <span class="metric-lbl">Core Focus</span>
-            </div>
-            <div class="metric-separator"></div>
-            <div class="metric-item">
-              <span class="metric-val">100%</span>
-              <span class="metric-lbl">Builder Mindset</span>
-            </div>
           </div>
         </div>
 
-        <!-- Hero Right: Interactive Builder Terminal & 3D Singularity Anchor -->
-        <div class="hero-visual reveal-fade" style="--delay: 350ms;">
-          <!-- 3D Orbit rings background glow -->
-          <div class="orbit-visual-ring ring-1" aria-hidden="true"></div>
-          <div class="orbit-visual-ring ring-2" aria-hidden="true"></div>
-
-          <!-- Interactive Terminal Card -->
-          <div class="terminal-card tilt-card" id="hero-terminal" data-tilt="12">
-            <div class="terminal-header">
-              <div class="terminal-dots">
-                <span class="dot dot-red"></span>
-                <span class="dot dot-amber"></span>
-                <span class="dot dot-green"></span>
-              </div>
-              <div class="terminal-path">gokul@labs ~ /builder</div>
-              <div class="terminal-badge">LIVE REPL</div>
-            </div>
-            
-            <div class="terminal-screen">
-              <div class="scanlines" aria-hidden="true"></div>
-              <div class="code-line"><span class="line-num">01</span><span class="tok-kw">const</span> <span class="tok-var">builder</span> = {</div>
-              <div class="code-line indent"><span class="line-num">02</span><span class="tok-prop">name</span>: <span class="tok-str">"Gokul Karpurapu"</span>,</div>
-              <div class="code-line indent"><span class="line-num">03</span><span class="tok-prop">role</span>: <span class="tok-str">"CSE AI/ML Student & Builder"</span>,</div>
-              <div class="code-line indent"><span class="line-num">04</span><span class="tok-prop">focus</span>: [<span class="tok-str">"Artificial Intelligence"</span>, <span class="tok-str">"Web Apps"</span>],</div>
-              <div class="code-line indent"><span class="line-num">05</span><span class="tok-prop">shipping</span>: <span class="tok-bool">true</span>,</div>
-              <div class="code-line indent"><span class="line-num">06</span><span class="tok-prop">ideas</span>: <span class="tok-inf">Infinity</span></div>
-              <div class="code-line"><span class="line-num">07</span>};</div>
-              <div class="code-line result-line">
-                <span class="line-num">08</span>
-                <span class="repl-indicator">›</span>
-                <span class="tok-fn">system</span>.<span class="tok-method">ready</span>() <span class="terminal-cursor"></span>
-              </div>
-            </div>
-
-            <div class="terminal-footer">
-              <span class="footer-chip">NODE v24 // ES2026</span>
-              <span class="footer-status"><span class="mini-pulse"></span> READY TO SHIP</span>
-            </div>
+        <!-- Center / Right Interactive Holographic Panels & 3D Singularity Layer -->
+        <div class="hero-visual-stage">
+          <!-- Floating Glass Card 1: IDEA -> INTELLIGENCE -> PRODUCT -->
+          <div class="hologram-glass-card holo-left tilt-card" data-tilt="12">
+            <div class="holo-line">IDEA</div>
+            <div class="holo-arrow-down">↓</div>
+            <div class="holo-line">INTELLIGENCE</div>
+            <div class="holo-arrow-down">↓</div>
+            <div class="holo-line highlight">PRODUCT</div>
           </div>
 
-          <!-- Floating Ambient Lab Chips -->
-          <div class="floating-chip chip-ai">
-            <span class="chip-dot"></span>
-            <span>AI / ML RESEARCH</span>
+          <!-- Floating Glass Card 2: AI / ML / WEB / CODE / PRODUCT with Signal Indicator -->
+          <div class="hologram-glass-card holo-right tilt-card" data-tilt="12">
+            <div class="holo-stat-row">AI / ML</div>
+            <div class="holo-stat-row">WEB</div>
+            <div class="holo-stat-row">CODE</div>
+            <div class="holo-stat-row active-row">
+              <span>PRODUCT</span>
+              <div class="mini-signal-graph" aria-hidden="true">
+                <span class="bar b1"></span>
+                <span class="bar b2"></span>
+                <span class="bar b3"></span>
+                <span class="bar b4"></span>
+              </div>
+            </div>
           </div>
-          <div class="floating-chip chip-cycle">
-            <span>BUILD → LEARN → REPEAT</span>
+        </div>
+      </div>
+
+      <!-- Hero Bottom Bar -->
+      <div class="hero-bottom-bar reveal-fade" style="--delay: 450ms;">
+        <div class="bottom-bar-left">
+          <span class="diamond-icon">◇</span>
+          <span class="bar-tagline">BUILD → LEARN → REPEAT</span>
+          <span class="bar-extending-arrow">───────→</span>
+        </div>
+
+        <div class="bottom-bar-right">
+          <div class="available-badge-pill">
+            <span class="pulse-dot-cyan"></span>
+            <span>AVAILABLE TO BUILD</span>
           </div>
         </div>
       </div>
