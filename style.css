@@ -118,7 +118,7 @@ button {
   height: 100vh;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.85;
+  opacity: 1;
 }
 
 .noise-overlay {
@@ -126,7 +126,7 @@ button {
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  opacity: 0.025;
+  opacity: 0.02;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -137,7 +137,7 @@ button {
   border-radius: 50%;
   pointer-events: none;
   z-index: 1;
-  background: radial-gradient(circle, rgba(181, 255, 77, 0.065) 0%, rgba(56, 189, 248, 0.035) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.025) 0%, transparent 65%);
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease;
   will-change: left, top;
@@ -667,15 +667,15 @@ main {
 .orbit-visual-ring.ring-1 {
   width: 460px;
   height: 460px;
-  border: 1px dashed rgba(181, 255, 77, 0.12);
-  animation: spin-slow 35s linear infinite;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  animation: spin-slow 70s linear infinite;
 }
 
 .orbit-visual-ring.ring-2 {
   width: 580px;
   height: 580px;
-  border: 1px solid rgba(56, 189, 248, 0.08);
-  animation: spin-reverse 45s linear infinite;
+  border: 1px dashed rgba(255, 255, 255, 0.025);
+  animation: spin-reverse 90s linear infinite;
 }
 
 .terminal-card {

@@ -1,19 +1,25 @@
 /**
- * GOKUL LABS — Core Interactive & 3D WebGL Engine
- * Author: Gokul Karpurapu
- * Architecture:
- * - Three.js WebGL 3D AI Intelligence Core with 2D Canvas Graceful Fallback
- * - Scroll-driven Camera & Rotation Progression
- * - 3D Perspective Card Tilt & Magnetic Micro-interactions
- * - Dynamic LifeHub OS Real-time Clock
- * - Extensible Project Registry Integration
- * - Mobile Navigation & Section Observers
+ * GOKUL LABS — LIVING AI ARCHITECTURE
+ * 3D WebGL Architectural Environment & Creative Interaction Engine
+ * 
+ * Aesthetic: Futuristic Technology Laboratory built around intelligence,
+ * engineering, and product creation.
+ * 
+ * Visual Foundation:
+ * - Extremely deep graphite / near-black environment (80-90% quiet void)
+ * - Enormous translucent glass planes & thin metallic frames
+ * - Dynamic scroll camera moving through true physical depth
+ * - Section-reactive architectural metamorphism:
+ *   Hero (Void) → Intelligence Core (Separating Monoliths) → About (5 Thought Layers)
+ *   → Toolkit (Precision Lab Grid) → Valtora (Startup Blueprint) → Singularity Collapse
+ *   → LifeHub (Calm Modular System) → Convergence Void → Contact (Monolithic Ring)
+ * - Contact button hover reacts with central ring lighting
  */
 
 (function () {
   "use strict";
 
-  // --- UTILITY SELECTORS ---
+  // --- DOM SELECTORS ---
   const $ = (selector, context = document) => context.querySelector(selector);
   const $$ = (selector, context = document) => Array.from(context.querySelectorAll(selector));
 
@@ -36,33 +42,35 @@
   updateLiveClock();
   setInterval(updateLiveClock, 1000);
 
-  // --- SCROLL PROGRESS & NAVBAR BEHAVIOR ---
+  // --- SCROLL PROGRESS & NAVBAR ---
   const progressBar = $("#scroll-progress");
   const navbar = $("#navbar");
   const navLinks = $$(".nav-link");
   const sections = $$("section[id]");
 
+  let globalScrollProgress = 0;
+
   function handleScroll() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    globalScrollProgress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
 
     if (progressBar) {
-      progressBar.style.width = `${progress}%`;
+      progressBar.style.width = `${globalScrollProgress * 100}%`;
     }
 
     if (navbar) {
-      if (scrollTop > 40) {
+      if (scrollTop > 30) {
         navbar.classList.add("scrolled");
       } else {
         navbar.classList.remove("scrolled");
       }
     }
 
-    // Active Navigation Highlight
+    // Active Section Indicator
     let currentSectionId = "";
     sections.forEach((section) => {
-      const sectionTop = section.offsetTop - 180;
+      const sectionTop = section.offsetTop - 200;
       const sectionHeight = section.offsetHeight;
       if (scrollTop >= sectionTop && scrollTop < sectionTop + sectionHeight) {
         currentSectionId = section.getAttribute("id");
@@ -83,7 +91,7 @@
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
 
-  // --- MOBILE NAVIGATION DRAWER ---
+  // --- MOBILE NAV DRAWER ---
   const menuBtn = $("#menu-btn");
   const navMenu = $("#nav-menu");
 
@@ -103,7 +111,7 @@
     });
   }
 
-  // --- SMOOTH SCROLL FOR IN-PAGE LINKS ---
+  // --- SMOOTH SCROLL FOR ANCHORS ---
   $$("a[href^='#']").forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const targetId = this.getAttribute("href");
@@ -123,7 +131,7 @@
     });
   });
 
-  // --- INTERSECTION OBSERVER FOR REVEALS ---
+  // --- INTERSECTION OBSERVER REVEALS ---
   const revealElements = $$(".reveal, .reveal-fade");
   if ("IntersectionObserver" in window) {
     const revealObserver = new IntersectionObserver(
@@ -135,18 +143,14 @@
           }
         });
       },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -40px 0px"
-      }
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
     );
-
     revealElements.forEach((el) => revealObserver.observe(el));
   } else {
     revealElements.forEach((el) => el.classList.add("visible"));
   }
 
-  // --- CURSOR GLOW INTERPOLATION ---
+  // --- SUBTLE CURSOR GLOW ---
   const cursorGlow = $(".cursor-glow");
   if (cursorGlow && window.matchMedia("(hover: hover)").matches) {
     let mouseX = window.innerWidth / 2;
@@ -171,9 +175,7 @@
 
   // --- 3D PERSPECTIVE CARD TILT ---
   if (window.matchMedia("(hover: hover)").matches) {
-    const tiltCards = $$(".tilt-card");
-
-    tiltCards.forEach((card) => {
+    $$(".tilt-card").forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -194,7 +196,7 @@
     });
   }
 
-  // --- THE INTELLIGENCE CORE: INTERACTIVE STAGES ---
+  // --- THE INTELLIGENCE CORE: STAGES INTERACTION ---
   const stageCards = $$(".stage-card");
   stageCards.forEach((card) => {
     card.addEventListener("click", () => {
@@ -203,149 +205,245 @@
     });
   });
 
-  // --- 3D WEBGL AI INTELLIGENCE CORE ENGINE ---
-  const canvas = $("#webgl-canvas");
-  if (canvas) {
-    initThreeJSCore(canvas);
+  // ==========================================================================
+  // GOKUL LABS — LIVING AI ARCHITECTURE (3D WEBGL ENGINE)
+  // ==========================================================================
+  const canvasEl = $("#webgl-canvas");
+  if (canvasEl) {
+    initLivingArchitecture(canvasEl);
   }
 
-  function initThreeJSCore(canvasEl) {
-    // Check if Three.js library loaded
+  function initLivingArchitecture(canvas) {
     if (typeof THREE === "undefined") {
-      init2DCanvasFallback(canvasEl);
+      initArchitectural2DFallback(canvas);
       return;
     }
 
     try {
+      // 1. Scene & Deep Atmospheric Haze (Fog)
       const scene = new THREE.Scene();
+      const graphiteBg = new THREE.Color(0x050608);
+      scene.background = graphiteBg;
+      scene.fog = new THREE.FogExp2(0x050608, 0.016); // Subtle atmospheric depth-of-field
+
+      // 2. Camera Setup
       const camera = new THREE.PerspectiveCamera(
-        55,
+        48,
         window.innerWidth / window.innerHeight,
         0.1,
-        1000
+        180
       );
-      camera.position.z = 24;
+      camera.position.set(0, 0, 26);
 
+      // 3. Renderer with High Dynamic Range & Tone Mapping
       const renderer = new THREE.WebGLRenderer({
-        canvas: canvasEl,
-        alpha: true,
+        canvas: canvas,
+        alpha: false,
         antialias: true,
         powerPreference: "high-performance"
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.05;
 
-      // Container Group for AI Core
-      const coreGroup = new THREE.Group();
-      scene.add(coreGroup);
+      // Master Architectural Group
+      const archGroup = new THREE.Group();
+      scene.add(archGroup);
 
-      // 1. Central Singularity Wireframe Icosahedron
-      const icoGeometry = new THREE.IcosahedronGeometry(4.8, 1);
-      const icoMaterial = new THREE.MeshBasicMaterial({
-        color: 0xb5ff4d,
-        wireframe: true,
+      // 4. Lighting Rig
+      const ambientLight = new THREE.AmbientLight(0x0a0d14, 0.9);
+      scene.add(ambientLight);
+
+      // Key soft light behind typography
+      const keyLight = new THREE.DirectionalLight(0xe2e8f0, 0.85);
+      keyLight.position.set(5, 12, 18);
+      scene.add(keyLight);
+
+      // Controlled rim light (subtle steel/cool cyan)
+      const rimLight = new THREE.PointLight(0x38bdf8, 0.45, 60);
+      rimLight.position.set(-15, -8, -5);
+      scene.add(rimLight);
+
+      // Contact Ring Accent Light
+      const contactLight = new THREE.PointLight(0xb5ff4d, 0.1, 40);
+      contactLight.position.set(0, 0, 5);
+      scene.add(contactLight);
+
+      // 5. Materials (Translucent Glass & Precision Metallic Wireframes)
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0x111622,
+        metalness: 0.2,
+        roughness: 0.15,
+        transparent: true,
+        opacity: 0.12,
+        side: THREE.DoubleSide,
+        depthWrite: false
+      });
+
+      const frameMat = new THREE.LineBasicMaterial({
+        color: 0x475569,
         transparent: true,
         opacity: 0.38
       });
-      const icoMesh = new THREE.Mesh(icoGeometry, icoMaterial);
-      coreGroup.add(icoMesh);
 
-      // 2. Inner Glowing Nucleus
-      const nucleusGeometry = new THREE.SphereGeometry(2.4, 16, 16);
-      const nucleusMaterial = new THREE.MeshBasicMaterial({
-        color: 0x38bdf8,
-        wireframe: true,
+      const thinAccentMat = new THREE.LineBasicMaterial({
+        color: 0x94a3b8,
         transparent: true,
         opacity: 0.45
       });
-      const nucleusMesh = new THREE.Mesh(nucleusGeometry, nucleusMaterial);
-      coreGroup.add(nucleusMesh);
 
-      // 3. Orbiting Rings
-      const rings = [];
-      const ringConfigs = [
-        { radius: 8.5, color: 0xb5ff4d, rotX: Math.PI / 3, rotY: Math.PI / 6, speed: 0.006 },
-        { radius: 10.5, color: 0x38bdf8, rotX: -Math.PI / 4, rotY: Math.PI / 4, speed: -0.005 },
-        { radius: 12.8, color: 0x8b5cf6, rotX: Math.PI / 6, rotY: -Math.PI / 3, speed: 0.004 }
-      ];
+      // --- ARCHITECTURAL ELEMENTS CREATION ---
 
-      ringConfigs.forEach((cfg) => {
-        const ringGeo = new THREE.BufferGeometry();
-        const segments = 64;
-        const positions = [];
-        for (let i = 0; i <= segments; i++) {
-          const theta = (i / segments) * Math.PI * 2;
-          positions.push(Math.cos(theta) * cfg.radius, Math.sin(theta) * cfg.radius, 0);
-        }
-        ringGeo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
-        const ringMat = new THREE.LineBasicMaterial({
-          color: cfg.color,
-          transparent: true,
-          opacity: 0.32
-        });
-        const ringMesh = new THREE.Line(ringGeo, ringMat);
-        ringMesh.rotation.x = cfg.rotX;
-        ringMesh.rotation.y = cfg.rotY;
+      // A. Enormous Translucent Glass Planes at Varying Depths
+      // Frame 1 (Far Void)
+      const planeFarGeo = new THREE.PlaneGeometry(42, 28);
+      const planeFar = new THREE.Mesh(planeFarGeo, glassMat);
+      planeFar.position.set(6, 2, -38);
+      planeFar.rotation.y = -0.12;
+      const planeFarEdges = new THREE.LineSegments(new THREE.EdgesGeometry(planeFarGeo), frameMat);
+      planeFar.add(planeFarEdges);
+      archGroup.add(planeFar);
 
-        // Add a small node to the ring
-        const nodeGeo = new THREE.SphereGeometry(0.28, 8, 8);
-        const nodeMat = new THREE.MeshBasicMaterial({ color: cfg.color });
-        const nodeMesh = new THREE.Mesh(nodeGeo, nodeMat);
-        nodeMesh.position.set(cfg.radius, 0, 0);
-        ringMesh.add(nodeMesh);
+      // Frame 2 (Mid Depth - Angled Laboratory Wall)
+      const planeMidGeo = new THREE.PlaneGeometry(28, 20);
+      const planeMid = new THREE.Mesh(planeMidGeo, glassMat);
+      planeMid.position.set(-8, -1, -18);
+      planeMid.rotation.y = 0.18;
+      planeMid.rotation.x = 0.05;
+      const planeMidEdges = new THREE.LineSegments(new THREE.EdgesGeometry(planeMidGeo), frameMat);
+      planeMid.add(planeMidEdges);
+      archGroup.add(planeMid);
 
-        coreGroup.add(ringMesh);
-        rings.push({ mesh: ringMesh, speed: cfg.speed });
-      });
+      // Frame 3 (Near Field Monolith)
+      const planeNearGeo = new THREE.PlaneGeometry(18, 14);
+      const planeNear = new THREE.Mesh(planeNearGeo, glassMat);
+      planeNear.position.set(10, -3, -4);
+      planeNear.rotation.y = -0.22;
+      const planeNearEdges = new THREE.LineSegments(new THREE.EdgesGeometry(planeNearGeo), thinAccentMat);
+      planeNear.add(planeNearEdges);
+      archGroup.add(planeNear);
 
-      // 4. Ambient Data Particles Field
-      const particleCount = window.innerWidth < 768 ? 90 : 180;
-      const particleGeo = new THREE.BufferGeometry();
-      const particlePositions = new Float32Array(particleCount * 3);
-      const particleColors = new Float32Array(particleCount * 3);
-
-      const colorPalette = [
-        new THREE.Color(0xb5ff4d),
-        new THREE.Color(0x38bdf8),
-        new THREE.Color(0x8b5cf6)
-      ];
-
-      for (let i = 0; i < particleCount; i++) {
-        const radius = 9 + Math.random() * 20;
-        const theta = Math.random() * Math.PI * 2;
-        const phi = (Math.random() - 0.5) * Math.PI;
-
-        particlePositions[i * 3] = radius * Math.cos(theta) * Math.cos(phi);
-        particlePositions[i * 3 + 1] = radius * Math.sin(theta) * Math.cos(phi);
-        particlePositions[i * 3 + 2] = radius * Math.sin(phi);
-
-        const col = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-        particleColors[i * 3] = col.r;
-        particleColors[i * 3 + 1] = col.g;
-        particleColors[i * 3 + 2] = col.b;
+      // B. 5 Stepped Thought Layers for About Section (Metaphor: Problem → Research → Tech → Product → Execution)
+      const thoughtLayers = [];
+      const layerGeo = new THREE.PlaneGeometry(16, 10);
+      for (let i = 0; i < 5; i++) {
+        const tLayer = new THREE.Mesh(layerGeo, glassMat.clone());
+        tLayer.material.opacity = 0.04 + i * 0.015;
+        tLayer.position.set(0, 0, -12 - i * 4);
+        const tEdges = new THREE.LineSegments(new THREE.EdgesGeometry(layerGeo), frameMat);
+        tLayer.add(tEdges);
+        archGroup.add(tLayer);
+        thoughtLayers.push(tLayer);
       }
 
-      particleGeo.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
-      particleGeo.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
+      // C. Technical Precision Grid & Coordinates for Toolkit Section
+      const techGrid = new THREE.GridHelper(36, 18, 0x334155, 0x1e293b);
+      techGrid.position.set(0, -10, -15);
+      techGrid.material.transparent = true;
+      techGrid.material.opacity = 0.22;
+      archGroup.add(techGrid);
 
-      const particleMat = new THREE.PointsMaterial({
-        size: 0.28,
-        vertexColors: true,
-        transparent: true,
-        opacity: 0.65
+      // D. Central Singularity Core & Precision Concentric Rings
+      const singularityGroup = new THREE.Group();
+      singularityGroup.position.set(4, 0, -14);
+      archGroup.add(singularityGroup);
+
+      // Precision Rings
+      const ringGeometries = [
+        { r: 4.8, segs: 64, color: 0x94a3b8, opacity: 0.4 },
+        { r: 7.2, segs: 72, color: 0x475569, opacity: 0.25 },
+        { r: 9.6, segs: 96, color: 0x334155, opacity: 0.18 }
+      ];
+
+      const rings = [];
+      ringGeometries.forEach((rg, idx) => {
+        const ringGeo = new THREE.BufferGeometry();
+        const positions = [];
+        for (let j = 0; j <= rg.segs; j++) {
+          const theta = (j / rg.segs) * Math.PI * 2;
+          positions.push(Math.cos(theta) * rg.r, Math.sin(theta) * rg.r, 0);
+        }
+        ringGeo.setAttribute("position", new THREE.Float32BufferAttribute(positions, 3));
+        const rLine = new THREE.Line(
+          ringGeo,
+          new THREE.LineBasicMaterial({ color: rg.color, transparent: true, opacity: rg.opacity })
+        );
+        rLine.rotation.x = Math.PI / 4 + idx * 0.2;
+        singularityGroup.add(rLine);
+        rings.push(rLine);
       });
-      const particlePoints = new THREE.Points(particleGeo, particleMat);
-      coreGroup.add(particlePoints);
 
-      // Target Coordinates for Smooth Mouse and Scroll Motion
-      let targetMouseX = 0;
-      let targetMouseY = 0;
-      let currentMouseX = 0;
-      let currentMouseY = 0;
+      // Octagonal Inner Chamber Wireframe
+      const octGeo = new THREE.CylinderGeometry(2.6, 2.6, 3.8, 8, 1, true);
+      const octEdges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(octGeo),
+        new THREE.LineBasicMaterial({ color: 0x64748b, transparent: true, opacity: 0.35 })
+      );
+      singularityGroup.add(octEdges);
+
+      // E. Contact Architectural Precision Ring (Centrally Positioned for Section 07)
+      const contactRingGeo = new THREE.BufferGeometry();
+      const contactPositions = [];
+      const cSegs = 96;
+      const cRadius = 11.5;
+      for (let k = 0; k <= cSegs; k++) {
+        const theta = (k / cSegs) * Math.PI * 2;
+        contactPositions.push(Math.cos(theta) * cRadius, Math.sin(theta) * cRadius, 0);
+      }
+      contactRingGeo.setAttribute("position", new THREE.Float32BufferAttribute(contactPositions, 3));
+      const contactRing = new THREE.Line(
+        contactRingGeo,
+        new THREE.LineBasicMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.3 })
+      );
+      contactRing.position.set(0, 0, -22);
+      archGroup.add(contactRing);
+
+      // Add architectural tick marks around contact ring
+      const ticksGroup = new THREE.Group();
+      for (let t = 0; t < 24; t++) {
+        const rad = (t / 24) * Math.PI * 2;
+        const tickGeo = new THREE.BufferGeometry();
+        const innerX = Math.cos(rad) * 11.2;
+        const innerY = Math.sin(rad) * 11.2;
+        const outerX = Math.cos(rad) * 11.8;
+        const outerY = Math.sin(rad) * 11.8;
+        tickGeo.setAttribute(
+          "position",
+          new THREE.Float32BufferAttribute([innerX, innerY, 0, outerX, outerY, 0], 3)
+        );
+        const tickLine = new THREE.Line(
+          tickGeo,
+          new THREE.LineBasicMaterial({ color: 0x475569, transparent: true, opacity: 0.25 })
+        );
+        ticksGroup.add(tickLine);
+      }
+      contactRing.add(ticksGroup);
+
+      // --- MOUSE & INTERACTIVE SPRINGS ---
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetCamRotX = 0;
+      let targetCamRotY = 0;
+      let smoothScroll = 0;
 
       window.addEventListener("pointermove", (e) => {
-        targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-        targetMouseY = -(e.clientY / window.innerHeight - 0.5) * 2;
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        targetCamRotY = -mouseX * 0.04;
+        targetCamRotX = -mouseY * 0.03;
+      });
+
+      // Contact button hover interaction
+      let contactHovered = false;
+      const contactButtons = $$("#contact a");
+      contactButtons.forEach((btn) => {
+        btn.addEventListener("mouseenter", () => {
+          contactHovered = true;
+        });
+        btn.addEventListener("mouseleave", () => {
+          contactHovered = false;
+        });
       });
 
       // Handle Resize
@@ -355,117 +453,132 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
-      // Render Loop
-      let clock = new THREE.Clock();
+      // 6. Animation Loop (60fps, Smooth Camera & Architectural Metamorphosis)
+      const clock = new THREE.Clock();
 
-      function animate() {
-        requestAnimationFrame(animate);
-        const elapsedTime = clock.getElapsedTime();
+      function renderFrame() {
+        requestAnimationFrame(renderFrame);
+        const delta = clock.getDelta();
+        const time = clock.getElapsedTime();
 
-        // Smooth Lerp Mouse Reaction
-        currentMouseX += (targetMouseX - currentMouseX) * 0.04;
-        currentMouseY += (targetMouseY - currentMouseY) * 0.04;
+        // Smooth spring scroll interpolation
+        smoothScroll += (globalScrollProgress - smoothScroll) * 0.06;
 
-        // Scroll influence
-        const scrollFraction = window.scrollY / (document.documentElement.scrollHeight || 1);
+        // Camera distance & path across scroll checkpoints:
+        // 0% (Hero): Camera z ~ 26
+        // 25% (Intelligence/About): Camera z ~ 21
+        // 50% (Toolkit): Camera z ~ 16
+        // 75% (Projects): Camera z ~ 11
+        // 100% (Contact): Camera z ~ 8
+        const targetCamZ = 26 - smoothScroll * 18;
+        camera.position.z += (targetCamZ - camera.position.z) * 0.08;
 
-        // Core Rotations
-        icoMesh.rotation.y = elapsedTime * 0.25;
-        icoMesh.rotation.x = elapsedTime * 0.15;
-        nucleusMesh.rotation.y = -elapsedTime * 0.35;
+        // Subtle camera inertia tilt following cursor
+        camera.rotation.y += (targetCamRotY - camera.rotation.y) * 0.05;
+        camera.rotation.x += (targetCamRotX - camera.rotation.x) * 0.05;
 
-        rings.forEach((r) => {
-          r.mesh.rotation.z += r.speed;
+        // --- STAGE-BY-STAGE ARCHITECTURAL TRANSFORMATION ---
+
+        // 1. Hero / Intelligence Core (0 - 25%)
+        // Large glass frames subtly drift and separate horizontally
+        const heroSpread = Math.min(1, smoothScroll * 4);
+        planeFar.position.x = 6 + heroSpread * 3;
+        planeFar.rotation.y = -0.12 - heroSpread * 0.08;
+        planeMid.position.x = -8 - heroSpread * 2.5;
+
+        // 2. About Section: 5 Thought Layers Drifting Apart (20% - 40%)
+        const aboutFactor = Math.max(0, Math.min(1, (smoothScroll - 0.2) * 5));
+        thoughtLayers.forEach((layer, idx) => {
+          layer.position.x = (idx - 2) * aboutFactor * 2.2;
+          layer.rotation.y = (idx - 2) * aboutFactor * 0.04;
+          layer.rotation.x = Math.sin(time * 0.3 + idx) * 0.02;
         });
 
-        particlePoints.rotation.y = elapsedTime * 0.05;
+        // 3. Toolkit Section: Grid Elevation & Technical Raking Light (40% - 60%)
+        const toolFactor = Math.max(0, Math.min(1, (smoothScroll - 0.4) * 5));
+        techGrid.position.y = -10 + toolFactor * 4;
+        techGrid.material.opacity = 0.15 + toolFactor * 0.25;
 
-        // Group Positioning Linked to Scroll & Mouse
-        coreGroup.rotation.y = currentMouseX * 0.4 + scrollFraction * Math.PI;
-        coreGroup.rotation.x = currentMouseY * 0.3 + scrollFraction * 0.5;
+        // 4. Projects: Valtora Blueprint & Singularity Collapse (60% - 85%)
+        // As we move between Valtora and LifeHub, geometry compresses into center, then blooms
+        const projTransition = Math.sin(Math.max(0, Math.min(Math.PI, (smoothScroll - 0.62) * Math.PI * 4)));
+        singularityGroup.scale.setScalar(1 - projTransition * 0.45);
+        singularityGroup.rotation.y = time * 0.15 + smoothScroll * Math.PI;
 
-        // Offset position slightly to the right on desktop hero, center on mobile
-        if (window.innerWidth > 1024) {
-          coreGroup.position.x = 4.5 + currentMouseX * 1.5;
-          coreGroup.position.y = 0 + currentMouseY * 1.2;
+        // 5. Contact Section & Architectural Ring (85% - 100%)
+        const contactFactor = Math.max(0, Math.min(1, (smoothScroll - 0.82) * 6));
+        contactRing.rotation.z = time * 0.08;
+        contactRing.scale.setScalar(0.7 + contactFactor * 0.3);
+
+        // Contact Button Hover Interaction: Ring responds with subtle speed and emissive glow
+        if (contactHovered) {
+          contactRing.rotation.z += delta * 0.35;
+          contactLight.intensity += (0.6 - contactLight.intensity) * 0.1;
         } else {
-          coreGroup.position.x = 0;
-          coreGroup.position.y = 0;
+          contactLight.intensity += (0.05 - contactLight.intensity) * 0.05;
         }
 
-        // Camera Depth linked to scroll
-        camera.position.z = 24 - scrollFraction * 6;
+        // Concentric precision rings rotation
+        rings.forEach((r, idx) => {
+          r.rotation.z += 0.003 * (idx % 2 === 0 ? 1 : -1);
+        });
+
+        octEdges.rotation.y = time * 0.1;
+
+        // Dynamic light tracking
+        keyLight.position.x = 5 + Math.sin(time * 0.2) * 3;
+        keyLight.position.y = 12 - smoothScroll * 10;
 
         renderer.render(scene, camera);
       }
 
-      animate();
+      renderFrame();
     } catch (err) {
-      console.warn("Three.js init fallback to Canvas 2D:", err);
-      init2DCanvasFallback(canvasEl);
+      console.warn("Living Architecture WebGL fallback:", err);
+      initArchitectural2DFallback(canvas);
     }
   }
 
-  // --- HIGH-PERFORMANCE 2D CANVAS FALLBACK ---
-  function init2DCanvasFallback(canvasEl) {
-    const ctx = canvasEl.getContext("2d");
+  // --- RESTRAINED ARCHITECTURAL 2D CANVAS FALLBACK ---
+  function initArchitectural2DFallback(canvas) {
+    const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let width = (canvasEl.width = window.innerWidth);
-    let height = (canvasEl.height = window.innerHeight);
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
 
     window.addEventListener("resize", () => {
-      width = canvasEl.width = window.innerWidth;
-      height = canvasEl.height = window.innerHeight;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
     });
 
-    const particles = Array.from({ length: 65 }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      radius: Math.random() * 1.8 + 0.6,
-      color: Math.random() > 0.5 ? "rgba(181, 255, 77, 0.45)" : "rgba(56, 189, 248, 0.45)"
-    }));
+    function drawArch2D() {
+      ctx.fillStyle = "#050608";
+      ctx.fillRect(0, 0, width, height);
 
-    function drawFallback() {
-      ctx.clearRect(0, 0, width, height);
+      // Draw subtle architectural perspective frames
+      ctx.strokeStyle = "rgba(71, 85, 105, 0.18)";
+      ctx.lineWidth = 1;
 
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
+      const cx = width / 2;
+      const cy = height / 2;
 
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.fill();
-      });
+      // Outer frame
+      ctx.strokeRect(cx - 300, cy - 200, 600, 400);
 
-      requestAnimationFrame(drawFallback);
+      // Inner frame with scroll shift
+      const shift = (globalScrollProgress || 0) * 80;
+      ctx.strokeStyle = "rgba(148, 163, 184, 0.12)";
+      ctx.strokeRect(cx - 200 + shift * 0.2, cy - 140 - shift * 0.1, 400, 280);
+
+      requestAnimationFrame(drawArch2D);
     }
 
-    drawFallback();
+    drawArch2D();
   }
 
-  // --- EXTENSIBLE PROJECT REGISTRY SYNC ---
-  // If future projects are added to data/projects.js, render them dynamically
-  if (window.PROJECTS && Array.isArray(window.PROJECTS) && window.PROJECTS.length > 2) {
-    const projectsContainer = $("#projects-container");
-    if (projectsContainer) {
-      // Future projects renderer handles dynamically appended project entries
-      console.log(`Loaded ${window.PROJECTS.length} projects from registry.`);
-    }
+  // Extensible Project Registry log
+  if (window.PROJECTS && Array.isArray(window.PROJECTS)) {
+    console.log(`Gokul Labs: ${window.PROJECTS.length} verified projects loaded.`);
   }
-
-  // Console Brand Signature
-  console.log(
-    "%c GOKUL LABS %c CSE • AI/ML • BUILDER %c https://github.com/gokul1599 ",
-    "background: #b5ff4d; color: #050508; font-weight: bold; padding: 4px 8px; border-radius: 4px 0 0 4px;",
-    "background: #141824; color: #f8f9fc; padding: 4px 8px;",
-    "background: #38bdf8; color: #050508; font-weight: bold; padding: 4px 8px; border-radius: 0 4px 4px 0;"
-  );
 })();
