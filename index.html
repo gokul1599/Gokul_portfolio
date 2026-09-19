@@ -128,72 +128,129 @@
           </div>
         </div>
 
-        <!-- Right Visual Stage with Interactive Floating Holographic Cards -->
+        <!-- Right Visual Stage: Interactive AI Laboratory Terminal (No 3D shapes) -->
         <div class="hero-visual-stage" id="hero-visual-stage">
           <!-- Ambient Volumetric Cyan Flare -->
           <div class="hero-stage-flare" aria-hidden="true"></div>
 
-          <!-- Floating Holographic Card 1: Methodology Flow -->
-          <div class="hologram-glass-card holo-left tilt-card" data-tilt="14">
+          <!-- Interactive AI Engineering Terminal -->
+          <div class="hero-terminal-window tilt-card" data-tilt="6">
             <div class="card-spotlight" aria-hidden="true"></div>
-            <span class="card-corner tl"></span>
-            <span class="card-corner tr"></span>
-            <div class="holo-header">
-              <span class="holo-header-dot"></span>
-              <span>METHODOLOGY</span>
+            
+            <div class="terminal-header">
+              <div class="terminal-dots" aria-hidden="true">
+                <span class="dot dot-close"></span>
+                <span class="dot dot-minimize"></span>
+                <span class="dot dot-expand"></span>
+              </div>
+              <div class="terminal-tabs" role="tablist">
+                <button class="terminal-tab active" data-tab="engine" role="tab" aria-selected="true">
+                  <span class="tab-icon">⚡</span>
+                  <span class="tab-title">intelligence_core.py</span>
+                </button>
+                <button class="terminal-tab" data-tab="valtora" role="tab" aria-selected="false">
+                  <span class="tab-icon">◈</span>
+                  <span class="tab-title">valtora_ai.py</span>
+                </button>
+                <button class="terminal-tab" data-tab="lifehub" role="tab" aria-selected="false">
+                  <span class="tab-icon">✦</span>
+                  <span class="tab-title">lifehub_agent.ts</span>
+                </button>
+              </div>
+              <div class="terminal-status-pill">
+                <span class="pulse-dot-cyan"></span>
+                <span>INFERENCE: READY</span>
+              </div>
             </div>
-            <div class="holo-flow">
-              <span class="holo-line highlight">IDEA</span>
-              <span class="holo-arrow-down">↓</span>
-              <span class="holo-line highlight">INTELLIGENCE</span>
-              <span class="holo-arrow-down">↓</span>
-              <span class="holo-line highlight">PRODUCT</span>
-            </div>
-          </div>
 
-          <!-- Floating Holographic Card 2: Disciplines & Signal Visualizer -->
-          <div class="hologram-glass-card holo-right tilt-card" data-tilt="14">
-            <div class="card-spotlight" aria-hidden="true"></div>
-            <span class="card-corner tl"></span>
-            <span class="card-corner tr"></span>
-            <div class="holo-header">
-              <span class="holo-header-dot"></span>
-              <span>DISCIPLINES</span>
-            </div>
-            <div class="holo-stat-list">
-              <div class="holo-stat-row">
-                <span>AI / ML</span>
-                <span class="holo-tag">MODELS</span>
+            <div class="terminal-body">
+              <!-- Tab 1: intelligence_core.py -->
+              <div class="terminal-tab-panel active" id="tab-engine">
+                <pre class="code-block"><code><span class="code-comment"># GOKUL LABS — Intelligent Product Architecture</span>
+<span class="code-keyword">from</span> gokul_labs <span class="code-keyword">import</span> NeuralEngine, ProductBuilder
+
+<span class="code-keyword">class</span> <span class="code-class">IntelligenceCore</span>:
+    <span class="code-keyword">def</span> <span class="code-function">__init__</span>(self):
+        self.builder = <span class="code-string">"Gokul Karpurapu"</span>
+        self.disciplines = [<span class="code-string">"AI/ML"</span>, <span class="code-string">"Interactive Web"</span>, <span class="code-string">"Systems"</span>]
+        self.mission = <span class="code-string">"Turn ideas into scalable intelligence."</span>
+    
+    <span class="code-keyword">async def</span> <span class="code-function">synthesize</span>(self, problem):
+        pipeline = <span class="code-keyword">await</span> NeuralEngine.build(problem)
+        <span class="code-keyword">return</span> pipeline.deploy(latency_target=<span class="code-string">"&lt;15ms"</span>)</code></pre>
+                <div class="terminal-output">
+                  <span class="output-prefix">&gt;&gt;&gt;</span>
+                  <span class="output-text">SYSTEM STATUS: <span class="text-cyan">ONLINE</span> // CUDA 12.4 // 2 PRODUCTS DEPLOYED</span>
+                  <span class="terminal-cursor">_</span>
+                </div>
               </div>
-              <div class="holo-stat-row">
-                <span>WEB</span>
-                <span class="holo-tag">INTERACTIVE</span>
+
+              <!-- Tab 2: valtora_ai.py -->
+              <div class="terminal-tab-panel" id="tab-valtora">
+                <pre class="code-block"><code><span class="code-comment"># VALTORA — AI Multimodal Intelligence Platform</span>
+<span class="code-keyword">from</span> valtora.core <span class="code-keyword">import</span> AgentWorkflow, ReasoningPipeline
+
+agent = AgentWorkflow(
+    model=<span class="code-string">"Valtora-Multimodal-v2"</span>,
+    streaming=<span class="code-keyword">True</span>,
+    rag_engine=<span class="code-string">"Hybrid-Vector"</span>
+)
+<span class="code-comment"># Live production build deployed</span>
+app = agent.serve(endpoint=<span class="code-string">"valtora-swart.vercel.app"</span>)</code></pre>
+                <div class="terminal-output">
+                  <span class="output-prefix">&gt;&gt;&gt;</span>
+                  <span class="output-text">LIVE VERIFICATION: <a href="https://valtora-swart.vercel.app" target="_blank" rel="noopener noreferrer" class="terminal-link">https://valtora-swart.vercel.app ↗</a></span>
+                </div>
               </div>
-              <div class="holo-stat-row">
-                <span>CODE</span>
-                <span class="holo-tag">SYSTEMS</span>
-              </div>
-              <div class="holo-stat-row active-row">
-                <span>PRODUCT</span>
-                <div class="mini-signal-graph" aria-hidden="true">
-                  <span class="bar b1"></span>
-                  <span class="bar b2"></span>
-                  <span class="bar b3"></span>
-                  <span class="bar b4"></span>
-                  <span class="bar b5"></span>
-                  <span class="bar b6"></span>
-                  <span class="bar b7"></span>
+
+              <!-- Tab 3: lifehub_agent.ts -->
+              <div class="terminal-tab-panel" id="tab-lifehub">
+                <pre class="code-block"><code><span class="code-comment">// LIFEHUB — Unified Intelligent Workspace Ecosystem</span>
+<span class="code-keyword">import</span> { LifeHubAgent, PredictiveCore } <span class="code-keyword">from</span> <span class="code-string">"@lifehub/ai"</span>;
+
+<span class="code-keyword">export const</span> workspace = <span class="code-keyword">new</span> LifeHubAgent({
+  mode: <span class="code-string">"predictive-scheduling"</span>,
+  telemetry: <span class="code-keyword">true</span>,
+  target: <span class="code-string">"lifehub-sage.vercel.app"</span>
+});</code></pre>
+                <div class="terminal-output">
+                  <span class="output-prefix">&gt;&gt;&gt;</span>
+                  <span class="output-text">LIVE VERIFICATION: <a href="https://lifehub-sage.vercel.app" target="_blank" rel="noopener noreferrer" class="terminal-link">https://lifehub-sage.vercel.app ↗</a></span>
                 </div>
               </div>
             </div>
+
+            <div class="terminal-footer">
+              <div class="terminal-tech-stack">
+                <span class="tech-tag">PYTORCH</span>
+                <span class="tech-tag">FASTAPI</span>
+                <span class="tech-tag">TYPESCRIPT</span>
+                <span class="tech-tag">NEXT.JS</span>
+              </div>
+              <div class="terminal-metrics">
+                <span class="metric-indicator"></span>
+                <span class="metric-val">14.2MS LATENCY // 0 ERRORS</span>
+              </div>
+            </div>
           </div>
 
-          <!-- Floating Holographic Micro-HUD Telemetry -->
-          <div class="hologram-glass-card holo-telemetry tilt-card" data-tilt="8">
+          <!-- Floating Ambient HUD Chips -->
+          <div class="floating-hud hud-top-right tilt-card" data-tilt="10">
             <div class="card-spotlight" aria-hidden="true"></div>
-            <span class="telemetry-dot"></span>
-            <span class="telemetry-label">AI ARCHITECTURE // SYNCHRONIZED</span>
-            <span class="telemetry-freq">120HZ</span>
+            <span class="hud-chip-dot green"></span>
+            <div class="hud-chip-info">
+              <span class="hud-chip-label">METHODOLOGY</span>
+              <span class="hud-chip-val">IDEA → BUILD → PRODUCT</span>
+            </div>
+          </div>
+
+          <div class="floating-hud hud-bottom-left tilt-card" data-tilt="10">
+            <div class="card-spotlight" aria-hidden="true"></div>
+            <span class="hud-chip-dot cyan"></span>
+            <div class="hud-chip-info">
+              <span class="hud-chip-label">DEPLOYED PLATFORMS</span>
+              <span class="hud-chip-val">VALTORA • LIFEHUB</span>
+            </div>
           </div>
         </div>
       </div>
