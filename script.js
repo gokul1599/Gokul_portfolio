@@ -1,40 +1,35 @@
 /**
- * GOKUL LABS — PREMIUM ANIMATION ENGINE v3.0
- * Cinematic entrance, spring physics, upgraded 3D living architecture
+ * GOKUL LABS — AWWWARDS-GRADE ANIMATION ENGINE v4.0
+ * Living AI Architecture & Kinetic Quantum Interaction Engine
  *
- * Features:
- *  - Staggered hero entrance (kicker → title words → description → buttons → cards)
- *  - Smooth spring-lerp on mouse parallax (damping + velocity)
- *  - 3D scene: breathing core with emissive pulse, beam flicker, ring energy pulse,
- *    crystal shimmer, particle colour-cycle, camera dolly on scroll
- *  - Scroll-driven section reveals with IntersectionObserver stagger
- *  - 3D card tilt with spring return
- *  - Live clock, cursor glow
+ * Core Systems:
+ *  - Cinematic blur-lift & clip entrance for typography and UI
+ *  - 3D Kinetic Quantum Crystal Lattice (No sphere, No vertical line)
+ *  - 3-Axis Concentric Precision Gimbal Rings with planetary nutation
+ *  - Real-time specular cursor spotlight on all glass cards (--mouse-x, --mouse-y)
+ *  - Magnetic CTA button physics with spring harmonic return
+ *  - Particle nebula with cursor-velocity kinetic swirl
+ *  - High-precision scroll-driven architectural metamorphism
  */
 
 (function () {
   "use strict";
 
   /* ============================================================
-     UTILITIES
+     UTILITIES & MATHEMATICAL EASING
      ============================================================ */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
-  /** Clamp a value between min and max */
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-
-  /** Linear interpolation */
   const lerp = (a, b, t) => a + (b - a) * t;
-
-  /** Smooth-step (ease-in-out) */
   const smoothstep = (edge0, edge1, x) => {
     const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
     return t * t * (3 - 2 * t);
   };
 
   /* ============================================================
-     LIVE CLOCK
+     LIVE CLOCK & METADATA
      ============================================================ */
   const liveClockEl = $("#live-clock");
   function updateLiveClock() {
@@ -53,7 +48,7 @@
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   /* ============================================================
-     SCROLL PROGRESS & NAVBAR
+     SCROLL PROGRESS & DYNAMIC NAVIGATION
      ============================================================ */
   const progressBar = $("#scroll-progress");
   const navbar = $("#navbar");
@@ -72,7 +67,6 @@
 
     if (navbar) navbar.classList.toggle("scrolled", scrollTop > 30);
 
-    // Active nav highlight
     let current = "";
     sections.forEach((s) => {
       if (scrollTop >= s.offsetTop - 220) current = s.getAttribute("id");
@@ -87,7 +81,7 @@
   handleScroll();
 
   /* ============================================================
-     MOBILE NAV
+     MOBILE NAVIGATION DRAWER
      ============================================================ */
   const menuBtn = $("#menu-btn");
   const navMenu = $("#nav-menu");
@@ -123,8 +117,7 @@
   });
 
   /* ============================================================
-     CINEMATIC HERO ENTRANCE ANIMATION
-     Staggered reveal: kicker → title word by word → description → buttons → cards
+     CINEMATIC BLUR-LIFT HERO ENTRANCE (Apple/Awwwards Grade)
      ============================================================ */
   function initHeroEntrance() {
     const kicker = $(".hero-kicker-cinematic");
@@ -134,44 +127,150 @@
     const cards = $$(".hologram-glass-card");
     const bottomBar = $(".hero-bottom-bar");
 
-    // Set initial hidden state
-    const hide = (el, opts = {}) => {
+    const hide = (el, transform = "translateY(36px)") => {
       if (!el) return;
       el.style.opacity = "0";
-      el.style.transform = opts.transform || "translateY(28px)";
+      el.style.filter = "blur(12px)";
+      el.style.transform = transform;
       el.style.transition = "none";
     };
-    const show = (el, delay, opts = {}) => {
+
+    const reveal = (el, delay, opts = {}) => {
       if (!el) return;
       setTimeout(() => {
-        el.style.transition = `opacity 0.85s cubic-bezier(0.16,1,0.3,1) ${opts.td || 0}ms, transform 0.85s cubic-bezier(0.16,1,0.3,1) ${opts.td || 0}ms`;
+        const dur = opts.dur || "0.95s";
+        const ease = "cubic-bezier(0.16, 1, 0.3, 1)";
+        el.style.transition = `opacity ${dur} ${ease}, transform ${dur} ${ease}, filter ${dur} ${ease}`;
         el.style.opacity = "1";
-        el.style.transform = "none";
+        el.style.filter = "blur(0px)";
+        el.style.transform = opts.transform || "none";
       }, delay);
     };
 
-    hide(kicker);
-    titleRows.forEach((r) => hide(r, { transform: "translateY(48px)" }));
-    hide(desc);
-    buttons.forEach((b) => hide(b));
-    cards.forEach((c) => hide(c, { transform: "translateY(32px) scale(0.94)" }));
-    if (bottomBar) hide(bottomBar, { transform: "translateY(20px)" });
+    hide(kicker, "translateY(24px)");
+    titleRows.forEach((r) => hide(r, "translateY(42px) scale(0.97)"));
+    hide(desc, "translateY(28px)");
+    buttons.forEach((b) => hide(b, "translateY(24px) scale(0.95)"));
+    cards.forEach((c) => hide(c, "translateY(36px) scale(0.92)"));
+    if (bottomBar) hide(bottomBar, "translateY(20px)");
 
-    // Stagger in after a tiny initial delay (page load breathing room)
-    const BASE = 180;
-    show(kicker, BASE);
-    titleRows.forEach((r, i) => show(r, BASE + 140 + i * 110));
-    show(desc, BASE + 540);
-    buttons.forEach((b, i) => show(b, BASE + 680 + i * 90));
-    cards.forEach((c, i) => show(c, BASE + 760 + i * 140));
-    if (bottomBar) show(bottomBar, BASE + 900);
+    const BASE = 140;
+    reveal(kicker, BASE);
+    titleRows.forEach((r, i) => reveal(r, BASE + 120 + i * 130, { dur: "1.1s" }));
+    reveal(desc, BASE + 560, { dur: "0.9s" });
+    buttons.forEach((b, i) => reveal(b, BASE + 700 + i * 90, { dur: "0.85s" }));
+    cards.forEach((c, i) => reveal(c, BASE + 800 + i * 140, { dur: "1.0s" }));
+    if (bottomBar) reveal(bottomBar, BASE + 960, { dur: "0.8s" });
   }
-  // Run entrance once DOM settles
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initHeroEntrance);
   } else {
-    // Tiny rAF so CSS is applied before we measure
     requestAnimationFrame(initHeroEntrance);
+  }
+
+  /* ============================================================
+     INTERACTIVE SPECULAR SPOTLIGHT ON ALL GLASS CARDS
+     (Linear.app / Apple style mouse reflection)
+     ============================================================ */
+  const interactiveCards = $$(
+    ".hologram-glass-card, .stage-card, .project-card, .skill-card, .journey-item"
+  );
+  interactiveCards.forEach((card) => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty("--mouse-x", `${x}px`);
+      card.style.setProperty("--mouse-y", `${y}px`);
+    });
+  });
+
+  /* ============================================================
+     MAGNETIC BUTTONS (Spring harmonic physics)
+     ============================================================ */
+  const magneticButtons = $$(
+    ".btn-glow-cyan, .btn-glass-github, .cta-pill-glass, .btn-primary"
+  );
+  if (window.matchMedia("(hover: hover)").matches) {
+    magneticButtons.forEach((btn) => {
+      let bx = 0, by = 0;
+      let targetX = 0, targetY = 0;
+      let frameId = null;
+
+      btn.addEventListener("mousemove", (e) => {
+        const rect = btn.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        targetX = (e.clientX - centerX) * 0.28;
+        targetY = (e.clientY - centerY) * 0.28;
+
+        if (!frameId) {
+          function springTick() {
+            bx += (targetX - bx) * 0.22;
+            by += (targetY - by) * 0.22;
+            btn.style.transform = `translate3d(${bx.toFixed(2)}px, ${by.toFixed(2)}px, 0) scale(1.02)`;
+            if (Math.abs(targetX - bx) > 0.1 || Math.abs(targetY - by) > 0.1) {
+              frameId = requestAnimationFrame(springTick);
+            } else {
+              frameId = null;
+            }
+          }
+          springTick();
+        }
+      });
+
+      btn.addEventListener("mouseleave", () => {
+        targetX = 0;
+        targetY = 0;
+        function returnSpring() {
+          bx *= 0.76;
+          by *= 0.76;
+          btn.style.transform = `translate3d(${bx.toFixed(2)}px, ${by.toFixed(2)}px, 0)`;
+          if (Math.abs(bx) > 0.1 || Math.abs(by) > 0.1) {
+            requestAnimationFrame(returnSpring);
+          } else {
+            btn.style.transform = "";
+          }
+        }
+        returnSpring();
+      });
+    });
+  }
+
+  /* ============================================================
+     3D CARD TILT WITH SPRING RETURN
+     ============================================================ */
+  if (window.matchMedia("(hover: hover)").matches) {
+    $$(".tilt-card").forEach((card) => {
+      let rx = 0, ry = 0, vrx = 0, vry = 0;
+      const MAX = parseFloat(card.dataset.tilt) || 8;
+
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        const targetRX = -py * MAX * 2;
+        const targetRY = px * MAX * 2;
+        vrx = (vrx + (targetRX - rx) * 0.22) * 0.72;
+        vry = (vry + (targetRY - ry) * 0.22) * 0.72;
+        rx += vrx; ry += vry;
+        card.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(8px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        function springBack() {
+          rx *= 0.78; ry *= 0.78;
+          card.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
+          if (Math.abs(rx) > 0.05 || Math.abs(ry) > 0.05) {
+            requestAnimationFrame(springBack);
+          } else {
+            card.style.transform = "";
+          }
+        }
+        springBack();
+      });
+    });
   }
 
   /* ============================================================
@@ -190,10 +289,8 @@
       { threshold: 0.08, rootMargin: "0px 0px -50px 0px" }
     );
 
-    // Stagger children of reveal-stagger containers
     $$(".reveal-stagger").forEach((container) => {
-      const children = container.children;
-      Array.from(children).forEach((child, i) => {
+      Array.from(container.children).forEach((child, i) => {
         child.style.transitionDelay = `${i * 75}ms`;
       });
     });
@@ -206,20 +303,31 @@
   }
 
   /* ============================================================
-     CURSOR GLOW (spring-tracked)
+     CURSOR GLOW (Chromatic double-layer spring)
      ============================================================ */
   const cursorGlow = $(".cursor-glow");
-  if (cursorGlow && window.matchMedia("(hover: hover)").matches) {
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let cx = mx, cy = my;
-    let vx = 0, vy = 0;
-    const STIFFNESS = 0.14, DAMPING = 0.78;
+  let globalMouseX = window.innerWidth / 2;
+  let globalMouseY = window.innerHeight / 2;
+  let mouseVelX = 0, mouseVelY = 0;
+  let lastMouseX = globalMouseX, lastMouseY = globalMouseY;
 
-    window.addEventListener("pointermove", (e) => { mx = e.clientX; my = e.clientY; });
+  window.addEventListener("pointermove", (e) => {
+    globalMouseX = e.clientX;
+    globalMouseY = e.clientY;
+    mouseVelX = globalMouseX - lastMouseX;
+    mouseVelY = globalMouseY - lastMouseY;
+    lastMouseX = globalMouseX;
+    lastMouseY = globalMouseY;
+  });
+
+  if (cursorGlow && window.matchMedia("(hover: hover)").matches) {
+    let cx = globalMouseX, cy = globalMouseY;
+    let vx = 0, vy = 0;
+    const STIFFNESS = 0.15, DAMPING = 0.76;
 
     function animateCursor() {
-      vx = (vx + (mx - cx) * STIFFNESS) * DAMPING;
-      vy = (vy + (my - cy) * STIFFNESS) * DAMPING;
+      vx = (vx + (globalMouseX - cx) * STIFFNESS) * DAMPING;
+      vy = (vy + (globalMouseY - cy) * STIFFNESS) * DAMPING;
       cx += vx; cy += vy;
       cursorGlow.style.left = `${cx}px`;
       cursorGlow.style.top = `${cy}px`;
@@ -229,43 +337,7 @@
   }
 
   /* ============================================================
-     3D CARD TILT — spring physics
-     ============================================================ */
-  if (window.matchMedia("(hover: hover)").matches) {
-    $$(".tilt-card").forEach((card) => {
-      let rx = 0, ry = 0, vrx = 0, vry = 0;
-      let hovering = false;
-      const MAX = parseFloat(card.dataset.tilt) || 8;
-
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const px = (e.clientX - rect.left) / rect.width - 0.5;
-        const py = (e.clientY - rect.top) / rect.height - 0.5;
-        hovering = true;
-        const targetRX = -py * MAX * 2;
-        const targetRY = px * MAX * 2;
-        vrx = (vrx + (targetRX - rx) * 0.22) * 0.72;
-        vry = (vry + (targetRY - ry) * 0.22) * 0.72;
-        rx += vrx; ry += vry;
-        card.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) translateZ(8px)`;
-        card.style.transition = "box-shadow 0.3s ease";
-      });
-
-      card.addEventListener("mouseleave", () => {
-        hovering = false;
-        function springBack() {
-          rx *= 0.78; ry *= 0.78;
-          card.style.transform = `perspective(900px) rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg)`;
-          if (Math.abs(rx) > 0.05 || Math.abs(ry) > 0.05) requestAnimationFrame(springBack);
-          else card.style.transform = "";
-        }
-        springBack();
-      });
-    });
-  }
-
-  /* ============================================================
-     STAGE CARDS
+     STAGE CARDS INTERACTION
      ============================================================ */
   const stageCards = $$(".stage-card");
   stageCards.forEach((card) => {
@@ -276,7 +348,11 @@
   });
 
   /* ============================================================
-     3D WEBGL — LIVING AI ARCHITECTURE (upgraded engine)
+     3D WEBGL — KINETIC QUANTUM ARCHITECTURE (AWWWARDS-GRADE)
+     No sphere, No vertical line.
+     Pure architectural geometry: nested quantum crystal cage,
+     3-axis precision gimbals, floating frosted glass monoliths,
+     tumbling refraction prisms, and velocity-reactive particles.
      ============================================================ */
   const canvasEl = $("#webgl-canvas");
   if (canvasEl) initLivingArchitecture(canvasEl);
@@ -288,17 +364,17 @@
     }
 
     try {
-      /* --- Scene -------------------------------------------------- */
+      /* --- Scene & Deep Void Fog ---------------------------------- */
       const scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(0x050608, 0.011);
 
-      /* --- Camera ------------------------------------------------- */
+      /* --- Camera Setup ------------------------------------------- */
       const camera = new THREE.PerspectiveCamera(
         46, window.innerWidth / window.innerHeight, 0.1, 200
       );
       camera.position.set(0, 0, 24);
 
-      /* --- Renderer ----------------------------------------------- */
+      /* --- Renderer (High Dynamic Range & Alpha) ------------------- */
       const renderer = new THREE.WebGLRenderer({
         canvas, alpha: true, antialias: true,
         powerPreference: "high-performance"
@@ -306,50 +382,46 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.1;
+      renderer.toneMappingExposure = 1.15;
 
-      /* --- Master Group ------------------------------------------ */
+      /* --- Master Architectural Group ---------------------------- */
       const archGroup = new THREE.Group();
       scene.add(archGroup);
 
-      /* --- Lighting ----------------------------------------------- */
-      const ambient = new THREE.AmbientLight(0x080d1a, 1.4);
+      /* --- Lighting Rig (Volumetric Studio Atmosphere) ------------- */
+      const ambient = new THREE.AmbientLight(0x080e1d, 1.5);
       scene.add(ambient);
 
-      const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.0);
       keyLight.position.set(8, 14, 18);
       scene.add(keyLight);
 
-      // Main cyan rim (will be pulsed in animation loop)
-      const rimLight = new THREE.PointLight(0x38bdf8, 3.2, 60);
+      const rimLight = new THREE.PointLight(0x38bdf8, 3.4, 60);
       rimLight.position.set(8, 2, 8);
       scene.add(rimLight);
 
-      // Violet accent
-      const violetLight = new THREE.PointLight(0x818cf8, 2.0, 50);
+      const violetLight = new THREE.PointLight(0x818cf8, 2.2, 50);
       violetLight.position.set(-12, -6, 6);
       scene.add(violetLight);
 
-      // Acid accent (subtle, for crystal highlights)
-      const acidLight = new THREE.PointLight(0xb5ff4d, 0.8, 30);
+      const acidLight = new THREE.PointLight(0xb5ff4d, 0.9, 32);
       acidLight.position.set(-6, 8, 4);
       scene.add(acidLight);
 
-      // Contact hover light
       const contactLight = new THREE.PointLight(0xb5ff4d, 0.05, 40);
       contactLight.position.set(0, 0, 5);
       scene.add(contactLight);
 
-      /* --- Background Glass Architecture -------------------------- */
+      /* --- Background Architectural Glass Planes ----------------- */
       const glassMat = new THREE.MeshPhysicalMaterial({
         color: 0x111622, metalness: 0.2, roughness: 0.15,
         transparent: true, opacity: 0.1, side: THREE.DoubleSide, depthWrite: false
       });
       const frameMat = new THREE.LineBasicMaterial({
-        color: 0x334155, transparent: true, opacity: 0.32
+        color: 0x334155, transparent: true, opacity: 0.34
       });
       const accentMat = new THREE.LineBasicMaterial({
-        color: 0x64748b, transparent: true, opacity: 0.38
+        color: 0x64748b, transparent: true, opacity: 0.4
       });
 
       // Far glass plane
@@ -360,7 +432,7 @@
       planeFar.add(new THREE.LineSegments(new THREE.EdgesGeometry(g1), frameMat));
       archGroup.add(planeFar);
 
-      // Mid-depth wall
+      // Mid-depth angled wall
       const g2 = new THREE.PlaneGeometry(30, 22);
       const planeMid = new THREE.Mesh(g2, glassMat);
       planeMid.position.set(-8, -1, -20);
@@ -376,7 +448,7 @@
       planeNear.add(new THREE.LineSegments(new THREE.EdgesGeometry(g3), accentMat));
       archGroup.add(planeNear);
 
-      // Thought layers (About section)
+      // Thought layers for About section
       const thoughtLayers = [];
       const lg = new THREE.PlaneGeometry(16, 10);
       for (let i = 0; i < 5; i++) {
@@ -388,14 +460,17 @@
         thoughtLayers.push(tl);
       }
 
-      // Tech grid
+      // Tech coordinate grid
       const techGrid = new THREE.GridHelper(36, 18, 0x1e293b, 0x0f172a);
       techGrid.position.set(0, -10, -15);
       techGrid.material.transparent = true;
       techGrid.material.opacity = 0.18;
       archGroup.add(techGrid);
 
-      /* --- Singularity Group (Hero Orb + Rings + Beam) ----------- */
+      /* ============================================================
+         KINETIC QUANTUM ARCHITECTURE (HERO STAGE FOCAL POINT)
+         Zero spheres. Zero vertical lines.
+         ============================================================ */
       const singularityGroup = new THREE.Group();
       archGroup.add(singularityGroup);
 
@@ -407,20 +482,77 @@
       placeSingularity();
       window.addEventListener("resize", placeSingularity);
 
-      // ── Central luminous ambient accent (clean open center)
-      const centerLight = new THREE.PointLight(0x38bdf8, 2.2, 40);
+      // ── Central luminous ambient accent (internal illumination)
+      const centerLight = new THREE.PointLight(0x38bdf8, 2.5, 42);
       singularityGroup.add(centerLight);
 
-      // ── Precision orbit rings
+      // ── 1. Central Kinetic Quantum Crystal Lattice (Nested Polyhedral Cage)
+      const quantumCage = new THREE.Group();
+      singularityGroup.add(quantumCage);
+
+      // Outer geometric wireframe cage (Icosahedron)
+      const outerCageGeo = new THREE.IcosahedronGeometry(2.3, 0);
+      const outerCageEdges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(outerCageGeo),
+        new THREE.LineBasicMaterial({
+          color: 0x38bdf8,
+          transparent: true,
+          opacity: 0.48
+        })
+      );
+      quantumCage.add(outerCageEdges);
+
+      // Subtle vertex point nodes on outer cage
+      const vertexGeo = new THREE.BufferGeometry();
+      const posAttr = outerCageGeo.getAttribute("position");
+      vertexGeo.setAttribute("position", posAttr);
+      const vertexMat = new THREE.PointsMaterial({
+        color: 0x93c5fd,
+        size: 0.14,
+        transparent: true,
+        opacity: 0.85,
+        blending: THREE.AdditiveBlending
+      });
+      const vertexPoints = new THREE.Points(vertexGeo, vertexMat);
+      quantumCage.add(vertexPoints);
+
+      // Inner faceted quartz crystal (Octahedron with counter-rotation)
+      const innerCrystalGeo = new THREE.OctahedronGeometry(1.4, 0);
+      const innerCrystalMat = new THREE.MeshPhysicalMaterial({
+        color: 0xe0f2fe,
+        metalness: 0.15,
+        roughness: 0.04,
+        transmission: 0.92,
+        thickness: 1.8,
+        transparent: true,
+        opacity: 0.76,
+        side: THREE.DoubleSide
+      });
+      const innerCrystal = new THREE.Mesh(innerCrystalGeo, innerCrystalMat);
+      const innerCrystalEdges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(innerCrystalGeo),
+        new THREE.LineBasicMaterial({
+          color: 0x7dd3fc,
+          transparent: true,
+          opacity: 0.8
+        })
+      );
+      innerCrystal.add(innerCrystalEdges);
+      quantumCage.add(innerCrystal);
+
+      // ── 2. 3-Axis Concentric Precision Gimbal Rings
       const ringMat = new THREE.MeshStandardMaterial({
-        color: 0xf1f5f9, metalness: 0.96, roughness: 0.12,
-        emissive: 0x0284c7, emissiveIntensity: 0.25
+        color: 0xf1f5f9,
+        metalness: 0.96,
+        roughness: 0.12,
+        emissive: 0x0284c7,
+        emissiveIntensity: 0.28
       });
 
       const ringCfgs = [
-        { r: 3.8, tube: 0.038, rot: [1.1, 0.35, 0.2], spd: 0.009, nR: 0.13 },
-        { r: 5.2, tube: 0.042, rot: [-0.8, -0.45, 0.4], spd: -0.007, nR: 0.15 },
-        { r: 6.8, tube: 0.046, rot: [0.4, 0.95, -0.3], spd: 0.006, nR: 0.17 }
+        { r: 3.8, tube: 0.038, rot: [1.1, 0.35, 0.2], spd: 0.007, nR: 0.12 },
+        { r: 5.3, tube: 0.042, rot: [-0.8, -0.45, 0.4], spd: -0.005, nR: 0.14 },
+        { r: 6.9, tube: 0.046, rot: [0.4, 0.95, -0.3], spd: 0.004, nR: 0.16 }
       ];
 
       const metallicRings = [];
@@ -428,21 +560,47 @@
         const holder = new THREE.Group();
         holder.rotation.set(...cfg.rot);
 
-        const ring = new THREE.Mesh(new THREE.TorusGeometry(cfg.r, cfg.tube, 16, 128), ringMat);
+        const ring = new THREE.Mesh(
+          new THREE.TorusGeometry(cfg.r, cfg.tube, 16, 144),
+          ringMat
+        );
         holder.add(ring);
 
-        // Satellite node
+        // Precision tick marks around each gimbal ring
+        const tickGroup = new THREE.Group();
+        const ticksCount = 24 + idx * 8;
+        for (let t = 0; t < ticksCount; t++) {
+          const theta = (t / ticksCount) * Math.PI * 2;
+          const tGeo = new THREE.BufferGeometry();
+          const rInner = cfg.r - 0.12;
+          const rOuter = cfg.r + 0.12;
+          tGeo.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute([
+              Math.cos(theta) * rInner, Math.sin(theta) * rInner, 0,
+              Math.cos(theta) * rOuter, Math.sin(theta) * rOuter, 0
+            ], 3)
+          );
+          tickGroup.add(new THREE.Line(tGeo, new THREE.LineBasicMaterial({
+            color: 0x475569, transparent: true, opacity: 0.35
+          })));
+        }
+        holder.add(tickGroup);
+
+        // Orbiting satellite pulse node
         const nodeMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-        const node = new THREE.Mesh(new THREE.SphereGeometry(cfg.nR, 12, 12), nodeMat);
+        const node = new THREE.Mesh(new THREE.BoxGeometry(cfg.nR * 1.5, cfg.nR * 1.5, cfg.nR * 1.5), nodeMat);
         node.position.set(cfg.r, 0, 0);
         holder.add(node);
 
-        // Trailing glow dot
+        // Trailing glow arc
         const trailMat = new THREE.MeshBasicMaterial({
-          color: 0x38bdf8, transparent: true, opacity: 0.35,
+          color: 0x38bdf8,
+          transparent: true,
+          opacity: 0.32,
           blending: THREE.AdditiveBlending
         });
-        const trail = new THREE.Mesh(new THREE.SphereGeometry(cfg.nR * 2.2, 8, 8), trailMat);
+        const trail = new THREE.Mesh(new THREE.BoxGeometry(cfg.nR * 2.2, cfg.nR * 2.2, cfg.nR * 2.2), trailMat);
         trail.position.set(cfg.r, 0, 0);
         holder.add(trail);
 
@@ -450,13 +608,20 @@
         metallicRings.push({ group: holder, speed: cfg.spd, node, trail, radius: cfg.r, idx });
       });
 
-      // ── Floating architectural glass slabs
+      // ── 3. Floating Architectural Glass Monoliths
       const slabMat = new THREE.MeshPhysicalMaterial({
-        color: 0x0e1726, roughness: 0.08, metalness: 0.2,
-        transmission: 0.88, transparent: true, opacity: 0.4, depthWrite: false
+        color: 0x0e1726,
+        roughness: 0.08,
+        metalness: 0.2,
+        transmission: 0.88,
+        transparent: true,
+        opacity: 0.4,
+        depthWrite: false
       });
       const slabEdgeMat = new THREE.LineBasicMaterial({
-        color: 0x64748b, transparent: true, opacity: 0.42
+        color: 0x64748b,
+        transparent: true,
+        opacity: 0.44
       });
       const slabCfgs = [
         { g: new THREE.BoxGeometry(4.2, 6.4, 0.06), p: [-3.4, 1.2, -2.5], r: [0.1, 0.35, -0.05] },
@@ -473,14 +638,20 @@
         glassSlabs.push({ mesh: m, basePos: [...s.p], baseRot: [...s.r] });
       });
 
-      // ── Refraction crystals (6 polyhedra)
+      // ── 4. Tumbling Polyhedral Refraction Prisms (6 crystals)
       const crystalMat = new THREE.MeshPhysicalMaterial({
-        color: 0xdbeafe, metalness: 0.15, roughness: 0.06,
-        transmission: 0.82, thickness: 1.2,
-        transparent: true, opacity: 0.68
+        color: 0xdbeafe,
+        metalness: 0.15,
+        roughness: 0.06,
+        transmission: 0.84,
+        thickness: 1.2,
+        transparent: true,
+        opacity: 0.7
       });
       const crystalEdgeMat = new THREE.LineBasicMaterial({
-        color: 0x7dd3fc, transparent: true, opacity: 0.8
+        color: 0x7dd3fc,
+        transparent: true,
+        opacity: 0.82
       });
       const crystalCfgs = [
         { geo: new THREE.OctahedronGeometry(0.85), pos: [-4.2, 3.5, 1.8], spd: [0.012, 0.017, 0.008], fo: 0.0 },
@@ -501,16 +672,15 @@
       });
       singularityGroup.add(crystalGroup);
 
-      // ── Quantum dust particles (400 points, 2-color)
-      const PARTICLE_COUNT = 400;
+      // ── 5. Dual-Tone Quantum Particle Dust (420 points)
+      const PARTICLE_COUNT = 420;
       const pGeo = new THREE.BufferGeometry();
       const pPos = new Float32Array(PARTICLE_COUNT * 3);
       const pColours = new Float32Array(PARTICLE_COUNT * 3);
       for (let i = 0; i < PARTICLE_COUNT; i++) {
-        pPos[i * 3] = (Math.random() - 0.5) * 50;
-        pPos[i * 3 + 1] = (Math.random() - 0.5) * 38;
+        pPos[i * 3] = (Math.random() - 0.5) * 52;
+        pPos[i * 3 + 1] = (Math.random() - 0.5) * 40;
         pPos[i * 3 + 2] = (Math.random() - 0.5) * 32 - 6;
-        // Alternate cyan / violet
         const isCyan = Math.random() > 0.35;
         pColours[i * 3] = isCyan ? 0.22 : 0.51;
         pColours[i * 3 + 1] = isCyan ? 0.74 : 0.36;
@@ -519,13 +689,16 @@
       pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
       pGeo.setAttribute("color", new THREE.BufferAttribute(pColours, 3));
       const pMat = new THREE.PointsMaterial({
-        size: 0.11, transparent: true, opacity: 0.72,
-        blending: THREE.AdditiveBlending, vertexColors: true
+        size: 0.11,
+        transparent: true,
+        opacity: 0.72,
+        blending: THREE.AdditiveBlending,
+        vertexColors: true
       });
       const particles = new THREE.Points(pGeo, pMat);
       scene.add(particles);
 
-      // ── Contact precision ring
+      // ── 6. Contact Section Precision Ring
       const cRingPositions = [];
       const cSegs = 120;
       const cRad = 11.5;
@@ -542,8 +715,7 @@
       contactRing.position.set(0, 0, -22);
       archGroup.add(contactRing);
 
-      // Tick marks
-      const tickGroup = new THREE.Group();
+      const contactTickGroup = new THREE.Group();
       for (let t = 0; t < 32; t++) {
         const rad = (t / 32) * Math.PI * 2;
         const long = t % 4 === 0;
@@ -554,13 +726,13 @@
           Math.cos(rad) * r1, Math.sin(rad) * r1, 0,
           Math.cos(rad) * r2, Math.sin(rad) * r2, 0
         ], 3));
-        tickGroup.add(new THREE.Line(tGeo, new THREE.LineBasicMaterial({
+        contactTickGroup.add(new THREE.Line(tGeo, new THREE.LineBasicMaterial({
           color: long ? 0x475569 : 0x334155, transparent: true, opacity: long ? 0.3 : 0.18
         })));
       }
-      contactRing.add(tickGroup);
+      contactRing.add(contactTickGroup);
 
-      /* --- Mouse Spring ------------------------------------------ */
+      /* --- Mouse Spring & Velocity Tracking ---------------------- */
       let rawMouseX = 0, rawMouseY = 0;
       let smoothMouseX = 0, smoothMouseY = 0;
       let vmx = 0, vmy = 0;
@@ -570,25 +742,22 @@
         rawMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
       });
 
-      /* --- Contact Hover ----------------------------------------- */
       let contactHovered = false;
       $$("#contact a").forEach((btn) => {
         btn.addEventListener("mouseenter", () => (contactHovered = true));
         btn.addEventListener("mouseleave", () => (contactHovered = false));
       });
 
-      /* --- Resize ------------------------------------------------- */
       window.addEventListener("resize", () => {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
 
-      /* --- Animation Loop ---------------------------------------- */
+      /* --- Animation Loop (60 FPS Harmonic Engine) ---------------- */
       const clock = new THREE.Clock();
       let smoothScroll = 0;
 
-      // Per-crystal individual life phase
       crystals.forEach((c) => { c.phase = Math.random() * Math.PI * 2; });
 
       function renderFrame() {
@@ -596,34 +765,33 @@
         const dt = clock.getDelta();
         const t = clock.getElapsedTime();
 
-        /* Scroll spring */
+        /* Smooth scroll interpolation */
         smoothScroll = lerp(smoothScroll, globalScrollProgress, 0.055);
 
         /* Camera dolly on scroll */
         const targetCamZ = 24 - smoothScroll * 16;
         camera.position.z = lerp(camera.position.z, targetCamZ, 0.07);
 
-        /* Mouse spring (damped) */
+        /* Mouse spring with inertia */
         vmx = (vmx + (rawMouseX - smoothMouseX) * 0.06) * 0.82;
         vmy = (vmy + (rawMouseY - smoothMouseY) * 0.06) * 0.82;
         smoothMouseX += vmx;
         smoothMouseY += vmy;
 
-        /* Camera inertia tilt */
+        /* Camera tilt inertia */
         const targetCamRotY = -smoothMouseX * 0.038;
         const targetCamRotX = -smoothMouseY * 0.028;
         camera.rotation.y = lerp(camera.rotation.y, targetCamRotY, 0.05);
         camera.rotation.x = lerp(camera.rotation.x, targetCamRotX, 0.05);
 
-        /* ── Scroll-driven architecture metamorphosis ── */
-
-        // 1. Hero glass planes separation
+        /* ── Scroll-driven architectural metamorphism ── */
+        // 1. Hero glass frames separation
         const heroSpread = smoothstep(0, 0.25, smoothScroll);
         planeFar.position.x = 6 + heroSpread * 3.5;
         planeFar.rotation.y = -0.12 - heroSpread * 0.09;
         planeMid.position.x = -8 - heroSpread * 2.8;
 
-        // 2. About: thought layers fan out
+        // 2. About: thought layers fan out in isometric depth
         const aboutF = smoothstep(0.18, 0.42, smoothScroll);
         thoughtLayers.forEach((layer, i) => {
           layer.position.x = (i - 2) * aboutF * 2.4;
@@ -631,7 +799,7 @@
           layer.rotation.x = Math.sin(t * 0.28 + i) * 0.02;
         });
 
-        // 3. Toolkit: grid rises
+        // 3. Toolkit: technical coordinate grid rises
         const toolF = smoothstep(0.38, 0.62, smoothScroll);
         techGrid.position.y = -10 + toolF * 4.5;
         techGrid.material.opacity = 0.12 + toolF * 0.28;
@@ -640,9 +808,9 @@
         const projT = Math.sin(clamp((smoothScroll - 0.62) * Math.PI * 4, 0, Math.PI));
         singularityGroup.scale.setScalar((window.innerWidth < 900 ? 0.72 : 1.0) - projT * 0.38);
 
-        // Mouse-reactive tilt of singularity
-        const tiltY = smoothMouseX * 0.24;
-        const tiltX = -smoothMouseY * 0.18;
+        // Singularity group responds dynamically to cursor position
+        const tiltY = smoothMouseX * 0.26;
+        const tiltX = -smoothMouseY * 0.2;
         singularityGroup.rotation.y = lerp(singularityGroup.rotation.y, tiltY, 0.04);
         singularityGroup.rotation.x = lerp(singularityGroup.rotation.x, tiltX, 0.04);
 
@@ -653,53 +821,57 @@
         contactRing.scale.setScalar(0.65 + contactF * 0.35);
         contactLight.intensity = lerp(contactLight.intensity, contactHovered ? 0.7 : 0.05, 0.08);
 
-        /* ── Center ambient light pulse ── */
-        centerLight.intensity = 2.2 + Math.sin(t * 2.0) * 0.4;
+        /* ── Quantum Crystal Cage Rotation (Nested Polyhedral Counter-Spin) ── */
+        quantumCage.rotation.y = t * 0.14;
+        quantumCage.rotation.x = Math.sin(t * 0.22) * 0.15;
+        innerCrystal.rotation.y = -t * 0.22;
+        innerCrystal.rotation.z = t * 0.11;
 
-        /* ── Rim light slow drift ── */
+        // Ambient internal crystal illumination breathing
+        centerLight.intensity = 2.2 + Math.sin(t * 2.2) * 0.45;
+
+        /* ── Rim light slow harmonic drift ── */
         rimLight.intensity = 3.0 + Math.sin(t * 0.85) * 0.8;
 
-        /* ── Metallic rings orbit + energy pulse ── */
+        /* ── Metallic Precision Rings Planetary Orbit ── */
         metallicRings.forEach((mr, i) => {
           mr.group.rotation.z += mr.speed;
-          const angle = t * (0.5 + i * 0.28);
+          // Nutation wobble on x and y axes for astronomical clock feel
+          mr.group.rotation.x += Math.sin(t * 0.4 + i) * 0.0008;
+          const angle = t * (0.45 + i * 0.24);
           mr.node.position.x = Math.cos(angle) * mr.radius;
           mr.node.position.y = Math.sin(angle) * mr.radius;
-          mr.trail.position.x = Math.cos(angle - 0.14) * mr.radius;
-          mr.trail.position.y = Math.sin(angle - 0.14) * mr.radius;
-          // Ring emissive pulse
+          mr.trail.position.x = Math.cos(angle - 0.15) * mr.radius;
+          mr.trail.position.y = Math.sin(angle - 0.15) * mr.radius;
           mr.group.children[0].material.emissiveIntensity =
-            0.18 + Math.sin(t * 2.2 + i * 1.5) * 0.14;
+            0.18 + Math.sin(t * 2.0 + i * 1.4) * 0.15;
         });
 
-        /* ── Glass slabs gentle sway ── */
+        /* ── Floating Glass Slabs Gentle Sway ── */
         glassSlabs.forEach((s, i) => {
-          s.mesh.position.y = s.basePos[1] + Math.sin(t * 0.6 + i * 2.1) * 0.18;
-          s.mesh.rotation.y = s.baseRot[1] + Math.sin(t * 0.4 + i * 1.5) * 0.025;
+          s.mesh.position.y = s.basePos[1] + Math.sin(t * 0.55 + i * 2.1) * 0.2;
+          s.mesh.rotation.y = s.baseRot[1] + Math.sin(t * 0.38 + i * 1.5) * 0.03;
         });
 
-        /* ── Crystal animation: spin + float + emissive twinkle ── */
+        /* ── Tumbling Polyhedral Crystals ── */
         crystals.forEach((c) => {
           c.mesh.rotation.x += c.spd[0];
           c.mesh.rotation.y += c.spd[1];
           c.mesh.rotation.z += c.spd[2];
-          c.mesh.position.y = c.pos[1] + Math.sin(t * 1.55 + c.fo) * 0.28;
-          // Crystal shimmer: change opacity slightly
-          c.mesh.material.opacity = 0.58 + Math.sin(t * 2.8 + c.fo) * 0.12;
-          c.mesh.material.emissiveIntensity = 0.05 + Math.sin(t * 3.5 + c.fo) * 0.06;
+          c.mesh.position.y = c.pos[1] + Math.sin(t * 1.5 + c.fo) * 0.3;
+          c.mesh.material.opacity = 0.58 + Math.sin(t * 2.6 + c.fo) * 0.14;
         });
 
-        /* ── Particle slow rotation + Y drift ── */
-        particles.rotation.y = t * 0.012;
-        particles.rotation.x = Math.sin(t * 0.08) * 0.02;
-        pMat.opacity = 0.6 + Math.sin(t * 0.6) * 0.15;
+        /* ── Quantum Particle Swirl Reactive to Cursor Velocity ── */
+        const velMag = Math.sqrt(mouseVelX * mouseVelX + mouseVelY * mouseVelY);
+        particles.rotation.y = t * 0.012 + Math.min(0.08, velMag * 0.002);
+        particles.rotation.x = Math.sin(t * 0.08) * 0.025;
+        pMat.opacity = 0.62 + Math.sin(t * 0.6) * 0.16;
 
-        /* ── Keylight drift ── */
+        /* ── Dynamic Light Tracking ── */
         keyLight.position.x = 5 + Math.sin(t * 0.22) * 3.5;
         keyLight.position.y = 12 - smoothScroll * 10;
-
-        /* ── Acid crystal light pulse ── */
-        acidLight.intensity = 0.6 + Math.sin(t * 2.8) * 0.4;
+        acidLight.intensity = 0.65 + Math.sin(t * 2.6) * 0.35;
 
         renderer.render(scene, camera);
       }
@@ -713,7 +885,7 @@
   }
 
   /* ============================================================
-     2D CANVAS FALLBACK
+     RESTRAINED 2D CANVAS FALLBACK
      ============================================================ */
   function initFallback2D(canvas) {
     const ctx = canvas.getContext("2d");

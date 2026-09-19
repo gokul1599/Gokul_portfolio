@@ -909,7 +909,63 @@ main {
   border-radius: 4px;
 }
 
-/* Signal Equalizer */
+/* Dynamic Card Spotlight (follows mouse coordinates) */
+.card-spotlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(280px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.18), transparent 70%);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+.hologram-glass-card:hover .card-spotlight {
+  opacity: 1;
+}
+
+/* Floating Micro-HUD Telemetry at Bottom of Visual Stage */
+.holo-telemetry {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 8px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius-pill);
+  font-size: 9px;
+  letter-spacing: 0.16em;
+  color: #94a3b8;
+  white-space: nowrap;
+  animation: float-card 7s cubic-bezier(0.45, 0, 0.55, 1) 2s infinite alternate;
+  z-index: 12;
+}
+.telemetry-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-acid);
+  box-shadow: 0 0 8px var(--accent-acid);
+  animation: pulse-glow 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+.telemetry-label {
+  color: #cbd5e1;
+  font-weight: 500;
+}
+.telemetry-freq {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  padding: 1px 5px;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 3px;
+  font-size: 8px;
+}
+
+/* Signal Equalizer (7-band harmonic wave) */
 .mini-signal-graph {
   display: inline-flex;
   align-items: flex-end;
@@ -917,17 +973,19 @@ main {
   height: 14px;
 }
 .mini-signal-graph .bar {
-  width: 3px;
-  background: #38bdf8;
-  border-radius: 2px 2px 0 0;
-  animation: signal-bounce 1.0s ease-in-out infinite alternate;
+  width: 2.5px;
+  background: linear-gradient(to top, #0284c7, #38bdf8);
+  border-radius: 1.5px 1.5px 0 0;
+  animation: signal-bounce 0.9s ease-in-out infinite alternate;
   transform-origin: bottom;
 }
-.mini-signal-graph .b1 { height: 5px; animation-delay: 0.0s; }
-.mini-signal-graph .b2 { height: 9px; animation-delay: 0.25s; }
-.mini-signal-graph .b3 { height: 13px; animation-delay: 0.1s; }
-.mini-signal-graph .b4 { height: 7px; animation-delay: 0.4s; }
-.mini-signal-graph .b5 { height: 11px; animation-delay: 0.15s; }
+.mini-signal-graph .b1 { height: 4px; animation-delay: 0.0s; }
+.mini-signal-graph .b2 { height: 8px; animation-delay: 0.2s; }
+.mini-signal-graph .b3 { height: 13px; animation-delay: 0.08s; }
+.mini-signal-graph .b4 { height: 6px; animation-delay: 0.32s; }
+.mini-signal-graph .b5 { height: 12px; animation-delay: 0.14s; }
+.mini-signal-graph .b6 { height: 9px; animation-delay: 0.28s; }
+.mini-signal-graph .b7 { height: 5px; animation-delay: 0.18s; }
 
 
 
