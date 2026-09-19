@@ -407,50 +407,9 @@
       placeSingularity();
       window.addEventListener("resize", placeSingularity);
 
-      // ── Core sphere (luminous)
-      const coreGeo = new THREE.SphereGeometry(1.85, 40, 40);
-      const coreMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      singularityGroup.add(coreMesh);
-
-      const coreLight = new THREE.PointLight(0x38bdf8, 4.2, 38);
-      singularityGroup.add(coreLight);
-
-      // ── Corona halo (additive blending)
-      const coronaGeo = new THREE.SphereGeometry(2.18, 32, 32);
-      const coronaMat = new THREE.MeshBasicMaterial({
-        color: 0x7dd3fc, transparent: true, opacity: 0.3,
-        blending: THREE.AdditiveBlending
-      });
-      const coronaMesh = new THREE.Mesh(coronaGeo, coronaMat);
-      singularityGroup.add(coronaMesh);
-
-      // ── Second softer outer corona
-      const corona2Geo = new THREE.SphereGeometry(2.68, 32, 32);
-      const corona2Mat = new THREE.MeshBasicMaterial({
-        color: 0x0ea5e9, transparent: true, opacity: 0.12,
-        blending: THREE.AdditiveBlending
-      });
-      const corona2Mesh = new THREE.Mesh(corona2Geo, corona2Mat);
-      singularityGroup.add(corona2Mesh);
-
-      // ── Glass sphere
-      const glassSphereGeo = new THREE.SphereGeometry(2.46, 48, 48);
-      const glassSphereMat = new THREE.MeshPhysicalMaterial({
-        color: 0x0c1424, metalness: 0.15, roughness: 0.04,
-        transmission: 0.88, thickness: 1.5,
-        transparent: true, opacity: 0.72, side: THREE.DoubleSide
-      });
-      const glassSphereMesh = new THREE.Mesh(glassSphereGeo, glassSphereMat);
-      singularityGroup.add(glassSphereMesh);
-
-      // ── Wireframe overlay
-      const wireGeo = new THREE.WireframeGeometry(new THREE.SphereGeometry(2.5, 18, 18));
-      const wireMat = new THREE.LineBasicMaterial({
-        color: 0x38bdf8, transparent: true, opacity: 0.22
-      });
-      const sphereWire = new THREE.LineSegments(wireGeo, wireMat);
-      singularityGroup.add(sphereWire);
+      // ── Central luminous ambient accent (clean open center)
+      const centerLight = new THREE.PointLight(0x38bdf8, 2.2, 40);
+      singularityGroup.add(centerLight);
 
       // ── Precision orbit rings
       const ringMat = new THREE.MeshStandardMaterial({
@@ -490,27 +449,6 @@
         singularityGroup.add(holder);
         metallicRings.push({ group: holder, speed: cfg.spd, node, trail, radius: cfg.r, idx });
       });
-
-      // ── Laser Beam Column (3-layer: white core + cyan + outer halo)
-      const beamCore = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.035, 0.035, 48, 12),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.98 })
-      );
-      singularityGroup.add(beamCore);
-
-      const beamGlowMat = new THREE.MeshBasicMaterial({
-        color: 0x38bdf8, transparent: true, opacity: 0.5,
-        blending: THREE.AdditiveBlending
-      });
-      const beamGlow = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 48, 12), beamGlowMat);
-      singularityGroup.add(beamGlow);
-
-      const beamHaloMat = new THREE.MeshBasicMaterial({
-        color: 0x0ea5e9, transparent: true, opacity: 0.16,
-        blending: THREE.AdditiveBlending
-      });
-      const beamHalo = new THREE.Mesh(new THREE.CylinderGeometry(0.72, 0.72, 48, 12), beamHaloMat);
-      singularityGroup.add(beamHalo);
 
       // ── Floating architectural glass slabs
       const slabMat = new THREE.MeshPhysicalMaterial({
@@ -715,26 +653,11 @@
         contactRing.scale.setScalar(0.65 + contactF * 0.35);
         contactLight.intensity = lerp(contactLight.intensity, contactHovered ? 0.7 : 0.05, 0.08);
 
-        /* ── Core breathing (slow sine pulse) ── */
-        const breathe = 1.0 + Math.sin(t * 1.8) * 0.04;
-        coreMesh.scale.setScalar(breathe);
-        coronaMesh.scale.setScalar(breathe * (1.0 + Math.sin(t * 2.4) * 0.025));
-        corona2Mesh.scale.setScalar(breathe * (1.0 + Math.sin(t * 1.2 + 0.8) * 0.035));
-
-        /* ── Core light pulse (adds energy flicker) ── */
-        coreLight.intensity = 3.8 + Math.sin(t * 4.2) * 0.55 + Math.sin(t * 11.0) * 0.18;
+        /* ── Center ambient light pulse ── */
+        centerLight.intensity = 2.2 + Math.sin(t * 2.0) * 0.4;
 
         /* ── Rim light slow drift ── */
         rimLight.intensity = 3.0 + Math.sin(t * 0.85) * 0.8;
-
-        /* ── Wireframe slow rotation ── */
-        sphereWire.rotation.y = t * 0.09;
-        sphereWire.rotation.x = t * 0.05;
-
-        /* ── Beam flicker ── */
-        const beamFlicker = 0.46 + Math.sin(t * 7.5) * 0.06 + Math.sin(t * 23.0) * 0.02;
-        beamGlowMat.opacity = beamFlicker;
-        beamHaloMat.opacity = 0.14 + Math.sin(t * 5.0) * 0.04;
 
         /* ── Metallic rings orbit + energy pulse ── */
         metallicRings.forEach((mr, i) => {

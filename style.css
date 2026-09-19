@@ -740,40 +740,8 @@ main {
   justify-content: center;
 }
 
-/* Volumetric beam glow behind orb */
-.hero-beam-glow {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    rgba(56,189,248,0.8) 30%,
-    rgba(56,189,248,1) 50%,
-    rgba(56,189,248,0.8) 70%,
-    transparent 100%
-  );
-  filter: blur(1px);
-  z-index: 2;
-  pointer-events: none;
-}
-.hero-beam-glow::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  width: 30px;
-  left: -14px;
-  background: linear-gradient(to bottom,
-    transparent 0%,
-    rgba(56,189,248,0.15) 30%,
-    rgba(56,189,248,0.25) 50%,
-    rgba(56,189,248,0.15) 70%,
-    transparent 100%
-  );
-  filter: blur(8px);
-}
+
+
 
 /* Radial flare glow around center */
 .hero-stage-flare {
