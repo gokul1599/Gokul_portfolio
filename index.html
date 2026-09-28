@@ -1,17 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Gokul | Student Portfolio</title>
+
     <style>
+
         /* -------------------- BASIC SETTINGS -------------------- */
+
         * {
             box-sizing: border-box;
         }
+
         html {
             scroll-behavior: smooth;
         }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -19,146 +27,190 @@
             color: #1f2937;
             line-height: 1.6;
         }
+
         a {
             text-decoration: none;
         }
+
+
         /* -------------------- HEADER -------------------- */
+
         header {
             background-color: #111827;
             color: white;
             padding: 25px 8%;
         }
+
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 30px;
         }
+
         .logo h1 {
             margin: 0;
             font-size: 30px;
         }
+
         .logo p {
             margin: 3px 0 0;
             color: #a5b4fc;
         }
+
         nav {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
+
         nav a {
             color: white;
             font-size: 15px;
         }
+
         nav a:hover {
             color: #60a5fa;
         }
+
+
         /* -------------------- HERO SECTION -------------------- */
+
         .hero {
             background-color: #1e3a8a;
             color: white;
             padding: 70px 8%;
         }
+
         .hero-content {
             max-width: 850px;
         }
+
         .hero h2 {
             font-size: 46px;
             margin: 0 0 10px;
         }
+
         .hero h2 span {
             color: #60a5fa;
         }
+
         .hero p {
             font-size: 18px;
             color: #dbeafe;
             max-width: 700px;
         }
+
         .hero-buttons {
             display: flex;
             gap: 15px;
             margin-top: 25px;
             flex-wrap: wrap;
         }
+
         .button {
             display: inline-block;
             padding: 12px 22px;
             border-radius: 8px;
             font-weight: bold;
         }
+
         .primary-button {
             background-color: #60a5fa;
             color: #111827;
         }
+
         .secondary-button {
             border: 1px solid white;
             color: white;
         }
+
         .button:hover {
             opacity: 0.8;
         }
+
+
         /* -------------------- COMMON SECTION -------------------- */
+
         section {
             width: 84%;
             max-width: 1100px;
             margin: 50px auto;
         }
+
         .section-title {
             margin-bottom: 25px;
         }
+
         .section-title h2 {
             color: #1d4ed8;
             margin-bottom: 5px;
             font-size: 30px;
         }
+
         .section-title p {
             color: #6b7280;
             margin-top: 0;
         }
+
+
         /* -------------------- ABOUT -------------------- */
+
         .about-box {
             background-color: white;
             padding: 30px;
             border-radius: 12px;
             border: 1px solid #e5e7eb;
         }
+
         .about-box p {
             margin-top: 0;
         }
+
+
         /* -------------------- EDUCATION -------------------- */
+
         .education-list {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
+
         .education-card {
             background-color: white;
             border-left: 5px solid #2563eb;
             padding: 22px;
             border-radius: 10px;
+
             border-top: 1px solid #e5e7eb;
             border-right: 1px solid #e5e7eb;
             border-bottom: 1px solid #e5e7eb;
         }
+
         .education-card h3 {
             margin: 5px 0;
             color: #111827;
         }
+
         .education-card .year {
             color: #2563eb;
             font-weight: bold;
         }
+
         .education-card p {
             margin-bottom: 0;
             color: #6b7280;
         }
+
+
         /* -------------------- SKILLS -------------------- */
+
         .skills {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
         }
+
         .skill {
             background-color: white;
             border: 1px solid #dbeafe;
@@ -167,15 +219,20 @@
             color: #1d4ed8;
             font-weight: bold;
         }
+
         .skill:hover {
             background-color: #dbeafe;
         }
+
+
         /* -------------------- PROJECTS -------------------- */
+
         .projects {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
+
         .project-card {
             background-color: white;
             width: calc(33.33% - 14px);
@@ -184,32 +241,41 @@
             border-radius: 12px;
             border: 1px solid #e5e7eb;
         }
+
         .project-number {
             color: #2563eb;
             font-size: 14px;
             font-weight: bold;
         }
+
         .project-card h3 {
             margin: 8px 0;
             color: #111827;
         }
+
         .project-card p {
             color: #6b7280;
             min-height: 70px;
         }
+
         .project-card a {
             color: #2563eb;
             font-weight: bold;
         }
+
         .project-card:hover {
             border-color: #2563eb;
         }
+
+
         /* -------------------- WHAT I WORK ON -------------------- */
+
         .achievement-list {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
+
         .achievement-card {
             background-color: white;
             padding: 25px;
@@ -217,30 +283,40 @@
             border: 1px solid #e5e7eb;
             flex: 1;
             min-width: 250px;
+        }
+
         .achievement-icon {
             font-size: 30px;
             margin-bottom: 10px;
         }
+
         .achievement-card h3 {
             margin: 5px 0;
             color: #111827;
         }
+
         .achievement-card p {
             color: #6b7280;
         }
+
+
         /* -------------------- LEARNING JOURNEY -------------------- */
+
         .journey {
             background-color: #111827;
             color: white;
             padding: 35px;
             border-radius: 14px;
         }
+
         .journey h2 {
             margin-top: 0;
         }
+
         .journey p {
             color: #d1d5db;
         }
+
         .journey-items {
             display: flex;
             gap: 20px;
@@ -260,7 +336,10 @@
             color: #60a5fa;
             margin-top: 0;
         }
+
+
         /* -------------------- CONTACT -------------------- */
+
         .contact-cards {
             display: flex;
             gap: 20px;
@@ -284,23 +363,31 @@
             border-radius: 50%;
             background-color: #dbeafe;
             color: #1d4ed8;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             font-size: 24px;
         }
+
         .contact-card h3 {
             margin: 5px 0;
         }
+
         .contact-card p {
             color: #6b7280;
             font-size: 14px;
         }
+
         .contact-card a {
             color: #2563eb;
             font-weight: bold;
         }
+
+
         /* -------------------- FOOTER -------------------- */
+
         footer {
             background-color: #111827;
             color: white;
@@ -308,12 +395,17 @@
             padding: 30px;
             margin-top: 60px;
         }
+
         footer p {
             margin: 5px;
             color: #9ca3af;
         }
+
+
         /* -------------------- TABLET -------------------- */
+
         @media (max-width: 800px) {
+
             .header-content {
                 flex-direction: column;
                 text-align: center;
@@ -921,97 +1013,154 @@
                     <h3>
                         Improve
                     </h3>
+
                     <p>
                         Analyze my projects, identify problems
                         and continuously improve my skills.
                     </p>
+
                 </div>
+
+
             </div>
+
         </div>
+
     </section>
+
+
+
     <!-- ==================== CONTACT SECTION ==================== -->
+
     <section id="contact">
+
         <div class="section-title">
+
             <h2>Let's Connect</h2>
+
             <p>
                 You can find me through these platforms
             </p>
+
         </div>
+
+
         <div class="contact-cards">
+
+
             <!-- GITHUB -->
+
             <div class="contact-card">
+
                 <div class="contact-icon">
                     🐙
                 </div>
+
                 <h3>
                     GitHub
                 </h3>
+
                 <p>
                     Check out my code and projects.
                 </p>
+
                 <a
                     href="https://github.com/gokul1599"
                     target="_blank">
                     Visit GitHub
                 </a>
+
             </div>
+
+
             <!-- INSTAGRAM -->
+
             <div class="contact-card">
+
                 <div class="contact-icon">
                     📸
                 </div>
+
                 <h3>
                     Instagram
                 </h3>
+
                 <p>
                     Follow my developer journey.
                 </p>
+
                 <a
                     href="https://www.instagram.com/buildweb.lab/"
                     target="_blank">
                     Visit Instagram
                 </a>
+
             </div>
+
+
             <!-- EMAIL -->
+
             <div class="contact-card">
+
                 <div class="contact-icon">
                     ✉️
                 </div>
+
                 <h3>
                     Email
                 </h3>
+
                 <p>
                     Send me a message directly.
                 </p>
+
                 <a
                     href="mailto:gokulkarpurapu@gmail.com">
                     gokulkarpurapu@gmail.com
                 </a>
+
             </div>
+
+
             <!-- LINKEDIN -->
+
             <div class="contact-card">
+
                 <div class="contact-icon">
                     💼
                 </div>
+
                 <h3>
                     LinkedIn
                 </h3>
+
                 <p>
                     Connect with me professionally.
                 </p>
+
                 <a
                     href="https://www.linkedin.com/in/gokul-karpurapu-8b234141b/"
                     target="_blank">
                     LinkedIn Profile
                 </a>
+
             </div>
+
+
         </div>
+
     </section>
+
+
+
     <!-- ==================== FOOTER ==================== -->
+
     <footer>
+
         <h3>
             Gokul
         </h3>
+
         <p>
             Computer Science Student • Developer • Builder
         </p>
@@ -1020,9 +1169,15 @@
             Email:
             gokulkarpurapu@gmail.com
         </p>
+
         <p>
             © 2026 Gokul. All rights reserved.
         </p>
+
     </footer>
+
+
 </body>
+
 </html>
+
