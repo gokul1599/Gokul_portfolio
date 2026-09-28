@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@
 
     <style>
 
-        /* Basic */
+        /* ==================== BASIC ==================== */
 
         * {
             box-sizing: border-box;
@@ -25,6 +26,7 @@
             font-family: Arial, sans-serif;
             background-color: #f4f6f8;
             color: #222;
+            line-height: 1.6;
         }
 
         a {
@@ -32,7 +34,7 @@
         }
 
 
-        /* Header */
+        /* ==================== HEADER ==================== */
 
         header {
             background-color: #1f2937;
@@ -65,7 +67,7 @@
         }
 
 
-        /* Hero */
+        /* ==================== HERO ==================== */
 
         .hero {
             background-color: #2563eb;
@@ -103,7 +105,7 @@
         }
 
 
-        /* Sections */
+        /* ==================== SECTIONS ==================== */
 
         section {
             width: 84%;
@@ -121,7 +123,7 @@
         }
 
 
-        /* About */
+        /* ==================== ABOUT ==================== */
 
         .about-box {
             background-color: white;
@@ -130,8 +132,12 @@
             border-radius: 8px;
         }
 
+        .about-box:hover {
+            border-color: #2563eb;
+        }
 
-        /* Education */
+
+        /* ==================== EDUCATION ==================== */
 
         .education-card {
             background-color: white;
@@ -148,13 +154,21 @@
             border-left-color: #111827;
         }
 
+        .education-card h3 {
+            margin-bottom: 5px;
+        }
+
+        .education-card p {
+            color: #666;
+        }
+
         .year {
             color: #2563eb;
             font-weight: bold;
         }
 
 
-        /* Skills */
+        /* ==================== SKILLS ==================== */
 
         .skills {
             display: flex;
@@ -176,7 +190,7 @@
         }
 
 
-        /* Projects */
+        /* ==================== PROJECTS ==================== */
 
         .projects {
             display: flex;
@@ -215,7 +229,7 @@
         }
 
 
-        /* What I Work On */
+        /* ==================== WHAT I WORK ON ==================== */
 
         .work-list {
             display: flex;
@@ -225,7 +239,7 @@
 
         .work-card {
             background-color: white;
-            padding: 20px;
+            padding: 25px;
             flex: 1;
             min-width: 250px;
             border: 1px solid #ddd;
@@ -234,10 +248,20 @@
 
         .work-card:hover {
             border-color: #2563eb;
+            background-color: #f8fbff;
+        }
+
+        .work-card h3 {
+            color: #1f2937;
+            margin-top: 0;
+        }
+
+        .work-card p {
+            color: #666;
         }
 
 
-        /* Learning Journey */
+        /* ==================== LEARNING JOURNEY ==================== */
 
         .journey {
             background-color: #1f2937;
@@ -246,7 +270,15 @@
             border-radius: 8px;
         }
 
-        .journey p {
+        .journey:hover {
+            background-color: #182230;
+        }
+
+        .journey h2 {
+            margin-top: 0;
+        }
+
+        .journey > p {
             color: #d1d5db;
         }
 
@@ -254,26 +286,33 @@
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
+            margin-top: 20px;
         }
 
         .journey-item {
             flex: 1;
             min-width: 200px;
             border: 1px solid #4b5563;
-            padding: 15px;
+            padding: 18px;
             border-radius: 6px;
         }
 
         .journey-item:hover {
             border-color: #60a5fa;
+            background-color: #273449;
         }
 
         .journey-item h3 {
             color: #60a5fa;
+            margin-top: 0;
+        }
+
+        .journey-item p {
+            color: #d1d5db;
         }
 
 
-        /* Contact */
+        /* ==================== CONTACT ==================== */
 
         .contact-cards {
             display: flex;
@@ -285,7 +324,7 @@
             background-color: white;
             flex: 1;
             min-width: 220px;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -293,6 +332,7 @@
 
         .contact-card:hover {
             border-color: #2563eb;
+            background-color: #f8fbff;
         }
 
         .contact-icon {
@@ -300,8 +340,14 @@
             margin-bottom: 10px;
         }
 
+        .contact-card h3 {
+            margin: 5px 0;
+            color: #1f2937;
+        }
+
         .contact-card p {
             color: #666;
+            font-size: 14px;
         }
 
         .contact-card a {
@@ -314,22 +360,31 @@
         }
 
 
-        /* Footer */
+        /* ==================== FOOTER ==================== */
 
         footer {
             background-color: #1f2937;
             color: white;
             text-align: center;
-            padding: 25px;
+            padding: 30px 20px;
             margin-top: 50px;
+        }
+
+        footer h3 {
+            margin-bottom: 8px;
         }
 
         footer p {
             color: #b8c1cc;
+            margin: 5px;
+        }
+
+        footer p:hover {
+            color: white;
         }
 
 
-        /* Mobile */
+        /* ==================== MOBILE ==================== */
 
         @media (max-width: 700px) {
 
@@ -354,6 +409,18 @@
                 width: 100%;
             }
 
+            .work-card {
+                width: 100%;
+            }
+
+            .contact-card {
+                width: 100%;
+            }
+
+            .journey-item {
+                width: 100%;
+            }
+
         }
 
     </style>
@@ -364,7 +431,7 @@
 <body>
 
 
-    <!-- Header -->
+    <!-- ==================== HEADER ==================== -->
 
     <header>
 
@@ -382,10 +449,15 @@
             <nav>
 
                 <a href="#about">About</a>
+
                 <a href="#education">Education</a>
+
                 <a href="#skills">Skills</a>
+
                 <a href="#projects">Projects</a>
+
                 <a href="#journey">Journey</a>
+
                 <a href="#contact">Contact</a>
 
             </nav>
@@ -396,7 +468,7 @@
 
 
 
-    <!-- Hero -->
+    <!-- ==================== HERO ==================== -->
 
     <div class="hero">
 
@@ -427,7 +499,7 @@
 
 
 
-    <!-- About -->
+    <!-- ==================== ABOUT ==================== -->
 
     <section id="about">
 
@@ -463,7 +535,7 @@
 
 
 
-    <!-- Education -->
+    <!-- ==================== EDUCATION ==================== -->
 
     <section id="education">
 
@@ -523,7 +595,7 @@
 
 
 
-    <!-- Skills -->
+    <!-- ==================== SKILLS ==================== -->
 
     <section id="skills">
 
@@ -531,7 +603,9 @@
 
             <h2>Skills</h2>
 
-            <p>Technologies and areas I am learning</p>
+            <p>
+                Technologies and areas I am learning
+            </p>
 
         </div>
 
@@ -562,7 +636,7 @@
 
 
 
-    <!-- Projects -->
+    <!-- ==================== PROJECTS ==================== -->
 
     <section id="projects">
 
@@ -570,13 +644,17 @@
 
             <h2>My Projects</h2>
 
-            <p>Some projects I have built</p>
+            <p>
+                Some projects I have built
+            </p>
 
         </div>
 
 
         <div class="projects">
 
+
+            <!-- VALTORA -->
 
             <div class="project-card">
 
@@ -590,11 +668,15 @@
                 <a
                     href="https://valtora-swart.vercel.app"
                     target="_blank">
+
                     View Project →
+
                 </a>
 
             </div>
 
+
+            <!-- LIFEHUB -->
 
             <div class="project-card">
 
@@ -608,11 +690,15 @@
                 <a
                     href="https://lifehub-sage.vercel.app"
                     target="_blank">
+
                     View Project →
+
                 </a>
 
             </div>
 
+
+            <!-- DEVYATRA -->
 
             <div class="project-card">
 
@@ -626,11 +712,15 @@
                 <a
                     href="https://templeora.vercel.app"
                     target="_blank">
+
                     View Project →
+
                 </a>
 
             </div>
 
+
+            <!-- TELUGUVA -->
 
             <div class="project-card">
 
@@ -644,11 +734,15 @@
                 <a
                     href="https://teluguva.vercel.app"
                     target="_blank">
+
                     View Project →
+
                 </a>
 
             </div>
 
+
+            <!-- PROJECT 2 -->
 
             <div class="project-card">
 
@@ -662,11 +756,15 @@
                 <a
                     href="https://gokul1599.github.io/project-2/"
                     target="_blank">
+
                     View Project →
+
                 </a>
 
             </div>
 
+
+            <!-- PROJECT 1 -->
 
             <div class="project-card">
 
@@ -680,7 +778,9 @@
                 <a
                     href="https://gokul1599.github.io/project--1/"
                     target="_blank">
+
                     View Project →
+
                 </a>
 
             </div>
@@ -692,7 +792,7 @@
 
 
 
-    <!-- What I Work On -->
+    <!-- ==================== WHAT I WORK ON ==================== -->
 
     <section>
 
@@ -700,7 +800,9 @@
 
             <h2>What I Work On</h2>
 
-            <p>Areas I am currently developing</p>
+            <p>
+                Areas I am currently developing
+            </p>
 
         </div>
 
@@ -710,7 +812,9 @@
 
             <div class="work-card">
 
-                <h3>Web Development</h3>
+                <h3>
+                    Web Development
+                </h3>
 
                 <p>
                     Building responsive websites and improving
@@ -722,7 +826,9 @@
 
             <div class="work-card">
 
-                <h3>Artificial Intelligence</h3>
+                <h3>
+                    Artificial Intelligence
+                </h3>
 
                 <p>
                     Exploring AI concepts and experimenting
@@ -734,7 +840,9 @@
 
             <div class="work-card">
 
-                <h3>Product Building</h3>
+                <h3>
+                    Product Building
+                </h3>
 
                 <p>
                     Turning ideas into practical digital
@@ -750,13 +858,15 @@
 
 
 
-    <!-- Learning Journey -->
+    <!-- ==================== LEARNING JOURNEY ==================== -->
 
     <section id="journey">
 
         <div class="journey">
 
-            <h2>My Learning Journey</h2>
+            <h2>
+                My Learning Journey
+            </h2>
 
             <p>
                 My journey is focused on learning, building
@@ -769,7 +879,9 @@
 
                 <div class="journey-item">
 
-                    <h3>Learn</h3>
+                    <h3>
+                        Learn
+                    </h3>
 
                     <p>
                         Learn programming and computer science concepts.
@@ -780,7 +892,9 @@
 
                 <div class="journey-item">
 
-                    <h3>Build</h3>
+                    <h3>
+                        Build
+                    </h3>
 
                     <p>
                         Apply what I learn by creating real projects.
@@ -791,7 +905,9 @@
 
                 <div class="journey-item">
 
-                    <h3>Improve</h3>
+                    <h3>
+                        Improve
+                    </h3>
 
                     <p>
                         Find problems in my work and improve them.
@@ -808,15 +924,19 @@
 
 
 
-    <!-- Contact -->
+    <!-- ==================== CONTACT ==================== -->
 
     <section id="contact">
 
         <div class="section-title">
 
-            <h2>Let's Connect</h2>
+            <h2>
+                Let's Connect
+            </h2>
 
-            <p>You can find me through these platforms</p>
+            <p>
+                You can find me through these platforms
+            </p>
 
         </div>
 
@@ -824,7 +944,7 @@
         <div class="contact-cards">
 
 
-            <!-- GitHub -->
+            <!-- GITHUB -->
 
             <div class="contact-card">
 
@@ -832,7 +952,9 @@
                     🐙
                 </div>
 
-                <h3>GitHub</h3>
+                <h3>
+                    GitHub
+                </h3>
 
                 <p>
                     Check out my code and projects.
@@ -841,13 +963,15 @@
                 <a
                     href="https://github.com/gokul1599"
                     target="_blank">
+
                     Visit GitHub
+
                 </a>
 
             </div>
 
 
-            <!-- Instagram -->
+            <!-- INSTAGRAM -->
 
             <div class="contact-card">
 
@@ -855,7 +979,9 @@
                     📸
                 </div>
 
-                <h3>Instagram</h3>
+                <h3>
+                    Instagram
+                </h3>
 
                 <p>
                     Follow my developer journey.
@@ -864,13 +990,15 @@
                 <a
                     href="https://www.instagram.com/buildweb.lab/"
                     target="_blank">
+
                     Visit Instagram
+
                 </a>
 
             </div>
 
 
-            <!-- Email -->
+            <!-- EMAIL -->
 
             <div class="contact-card">
 
@@ -878,7 +1006,9 @@
                     ✉️
                 </div>
 
-                <h3>Email</h3>
+                <h3>
+                    Email
+                </h3>
 
                 <p>
                     Send me a message directly.
@@ -886,13 +1016,15 @@
 
                 <a
                     href="mailto:gokulkarpurapu@gmail.com">
+
                     gokulkarpurapu@gmail.com
+
                 </a>
 
             </div>
 
 
-            <!-- LinkedIn -->
+            <!-- LINKEDIN -->
 
             <div class="contact-card">
 
@@ -900,7 +1032,9 @@
                     💼
                 </div>
 
-                <h3>LinkedIn</h3>
+                <h3>
+                    LinkedIn
+                </h3>
 
                 <p>
                     Connect with me professionally.
@@ -909,7 +1043,9 @@
                 <a
                     href="https://www.linkedin.com/in/gokul-karpurapu-8b234141b/"
                     target="_blank">
+
                     LinkedIn Profile
+
                 </a>
 
             </div>
@@ -921,18 +1057,20 @@
 
 
 
-    <!-- Footer -->
+    <!-- ==================== FOOTER ==================== -->
 
     <footer>
 
-        <h3>Gokul</h3>
+        <h3>
+            Gokul
+        </h3>
 
         <p>
             Computer Science Student • Developer • Builder
         </p>
 
         <p>
-            gokulkarpurapu@gmail.com
+            Email: gokulkarpurapu@gmail.com
         </p>
 
         <p>
