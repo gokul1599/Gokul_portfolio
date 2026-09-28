@@ -1,8 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,7 +10,7 @@
 
     <style>
 
-        /* -------------------- BASIC SETTINGS -------------------- */
+        /* Basic */
 
         * {
             box-sizing: border-box;
@@ -23,9 +23,8 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f7fb;
-            color: #1f2937;
-            line-height: 1.6;
+            background-color: #f4f6f8;
+            color: #222;
         }
 
         a {
@@ -33,40 +32,32 @@
         }
 
 
-        /* -------------------- HEADER -------------------- */
+        /* Header */
 
         header {
-            background-color: #111827;
+            background-color: #1f2937;
             color: white;
-            padding: 25px 8%;
+            padding: 20px 8%;
         }
 
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 30px;
         }
 
         .logo h1 {
             margin: 0;
-            font-size: 30px;
         }
 
         .logo p {
-            margin: 3px 0 0;
-            color: #a5b4fc;
-        }
-
-        nav {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
+            margin: 4px 0;
+            color: #b8c7e0;
         }
 
         nav a {
             color: white;
-            font-size: 15px;
+            margin-left: 20px;
         }
 
         nav a:hover {
@@ -74,188 +65,144 @@
         }
 
 
-        /* -------------------- HERO SECTION -------------------- */
+        /* Hero */
 
         .hero {
-            background-color: #1e3a8a;
+            background-color: #2563eb;
             color: white;
-            padding: 70px 8%;
-        }
-
-        .hero-content {
-            max-width: 850px;
+            padding: 60px 8%;
         }
 
         .hero h2 {
-            font-size: 46px;
-            margin: 0 0 10px;
+            font-size: 42px;
+            margin-bottom: 10px;
         }
 
         .hero h2 span {
-            color: #60a5fa;
+            color: #dbeafe;
         }
 
         .hero p {
-            font-size: 18px;
-            color: #dbeafe;
             max-width: 700px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            margin-top: 25px;
-            flex-wrap: wrap;
+            font-size: 18px;
         }
 
         .button {
             display: inline-block;
-            padding: 12px 22px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .primary-button {
-            background-color: #60a5fa;
-            color: #111827;
-        }
-
-        .secondary-button {
+            margin-top: 15px;
+            padding: 10px 18px;
+            margin-right: 10px;
+            border-radius: 6px;
             border: 1px solid white;
             color: white;
         }
 
         .button:hover {
-            opacity: 0.8;
+            background-color: white;
+            color: #2563eb;
         }
 
 
-        /* -------------------- COMMON SECTION -------------------- */
+        /* Sections */
 
         section {
             width: 84%;
             max-width: 1100px;
-            margin: 50px auto;
-        }
-
-        .section-title {
-            margin-bottom: 25px;
+            margin: 45px auto;
         }
 
         .section-title h2 {
-            color: #1d4ed8;
+            color: #2563eb;
             margin-bottom: 5px;
-            font-size: 30px;
         }
 
         .section-title p {
-            color: #6b7280;
-            margin-top: 0;
+            color: #666;
         }
 
 
-        /* -------------------- ABOUT -------------------- */
+        /* About */
 
         .about-box {
             background-color: white;
-            padding: 30px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
-        }
-
-        .about-box p {
-            margin-top: 0;
+            padding: 25px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
 
-        /* -------------------- EDUCATION -------------------- */
-
-        .education-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+        /* Education */
 
         .education-card {
             background-color: white;
-            border-left: 5px solid #2563eb;
-            padding: 22px;
-            border-radius: 10px;
-
-            border-top: 1px solid #e5e7eb;
-            border-right: 1px solid #e5e7eb;
-            border-bottom: 1px solid #e5e7eb;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #2563eb;
+            border-radius: 6px;
+            border-top: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
         }
 
-        .education-card h3 {
-            margin: 5px 0;
-            color: #111827;
+        .education-card:hover {
+            border-left-color: #111827;
         }
 
-        .education-card .year {
+        .year {
             color: #2563eb;
             font-weight: bold;
         }
 
-        .education-card p {
-            margin-bottom: 0;
-            color: #6b7280;
-        }
 
-
-        /* -------------------- SKILLS -------------------- */
+        /* Skills */
 
         .skills {
             display: flex;
-            gap: 12px;
             flex-wrap: wrap;
+            gap: 10px;
         }
 
         .skill {
             background-color: white;
-            border: 1px solid #dbeafe;
-            padding: 12px 18px;
-            border-radius: 8px;
-            color: #1d4ed8;
-            font-weight: bold;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
         }
 
         .skill:hover {
-            background-color: #dbeafe;
+            background-color: #2563eb;
+            color: white;
+            border-color: #2563eb;
         }
 
 
-        /* -------------------- PROJECTS -------------------- */
+        /* Projects */
 
         .projects {
             display: flex;
-            gap: 20px;
             flex-wrap: wrap;
+            gap: 20px;
         }
 
         .project-card {
             background-color: white;
             width: calc(33.33% - 14px);
             min-width: 250px;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
-        .project-number {
-            color: #2563eb;
-            font-size: 14px;
-            font-weight: bold;
+        .project-card:hover {
+            border-color: #2563eb;
         }
 
         .project-card h3 {
-            margin: 8px 0;
-            color: #111827;
+            margin-bottom: 8px;
         }
 
         .project-card p {
-            color: #6b7280;
-            min-height: 70px;
+            color: #666;
         }
 
         .project-card a {
@@ -263,54 +210,40 @@
             font-weight: bold;
         }
 
-        .project-card:hover {
-            border-color: #2563eb;
+        .project-card a:hover {
+            color: #111827;
         }
 
 
-        /* -------------------- WHAT I WORK ON -------------------- */
+        /* What I Work On */
 
-        .achievement-list {
+        .work-list {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
         }
 
-        .achievement-card {
+        .work-card {
             background-color: white;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            padding: 20px;
             flex: 1;
             min-width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
         }
 
-        .achievement-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
-
-        .achievement-card h3 {
-            margin: 5px 0;
-            color: #111827;
-        }
-
-        .achievement-card p {
-            color: #6b7280;
+        .work-card:hover {
+            border-color: #2563eb;
         }
 
 
-        /* -------------------- LEARNING JOURNEY -------------------- */
+        /* Learning Journey */
 
         .journey {
-            background-color: #111827;
+            background-color: #1f2937;
             color: white;
-            padding: 35px;
-            border-radius: 14px;
-        }
-
-        .journey h2 {
-            margin-top: 0;
+            padding: 30px;
+            border-radius: 8px;
         }
 
         .journey p {
@@ -319,26 +252,28 @@
 
         .journey-items {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
-            margin-top: 25px;
         }
 
         .journey-item {
             flex: 1;
-            min-width: 220px;
-            padding: 20px;
-            border: 1px solid #374151;
-            border-radius: 10px;
+            min-width: 200px;
+            border: 1px solid #4b5563;
+            padding: 15px;
+            border-radius: 6px;
+        }
+
+        .journey-item:hover {
+            border-color: #60a5fa;
         }
 
         .journey-item h3 {
             color: #60a5fa;
-            margin-top: 0;
         }
 
 
-        /* -------------------- CONTACT -------------------- */
+        /* Contact */
 
         .contact-cards {
             display: flex;
@@ -350,34 +285,23 @@
             background-color: white;
             flex: 1;
             min-width: 220px;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #e5e7eb;
+            padding: 20px;
             text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .contact-card:hover {
+            border-color: #2563eb;
         }
 
         .contact-icon {
-            width: 55px;
-            height: 55px;
-            margin: 0 auto 15px;
-            border-radius: 50%;
-            background-color: #dbeafe;
-            color: #1d4ed8;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 24px;
-        }
-
-        .contact-card h3 {
-            margin: 5px 0;
+            font-size: 28px;
+            margin-bottom: 10px;
         }
 
         .contact-card p {
-            color: #6b7280;
-            font-size: 14px;
+            color: #666;
         }
 
         .contact-card a {
@@ -385,26 +309,29 @@
             font-weight: bold;
         }
 
+        .contact-card a:hover {
+            color: #111827;
+        }
 
-        /* -------------------- FOOTER -------------------- */
+
+        /* Footer */
 
         footer {
-            background-color: #111827;
+            background-color: #1f2937;
             color: white;
             text-align: center;
-            padding: 30px;
-            margin-top: 60px;
+            padding: 25px;
+            margin-top: 50px;
         }
 
         footer p {
-            margin: 5px;
-            color: #9ca3af;
+            color: #b8c1cc;
         }
 
 
-        /* -------------------- TABLET -------------------- */
+        /* Mobile */
 
-        @media (max-width: 800px) {
+        @media (max-width: 700px) {
 
             .header-content {
                 flex-direction: column;
@@ -412,60 +339,32 @@
             }
 
             nav {
-                justify-content: center;
+                margin-top: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
             }
 
             .hero h2 {
-                font-size: 36px;
-            }
-
-            .project-card {
-                width: calc(50% - 10px);
-            }
-        }
-
-
-        /* -------------------- MOBILE -------------------- */
-
-        @media (max-width: 600px) {
-
-            section {
-                width: 90%;
-            }
-
-            .hero {
-                padding: 50px 5%;
-            }
-
-            .hero h2 {
-                font-size: 30px;
+                font-size: 32px;
             }
 
             .project-card {
                 width: 100%;
             }
 
-            .contact-card {
-                width: 100%;
-            }
-
-            nav {
-                gap: 12px;
-            }
-
-            .journey {
-                padding: 25px;
-            }
         }
 
     </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- ==================== HEADER ==================== -->
+    <!-- Header -->
 
     <header>
 
@@ -483,15 +382,10 @@
             <nav>
 
                 <a href="#about">About</a>
-
                 <a href="#education">Education</a>
-
                 <a href="#skills">Skills</a>
-
                 <a href="#projects">Projects</a>
-
                 <a href="#journey">Journey</a>
-
                 <a href="#contact">Contact</a>
 
             </nav>
@@ -502,51 +396,38 @@
 
 
 
-    <!-- ==================== HERO SECTION ==================== -->
+    <!-- Hero -->
 
     <div class="hero">
 
-        <div class="hero-content">
+        <h2>
+            Hi, I'm <span>Gokul</span>
+        </h2>
 
-            <h2>
-                Hi, I'm <span>Gokul.</span>
-            </h2>
+        <p>
+            I am a Computer Science student who enjoys building
+            websites, exploring AI and creating useful digital products.
+        </p>
 
-            <p>
-                I am a Computer Science student who enjoys building
-                websites, exploring AI and turning ideas into real
-                digital products.
-            </p>
-
-            <p>
-                I believe in learning by building and improving my
-                technical skills through practical projects.
-            </p>
+        <p>
+            I like learning by building real projects and improving
+            my technical skills.
+        </p>
 
 
-            <div class="hero-buttons">
+        <a class="button" href="#projects">
+            View Projects
+        </a>
 
-                <a
-                    class="button primary-button"
-                    href="#projects">
-                    View My Projects
-                </a>
-
-                <a
-                    class="button secondary-button"
-                    href="#contact">
-                    Contact Me
-                </a>
-
-            </div>
-
-        </div>
+        <a class="button" href="#contact">
+            Contact Me
+        </a>
 
     </div>
 
 
 
-    <!-- ==================== ABOUT SECTION ==================== -->
+    <!-- About -->
 
     <section id="about">
 
@@ -563,27 +444,17 @@
 
             <p>
                 Hello! I'm Gokul, a Computer Science student interested
-                in web development, artificial intelligence and
-                technology.
+                in web development, artificial intelligence and technology.
             </p>
 
             <p>
-                I enjoy learning new technologies and using them to
-                build practical projects. Instead of only learning
-                theory, I like understanding concepts by applying them
-                to real-world projects.
+                I enjoy learning new technologies and applying them
+                to real projects.
             </p>
 
             <p>
-                My current interests include artificial intelligence,
-                software development, web technologies and
-                problem-solving.
-            </p>
-
-            <p>
-                My goal is to continuously improve my technical skills
-                and eventually build products that solve meaningful
-                real-world problems.
+                My goal is to improve my programming, problem-solving
+                and software development skills and build useful products.
             </p>
 
         </div>
@@ -592,7 +463,7 @@
 
 
 
-    <!-- ==================== EDUCATION SECTION ==================== -->
+    <!-- Education -->
 
     <section id="education">
 
@@ -605,54 +476,46 @@
         </div>
 
 
-        <div class="education-list">
+        <div class="education-card">
+
+            <span class="year">
+                2026 — Present
+            </span>
+
+            <h3>
+                B.Sc. Computer Science
+            </h3>
+
+            <p>
+                BITS Pilani
+            </p>
+
+            <p>
+                Currently pursuing undergraduate studies in
+                Computer Science.
+            </p>
+
+        </div>
 
 
-            <div class="education-card">
+        <div class="education-card">
 
-                <span class="year">
-                    2026 — Present
-                </span>
+            <span class="year">
+                Present
+            </span>
 
-                <h3>
-                    B.Sc. Computer Science
-                </h3>
+            <h3>
+                Scaler School of Technology
+            </h3>
 
-                <p>
-                    BITS Pilani
-                </p>
+            <p>
+                Computer Science
+            </p>
 
-                <p>
-                    Currently pursuing undergraduate studies in
-                    Computer Science and developing strong foundations
-                    in programming, computing and technology.
-                </p>
-
-            </div>
-
-
-            <div class="education-card">
-
-                <span class="year">
-                    Present
-                </span>
-
-                <h3>
-                    Scaler School of Technology
-                </h3>
-
-                <p>
-                    Computer Science
-                </p>
-
-                <p>
-                    Building practical knowledge in programming,
-                    computer science, software development and
-                    problem-solving.
-                </p>
-
-            </div>
-
+            <p>
+                Developing knowledge in programming,
+                computer science and software development.
+            </p>
 
         </div>
 
@@ -660,7 +523,7 @@
 
 
 
-    <!-- ==================== SKILLS SECTION ==================== -->
+    <!-- Skills -->
 
     <section id="skills">
 
@@ -668,9 +531,7 @@
 
             <h2>Skills</h2>
 
-            <p>
-                Technologies and areas I am learning
-            </p>
+            <p>Technologies and areas I am learning</p>
 
         </div>
 
@@ -701,7 +562,7 @@
 
 
 
-    <!-- ==================== PROJECTS SECTION ==================== -->
+    <!-- Projects -->
 
     <section id="projects">
 
@@ -709,9 +570,7 @@
 
             <h2>My Projects</h2>
 
-            <p>
-                Some of the projects I have built
-            </p>
+            <p>Some projects I have built</p>
 
         </div>
 
@@ -719,22 +578,13 @@
         <div class="projects">
 
 
-            <!-- PROJECT 01 -->
-
             <div class="project-card">
 
-                <span class="project-number">
-                    PROJECT 01
-                </span>
-
-                <h3>
-                    VALTORA
-                </h3>
+                <h3>VALTORA</h3>
 
                 <p>
                     An AI-powered startup co-founder concept
-                    designed to help users develop and explore
-                    startup ideas.
+                    designed to help users explore startup ideas.
                 </p>
 
                 <a
@@ -746,17 +596,9 @@
             </div>
 
 
-            <!-- PROJECT 02 -->
-
             <div class="project-card">
 
-                <span class="project-number">
-                    PROJECT 02
-                </span>
-
-                <h3>
-                    LifeHub
-                </h3>
+                <h3>LifeHub</h3>
 
                 <p>
                     A digital platform designed around useful
@@ -772,22 +614,13 @@
             </div>
 
 
-            <!-- PROJECT 03 -->
-
             <div class="project-card">
 
-                <span class="project-number">
-                    PROJECT 03
-                </span>
-
-                <h3>
-                    Devyatra / Templeora
-                </h3>
+                <h3>Devyatra / Templeora</h3>
 
                 <p>
                     A temple discovery platform focused on
-                    exploring temples and destinations across
-                    India.
+                    exploring temples and destinations across India.
                 </p>
 
                 <a
@@ -799,17 +632,9 @@
             </div>
 
 
-            <!-- PROJECT 04 -->
-
             <div class="project-card">
 
-                <span class="project-number">
-                    PROJECT 04
-                </span>
-
-                <h3>
-                    Teluguva
-                </h3>
+                <h3>Teluguva</h3>
 
                 <p>
                     A web project focused on creating a digital
@@ -825,21 +650,13 @@
             </div>
 
 
-            <!-- PROJECT 05 -->
-
             <div class="project-card">
 
-                <span class="project-number">
-                    PROJECT 05
-                </span>
-
-                <h3>
-                    Project 2
-                </h3>
+                <h3>Project 2</h3>
 
                 <p>
                     A project hosted using GitHub Pages as part
-                    of my web development learning journey.
+                    of my web development learning.
                 </p>
 
                 <a
@@ -851,21 +668,13 @@
             </div>
 
 
-            <!-- PROJECT 06 -->
-
             <div class="project-card">
 
-                <span class="project-number">
-                    PROJECT 06
-                </span>
-
-                <h3>
-                    Project 1
-                </h3>
+                <h3>Project 1</h3>
 
                 <p>
                     An early web development project hosted
-                    through GitHub Pages.
+                    using GitHub Pages.
                 </p>
 
                 <a
@@ -883,7 +692,7 @@
 
 
 
-    <!-- ==================== WHAT I WORK ON ==================== -->
+    <!-- What I Work On -->
 
     <section>
 
@@ -891,65 +700,45 @@
 
             <h2>What I Work On</h2>
 
-            <p>
-                Areas I am currently developing
-            </p>
+            <p>Areas I am currently developing</p>
 
         </div>
 
 
-        <div class="achievement-list">
+        <div class="work-list">
 
 
-            <div class="achievement-card">
+            <div class="work-card">
 
-                <div class="achievement-icon">
-                    💻
-                </div>
-
-                <h3>
-                    Web Development
-                </h3>
+                <h3>Web Development</h3>
 
                 <p>
-                    Building responsive websites and learning
-                    modern web technologies.
+                    Building responsive websites and improving
+                    my frontend development skills.
                 </p>
 
             </div>
 
 
-            <div class="achievement-card">
+            <div class="work-card">
 
-                <div class="achievement-icon">
-                    🤖
-                </div>
-
-                <h3>
-                    Artificial Intelligence
-                </h3>
+                <h3>Artificial Intelligence</h3>
 
                 <p>
-                    Exploring AI concepts and experimenting with
-                    AI-powered applications.
+                    Exploring AI concepts and experimenting
+                    with AI-powered applications.
                 </p>
 
             </div>
 
 
-            <div class="achievement-card">
+            <div class="work-card">
 
-                <div class="achievement-icon">
-                    🚀
-                </div>
-
-                <h3>
-                    Product Building
-                </h3>
+                <h3>Product Building</h3>
 
                 <p>
-                    Turning ideas into working digital products
-                    through practical development.
+                    Turning ideas into practical digital
+                    products through development.
                 </p>
 
             </div>
@@ -961,19 +750,17 @@
 
 
 
-    <!-- ==================== JOURNEY SECTION ==================== -->
+    <!-- Learning Journey -->
 
     <section id="journey">
 
         <div class="journey">
 
-            <h2>
-                My Learning Journey
-            </h2>
+            <h2>My Learning Journey</h2>
 
             <p>
-                My journey is focused on continuously learning,
-                building and improving.
+                My journey is focused on learning, building
+                and continuously improving.
             </p>
 
 
@@ -982,13 +769,10 @@
 
                 <div class="journey-item">
 
-                    <h3>
-                        Learn
-                    </h3>
+                    <h3>Learn</h3>
 
                     <p>
-                        Learn programming, computer science
-                        concepts and modern technologies.
+                        Learn programming and computer science concepts.
                     </p>
 
                 </div>
@@ -996,13 +780,10 @@
 
                 <div class="journey-item">
 
-                    <h3>
-                        Build
-                    </h3>
+                    <h3>Build</h3>
 
                     <p>
-                        Apply what I learn by creating websites,
-                        applications and practical projects.
+                        Apply what I learn by creating real projects.
                     </p>
 
                 </div>
@@ -1010,13 +791,10 @@
 
                 <div class="journey-item">
 
-                    <h3>
-                        Improve
-                    </h3>
+                    <h3>Improve</h3>
 
                     <p>
-                        Analyze my projects, identify problems
-                        and continuously improve my skills.
+                        Find problems in my work and improve them.
                     </p>
 
                 </div>
@@ -1030,7 +808,7 @@
 
 
 
-    <!-- ==================== CONTACT SECTION ==================== -->
+    <!-- Contact -->
 
     <section id="contact">
 
@@ -1038,9 +816,7 @@
 
             <h2>Let's Connect</h2>
 
-            <p>
-                You can find me through these platforms
-            </p>
+            <p>You can find me through these platforms</p>
 
         </div>
 
@@ -1048,7 +824,7 @@
         <div class="contact-cards">
 
 
-            <!-- GITHUB -->
+            <!-- GitHub -->
 
             <div class="contact-card">
 
@@ -1056,9 +832,7 @@
                     🐙
                 </div>
 
-                <h3>
-                    GitHub
-                </h3>
+                <h3>GitHub</h3>
 
                 <p>
                     Check out my code and projects.
@@ -1073,7 +847,7 @@
             </div>
 
 
-            <!-- INSTAGRAM -->
+            <!-- Instagram -->
 
             <div class="contact-card">
 
@@ -1081,9 +855,7 @@
                     📸
                 </div>
 
-                <h3>
-                    Instagram
-                </h3>
+                <h3>Instagram</h3>
 
                 <p>
                     Follow my developer journey.
@@ -1098,7 +870,7 @@
             </div>
 
 
-            <!-- EMAIL -->
+            <!-- Email -->
 
             <div class="contact-card">
 
@@ -1106,9 +878,7 @@
                     ✉️
                 </div>
 
-                <h3>
-                    Email
-                </h3>
+                <h3>Email</h3>
 
                 <p>
                     Send me a message directly.
@@ -1122,7 +892,7 @@
             </div>
 
 
-            <!-- LINKEDIN -->
+            <!-- LinkedIn -->
 
             <div class="contact-card">
 
@@ -1130,9 +900,7 @@
                     💼
                 </div>
 
-                <h3>
-                    LinkedIn
-                </h3>
+                <h3>LinkedIn</h3>
 
                 <p>
                     Connect with me professionally.
@@ -1153,20 +921,17 @@
 
 
 
-    <!-- ==================== FOOTER ==================== -->
+    <!-- Footer -->
 
     <footer>
 
-        <h3>
-            Gokul
-        </h3>
+        <h3>Gokul</h3>
 
         <p>
             Computer Science Student • Developer • Builder
         </p>
 
         <p>
-            Email:
             gokulkarpurapu@gmail.com
         </p>
 
