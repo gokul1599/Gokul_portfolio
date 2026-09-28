@@ -5,523 +5,262 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gokul | Student Portfolio</title>
     <style>
-        /* ==================== BASIC SETTINGS ==================== */
+        /* -------------------- BASIC SETTINGS -------------------- */
         * {
             box-sizing: border-box;
         }
-
         html {
             scroll-behavior: smooth;
         }
-
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #f4f7fb, #eef4ff);
+            background-color: #f4f7fb;
             color: #1f2937;
             line-height: 1.6;
         }
-
         a {
             text-decoration: none;
         }
-
-
-        /* ==================== HEADER ==================== */
-
+        /* -------------------- HEADER -------------------- */
         header {
-            background: linear-gradient(135deg, #0f172a, #111827, #1e293b);
+            background-color: #111827;
             color: white;
             padding: 25px 8%;
-            box-shadow: 0 4px 20px rgba(15, 23, 42, 0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
         }
-
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: 30px;
         }
-
-        .logo {
-            transition: transform 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: translateY(-3px);
-        }
-
         .logo h1 {
             margin: 0;
             font-size: 30px;
-            letter-spacing: 1px;
         }
-
         .logo p {
             margin: 3px 0 0;
             color: #a5b4fc;
-            font-size: 14px;
         }
-
         nav {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             flex-wrap: wrap;
         }
-
         nav a {
-            color: #e5e7eb;
+            color: white;
             font-size: 15px;
-            font-weight: bold;
-            position: relative;
-            padding: 5px 0;
-            transition: color 0.3s ease;
         }
-
-        nav a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 0;
-            height: 2px;
-            background-color: #60a5fa;
-            transition: width 0.3s ease;
-        }
-
         nav a:hover {
             color: #60a5fa;
         }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-
-        /* ==================== HERO ==================== */
-
+        /* -------------------- HERO SECTION -------------------- */
         .hero {
-            position: relative;
-            overflow: hidden;
-            background: linear-gradient(
-                135deg,
-                #172554,
-                #1e3a8a,
-                #2563eb
-            );
+            background-color: #1e3a8a;
             color: white;
-            padding: 90px 8%;
+            padding: 70px 8%;
         }
         .hero-content {
             max-width: 850px;
-            position: relative;
-            z-index: 2;
         }
         .hero h2 {
-            font-size: 52px;
-            margin: 0 0 15px;
-            letter-spacing: -1px;
+            font-size: 46px;
+            margin: 0 0 10px;
         }
         .hero h2 span {
-            color: #93c5fd;
+            color: #60a5fa;
         }
         .hero p {
             font-size: 18px;
             color: #dbeafe;
-            max-width: 720px;
-            margin: 12px 0;
+            max-width: 700px;
         }
-
         .hero-buttons {
             display: flex;
             gap: 15px;
-            margin-top: 30px;
+            margin-top: 25px;
             flex-wrap: wrap;
         }
-
         .button {
             display: inline-block;
-            padding: 13px 24px;
-            border-radius: 10px;
+            padding: 12px 22px;
+            border-radius: 8px;
             font-weight: bold;
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                background-color 0.3s ease;
         }
-
         .primary-button {
-            background-color: #ffffff;
-            color: #1d4ed8;
+            background-color: #60a5fa;
+            color: #111827;
         }
-
         .secondary-button {
-            border: 1px solid #ffffff;
+            border: 1px solid white;
             color: white;
-            background-color: transparent;
         }
-
         .button:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.22);
+            opacity: 0.8;
         }
-
-        .primary-button:hover {
-            background-color: #dbeafe;
-        }
-
-        .secondary-button:hover {
-            background-color: white;
-            color: #1d4ed8;
-        }
-
-
-        /* ==================== COMMON SECTION ==================== */
-
+        /* -------------------- COMMON SECTION -------------------- */
         section {
             width: 84%;
             max-width: 1100px;
-            margin: 70px auto;
+            margin: 50px auto;
         }
-
         .section-title {
-            margin-bottom: 28px;
+            margin-bottom: 25px;
         }
-
         .section-title h2 {
             color: #1d4ed8;
-            margin-bottom: 6px;
-            font-size: 32px;
+            margin-bottom: 5px;
+            font-size: 30px;
         }
-
-        .section-title h2::after {
-            content: "";
-            display: block;
-            width: 55px;
-            height: 4px;
-            background: linear-gradient(90deg, #2563eb, #60a5fa);
-            border-radius: 5px;
-            margin-top: 8px;
-            transition: width 0.3s ease;
-        }
-
-        .section-title:hover h2::after {
-            width: 90px;
-        }
-
         .section-title p {
             color: #6b7280;
-            margin-top: 8px;
+            margin-top: 0;
         }
-
-
-        /* ==================== ABOUT ==================== */
-
+        /* -------------------- ABOUT -------------------- */
         .about-box {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 32px;
-            border-radius: 16px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
             border: 1px solid #e5e7eb;
-            box-shadow: 0 8px 30px rgba(15, 23, 42, 0.07);
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-color 0.3s ease;
         }
-
-        .about-box:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 40px rgba(37, 99, 235, 0.12);
-            border-color: #93c5fd;
-        }
-
         .about-box p {
             margin-top: 0;
-            margin-bottom: 16px;
         }
-
-        .about-box p:last-child {
-            margin-bottom: 0;
-        }
-
-
-        /* ==================== EDUCATION ==================== */
-
+        /* -------------------- EDUCATION -------------------- */
         .education-list {
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: 20px;
         }
-
         .education-card {
             background-color: white;
             border-left: 5px solid #2563eb;
-            padding: 25px;
-            border-radius: 14px;
+            padding: 22px;
+            border-radius: 10px;
             border-top: 1px solid #e5e7eb;
             border-right: 1px solid #e5e7eb;
             border-bottom: 1px solid #e5e7eb;
-
-            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-left-color 0.3s ease;
         }
-
-        .education-card:hover {
-            transform: translateX(8px);
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.12);
-            border-left-color: #60a5fa;
-        }
-
         .education-card h3 {
-            margin: 7px 0;
+            margin: 5px 0;
             color: #111827;
-            font-size: 22px;
         }
-
         .education-card .year {
             color: #2563eb;
             font-weight: bold;
-            font-size: 14px;
         }
-
         .education-card p {
             margin-bottom: 0;
             color: #6b7280;
         }
-
-
-        /* ==================== SKILLS ==================== */
-
+        /* -------------------- SKILLS -------------------- */
         .skills {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
         }
-
         .skill {
-            background: white;
+            background-color: white;
             border: 1px solid #dbeafe;
-            padding: 13px 20px;
-            border-radius: 10px;
+            padding: 12px 18px;
+            border-radius: 8px;
             color: #1d4ed8;
             font-weight: bold;
-
-            box-shadow: 0 5px 15px rgba(15, 23, 42, 0.05);
-
-            transition:
-                transform 0.25s ease,
-                background-color 0.25s ease,
-                color 0.25s ease,
-                box-shadow 0.25s ease;
         }
-
         .skill:hover {
-            background: linear-gradient(135deg, #2563eb, #3b82f6);
-            color: white;
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 10px 22px rgba(37, 99, 235, 0.25);
+            background-color: #dbeafe;
         }
-
-
-        /* ==================== PROJECTS ==================== */
-
+        /* -------------------- PROJECTS -------------------- */
         .projects {
             display: flex;
-            gap: 22px;
+            gap: 20px;
             flex-wrap: wrap;
         }
-
         .project-card {
             background-color: white;
-            width: calc(33.33% - 15px);
+            width: calc(33.33% - 14px);
             min-width: 250px;
-            padding: 27px;
-            border-radius: 15px;
+            padding: 25px;
+            border-radius: 12px;
             border: 1px solid #e5e7eb;
-
-            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-color 0.3s ease;
         }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.14);
-            border-color: #60a5fa;
-        }
-
         .project-number {
             color: #2563eb;
-            font-size: 13px;
+            font-size: 14px;
             font-weight: bold;
-            letter-spacing: 1px;
         }
-
         .project-card h3 {
-            margin: 9px 0;
+            margin: 8px 0;
             color: #111827;
-            font-size: 21px;
-            transition: color 0.3s ease;
         }
-
-        .project-card:hover h3 {
-            color: #2563eb;
-        }
-
         .project-card p {
             color: #6b7280;
-            min-height: 80px;
+            min-height: 70px;
         }
-
         .project-card a {
             color: #2563eb;
             font-weight: bold;
-            display: inline-block;
-            transition:
-                transform 0.3s ease,
-                color 0.3s ease;
         }
-
-        .project-card a:hover {
-            color: #1e40af;
-            transform: translateX(6px);
+        .project-card:hover {
+            border-color: #2563eb;
         }
-
-
-        /* ==================== WHAT I WORK ON ==================== */
-
+        /* -------------------- WHAT I WORK ON -------------------- */
         .achievement-list {
             display: flex;
-            gap: 22px;
+            gap: 20px;
             flex-wrap: wrap;
         }
-
         .achievement-card {
             background-color: white;
-            padding: 28px;
-            border-radius: 15px;
+            padding: 25px;
+            border-radius: 12px;
             border: 1px solid #e5e7eb;
             flex: 1;
             min-width: 250px;
-
-            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 35px rgba(37, 99, 235, 0.13);
-            border-color: #93c5fd;
-        }
-
         .achievement-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, #dbeafe, #eff6ff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            margin-bottom: 15px;
-
-            transition:
-                transform 0.3s ease,
-                background-color 0.3s ease;
+            font-size: 30px;
+            margin-bottom: 10px;
         }
-
-        .achievement-card:hover .achievement-icon {
-            transform: rotate(8deg) scale(1.08);
-        }
-
         .achievement-card h3 {
             margin: 5px 0;
             color: #111827;
         }
-
         .achievement-card p {
             color: #6b7280;
         }
-
-
-        /* ==================== JOURNEY ==================== */
-
+        /* -------------------- LEARNING JOURNEY -------------------- */
         .journey {
-            background: linear-gradient(
-                135deg,
-                #0f172a,
-                #111827,
-                #1e293b
-            );
+            background-color: #111827;
             color: white;
-            padding: 38px;
-            border-radius: 18px;
-            box-shadow: 0 15px 40px rgba(15, 23, 42, 0.18);
+            padding: 35px;
+            border-radius: 14px;
         }
-
         .journey h2 {
             margin-top: 0;
-            font-size: 30px;
         }
-
-        .journey > p {
-            color: #cbd5e1;
+        .journey p {
+            color: #d1d5db;
         }
-
         .journey-items {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-            margin-top: 28px;
+            margin-top: 25px;
         }
 
         .journey-item {
             flex: 1;
             min-width: 220px;
-            padding: 22px;
+            padding: 20px;
             border: 1px solid #374151;
-            border-radius: 12px;
-            background-color: rgba(255, 255, 255, 0.03);
-
-            transition:
-                transform 0.3s ease,
-                background-color 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-        .journey-item:hover {
-            transform: translateY(-7px);
-            background-color: rgba(96, 165, 250, 0.08);
-            border-color: #60a5fa;
+            border-radius: 10px;
         }
 
         .journey-item h3 {
             color: #60a5fa;
             margin-top: 0;
-            font-size: 21px;
         }
-
-        .journey-item p {
-            color: #d1d5db;
-        }
-
-
-        /* ==================== CONTACT ==================== */
-
+        /* -------------------- CONTACT -------------------- */
         .contact-cards {
             display: flex;
             gap: 20px;
@@ -532,110 +271,49 @@
             background-color: white;
             flex: 1;
             min-width: 220px;
-            padding: 27px;
-            border-radius: 15px;
+            padding: 25px;
+            border-radius: 12px;
             border: 1px solid #e5e7eb;
             text-align: center;
-
-            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
-
-            transition:
-                transform 0.3s ease,
-                box-shadow 0.3s ease,
-                border-color 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 18px 35px rgba(37, 99, 235, 0.14);
-            border-color: #60a5fa;
         }
 
         .contact-icon {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 16px;
+            width: 55px;
+            height: 55px;
+            margin: 0 auto 15px;
             border-radius: 50%;
-
-            background: linear-gradient(135deg, #dbeafe, #eff6ff);
-
+            background-color: #dbeafe;
             color: #1d4ed8;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 25px;
-
-            transition:
-                transform 0.3s ease,
-                background-color 0.3s ease;
+            font-size: 24px;
         }
-
-        .contact-card:hover .contact-icon {
-            transform: scale(1.12) rotate(6deg);
-        }
-
         .contact-card h3 {
             margin: 5px 0;
-            color: #111827;
         }
-
         .contact-card p {
             color: #6b7280;
             font-size: 14px;
         }
-
         .contact-card a {
             color: #2563eb;
             font-weight: bold;
-            display: inline-block;
-
-            transition:
-                color 0.3s ease,
-                transform 0.3s ease;
         }
-
-        .contact-card a:hover {
-            color: #1e40af;
-            transform: translateY(-2px);
-        }
-
-
-        /* ==================== FOOTER ==================== */
-
+        /* -------------------- FOOTER -------------------- */
         footer {
-            background: linear-gradient(
-                135deg,
-                #0f172a,
-                #111827
-            );
+            background-color: #111827;
             color: white;
             text-align: center;
-            padding: 35px;
-            margin-top: 80px;
-            box-shadow: 0 -5px 25px rgba(15, 23, 42, 0.08);
+            padding: 30px;
+            margin-top: 60px;
         }
-
-        footer h3 {
-            font-size: 23px;
-            margin-bottom: 10px;
-        }
-
         footer p {
-            margin: 6px;
+            margin: 5px;
             color: #9ca3af;
         }
-
-        footer p:hover {
-            color: #dbeafe;
-        }
-
-
-        /* ==================== TABLET ==================== */
-
+        /* -------------------- TABLET -------------------- */
         @media (max-width: 800px) {
-
             .header-content {
                 flex-direction: column;
                 text-align: center;
@@ -645,71 +323,33 @@
                 justify-content: center;
             }
 
-            .hero {
-                padding: 70px 7%;
-            }
-
             .hero h2 {
-                font-size: 40px;
+                font-size: 36px;
             }
 
             .project-card {
-                width: calc(50% - 11px);
-            }
-
-            .achievement-card {
-                min-width: 220px;
+                width: calc(50% - 10px);
             }
         }
 
 
-        /* ==================== MOBILE ==================== */
+        /* -------------------- MOBILE -------------------- */
 
         @media (max-width: 600px) {
 
-            header {
-                padding: 20px 5%;
-            }
-
             section {
                 width: 90%;
-                margin: 55px auto;
-            }
-
-            nav {
-                gap: 13px;
-            }
-
-            nav a {
-                font-size: 14px;
             }
 
             .hero {
-                padding: 60px 5%;
+                padding: 50px 5%;
             }
 
             .hero h2 {
-                font-size: 32px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .button {
-                text-align: center;
-                width: 100%;
+                font-size: 30px;
             }
 
             .project-card {
-                width: 100%;
-            }
-
-            .achievement-card {
                 width: 100%;
             }
 
@@ -717,24 +357,12 @@
                 width: 100%;
             }
 
+            nav {
+                gap: 12px;
+            }
+
             .journey {
-                padding: 28px 22px;
-            }
-
-            .journey-item {
-                width: 100%;
-            }
-
-            .about-box {
-                padding: 24px;
-            }
-
-            .education-card {
-                padding: 22px;
-            }
-
-            .section-title h2 {
-                font-size: 28px;
+                padding: 25px;
             }
         }
 
@@ -826,7 +454,7 @@
 
 
 
-    <!-- ==================== ABOUT ==================== -->
+    <!-- ==================== ABOUT SECTION ==================== -->
 
     <section id="about">
 
@@ -834,9 +462,7 @@
 
             <h2>About Me</h2>
 
-            <p>
-                A little information about me
-            </p>
+            <p>A little information about me</p>
 
         </div>
 
@@ -874,7 +500,7 @@
 
 
 
-    <!-- ==================== EDUCATION ==================== -->
+    <!-- ==================== EDUCATION SECTION ==================== -->
 
     <section id="education">
 
@@ -882,9 +508,7 @@
 
             <h2>Education</h2>
 
-            <p>
-                My academic background
-            </p>
+            <p>My academic background</p>
 
         </div>
 
@@ -944,7 +568,7 @@
 
 
 
-    <!-- ==================== SKILLS ==================== -->
+    <!-- ==================== SKILLS SECTION ==================== -->
 
     <section id="skills">
 
@@ -961,41 +585,23 @@
 
         <div class="skills">
 
-            <div class="skill">
-                HTML
-            </div>
+            <div class="skill">HTML</div>
 
-            <div class="skill">
-                CSS
-            </div>
+            <div class="skill">CSS</div>
 
-            <div class="skill">
-                Python
-            </div>
+            <div class="skill">Python</div>
 
-            <div class="skill">
-                Java
-            </div>
+            <div class="skill">Java</div>
 
-            <div class="skill">
-                AI
-            </div>
+            <div class="skill">AI</div>
 
-            <div class="skill">
-                Git
-            </div>
+            <div class="skill">Git</div>
 
-            <div class="skill">
-                GitHub
-            </div>
+            <div class="skill">GitHub</div>
 
-            <div class="skill">
-                Web Development
-            </div>
+            <div class="skill">Web Development</div>
 
-            <div class="skill">
-                Problem Solving
-            </div>
+            <div class="skill">Problem Solving</div>
 
         </div>
 
@@ -1003,7 +609,7 @@
 
 
 
-    <!-- ==================== PROJECTS ==================== -->
+    <!-- ==================== PROJECTS SECTION ==================== -->
 
     <section id="projects">
 
@@ -1191,9 +797,7 @@
 
         <div class="section-title">
 
-            <h2>
-                What I Work On
-            </h2>
+            <h2>What I Work On</h2>
 
             <p>
                 Areas I am currently developing
@@ -1265,7 +869,7 @@
 
 
 
-    <!-- ==================== LEARNING JOURNEY ==================== -->
+    <!-- ==================== JOURNEY SECTION ==================== -->
 
     <section id="journey">
 
@@ -1317,115 +921,74 @@
                     <h3>
                         Improve
                     </h3>
-
                     <p>
                         Analyze my projects, identify problems
                         and continuously improve my skills.
                     </p>
-
                 </div>
-
-
             </div>
-
         </div>
     </section>
-    <!-- ==================== CONTACT ==================== -->
-
+    <!-- ==================== CONTACT SECTION ==================== -->
     <section id="contact">
-
         <div class="section-title">
-
-            <h2>
-                Let's Connect
-            </h2>
-
+            <h2>Let's Connect</h2>
             <p>
                 You can find me through these platforms
             </p>
-
         </div>
-
-
         <div class="contact-cards">
-
-
             <!-- GITHUB -->
-
             <div class="contact-card">
-
                 <div class="contact-icon">
                     🐙
                 </div>
-
                 <h3>
                     GitHub
                 </h3>
-
                 <p>
                     Check out my code and projects.
                 </p>
-
                 <a
                     href="https://github.com/gokul1599"
                     target="_blank">
                     Visit GitHub
                 </a>
-
             </div>
-
-
             <!-- INSTAGRAM -->
-
             <div class="contact-card">
-
                 <div class="contact-icon">
                     📸
                 </div>
-
                 <h3>
                     Instagram
                 </h3>
-
                 <p>
                     Follow my developer journey.
                 </p>
-
                 <a
                     href="https://www.instagram.com/buildweb.lab/"
                     target="_blank">
                     Visit Instagram
                 </a>
-
             </div>
-
-
             <!-- EMAIL -->
-
             <div class="contact-card">
-
                 <div class="contact-icon">
                     ✉️
                 </div>
-
                 <h3>
                     Email
                 </h3>
-
                 <p>
                     Send me a message directly.
                 </p>
-
                 <a
                     href="mailto:gokulkarpurapu@gmail.com">
                     gokulkarpurapu@gmail.com
                 </a>
-
             </div>
-
-
             <!-- LINKEDIN -->
-
             <div class="contact-card">
                 <div class="contact-icon">
                     💼
@@ -1452,6 +1015,7 @@
         <p>
             Computer Science Student • Developer • Builder
         </p>
+
         <p>
             Email:
             gokulkarpurapu@gmail.com
