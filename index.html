@@ -24,9 +24,9 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            color: #172033;
+            color: #1e293b;
             line-height: 1.6;
+            background-color: #f1f5f9;
         }
 
         a {
@@ -39,7 +39,6 @@
         header {
             background-color: #0f172a;
             padding: 18px 7%;
-            border-bottom: 1px solid #243047;
         }
 
         .navbar {
@@ -53,11 +52,11 @@
 
         .logo {
             color: white;
-            font-size: 25px;
+            font-size: 26px;
             font-weight: bold;
         }
 
-        .logo span {
+        .logo:hover {
             color: #60a5fa;
         }
 
@@ -67,7 +66,7 @@
         }
 
         nav a {
-            color: #d7deea;
+            color: #cbd5e1;
             font-size: 15px;
         }
 
@@ -81,8 +80,7 @@
         .hero {
             background-color: #0f172a;
             color: white;
-            padding: 90px 7% 100px;
-            border-bottom: 1px solid #243047;
+            padding: 90px 7%;
         }
 
         .hero-content {
@@ -104,7 +102,7 @@
             font-size: 14px;
             font-weight: bold;
             letter-spacing: 2px;
-            margin-bottom: 18px;
+            margin-bottom: 15px;
         }
 
         .hero h1 {
@@ -121,7 +119,7 @@
             max-width: 700px;
             color: #cbd5e1;
             font-size: 18px;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
         }
 
         .hero-buttons {
@@ -131,25 +129,23 @@
         }
 
         .primary-btn {
-            display: inline-block;
             background-color: #2563eb;
             color: white;
-            padding: 13px 22px;
-            border-radius: 7px;
-            font-weight: bold;
-        }
-
-        .secondary-btn {
-            display: inline-block;
-            border: 1px solid #64748b;
-            color: white;
-            padding: 13px 22px;
-            border-radius: 7px;
+            padding: 12px 22px;
+            border-radius: 6px;
             font-weight: bold;
         }
 
         .primary-btn:hover {
             background-color: #1d4ed8;
+        }
+
+        .secondary-btn {
+            border: 1px solid #64748b;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 6px;
+            font-weight: bold;
         }
 
         .secondary-btn:hover {
@@ -158,11 +154,10 @@
         }
 
 
-        /* ==================== PROFILE PHOTO ==================== */
+        /* ==================== PHOTO ==================== */
 
         .profile-area {
-            width: 300px;
-            flex-shrink: 0;
+            width: 290px;
             text-align: center;
         }
 
@@ -172,7 +167,6 @@
             object-fit: cover;
 
             border-radius: 12px;
-
             border: 4px solid #60a5fa;
 
             background-color: #1e293b;
@@ -192,11 +186,11 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 75px 0;
         }
 
         .heading {
-            margin-bottom: 35px;
+            margin-bottom: 32px;
         }
 
         .heading small {
@@ -207,14 +201,14 @@
         }
 
         .heading h2 {
-            font-size: 36px;
             color: #0f172a;
-            margin-top: 6px;
+            font-size: 34px;
+            margin-top: 5px;
         }
 
         .heading p {
             color: #64748b;
-            margin-top: 7px;
+            margin-top: 5px;
         }
 
 
@@ -227,41 +221,39 @@
         .about-layout {
             display: grid;
             grid-template-columns: 1.4fr 1fr;
-            gap: 50px;
+            gap: 40px;
         }
 
         .about-text p {
             color: #475569;
-            margin-bottom: 17px;
-            font-size: 16px;
-        }
-
-        .about-side {
-            background-color: #0f172a;
-            color: white;
-            padding: 30px;
-            border-radius: 10px;
-        }
-
-        .about-side:hover {
-            background-color: #162033;
-        }
-
-        .about-side h3 {
-            color: #60a5fa;
             margin-bottom: 15px;
-            font-size: 21px;
         }
 
-        .about-side p {
-            color: #cbd5e1;
+        .about-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #2563eb;
+            padding: 28px;
+            border-radius: 8px;
+        }
+
+        .about-box h3 {
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+
+        .about-box p {
+            color: #475569;
+        }
+
+        .about-box:hover {
+            background-color: #dbeafe;
         }
 
 
         /* ==================== EDUCATION ==================== */
 
         .education-section {
-            background-color: #f4f6f8;
+            background-color: #eaf2fb;
         }
 
         .education-grid {
@@ -272,9 +264,9 @@
 
         .education-card {
             background-color: white;
-            padding: 28px;
-            border: 1px solid #dbe2ea;
-            border-radius: 10px;
+            padding: 27px;
+            border-radius: 8px;
+            border: 1px solid #dbe4ef;
             border-top: 4px solid #2563eb;
         }
 
@@ -297,7 +289,7 @@
         .education-place {
             color: #334155;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .education-card p {
@@ -319,10 +311,10 @@
 
         .skill {
             background-color: #f8fafc;
-            border: 1px solid #dbe2ea;
-            padding: 17px;
+            border: 1px solid #dbe4ef;
+            padding: 15px;
             text-align: center;
-            border-radius: 8px;
+            border-radius: 7px;
             color: #334155;
             font-weight: bold;
         }
@@ -337,7 +329,7 @@
         /* ==================== PROJECTS ==================== */
 
         .projects-section {
-            background-color: #eef2f6;
+            background-color: #eaf2fb;
         }
 
         .projects {
@@ -348,16 +340,16 @@
 
         .project-card {
             background-color: white;
-            padding: 28px;
-            border-radius: 10px;
-            border: 1px solid #dbe2ea;
+            padding: 27px;
+            border-radius: 8px;
+            border: 1px solid #dbe4ef;
 
-            display: flex;
-            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
         }
 
         .project-card:hover {
             border-color: #2563eb;
+            box-shadow: 0 7px 18px rgba(15, 23, 42, 0.10);
         }
 
         .project-number {
@@ -369,7 +361,7 @@
 
         .project-card h3 {
             color: #0f172a;
-            font-size: 22px;
+            font-size: 21px;
             margin: 8px 0 12px;
         }
 
@@ -402,20 +394,19 @@
         }
 
         .interest-card {
-            padding: 28px;
             background-color: #f8fafc;
-            border: 1px solid #dbe2ea;
-            border-radius: 10px;
+            padding: 28px;
+            border: 1px solid #dbe4ef;
+            border-radius: 8px;
         }
 
         .interest-card:hover {
-            background-color: #f1f5f9;
+            background-color: #eff6ff;
             border-color: #2563eb;
         }
 
         .interest-card h3 {
             color: #0f172a;
-            font-size: 21px;
             margin-bottom: 10px;
         }
 
@@ -445,14 +436,14 @@
         }
 
         .journey-card {
-            padding: 28px;
+            background-color: #172033;
             border: 1px solid #334155;
-            border-radius: 9px;
+            padding: 27px;
+            border-radius: 8px;
         }
 
         .journey-card:hover {
             border-color: #60a5fa;
-            background-color: #162033;
         }
 
         .journey-number {
@@ -476,7 +467,7 @@
         /* ==================== CONTACT ==================== */
 
         .contact-section {
-            background-color: #f4f6f8;
+            background-color: #eaf2fb;
         }
 
         .contact-grid {
@@ -489,16 +480,19 @@
             background-color: white;
             padding: 25px 18px;
             text-align: center;
-            border: 1px solid #dbe2ea;
-            border-radius: 10px;
+            border: 1px solid #dbe4ef;
+            border-radius: 8px;
+
+            box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
         }
 
         .contact-card:hover {
             border-color: #2563eb;
+            box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
         }
 
         .contact-icon {
-            font-size: 28px;
+            font-size: 27px;
             margin-bottom: 10px;
         }
 
@@ -530,8 +524,7 @@
             background-color: #0f172a;
             color: white;
             text-align: center;
-            padding: 35px 20px;
-            border-top: 1px solid #243047;
+            padding: 32px 20px;
         }
 
         footer h3 {
@@ -684,7 +677,7 @@
         <div class="navbar">
 
             <div class="logo">
-                G<span>.</span>
+                Gokul
             </div>
 
             <nav>
@@ -733,18 +726,23 @@
                     digital products.
                 </p>
 
+
                 <div class="hero-buttons">
 
                     <a
                         href="#projects"
                         class="primary-btn">
+
                         View My Projects
+
                     </a>
 
                     <a
                         href="#contact"
                         class="secondary-btn">
+
                         Contact Me
+
                     </a>
 
                 </div>
@@ -752,12 +750,12 @@
             </div>
 
 
-            <!-- PROFILE PHOTO -->
+            <!-- PHOTO -->
 
             <div class="profile-area">
 
                 <img
-                    src="photo.jpg"
+                    src="photo.jpeg"
                     alt="Gokul Profile Photo"
                     class="profile-photo">
 
@@ -791,6 +789,7 @@
 
             <div class="about-layout">
 
+
                 <div class="about-text">
 
                     <p>
@@ -819,7 +818,7 @@
                 </div>
 
 
-                <div class="about-side">
+                <div class="about-box">
 
                     <h3>
                         My Approach
@@ -1003,7 +1002,7 @@
             <div class="projects">
 
 
-                <!-- PROJECT 01 -->
+                <!-- VALTORA -->
 
                 <div class="project-card">
 
@@ -1022,9 +1021,9 @@
                     </p>
 
                     <a
-                        class="project-link"
                         href="https://valtora-swart.vercel.app"
-                        target="_blank">
+                        target="_blank"
+                        class="project-link">
 
                         View Project →
 
@@ -1033,7 +1032,7 @@
                 </div>
 
 
-                <!-- PROJECT 02 -->
+                <!-- LIFEHUB -->
 
                 <div class="project-card">
 
@@ -1051,9 +1050,9 @@
                     </p>
 
                     <a
-                        class="project-link"
                         href="https://lifehub-sage.vercel.app"
-                        target="_blank">
+                        target="_blank"
+                        class="project-link">
 
                         View Project →
 
@@ -1062,7 +1061,7 @@
                 </div>
 
 
-                <!-- PROJECT 03 -->
+                <!-- DEVYATRA -->
 
                 <div class="project-card">
 
@@ -1080,9 +1079,9 @@
                     </p>
 
                     <a
-                        class="project-link"
                         href="https://templeora.vercel.app"
-                        target="_blank">
+                        target="_blank"
+                        class="project-link">
 
                         View Project →
 
@@ -1091,7 +1090,7 @@
                 </div>
 
 
-                <!-- PROJECT 04 -->
+                <!-- TELUGUVA -->
 
                 <div class="project-card">
 
@@ -1109,9 +1108,9 @@
                     </p>
 
                     <a
-                        class="project-link"
                         href="https://teluguva.vercel.app"
-                        target="_blank">
+                        target="_blank"
+                        class="project-link">
 
                         View Project →
 
@@ -1120,7 +1119,7 @@
                 </div>
 
 
-                <!-- PROJECT 05 -->
+                <!-- PROJECT 2 -->
 
                 <div class="project-card">
 
@@ -1138,9 +1137,9 @@
                     </p>
 
                     <a
-                        class="project-link"
                         href="https://gokul1599.github.io/project-2/"
-                        target="_blank">
+                        target="_blank"
+                        class="project-link">
 
                         View Project →
 
@@ -1149,7 +1148,7 @@
                 </div>
 
 
-                <!-- PROJECT 06 -->
+                <!-- PROJECT 1 -->
 
                 <div class="project-card">
 
@@ -1167,9 +1166,9 @@
                     </p>
 
                     <a
-                        class="project-link"
                         href="https://gokul1599.github.io/project--1/"
-                        target="_blank">
+                        target="_blank"
+                        class="project-link">
 
                         View Project →
 
@@ -1216,7 +1215,7 @@
 
                     <p>
                         Creating useful websites and improving
-                        my frontend development skills.
+                        my development skills.
                     </p>
 
                 </div>
