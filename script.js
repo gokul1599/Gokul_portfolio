@@ -711,35 +711,35 @@
 
       <div class="modal-body-sections">
         <section class="modal-cs-block">
-          <div class="cs-heading">01 // THE PROBLEM</div>
-          <p class="cs-text">${cs.problem || project.description}</p>
+          <div class="cs-heading">01 // WHAT WAS BUILT</div>
+          <p class="cs-text">${cs.what || cs.product || project.description}</p>
         </section>
 
         <section class="modal-cs-block">
-          <div class="cs-heading">02 // THE PRODUCT</div>
-          <p class="cs-text">${cs.product || ""}</p>
+          <div class="cs-heading">02 // WHY IT MATTERS (THE PROBLEM)</div>
+          <p class="cs-text">${cs.why || cs.problem || ""}</p>
         </section>
 
         <section class="modal-cs-block">
-          <div class="cs-heading">03 // WHERE AI CONTRIBUTES</div>
+          <div class="cs-heading">03 // HOW IT WAS APPROACHED</div>
+          <p class="cs-text">${cs.how || ""}</p>
+        </section>
+
+        <section class="modal-cs-block">
+          <div class="cs-heading">04 // WHERE AI &amp; MODELS CONTRIBUTE</div>
           <p class="cs-text">${cs.intelligence || ""}</p>
         </section>
 
         <section class="modal-cs-block">
-          <div class="cs-heading">04 // ENGINEERING IMPLEMENTATION</div>
+          <div class="cs-heading">05 // SYSTEMS &amp; ENGINEERING ARCHITECTURE</div>
           <p class="cs-text">${cs.engineering || ""}</p>
-        </section>
-
-        <section class="modal-cs-block">
-          <div class="cs-heading">05 // REAL TECH STACK</div>
-          <p class="cs-text">${cs.stack || ""}</p>
           <div class="modal-tech-pills">
             ${(project.technologies || []).map((t) => `<span class="tech-pill">${t}</span>`).join("")}
           </div>
         </section>
 
         <section class="modal-cs-block">
-          <div class="cs-heading">06 // INTERACTION &amp; EXPERIENCE</div>
+          <div class="cs-heading">06 // INTERACTION &amp; USER EXPERIENCE</div>
           <p class="cs-text">${cs.experience || ""}</p>
         </section>
       </div>
@@ -1013,9 +1013,31 @@
   });
 
   /* ============================================================
-     11. LOG INITIALIZATION STATUS
+     11. DYNAMIC NOW SECTION HYDRATION (From data/now.js)
      ============================================================ */
-  console.log("%cGOKUL LABS %cv7.0 — Living Digital Architecture Engine Active", 
+  function initNowSection() {
+    if (typeof window === "undefined" || !window.NOW_STATUS) return;
+    const nowGrid = $(".now-grid");
+    const dateEl = $("#now-updated-date");
+    if (dateEl && window.NOW_STATUS.lastUpdated) {
+      dateEl.textContent = `UPDATED ${window.NOW_STATUS.lastUpdated}`;
+    }
+    if (nowGrid && Array.isArray(window.NOW_STATUS.columns)) {
+      nowGrid.innerHTML = window.NOW_STATUS.columns.map((col, idx) => `
+        <div class="now-col ${idx === window.NOW_STATUS.columns.length - 1 ? 'highlight-col' : ''}">
+          <span class="now-col-label">${col.label}</span>
+          <p class="now-col-val">${col.value}</p>
+          ${col.detail ? `<p class="now-col-detail" style="font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.5;">${col.detail}</p>` : ''}
+        </div>
+      `).join("");
+    }
+  }
+  initNowSection();
+
+  /* ============================================================
+     12. LOG INITIALIZATION STATUS
+     ============================================================ */
+  console.log("%cGOKUL LABS %cv8.0 — Living Digital Architecture Engine Active", 
     "color: #38bdf8; font-weight: bold; font-family: monospace; font-size: 13px;",
     "color: #94a3b8; font-family: monospace; font-size: 11px;"
   );
