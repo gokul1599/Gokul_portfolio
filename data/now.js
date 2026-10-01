@@ -1,6 +1,6 @@
 /**
  * GOKUL LABS — Live Status Registry (NOW Section)
- * Structured, editable status reflecting Gokul Karpurapu's real current focus.
+ * Structured, factual status reflecting Gokul Karpurapu's real current focus.
  */
 
 const NOW_STATUS = {
@@ -8,24 +8,24 @@ const NOW_STATUS = {
   availability: "AVAILABLE FOR INTERNSHIPS & COLLABORATIONS",
   columns: [
     {
-      label: "CURRENTLY LEARNING",
-      value: "Advanced LLM Agent Orchestration, Spatial WebGL Architecture, and Modern Distributed Systems.",
-      detail: "Deepening mathematical foundations in neural attention mechanisms alongside low-latency client rendering."
+      label: "CURRENTLY BUILDING",
+      value: "Next-generation intelligent tool prototypes and accessibility interfaces.",
+      detail: "Focusing on products that solve real human friction through thoughtful engineering."
     },
     {
-      label: "CURRENTLY BUILDING",
-      value: "Production-grade personal digital studio & next-generation bilingual accessibility interfaces.",
-      detail: "Refining user-centric AI experiences where intelligent models solve acute everyday comprehension bottlenecks."
+      label: "CURRENTLY LEARNING",
+      value: "Advanced LLM orchestration and spatial WebGL graphics.",
+      detail: "Connecting theoretical AI concepts with low-latency browser experiences."
     },
     {
       label: "CURRENTLY EXPLORING",
-      value: "Autonomous agentic workflows, local client-side WebAssembly inference, and tactile micro-ergonomics.",
-      detail: "Investigating how physical spatial UI and physical constraints eliminate cognitive friction for real users."
+      value: "Practical AI applications and low-friction product ergonomics.",
+      detail: "Designing interfaces where intelligent models feel seamless and effortless."
     },
     {
       label: "LOOKING FOR",
-      value: "Engineering internships, builder collaborations, and challenging software roles.",
-      detail: "Eager to contribute where high visual craft, rigorous systems engineering, and rapid product velocity intersect."
+      value: "Engineering internships, builder collaborations, and software teams.",
+      detail: "Open to challenging roles where strong frontend craft meets practical engineering."
     }
   ]
 };

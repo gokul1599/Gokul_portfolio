@@ -961,7 +961,7 @@ input, textarea {
 
 .project-inner-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 0.92fr 1.2fr;
   gap: 48px;
   align-items: center;
 }
@@ -1245,54 +1245,225 @@ input, textarea {
   border-radius: 3px;
 }
 
-/* 01 Valtora Visual Frame UI */
-.valtora-canvas-ui {
-  padding: 24px;
+/* 01 Valtora Visual Frame UI (Authentic Live Product Interface) */
+.valtora-product-ui {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
-.valtora-stage-pill {
-  font-family: var(--font-mono);
-  font-size: 10px;
+
+.vui-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.vui-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vui-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
   color: var(--accent-cyan);
-  letter-spacing: 0.08em;
-  margin-bottom: 16px;
-}
-.blueprint-grid-preview {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-.blueprint-block {
-  background: rgba(14, 20, 32, 0.7);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-}
-.blueprint-block.highlight {
-  border-color: rgba(56, 189, 248, 0.35);
-  background: rgba(56, 189, 248, 0.06);
-}
-.block-tag {
-  display: block;
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-muted);
-  margin-bottom: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
 }
-.block-val {
+
+.vui-brand-text {
   font-family: var(--font-display);
   font-size: 12px;
   font-weight: 700;
-  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  color: #fff;
 }
-.blueprint-bottom-bar {
+
+.vui-nav-links {
   display: flex;
-  justify-content: space-between;
+  gap: 14px;
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--text-muted);
-  border-top: 1px solid var(--border-subtle);
-  padding-top: 14px;
+}
+
+.vui-cta-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.vui-hero-banner {
+  background: rgba(14, 20, 32, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.vui-hero-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--accent-cyan);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.vui-headline {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.vui-glow {
+  color: var(--accent-cyan);
+  text-shadow: 0 0 12px var(--accent-cyan-glow);
+}
+
+.vui-hero-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.vui-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.vui-card {
+  background: rgba(12, 17, 27, 0.75);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vui-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vui-head-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.vui-pill-cyan, .vui-pill-green, .vui-pill-indigo, .vui-pill-amber {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.vui-pill-cyan { background: rgba(56, 189, 248, 0.12); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.3); }
+.vui-pill-green { background: rgba(34, 197, 94, 0.12); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+.vui-pill-indigo { background: rgba(129, 140, 248, 0.12); color: #a5b4fc; border: 1px solid rgba(129, 140, 248, 0.3); }
+.vui-pill-amber { background: rgba(245, 158, 11, 0.12); color: var(--accent-amber); border: 1px solid rgba(245, 158, 11, 0.3); }
+
+.vui-metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 11px;
+}
+
+.vui-m-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.vui-m-val {
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: #fff;
+}
+
+.vui-m-val.cyan {
+  color: var(--accent-cyan);
+}
+
+.vui-bar-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-top: 2px;
+}
+
+.vui-bar-fill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-cyan), #60a5fa);
+  border-radius: var(--radius-pill);
+}
+
+.vui-card-body {
+  font-size: 11px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.vui-signal-badge {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.08);
+  padding: 3px 6px;
+  border-radius: 3px;
+  border-left: 2px solid #22c55e;
+}
+
+.vui-roadmap-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.vui-r-step {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+.step-check {
+  color: #4ade80;
+  font-weight: 700;
+}
+
+.step-dot {
+  color: var(--accent-cyan);
+  font-size: 8px;
 }
 
 /* 02 LifeHub Visual Frame UI */
@@ -1390,20 +1561,102 @@ input, textarea {
 
 /* 03 Teluguva Visual Frame UI */
 .teluguva-dual-ui {
-  padding: 24px;
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
+
+.teluguva-app-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.teluguva-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.teluguva-badge-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: var(--accent-amber);
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.teluguva-brand-name {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+}
+
+.teluguva-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.1);
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.teluguva-mode-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.sparkle-icon {
+  font-size: 9px;
+  color: #4ade80;
+}
+
 .translation-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 14px;
+  position: relative;
 }
+
 .trans-pane {
-  background: rgba(14, 18, 28, 0.6);
+  background: rgba(14, 18, 28, 0.65);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
   padding: 14px;
+  display: flex;
+  flex-direction: column;
 }
+
+.trans-divider-beam {
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(245, 158, 11, 0.35), transparent);
+  transform: translateX(-50%);
+}
+
 .pane-tag {
   display: block;
   font-family: var(--font-mono);
@@ -1412,16 +1665,20 @@ input, textarea {
   color: var(--text-muted);
   margin-bottom: 8px;
 }
+
 .amber-tag { color: var(--accent-amber); }
+
 .pane-body {
   font-size: 12px;
   color: var(--text-secondary);
   line-height: 1.5;
 }
+
 .telugu-script {
   color: #fff;
   font-weight: 500;
 }
+
 .teluguva-audio-bar {
   display: flex;
   justify-content: space-between;
@@ -1431,6 +1688,7 @@ input, textarea {
   border-radius: var(--radius-sm);
   padding: 10px 14px;
 }
+
 .audio-chip {
   display: flex;
   align-items: center;
@@ -1439,23 +1697,54 @@ input, textarea {
   font-size: 10px;
   color: var(--accent-amber);
 }
+
+.audio-speaker-icon {
+  font-size: 12px;
+}
+
 .audio-waveform-bars {
   display: flex;
   gap: 3px;
   align-items: center;
 }
+
 .audio-waveform-bars span {
   width: 2px;
   height: 12px;
   background: var(--accent-amber);
   animation: wave 1.2s ease-in-out infinite;
 }
+
 .audio-waveform-bars span:nth-child(2) { height: 18px; animation-delay: 0.2s; }
 .audio-waveform-bars span:nth-child(3) { height: 8px; animation-delay: 0.4s; }
 .audio-waveform-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
+
 @keyframes wave {
   0%, 100% { transform: scaleY(0.5); }
   50% { transform: scaleY(1); }
+}
+
+.font-scale-tools {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.f-tool {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--text-muted);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.f-tool.active, .f-tool:hover {
+  color: var(--accent-amber);
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.25);
 }
 
 /* 04 BuildShift Visual Frame UI */
@@ -1848,6 +2137,34 @@ input, textarea {
   border-radius: var(--radius-pill);
 }
 
+.lab-section-compact {
+  padding: 80px 0;
+}
+
+.lab-section-compact .lab-experiments-grid {
+  gap: 24px;
+}
+
+.lab-section-compact .lab-module-card {
+  padding: 22px 24px;
+  border-radius: var(--radius-md);
+}
+
+.lab-section-compact .exp-title {
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+.lab-section-compact .exp-desc {
+  font-size: 13px;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.lab-section-compact .exp-interactive-body {
+  padding: 16px;
+}
+
 .lab-experiments-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -2192,23 +2509,28 @@ input[type="range"] {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .tech-row {
   display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 8px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 8px 4px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+.tech-row:hover {
+  transform: translateX(4px);
+  border-bottom-color: rgba(56, 189, 248, 0.25);
 }
 .tech-name {
   font-family: var(--font-mono);
   font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
 }
-.tech-scope {
-  font-size: 11px;
-  color: var(--text-muted);
+.tech-row:hover .tech-name {
+  color: #fff;
 }
 
 /* --------------------------------------------------------------------------
@@ -2804,6 +3126,15 @@ input[type="range"] {
   }
   .translation-split {
     grid-template-columns: 1fr;
+  }
+  .trans-divider-beam {
+    display: none;
+  }
+  .vui-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .vui-nav-links {
+    display: none;
   }
   .blueprint-grid-preview {
     grid-template-columns: 1fr;

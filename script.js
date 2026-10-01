@@ -1,13 +1,14 @@
 /**
- * GOKUL LABS — Living Digital Architecture Engine v7.0
+ * GOKUL LABS — Living Digital Architecture Engine v8.5
  * 
  * Production-Grade Interactive System:
  *  - Signature 3D Living Digital Artifact (Three.js WebGL)
+ *  - Restrained, Purposeful Motion (Almost still at rest, controlled scroll evolution)
  *  - Scroll-Driven Architectural State Machine (Hero -> Work -> About -> Lab -> Stack -> Journey -> Contact)
- *  - Interactive Case Study Drawer Architecture (Problem, Product, AI, Engineering, Stack, Experience, Links)
- *  - Fully Functional Laboratory Interactive Workbench (Prompt Analyzer, Shader Calibrator, Spring Physics, Pipeline Visualizer)
+ *  - Interactive Case Study Drawer Architecture (What, Why, How, Intelligence, Engineering, Experience)
+ *  - Laboratory Interactive Workbench (Prompt Analyzer, Shader Calibrator, Spring Physics, Pipeline Visualizer)
  *  - Technical Stack Layer Resonance
- *  - Performance & Battery Optimization (DPR capped, Page Visibility pausing, WebGL Fallback, prefers-reduced-motion)
+ *  - Performance & Battery Optimization (DPR capped at 1.75, Page Visibility pausing, WebGL Fallback, prefers-reduced-motion)
  */
 
 (function () {
@@ -324,7 +325,7 @@
 
       // 7D. Master Artifact Container
       const artifactGroup = new THREE.Group();
-      artifactGroup.position.set(4.2, 0, 0); // Positioned to complement left typography on hero
+      artifactGroup.position.set(4.0, 0, 0); // Positioned to complement left typography on hero
       scene.add(artifactGroup);
 
       // --------------------------------------------------------
@@ -459,7 +460,7 @@
         }
       };
 
-      // Expose Stack Layer Resonance Hook (Section 21)
+      // Expose Stack Layer Resonance Hook
       highlightArtifactLayer = function (layerName) {
         if (layerName === "ai") {
           coreMat.emissiveIntensity = 2.4;
@@ -483,8 +484,9 @@
       };
 
       // 7E. Target State Variables for Scroll Transformations
-      let targetArtifactPos = { x: 4.2, y: 0, z: 0 };
-      let targetArtifactRot = { x: 0.18, y: 0.35, z: 0 };
+      // RESTRAINED MOTION: The artifact is almost still at rest, evolving calmly through scroll
+      let targetArtifactPos = { x: 4.0, y: 0, z: 0 };
+      let targetArtifactRot = { x: 0.15, y: 0.35, z: 0 };
       let targetGlassSeparation = 0;
       let targetLogicSeparation = 1;
 
@@ -511,14 +513,14 @@
         if (width < 768) {
           camera.position.set(0, 0, 26);
           targetArtifactPos.x = 0;
-          targetArtifactPos.y = -2.2;
+          targetArtifactPos.y = -2.0;
         } else if (width < 1024) {
           camera.position.set(0, 0, 24);
-          targetArtifactPos.x = 2.8;
+          targetArtifactPos.x = 2.6;
           targetArtifactPos.y = 0;
         } else {
           camera.position.set(0, 0, 22);
-          targetArtifactPos.x = 4.2;
+          targetArtifactPos.x = 4.0;
           targetArtifactPos.y = 0;
         }
 
@@ -550,83 +552,86 @@
         cursorLight.position.x = smoothMouseX * 12;
         cursorLight.position.y = -smoothMouseY * 8;
 
+        // Extremely gentle architectural resting breath (NOT endless screensaver spin)
+        const idleBreathe = Math.sin(elapsedTime * 0.45) * 0.035;
+
         // Update State Targets based on Active Section
         const isMobile = window.innerWidth < 768;
 
         switch (currentSectionId) {
           case "hero":
-            // State 0: IDEA / INTELLIGENCE (Compact, unified)
-            targetArtifactPos.x = isMobile ? 0 : 4.2;
-            targetArtifactPos.y = isMobile ? -2.2 : 0;
+            // State 0: IDEA / INTELLIGENCE (Compact, unified, resting calmly)
+            targetArtifactPos.x = isMobile ? 0 : 4.0;
+            targetArtifactPos.y = isMobile ? -2.0 : 0;
             targetArtifactPos.z = 0;
-            targetArtifactRot.x = 0.2 + smoothMouseY * 0.15;
-            targetArtifactRot.y = elapsedTime * 0.12 + smoothMouseX * 0.2;
+            targetArtifactRot.x = 0.15 + smoothMouseY * 0.1;
+            targetArtifactRot.y = 0.35 + smoothMouseX * 0.15 + idleBreathe;
             targetGlassSeparation = 0;
             targetLogicSeparation = 1;
             break;
 
           case "work":
             // State 1: MODULAR PROJECT FOCUS (Shifts into viewport depth)
-            targetArtifactPos.x = isMobile ? 0 : 5.4;
-            targetArtifactPos.y = isMobile ? -3.0 : -0.8;
-            targetArtifactPos.z = -4.5;
-            targetArtifactRot.x = 0.4 + smoothMouseY * 0.1;
-            targetArtifactRot.y = elapsedTime * 0.18 + smoothMouseX * 0.15;
-            targetGlassSeparation = 0.35;
-            targetLogicSeparation = 1.35;
+            targetArtifactPos.x = isMobile ? 0 : 5.0;
+            targetArtifactPos.y = isMobile ? -2.5 : -0.5;
+            targetArtifactPos.z = -3.5;
+            targetArtifactRot.x = 0.25 + smoothMouseY * 0.08;
+            targetArtifactRot.y = 0.65 + smoothMouseX * 0.12 + idleBreathe;
+            targetGlassSeparation = 0.3;
+            targetLogicSeparation = 1.25;
             break;
 
           case "about":
             // State 2: STRUCTURAL DISCLOSURE (Smoked shells glide open, revealing core)
-            targetArtifactPos.x = isMobile ? 0 : -4.8;
-            targetArtifactPos.y = isMobile ? -2.5 : 0.5;
-            targetArtifactPos.z = -2.0;
-            targetArtifactRot.x = 0.25;
-            targetArtifactRot.y = elapsedTime * 0.08;
-            targetGlassSeparation = 1.2;
-            targetLogicSeparation = 1.6;
+            targetArtifactPos.x = isMobile ? 0 : -4.2;
+            targetArtifactPos.y = isMobile ? -2.2 : 0.4;
+            targetArtifactPos.z = -1.8;
+            targetArtifactRot.x = 0.2 + smoothMouseY * 0.06;
+            targetArtifactRot.y = 1.05 + smoothMouseX * 0.1 + idleBreathe;
+            targetGlassSeparation = 0.9;
+            targetLogicSeparation = 1.5;
             break;
 
           case "lab":
-            // State 3: EXPERIMENTAL RESONANCE (Calibrating)
-            targetArtifactPos.x = isMobile ? 0 : 4.8;
-            targetArtifactPos.y = isMobile ? -2.2 : -0.4;
+            // State 3: EXPERIMENTAL RESONANCE
+            targetArtifactPos.x = isMobile ? 0 : 4.5;
+            targetArtifactPos.y = isMobile ? -2.0 : -0.3;
             targetArtifactPos.z = -1.5;
-            targetArtifactRot.x = 0.35;
-            targetArtifactRot.y = elapsedTime * 0.15;
-            targetGlassSeparation = 0.6;
-            targetLogicSeparation = 1.25;
+            targetArtifactRot.x = 0.28 + smoothMouseY * 0.08;
+            targetArtifactRot.y = 1.45 + smoothMouseX * 0.12 + idleBreathe;
+            targetGlassSeparation = 0.5;
+            targetLogicSeparation = 1.2;
             break;
 
           case "stack":
             // State 4: TECHNICAL STRATIFICATION (Tiers separate distinctly)
             targetArtifactPos.x = isMobile ? 0 : 0;
-            targetArtifactPos.y = isMobile ? -2.0 : -1.2;
-            targetArtifactPos.z = -3.0;
-            targetArtifactRot.x = 0.55;
-            targetArtifactRot.y = elapsedTime * 0.09;
-            targetGlassSeparation = 1.4;
-            targetLogicSeparation = 2.1;
+            targetArtifactPos.y = isMobile ? -1.8 : -1.0;
+            targetArtifactPos.z = -2.5;
+            targetArtifactRot.x = 0.45 + smoothMouseY * 0.06;
+            targetArtifactRot.y = 1.95 + smoothMouseX * 0.1 + idleBreathe;
+            targetGlassSeparation = 1.2;
+            targetLogicSeparation = 1.8;
             break;
 
           case "journey":
             // State 5: PROGRESSION AXIS (Forward trajectory)
-            targetArtifactPos.x = isMobile ? 0 : -5.0;
-            targetArtifactPos.y = isMobile ? -2.0 : -0.5;
-            targetArtifactPos.z = -2.5;
-            targetArtifactRot.x = 0.3;
-            targetArtifactRot.y = elapsedTime * 0.12;
-            targetGlassSeparation = 0.5;
-            targetLogicSeparation = 1.4;
+            targetArtifactPos.x = isMobile ? 0 : -4.5;
+            targetArtifactPos.y = isMobile ? -1.8 : -0.4;
+            targetArtifactPos.z = -2.0;
+            targetArtifactRot.x = 0.22 + smoothMouseY * 0.06;
+            targetArtifactRot.y = 2.45 + smoothMouseX * 0.1 + idleBreathe;
+            targetGlassSeparation = 0.4;
+            targetLogicSeparation = 1.3;
             break;
 
           case "contact":
-            // State 6: REUNIFICATION & HARMONY (Converges back together)
+            // State 6: REUNIFICATION & HARMONY (All layers converge back into one object)
             targetArtifactPos.x = isMobile ? 0 : 0;
-            targetArtifactPos.y = isMobile ? -2.5 : 0;
-            targetArtifactPos.z = 1.0;
-            targetArtifactRot.x = 0.18;
-            targetArtifactRot.y = elapsedTime * 0.1;
+            targetArtifactPos.y = isMobile ? -2.0 : 0;
+            targetArtifactPos.z = 0.5;
+            targetArtifactRot.x = 0.15 + smoothMouseY * 0.08;
+            targetArtifactRot.y = 3.14 + smoothMouseX * 0.12 + idleBreathe;
             targetGlassSeparation = 0;
             targetLogicSeparation = 1;
             break;
@@ -641,12 +646,12 @@
         artifactGroup.rotation.y = lerp(artifactGroup.rotation.y, targetArtifactRot.y, 0.04);
 
         // Core Subtle Breathing
-        const breathe = Math.sin(elapsedTime * 1.8) * 0.08 + 1.0;
+        const breathe = Math.sin(elapsedTime * 1.5) * 0.05 + 1.0;
         coreGroup.scale.set(breathe, breathe, breathe);
 
-        // Sub-Layer Articulations
-        latticeGroup.rotation.y = -elapsedTime * 0.15;
-        armatureGroup.rotation.z = elapsedTime * 0.08;
+        // Sub-Layer Micro-Articulations (Subtle & slow, not spinning)
+        latticeGroup.rotation.y = -elapsedTime * 0.03;
+        armatureGroup.rotation.z = elapsedTime * 0.015;
 
         // Shell & Logic Separation
         glassShell.position.y = lerp(glassShell.position.y, targetGlassSeparation, 0.04);
@@ -673,7 +678,7 @@
   }
 
   /* ============================================================
-     8. CASE STUDY MODAL DRAWER SYSTEM (Section 14)
+     8. CASE STUDY MODAL DRAWER SYSTEM
      ============================================================ */
   const modalBackdrop = $("#case-study-modal");
   const modalDrawer = $("#case-study-drawer");
@@ -795,7 +800,7 @@
   });
 
   /* ============================================================
-     9. LABORATORY INTERACTIVE WORKBENCH (Section 19)
+     9. LABORATORY INTERACTIVE WORKBENCH
      ============================================================ */
 
   // --- Lab 01: Prompt Structure Analyzer -----------------------
@@ -805,22 +810,20 @@
   const presetBtns = $$(".preset-btn");
 
   const promptPresets = {
-    venture: "ROLE: Senior Venture Architect\nCONTEXT: Early-stage developer building an AI co-founder.\nOBJECTIVE: Formulate a lean MVP specification focusing on unit economics and retention.\nCONSTRAINTS: Avoid premature scaling; emphasize client-side privacy.",
+    venture: "ROLE: Venture Architect\nCONTEXT: Early-stage founder exploring venture hypotheses.\nOBJECTIVE: Formulate a lean MVP specification focusing on unit economics and retention.\nCONSTRAINTS: Avoid premature scaling; validate client-side privacy.",
     ocr: "ROLE: Bilingual Accessibility Linguist\nCONTEXT: Official technical circular drafted in dense English.\nOBJECTIVE: Translate into colloquial conversational Telugu with 0.8x speech pacing.\nCONSTRAINTS: Preserve technical terms while eliminating bureaucratic jargon.",
-    spatial: "ROLE: Spatial Graphics Engineer\nCONTEXT: 2D residential floor plan with double-height ceiling.\nOBJECTIVE: Generate bounding box parameters and physically accurate daylight ray bounces.\nCONSTRAINTS: Cap draw calls under 60; enforce PBR energy conservation."
+    spatial: "ROLE: Spatial Graphics Engineer\nCONTEXT: 2D residential floor plan with double-height ceiling.\nOBJECTIVE: Generate bounding box parameters and physically accurate daylight reflections.\nCONSTRAINTS: Cap draw calls under 60; enforce PBR energy conservation."
   };
 
   function analyzePrompt(text) {
     if (!text) return;
-    // Heuristic token estimation (approx 1.3 words per token)
     const words = text.trim().split(/\s+/).filter(Boolean);
     const tokens = Math.round(words.length * 1.32);
     if (outTokens) outTokens.textContent = tokens;
 
-    // Detect Role header
     const match = text.match(/ROLE:\s*([^\n\r]+)/i);
     if (outRole) {
-      outRole.textContent = match ? match[1].trim() : "Custom Prompt Structure";
+      outRole.textContent = match ? match[1].trim() : "Custom Structure";
     }
   }
 
@@ -903,7 +906,6 @@
   if (springStage && springTarget) {
     function updateSpringPhysics() {
       if (!isDraggingSpring) {
-        // F = -k * x - c * v
         const forceX = -springParams.stiffness * (springPos.x * 0.01) - springParams.damping * springVel.x;
         const forceY = -springParams.stiffness * (springPos.y * 0.01) - springParams.damping * springVel.y;
         
@@ -919,7 +921,7 @@
     }
     requestAnimationFrame(updateSpringPhysics);
 
-    springTarget.addEventListener("mousedown", (e) => {
+    springTarget.addEventListener("mousedown", () => {
       isDraggingSpring = true;
     });
 
@@ -928,8 +930,8 @@
       const rect = springStage.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      springPos.x = clamp(e.clientX - cx, -110, 110);
-      springPos.y = clamp(e.clientY - cy, -60, 60);
+      springPos.x = clamp(e.clientX - cx, -90, 90);
+      springPos.y = clamp(e.clientY - cy, -50, 50);
       springVel.x = 0;
       springVel.y = 0;
       springTarget.style.transform = `translate3d(${springPos.x}px, ${springPos.y}px, 0)`;
@@ -961,11 +963,11 @@
     {
       tag: "STAGE 01 // PROBLEM DEFINITION",
       headline: "Idea &amp; Hypothesis Formulation",
-      copy: "Isolate friction, question default assumptions, and define quantifiable criteria for success before writing code."
+      copy: "Isolate friction, question default assumptions, and define clear success criteria before writing code."
     },
     {
       tag: "STAGE 02 // MODEL & FEASIBILITY",
-      headline: "Intelligence &amp; Heuristic Architecture",
+      headline: "Intelligence &amp; Architecture",
       copy: "Select the optimal LLM prompts, client-side OCR libraries, or spatial geometric math models to solve the problem directly."
     },
     {
@@ -976,7 +978,7 @@
     {
       tag: "STAGE 04 // POLISHED SHIP",
       headline: "Product Deployment &amp; User Experience",
-      copy: "Host on production edge networks, test on real devices, collect user signals, and loop back into the next iteration."
+      copy: "Host on production edge networks, test on real devices, collect user signals, and iterate into the next version."
     }
   ];
 
@@ -996,7 +998,7 @@
   });
 
   /* ============================================================
-     10. STACK LAYER RESONANCE WITH 3D ARTIFACT (Section 21)
+     10. STACK LAYER RESONANCE WITH 3D ARTIFACT
      ============================================================ */
   const stackCards = $$(".stack-category-card");
   stackCards.forEach((card) => {
@@ -1037,7 +1039,7 @@
   /* ============================================================
      12. LOG INITIALIZATION STATUS
      ============================================================ */
-  console.log("%cGOKUL LABS %cv8.0 — Living Digital Architecture Engine Active", 
+  console.log("%cGOKUL LABS %cv8.5 — Living Digital Architecture Engine Active", 
     "color: #38bdf8; font-weight: bold; font-family: monospace; font-size: 13px;",
     "color: #94a3b8; font-family: monospace; font-size: 11px;"
   );
