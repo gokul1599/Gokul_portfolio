@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gokul Karpurapu — Resume | AI Builder &amp; Full-Stack Developer</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* -------------------------------------------------------------
+       A4 PAGE ARCHITECTURE & RESET
+       ------------------------------------------------------------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
+      
+      /* Theme 1: Header Canopy Dark (Default / Recommended) */
+      --bg-canvas: #090b10;
+      --header-bg: #0f1420;
+      --header-border: #38bdf8;
+      --text-head: #ffffff;
+      --text-sub: #38bdf8;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
+      --text-bold: #ffffff;
+      --rule-color: #1e293b;
+      --link-color: #38bdf8;
+      --tag-bg: rgba(56, 189, 248, 0.1);
+      --tag-border: rgba(56, 189, 248, 0.25);
+    }
+
+    body.theme-ats {
+      --bg-canvas: #ffffff;
+      --header-bg: #f8fafc;
+      --header-border: #cbd5e1;
+      --text-head: #0f172a;
+      --text-sub: #2563eb;
+      --text-body: #334155;
+      --text-muted: #64748b;
+      --text-bold: #0f172a;
+      --rule-color: #e2e8f0;
+      --link-color: #2563eb;
+      --tag-bg: rgba(37, 99, 235, 0.08);
+      --tag-border: rgba(37, 99, 235, 0.2);
+    }
+
+    body.theme-cinematic {
+      --bg-canvas: #06070a;
+      --header-bg: #0b0f17;
+      --header-border: #38bdf8;
+      --text-head: #ffffff;
+      --text-sub: #7dd3fc;
+      --text-body: #cbd5e1;
+      --text-muted: #94a3b8;
+      --text-bold: #ffffff;
+      --rule-color: #182030;
+      --link-color: #38bdf8;
+      --tag-bg: rgba(56, 189, 248, 0.12);
+      --tag-border: rgba(56, 189, 248, 0.3);
+    }
+
+    body {
+      background-color: #030407;
+      font-family: var(--font-body);
+      color: var(--text-body);
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px 16px;
+      min-height: 100vh;
+    }
+
+    /* -------------------------------------------------------------
+       CONTROLS BAR (Hidden on Print)
+       ------------------------------------------------------------- */
+    .controls-toolbar {
+      width: 100%;
+      max-width: 794px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 12px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .toolbar-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .theme-selector {
+      display: flex;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .theme-btn {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn.active, .theme-btn:hover {
+      background: rgba(56, 189, 248, 0.2);
+      color: #fff;
+    }
+
+    .toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .action-btn {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.2s ease;
+    }
+
+    .btn-print {
+      background: #38bdf8;
+      color: #000;
+      border-color: #38bdf8;
+    }
+    .btn-print:hover {
+      background: #7dd3fc;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+    }
+
+    .btn-dl {
+      background: rgba(255, 255, 255, 0.06);
+      color: #e2e8f0;
+    }
+    .btn-dl:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* -------------------------------------------------------------
+       A4 RESUME SHEET CANVAS
+       Exact A4 Size: 210mm x 297mm (794px x 1123px at 96 DPI)
+       ------------------------------------------------------------- */
+    .resume-sheet {
+      width: 794px;
+      height: 1123px;
+      max-height: 1123px;
+      background-color: var(--bg-canvas);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      padding: 34px 44px 30px;
+      transition: background-color 0.25s ease;
+    }
+
+    /* Background Vector Overlay */
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-size: 100% 100%;
+    }
+
+    body:not(.theme-ats):not(.theme-cinematic) .bg-overlay {
+      background-image: url('backgrounds/background-header-only.svg');
+    }
+    body.theme-cinematic .bg-overlay {
+      background-image: url('backgrounds/background-cinematic.svg');
+    }
+    body.theme-ats .bg-overlay {
+      background-image: url('backgrounds/background-ats-safe.svg');
+    }
+
+    .resume-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* -------------------------------------------------------------
+       HEADER SECTION
+       ------------------------------------------------------------- */
+    header.resume-header {
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--rule-color);
+      margin-bottom: 10px;
+    }
+
+    .candidate-name {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-head);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 3px;
+    }
+
+    .candidate-title {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .contact-matrix {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .contact-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .contact-sep {
+      color: var(--rule-color);
+      font-size: 10px;
+    }
+
+    .contact-link {
+      color: var(--link-color);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .contact-link:hover {
+      text-decoration: underline;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION STYLES
+       ------------------------------------------------------------- */
+    .resume-section {
+      margin-bottom: 9px;
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-head);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding-bottom: 3px;
+      border-bottom: 1px solid var(--rule-color);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: "◆";
+      font-size: 8px;
+      color: var(--text-sub);
+    }
+
+    /* -------------------------------------------------------------
+       PROFILE
+       ------------------------------------------------------------- */
+    .profile-summary {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-body);
+    }
+
+    /* -------------------------------------------------------------
+       EDUCATION
+       ------------------------------------------------------------- */
+    .education-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .edu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-size: 11px;
+    }
+
+    .edu-org {
+      font-weight: 700;
+      color: var(--text-bold);
+    }
+
+    .edu-degree {
+      color: var(--text-body);
+      font-weight: 500;
+      margin-left: 6px;
+    }
+
+    .edu-meta {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+
+    /* -------------------------------------------------------------
+       TECHNICAL SKILLS
+       ------------------------------------------------------------- */
+    .skills-matrix {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5px;
+      font-size: 11px;
+    }
+
+    .skill-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      line-height: 1.4;
+    }
+
+    .skill-cat {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-bold);
+      min-width: 110px;
+      flex-shrink: 0;
+    }
+
+    .skill-list {
+      color: var(--text-body);
+    }
+
+    /* -------------------------------------------------------------
+       PROJECTS (STRICTLY 4 SELECTED PROJECTS)
+       ------------------------------------------------------------- */
+    .projects-container {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .project-entry {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .project-header-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .project-identity {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .project-name {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-bold);
+      letter-spacing: -0.01em;
+    }
+
+    .project-category {
+      font-size: 10.5px;
+      color: var(--text-muted);
+    }
+
+    .project-tech-badge {
+      font-family: var(--font-mono);
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--text-sub);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    .project-live-link {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--link-color);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .project-live-link:hover {
+      text-decoration: underline;
+    }
+
+    .project-description {
+      font-size: 10.8px;
+      line-height: 1.45;
+      color: var(--text-body);
+    }
+
+    /* -------------------------------------------------------------
+       BUILDER FOCUS
+       ------------------------------------------------------------- */
+    .focus-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 11px;
+    }
+
+    .focus-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      color: var(--text-body);
+      line-height: 1.4;
+    }
+
+    .focus-bullet {
+      color: var(--text-sub);
+      font-size: 8px;
+    }
+
+    .focus-bold {
+      font-weight: 700;
+      color: var(--text-bold);
+    }
+
+    /* -------------------------------------------------------------
+       FOOTER
+       ------------------------------------------------------------- */
+    footer.resume-footer {
+      text-align: center;
+      padding-top: 6px;
+      border-top: 1px solid var(--rule-color);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    footer.resume-footer a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    /* -------------------------------------------------------------
+       PRINT ENGINE STYLES (Strict A4 Exact 1-Page Output)
+       ------------------------------------------------------------- */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 0;
+      }
+
+      body {
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+      }
+
+      .controls-toolbar {
+        display: none !important;
+      }
+
+      .resume-sheet {
+        box-shadow: none !important;
+        width: 100% !important;
+        height: 100vh !important;
+        max-height: 100vh !important;
+        padding: 30mm 15mm 20mm !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controls Toolbar (Hidden when printing / generating PDF) -->
+  <div class="controls-toolbar" aria-label="Resume Display Controls">
+    <div class="toolbar-left">
+      <span class="toolbar-title">View Mode:</span>
+      <div class="theme-selector">
+        <button class="theme-btn active" onclick="setTheme('default')">Header Canopy</button>
+        <button class="theme-btn" onclick="setTheme('cinematic')">Cinematic Studio</button>
+        <button class="theme-btn" onclick="setTheme('ats')">ATS Clean White</button>
+      </div>
+    </div>
+    <div class="toolbar-right">
+      <button class="action-btn btn-print" onclick="window.print()">
+        <span>Print / Save as PDF</span>
+      </button>
+      <a href="Gokul_Karpurapu_Resume_ATS.pdf" class="action-btn btn-dl" download>
+        <span>ATS PDF</span>
+      </a>
+      <a href="Gokul_Karpurapu_Resume_Premium.pdf" class="action-btn btn-dl" download>
+        <span>Visual PDF</span>
+      </a>
+      <a href="Gokul_Karpurapu_Resume.docx" class="action-btn btn-dl" download>
+        <span>Word DOCX</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- A4 One-Page Resume Sheet -->
+  <main class="resume-sheet" id="resume-container">
+    <div class="bg-overlay" aria-hidden="true"></div>
+
+    <div class="resume-content">
+      <!-- 1. Header -->
+      <header class="resume-header">
+        <h1 class="candidate-name">GOKUL KARPURAPU</h1>
+        <div class="candidate-title">AI Builder | Computer Science Student | Full-Stack Developer</div>
+        
+        <div class="contact-matrix">
+          <span class="contact-item">Bengaluru, India</span>
+          <span class="contact-sep">•</span>
+          <span class="contact-item">
+            <a href="mailto:gokulkarpurapu@gmail.com" class="contact-link">gokulkarpurapu@gmail.com</a>
+          </span>
+          <span class="contact-sep">•</span>
+          <span class="contact-item">
+            <a href="https://www.linkedin.com/in/gokul-karpurapu-8b234141b/" target="_blank" rel="noopener noreferrer" class="contact-link">linkedin.com/in/gokul-karpurapu</a>
+          </span>
+          <span class="contact-sep">•</span>
+          <span class="contact-item">
+            <a href="https://github.com/gokul1599" target="_blank" rel="noopener noreferrer" class="contact-link">github.com/gokul1599</a>
+          </span>
+          <span class="contact-sep">•</span>
+          <span class="contact-item">
+            <a href="https://gokul-labs.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-link">gokul-labs.vercel.app</a>
+          </span>
+        </div>
+      </header>
+
+      <!-- 2. Profile -->
+      <section class="resume-section" aria-label="Profile Summary">
+        <h2 class="section-title">PROFILE</h2>
+        <p class="profile-summary">
+          Computer Science student focused on AI and product building, with hands-on experience creating and deploying modern web applications. Interested in AI agents, practical automation, hackathon-driven development, and modern full-stack workflows. Comfortable working across interface design, backend integration, validation, production deployment, and rapid iteration.
+        </p>
+      </section>
+
+      <!-- 3. Education -->
+      <section class="resume-section" aria-label="Education">
+        <h2 class="section-title">EDUCATION</h2>
+        <div class="education-grid">
+          <div class="edu-item">
+            <div>
+              <span class="edu-org">BITS Pilani</span>
+              <span class="edu-degree">— B.Sc. Computer Science</span>
+            </div>
+            <span class="edu-meta">2026 – Present</span>
+          </div>
+          <div class="edu-item">
+            <div>
+              <span class="edu-org">Scaler School of Technology</span>
+              <span class="edu-degree">— Computer Science, AI Focus</span>
+            </div>
+            <span class="edu-meta">2026 – Present</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Technical Skills -->
+      <section class="resume-section" aria-label="Technical Skills">
+        <h2 class="section-title">TECHNICAL SKILLS</h2>
+        <div class="skills-matrix">
+          <div class="skill-row">
+            <span class="skill-cat">Languages:</span>
+            <span class="skill-list">Java, Python, JavaScript, HTML, CSS</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-cat">Frontend:</span>
+            <span class="skill-list">React, Next.js, Tailwind CSS, Responsive UI Development</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-cat">Backend / Data:</span>
+            <span class="skill-list">Appwrite, API Integration, Authentication, Validation</span>
+          </div>
+          <div class="skill-row">
+            <span class="skill-cat">AI / Tools:</span>
+            <span class="skill-list">Groq, AI Application Development, Git, GitHub, Vercel, Three.js, React Three Fiber, GSAP</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Selected Projects (4 Verified Projects) -->
+      <section class="resume-section" aria-label="Selected Projects">
+        <h2 class="section-title">SELECTED PROJECTS</h2>
+        <div class="projects-container">
+          
+          <!-- Project 01: VALTORA -->
+          <article class="project-entry">
+            <div class="project-header-line">
+              <div class="project-identity">
+                <span class="project-name">VALTORA</span>
+                <span class="project-category">AI-Powered Full-Stack Application</span>
+                <span class="project-tech-badge">Appwrite + Groq</span>
+              </div>
+              <a href="https://valtora-swart.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-live-link">
+                <span>Live Demo</span> ↗
+              </a>
+            </div>
+            <p class="project-description">
+              Built and deployed an AI application with authentication, structured validation, usage controls, challenge workflows, roadmap experiences, and iterative production fixes.
+            </p>
+          </article>
+
+          <!-- Project 02: LIFEHUB -->
+          <article class="project-entry">
+            <div class="project-header-line">
+              <div class="project-identity">
+                <span class="project-name">LifeHub</span>
+                <span class="project-category">Personal Productivity &amp; Life-Management Web Application</span>
+              </div>
+              <a href="https://lifehub-sage.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-live-link">
+                <span>Live Demo</span> ↗
+              </a>
+            </div>
+            <p class="project-description">
+              Designed a responsive product around schedules, reminders, personalization, AI assistance, expenses, weather, and everyday utilities across desktop and mobile.
+            </p>
+          </article>
+
+          <!-- Project 03: TELUGUVA -->
+          <article class="project-entry">
+            <div class="project-header-line">
+              <div class="project-identity">
+                <span class="project-name">Teluguva</span>
+                <span class="project-category">Telugu-First Web Platform</span>
+              </div>
+              <a href="https://teluguva.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-live-link">
+                <span>Live Demo</span> ↗
+              </a>
+            </div>
+            <p class="project-description">
+              Built and deployed an independent web project focused on a Telugu-first digital experience and user-facing content.
+            </p>
+          </article>
+
+          <!-- Project 04: GOKUL LABS -->
+          <article class="project-entry">
+            <div class="project-header-line">
+              <div class="project-identity">
+                <span class="project-name">Gokul Labs Developer Portfolio</span>
+                <span class="project-category">Developer Portfolio</span>
+                <span class="project-tech-badge">Next.js / modern web stack</span>
+              </div>
+              <a href="https://gokul-labs.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-live-link">
+                <span>Live Demo</span> ↗
+              </a>
+            </div>
+            <p class="project-description">
+              Created a portfolio to present projects, technical skills, learning journey, and contact information with a focused developer experience.
+            </p>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- 6. Builder Focus -->
+      <section class="resume-section" aria-label="Builder Focus">
+        <h2 class="section-title">BUILDER FOCUS</h2>
+        <ul class="focus-list">
+          <li class="focus-item">
+            <span class="focus-bullet">◆</span>
+            <span><strong class="focus-bold">AI Systems &amp; Automation:</strong> AI agents, autonomous workflows, and real-world automation</span>
+          </li>
+          <li class="focus-item">
+            <span class="focus-bullet">◆</span>
+            <span><strong class="focus-bold">Rapid Prototyping:</strong> Hackathons, rapid prototyping, and shipping usable products</span>
+          </li>
+          <li class="focus-item">
+            <span class="focus-bullet">◆</span>
+            <span><strong class="focus-bold">Continuous Learning:</strong> Continuous learning in Python, AI, and modern full-stack development</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 7. Footer -->
+      <footer class="resume-footer">
+        Portfolio: <a href="https://gokul-labs.vercel.app/" target="_blank" rel="noopener noreferrer">gokul-labs.vercel.app</a>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    function setTheme(theme) {
+      document.body.classList.remove('theme-ats', 'theme-cinematic');
+      document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+      
+      if (theme === 'ats') {
+        document.body.classList.add('theme-ats');
+        event.target.classList.add('active');
+      } else if (theme === 'cinematic') {
+        document.body.classList.add('theme-cinematic');
+        event.target.classList.add('active');
+      } else {
+        event.target.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

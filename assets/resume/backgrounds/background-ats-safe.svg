@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" width="794" height="1123">
+  <defs>
+    <!-- Paper Light Clean Gradient -->
+    <linearGradient id="paper-clean" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fafbfd"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Clean Pure Background -->
+  <rect width="794" height="1123" fill="url(#paper-clean)"/>
+
+  <!-- Minimal Structural Header Border -->
+  <line x1="42" y1="126" x2="752" y2="126" stroke="#0f172a" stroke-opacity="0.12" stroke-width="1"/>
+
+  <!-- Minimal Hairline Corner Accents -->
+  <g stroke="#0f172a" stroke-opacity="0.2" stroke-width="0.75" fill="none">
+    <path d="M 42 42 L 50 42 M 42 42 L 42 50"/>
+    <path d="M 752 42 L 744 42 M 752 42 L 752 50"/>
+    <path d="M 42 1081 L 50 1081 M 42 1081 L 42 1073"/>
+    <path d="M 752 1081 L 744 1081 M 752 1081 L 752 1073"/>
+  </g>
+</svg>

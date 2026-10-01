@@ -97,32 +97,32 @@ const PROJECTS = [
     }
   },
   {
-    id: "buildshift",
+    id: "gokul-labs",
     number: "04",
-    name: "BUILDSHIFT",
-    subtitle: "3D SPATIAL ARCHITECTURE PLATFORM",
-    category: "3D / SPATIAL · ARCHITECTURE · WEBGL",
+    name: "GOKUL LABS",
+    subtitle: "DEVELOPER PORTFOLIO & DIGITAL STUDIO",
+    category: "PERSONAL STUDIO · INTERACTIVE · WEB SYSTEMS",
     year: "2026",
-    tagline: "See your home before you build it.",
-    description: "An interactive architectural visualization platform that transforms floor plans into 3D spatial home environments — allowing users to customize materials, test pigments, inspect lighting, and experience spaces before construction begins.",
-    liveUrl: "https://buildshift-green.vercel.app/",
-    githubUrl: null, // No public repository — strict rule: do not fabricate
-    accentColor: "#b8664e",
-    technologies: ["WebGL", "Three.js / Canvas", "JavaScript", "Spatial UI", "Vercel"],
+    tagline: "A personal digital studio where ideas become products.",
+    description: "A focused developer portfolio and living digital architecture platform presenting selected projects, technical stack, learning trajectory, and contact systems with an intentional, restrained developer experience.",
+    liveUrl: "https://gokul-labs.vercel.app/",
+    githubUrl: "https://github.com/gokul1599/gokul-labs",
+    accentColor: "#38bdf8",
+    technologies: ["Next.js / Modern Web Stack", "Three.js / WebGL", "JavaScript", "Responsive Design", "Vercel"],
     transformation: {
-      from: "2D BLUEPRINT",
-      core: "3D SPATIAL TWIN",
-      to: "VIRTUAL TOUR"
+      from: "RAW CODE",
+      core: "LIVING ARTIFACT",
+      to: "STUDIO PLATFORM"
     },
-    workflow: ["FLOOR PLAN", "3D SPACE", "MATERIALS & PIGMENTS", "SPATIAL TOUR"],
+    workflow: ["ARCHITECTURE", "3D ARTIFACT", "VERIFIED BUILDS", "PRODUCTION EDGE"],
     caseStudy: {
-      what: "BuildShift is an interactive 3D spatial home architecture visualization platform that enables homeowners and designers to explore floor plans as navigable volumetric rooms before construction.",
-      why: "Visualizing volumetric scale, natural daylight angles, and material textures from traditional flat 2D blueprint drawings is exceptionally difficult, leading to costly mid-construction alterations.",
-      how: "Created an interactive 3D spatial room viewport with customizable architectural materials, daylight lighting simulation, and room-to-room spatial transitions.",
-      intelligence: "Spatial dimension calculation, automated room boundary mapping, and physical lighting calculations that accurately simulate surface reflections and ambient bounce.",
-      engineering: "Interactive WebGL viewport integrating responsive camera controls, physically based material shaders (PBR), and lightweight procedural spatial geometry rendering.",
-      stack: "WebGL, Three.js, JavaScript, CSS Spatial Transforms, Vercel Edge Hosting.",
-      experience: "Interactive room viewport with clickable spatial navigation hotspots (Show Kitchen, Dining Pavilion, Terrace), live material inspector (Navona Travertine, Walnut, Bronze), and pigment hex swatches."
+      what: "Gokul Labs is a personal digital studio and developer portfolio engineered to showcase real-world projects, technical exploration, and product philosophy with high visual craft.",
+      why: "Standard developer portfolios often rely on generic templates, distracting animations, or unverified claims. Gokul Labs proves capabilities through live verified products and restrained, intentional design.",
+      how: "Engineered an editorial digital environment featuring a restrained 3D digital artifact, an interactive Laboratory workbench with 4 real-time experiments, and deep architectural case studies.",
+      intelligence: "Heuristic prompt tokenizer analysis, dynamic shader material calibration, and harmonic spring physics simulation integrated into real-time web prototypes.",
+      engineering: "Custom Three.js WebGL scene with scroll-synchronized geometry targets, zero artificial telemetry bloat, and sub-second edge deployment on Vercel.",
+      stack: "Next.js / Modern Web Stack, Three.js, WebGL, CSS Architecture, Vercel Edge Hosting.",
+      experience: "Disciplined obsidian aesthetic, desktop project quick-navigator, interactive case study drawers, and real-time interactive laboratory modules."
     }
   }
 ];

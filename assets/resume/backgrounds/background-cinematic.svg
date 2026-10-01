@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" width="794" height="1123">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0c12"/>
+      <stop offset="25%" stop-color="#0e1320"/>
+      <stop offset="70%" stop-color="#0a0c14"/>
+      <stop offset="100%" stop-color="#06070a"/>
+    </linearGradient>
+
+    <!-- Header Subtle Glow -->
+    <radialGradient id="header-glow" cx="50%" cy="10%" r="55%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.09"/>
+      <stop offset="45%" stop-color="#1e3a8a" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Bottom Vignette -->
+    <linearGradient id="bottom-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#040508" stop-opacity="0.8"/>
+    </linearGradient>
+
+    <!-- Hairline Grid Pattern -->
+    <pattern id="arch-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#ffffff" stroke-opacity="0.02" stroke-width="0.75"/>
+    </pattern>
+  </defs>
+
+  <!-- Base Fill -->
+  <rect width="794" height="1123" fill="url(#bg-grad)"/>
+
+  <!-- Architectural Hairline Grid -->
+  <rect width="794" height="1123" fill="url(#arch-grid)"/>
+
+  <!-- Header Ambient Light -->
+  <rect width="794" height="420" fill="url(#header-glow)"/>
+
+  <!-- Architectural Framing Accents (Top corners and margins) -->
+  <g stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1" fill="none">
+    <!-- Top-left registration mark -->
+    <path d="M 36 48 L 48 48 M 36 48 L 36 60"/>
+    <!-- Top-right registration mark -->
+    <path d="M 758 48 L 746 48 M 758 48 L 758 60"/>
+    <!-- Structural header guideline -->
+    <line x1="48" y1="130" x2="746" y2="130" stroke="#ffffff" stroke-opacity="0.06"/>
+    <!-- Delicate vertical margin guidelines -->
+    <line x1="36" y1="150" x2="36" y2="1070" stroke="#ffffff" stroke-opacity="0.025"/>
+    <line x1="758" y1="150" x2="758" y2="1070" stroke="#ffffff" stroke-opacity="0.025"/>
+    <!-- Bottom corner marks -->
+    <path d="M 36 1075 L 48 1075 M 36 1075 L 36 1063"/>
+    <path d="M 758 1075 L 746 1075 M 758 1075 L 758 1063"/>
+  </g>
+
+  <!-- Quiet Center Reading Zone Vignette -->
+  <rect y="700" width="794" height="423" fill="url(#bottom-fade)"/>
+</svg>

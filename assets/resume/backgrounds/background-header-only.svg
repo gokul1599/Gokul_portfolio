@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 794 1123" width="794" height="1123">
+  <defs>
+    <!-- Header Canopy Gradient -->
+    <linearGradient id="header-canopy" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c1017"/>
+      <stop offset="65%" stop-color="#0d121c"/>
+      <stop offset="100%" stop-color="#090b10"/>
+    </linearGradient>
+
+    <!-- Header Radial Atmosphere -->
+    <radialGradient id="top-illumination" cx="50%" cy="0%" r="70%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.12"/>
+      <stop offset="50%" stop-color="#1d4ed8" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Subtle Grid for Header -->
+    <pattern id="header-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#38bdf8" stroke-opacity="0.025" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- Full Canvas Neutral Dark Base -->
+  <rect width="794" height="1123" fill="#090b10"/>
+
+  <!-- Header Architectural Canopy (Top 160px) -->
+  <rect width="794" height="165" fill="url(#header-canopy)"/>
+  <rect width="794" height="165" fill="url(#header-grid)"/>
+  <rect width="794" height="165" fill="url(#top-illumination)"/>
+
+  <!-- Hairline Header Separator Rule -->
+  <line x1="36" y1="165" x2="758" y2="165" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1"/>
+  <line x1="36" y1="166" x2="758" y2="166" stroke="#000000" stroke-opacity="0.6" stroke-width="1"/>
+
+  <!-- Precision Corner Registrations on Header -->
+  <g stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1" fill="none">
+    <path d="M 36 36 L 46 36 M 36 36 L 36 46"/>
+    <path d="M 758 36 L 748 36 M 758 36 L 758 46"/>
+  </g>
+
+  <!-- Clean, Quiet Reading Zone Below Line 166 -->
+</svg>

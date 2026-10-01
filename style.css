@@ -1061,7 +1061,7 @@ input, textarea {
 }
 .lifehub-theme .project-tagline { color: var(--accent-blue); }
 .teluguva-theme .project-tagline { color: var(--accent-amber); }
-.buildshift-theme .project-tagline { color: var(--accent-terracotta); }
+.gokul-labs-theme .project-tagline { color: var(--accent-cyan); }
 
 .project-description {
   font-size: 15px;
@@ -1747,8 +1747,8 @@ input, textarea {
   border-color: rgba(245, 158, 11, 0.25);
 }
 
-/* 04 BuildShift Visual Frame UI */
-.buildshift-spatial-ui {
+/* 04 Spatial Frame UI */
+.spatial-viewport-ui {
   padding: 24px;
 }
 .spatial-viewport-header {
