@@ -1,46 +1,43 @@
 /**
- * GOKUL LABS — CINEMATIC 3D DIGITAL LABORATORY ENGINE v6.1
- * Award-Winning 3D Spatial Experience & Interactive AI Product Showcase
- *
- * Core Guarantee:
- *  - 100% Content Visibility: All content, text, links, and projects are ALWAYS visible and accessible.
- *  - Zero Blocking: No full-screen blocking veils or hidden opacities.
- *  - Continuous 3D WebGL Atmosphere: Active at 60 FPS in canvas background (z-index: 0).
+ * GOKUL LABS — Living Digital Architecture Engine v7.0
+ * 
+ * Production-Grade Interactive System:
+ *  - Signature 3D Living Digital Artifact (Three.js WebGL)
+ *  - Scroll-Driven Architectural State Machine (Hero -> Work -> About -> Lab -> Stack -> Journey -> Contact)
+ *  - Interactive Case Study Drawer Architecture (Problem, Product, AI, Engineering, Stack, Experience, Links)
+ *  - Fully Functional Laboratory Interactive Workbench (Prompt Analyzer, Shader Calibrator, Spring Physics, Pipeline Visualizer)
+ *  - Technical Stack Layer Resonance
+ *  - Performance & Battery Optimization (DPR capped, Page Visibility pausing, WebGL Fallback, prefers-reduced-motion)
  */
 
 (function () {
   "use strict";
 
   /* ============================================================
-     UTILITIES & MATHEMATICAL EASING
+     1. DOM UTILITIES & MATH HELPERS
      ============================================================ */
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
   const lerp = (a, b, t) => a + (b - a) * t;
-  const smoothstep = (edge0, edge1, x) => {
-    const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
-    return t * t * (3 - 2 * t);
-  };
+
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
 
   /* ============================================================
-     GUARANTEE 100% CONTENT VISIBILITY (Instant Fallback & Reveal)
+     2. ACCESSIBLE SCROLL REVEAL (Zero Content Blocking)
      ============================================================ */
   function initScrollReveal() {
-    const reveals = $$(
-      ".reveal, .reveal-fade, .reveal-stagger > *, .reveal-left, .reveal-right, .reveal-scale, .stage-card, .project-card, .stack-card, .timeline-milestone"
-    );
-
-    // Force all elements to be immediately visible so no content is ever missed
+    const reveals = $$(".reveal, .reveal-fade, .project-card, .stack-category-card, .timeline-entry, .lab-module-card");
+    
+    // Ensure all content is immediately accessible and visible
     reveals.forEach((el) => {
       el.classList.add("visible");
       el.style.opacity = "1";
-      el.style.transform = "none";
-      el.style.visibility = "visible";
     });
 
-    if ("IntersectionObserver" in window) {
+    if ("IntersectionObserver" in window && !prefersReducedMotion) {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -51,7 +48,7 @@
             }
           });
         },
-        { threshold: 0.05, rootMargin: "60px" }
+        { threshold: 0.08, rootMargin: "40px" }
       );
       reveals.forEach((el) => observer.observe(el));
     }
@@ -59,32 +56,36 @@
   initScrollReveal();
 
   /* ============================================================
-     LIVE CLOCK & METADATA
+     3. LIVE METADATA & LIFEHUB CLOCK
      ============================================================ */
-  const liveClockEl = $("#live-clock");
-  function updateLiveClock() {
-    if (!liveClockEl) return;
+  const yearEl = $("#copyright-year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  const lhClockEl = $("#lh-clock-display");
+  function updateLifeHubClock() {
+    if (!lhClockEl) return;
     const now = new Date();
     let h = now.getHours();
     const m = String(now.getMinutes()).padStart(2, "0");
     const ampm = h >= 12 ? "PM" : "AM";
     h = h % 12 || 12;
-    liveClockEl.textContent = `${String(h).padStart(2, "0")}:${m} ${ampm}`;
+    lhClockEl.textContent = `${String(h).padStart(2, "0")}:${m} ${ampm}`;
   }
-  updateLiveClock();
-  setInterval(updateLiveClock, 1000);
-
-  const yearEl = $("#copyright-year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  updateLifeHubClock();
+  setInterval(updateLifeHubClock, 1000);
 
   /* ============================================================
-     SCROLL PROGRESS & JOURNEY TRACKER
+     4. HEADER, NAVIGATION & SCROLL TRACKING
      ============================================================ */
-  const progressBar = $("#scroll-progress");
-  const trackerFill = $("#tracker-fill");
-  const journeySteps = $$(".tracker-step", $("#journey-tracker"));
   const navbar = $("#navbar");
+  const progressBar = $("#scroll-progress");
+  const navLinks = $$(".nav-link");
   const sections = $$("section[id]");
+  const projectCards = $$(".project-card");
+  const dockItems = $$(".nav-dock-item");
+  const activeWorkIndicator = $("#work-active-indicator");
+
+  let currentSectionId = "hero";
   let globalScrollProgress = 0;
 
   function handleScroll() {
@@ -92,91 +93,38 @@
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     globalScrollProgress = docHeight > 0 ? clamp(scrollTop / docHeight, 0, 1) : 0;
 
-    if (progressBar) progressBar.style.width = `${globalScrollProgress * 100}%`;
-    if (trackerFill) trackerFill.style.width = `${globalScrollProgress * 100}%`;
+    if (progressBar) {
+      progressBar.style.width = `${(globalScrollProgress * 100).toFixed(2)}%`;
+    }
 
-    const trackerDot = $("#scroll-tracker-dot");
-    if (trackerDot) trackerDot.style.top = `${globalScrollProgress * 65}px`;
+    // Header glass transition on scroll
+    if (navbar) {
+      if (scrollTop > 40) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+    }
 
-    if (navbar) navbar.classList.toggle("scrolled", scrollTop > 30);
-
-    // Journey tracker active checkpoint
-    let activeCheckpoint = "hero";
-    if (globalScrollProgress >= 0.88) activeCheckpoint = "contact";
-    else if (globalScrollProgress >= 0.78) activeCheckpoint = "journey";
-    else if (globalScrollProgress >= 0.54) activeCheckpoint = "work";
-    else if (globalScrollProgress >= 0.40) activeCheckpoint = "stack";
-    else if (globalScrollProgress >= 0.22) activeCheckpoint = "about";
-    else activeCheckpoint = "hero";
-
-    journeySteps.forEach((step) => {
-      step.classList.toggle("active", step.getAttribute("data-target") === activeCheckpoint);
+    // Active Section Tracking
+    let foundSection = "hero";
+    sections.forEach((sec) => {
+      const top = sec.offsetTop - 180;
+      const height = sec.offsetHeight;
+      if (scrollTop >= top && scrollTop < top + height) {
+        foundSection = sec.getAttribute("id") || "hero";
+      }
     });
 
-    // Dynamic nav link active state
-    let current = "";
-    sections.forEach((s) => {
-      if (scrollTop >= s.offsetTop - 220) current = s.getAttribute("id");
-    });
-    if (current) {
-      $$(".nav-link-dot").forEach((l) =>
-        l.classList.toggle("active", l.getAttribute("href") === `#${current}`)
-      );
+    if (foundSection !== currentSectionId) {
+      currentSectionId = foundSection;
+      navLinks.forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("data-nav") === currentSectionId);
+      });
     }
 
-    // Intelligence Core Stage Cards highlight sync
-    const stageCards = $$(".stage-card");
-    if (stageCards.length >= 4) {
-      let activeStage = 1;
-      if (globalScrollProgress >= 0.28) activeStage = 4;
-      else if (globalScrollProgress >= 0.24) activeStage = 3;
-      else if (globalScrollProgress >= 0.20) activeStage = 2;
-      else if (globalScrollProgress >= 0.16) activeStage = 1;
-
-      if (globalScrollProgress >= 0.14 && globalScrollProgress <= 0.34) {
-        stageCards.forEach((c, idx) => {
-          c.classList.toggle("active", idx + 1 === activeStage);
-        });
-      }
-    }
-
-    // Builder Principles Sequential Activation on Scroll (01 BUILD -> 02 LEARN -> 03 REPEAT)
-    const principlesSection = $("#builder-principles");
-    if (principlesSection) {
-      const rect = principlesSection.getBoundingClientRect();
-      const pCards = $$(".principle-card", principlesSection);
-      if (rect.top < window.innerHeight * 0.88 && rect.bottom > 0) {
-        const pProgress = clamp((window.innerHeight * 0.88 - rect.top) / (window.innerHeight * 0.55), 0, 1);
-        pCards.forEach((c, idx) => {
-          const threshold = (idx + 1) * 0.28;
-          c.classList.toggle("active", pProgress >= threshold);
-        });
-      }
-    }
-
-    // Journey Credo Line Sequential Activation (BUILD -> LEARN -> REPEAT)
-    const credoStrip = $("#journey-credo-strip");
-    if (credoStrip) {
-      const cRect = credoStrip.getBoundingClientRect();
-      const laserBeam = $("#credo-laser-beam");
-      const cWords = $$(".credo-word", credoStrip);
-      const cArrows = $$(".credo-arrow", credoStrip);
-
-      if (cRect.top < window.innerHeight * 0.92 && cRect.bottom > 0) {
-        const cProgress = clamp((window.innerHeight * 0.92 - cRect.top) / (window.innerHeight * 0.45), 0, 1);
-        if (laserBeam) laserBeam.style.width = `${cProgress * 100}%`;
-
-        if (cWords[0]) cWords[0].classList.toggle("active", cProgress >= 0.15);
-        if (cArrows[0]) cArrows[0].classList.toggle("active", cProgress >= 0.35);
-        if (cWords[1]) cWords[1].classList.toggle("active", cProgress >= 0.55);
-        if (cArrows[1]) cArrows[1].classList.toggle("active", cProgress >= 0.75);
-        if (cWords[2]) cWords[2].classList.toggle("active", cProgress >= 0.9);
-      }
-    }
-
-    // Work Section 3-Project Sequential Active Tracking
-    const projectCards = $$(".project-card");
-    if (projectCards.length >= 3) {
+    // Work Section Sequential Active Tracking for Dock Navigator
+    if (projectCards.length >= 4) {
       let activeProjIndex = 0;
       projectCards.forEach((pc, idx) => {
         const pRect = pc.getBoundingClientRect();
@@ -184,388 +132,165 @@
           activeProjIndex = idx;
         }
       });
-      const dockItems = $$(".nav-dock-item");
+
       dockItems.forEach((di, idx) => {
         di.classList.toggle("active", idx === activeProjIndex);
       });
-      const activeIndicator = $("#work-active-indicator");
-      if (activeIndicator) {
-        activeIndicator.textContent = `0${activeProjIndex + 1}`;
+
+      if (activeWorkIndicator) {
+        activeWorkIndicator.textContent = `0${activeProjIndex + 1}`;
       }
     }
   }
+
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
 
-  /* ============================================================
-     MOBILE NAVIGATION DRAWER
-     ============================================================ */
-  const menuBtn = $("#menu-btn");
-  const navMenu = $("#nav-menu");
-  if (menuBtn && navMenu) {
-    menuBtn.addEventListener("click", () => {
-      const isOpen = navMenu.classList.toggle("open");
-      menuBtn.classList.toggle("active", isOpen);
-      menuBtn.setAttribute("aria-expanded", String(isOpen));
-    });
-    $$(".nav-link-dot", navMenu).forEach((l) =>
-      l.addEventListener("click", () => {
-        navMenu.classList.remove("open");
-        menuBtn.classList.remove("active");
-        menuBtn.setAttribute("aria-expanded", "false");
-      })
-    );
-  }
-
-  /* ============================================================
-     SMOOTH ANCHOR SCROLL
-     ============================================================ */
-  $$("a[href^='#']").forEach((a) => {
-    a.addEventListener("click", function (e) {
-      const id = this.getAttribute("href");
-      if (id === "#") return;
-      const target = $(id);
-      if (target) {
+  // Smooth Anchor Navigation with Header Offset
+  $$("a[href^='#']").forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+      if (!targetId || targetId === "#") return;
+      const targetEl = $(targetId);
+      if (targetEl) {
         e.preventDefault();
-        const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
-        window.scrollTo({ top, behavior: "smooth" });
+        const headerOffset = 76;
+        const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: elementPosition - headerOffset,
+          behavior: prefersReducedMotion ? "auto" : "smooth"
+        });
+
+        // Close mobile drawer if open
+        if (navDrawer && navDrawer.classList.contains("open")) {
+          closeMobileMenu();
+        }
       }
     });
   });
 
   /* ============================================================
-     HERO ENTRANCE (Immediate 100% Content Guarantee)
+     5. MOBILE NAVIGATION DRAWER
      ============================================================ */
-  function initHeroEntrance() {
-    const kicker = $(".hero-kicker-cinematic");
-    const titleRows = $$(".hero-title-cinematic .title-row");
-    const desc = $(".hero-description-cinematic");
-    const buttons = $$(".hero-buttons-cinematic > *");
-    const terminal = $(".hero-terminal-window");
-    const hudChips = $$(".floating-hud");
-    const bottomBar = $(".hero-bottom-bar");
+  const menuBtn = $("#menu-btn");
+  const navDrawer = $("#mobile-nav");
 
-    const allHeroEls = [kicker, ...titleRows, desc, ...buttons, terminal, ...hudChips, bottomBar];
-    allHeroEls.forEach((el) => {
-      if (!el) return;
-      el.style.opacity = "1";
-      el.style.filter = "none";
-      el.style.transform = "none";
-      el.style.visibility = "visible";
-    });
+  function openMobileMenu() {
+    if (!menuBtn || !navDrawer) return;
+    menuBtn.classList.add("active");
+    menuBtn.setAttribute("aria-expanded", "true");
+    navDrawer.classList.add("open");
+    navDrawer.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
   }
-  initHeroEntrance();
 
-  /* ============================================================
-     INTERACTIVE AI LABORATORY TERMINAL (Hero Stage)
-     ============================================================ */
-  function initTerminalEngine() {
-    const tabs = $$(".terminal-tab");
-    const panels = $$(".terminal-tab-panel");
-    if (!tabs.length || !panels.length) return;
-
-    tabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const target = tab.getAttribute("data-tab");
-        tabs.forEach((t) => {
-          t.classList.remove("active");
-          t.setAttribute("aria-selected", "false");
-        });
-        panels.forEach((p) => p.classList.remove("active"));
-
-        tab.classList.add("active");
-        tab.setAttribute("aria-selected", "true");
-
-        const activePanel = $(`#tab-${target}`);
-        if (activePanel) {
-          activePanel.classList.add("active");
-        }
-      });
-    });
+  function closeMobileMenu() {
+    if (!menuBtn || !navDrawer) return;
+    menuBtn.classList.remove("active");
+    menuBtn.setAttribute("aria-expanded", "false");
+    navDrawer.classList.remove("open");
+    navDrawer.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
   }
-  initTerminalEngine();
 
-  /* ============================================================
-     ABOUT SECTION: EXECUTABLE BUILDER TERMINAL TYPING ENGINE
-     (Types code line-by-letter on viewport entrance)
-     ============================================================ */
-  function initBuilderTerminalTyping() {
-    const codeContainer = $("#dynamic-builder-code");
-    const statusText = $("#terminal-status-text");
-    const termOutput = $("#builder-terminal-output");
-    const readyBadge = $("#system-ready-badge");
-    const termWrapper = $("#about-builder-terminal");
-    if (!codeContainer || !termWrapper) return;
-
-    let hasTyped = false;
-
-    const fullLines = [
-      '<span class="code-keyword">const</span> <span class="code-variable">builder</span> = {',
-      '  <span class="code-property">name</span>: <span class="code-string">"Gokul"</span>,',
-      '  <span class="code-property">focus</span>: [<span class="code-string">"AI"</span>, <span class="code-string">"Web"</span>],',
-      '  <span class="code-property">shipping</span>: <span class="code-keyword">true</span>,',
-      '  <span class="code-property">ideas</span>: <span class="code-number">Infinity</span>',
-      '};',
-      '',
-      '<span class="code-function">system.ready()</span>;'
-    ];
-
-    function startTyping() {
-      if (hasTyped) return;
-      hasTyped = true;
-
-      codeContainer.innerHTML = "";
-      let lineIndex = 0;
-
-      function typeNextLine() {
-        if (lineIndex < fullLines.length) {
-          codeContainer.innerHTML += (lineIndex > 0 ? "\n" : "") + fullLines[lineIndex];
-          lineIndex++;
-          setTimeout(typeNextLine, 140);
-        } else {
-          // Finished typing: activate ready badge & status
-          if (statusText) statusText.textContent = "ONLINE";
-          const pulseDot = $("#terminal-pulse-dot");
-          if (pulseDot) {
-            pulseDot.classList.remove("pulse-dot-cyan");
-            pulseDot.classList.add("pulse-dot-green");
-          }
-          if (readyBadge) {
-            readyBadge.style.boxShadow = "0 0 16px rgba(181, 255, 77, 0.4)";
-          }
-          if (termOutput) {
-            termOutput.textContent = ">>> System ready: [AI, Web] active. Shipping ideas to production.";
-          }
-
-          // Cycle subtle diagnostic messages periodically
-          const diagMessages = [
-            ">>> Ready: [AI, Web] active. Shipping ideas to production.",
-            ">>> Neural pipeline initialized: Latency <12ms // 0 errors.",
-            ">>> Deployed verification: VALTORA (Startup AI) & LifeHub (Daily OS).",
-            ">>> Continuous laboratory loop: [ideas: ∞, shipping: true]."
-          ];
-          let dIdx = 0;
-          setInterval(() => {
-            dIdx = (dIdx + 1) % diagMessages.length;
-            termOutput.style.opacity = "0";
-            setTimeout(() => {
-              termOutput.textContent = diagMessages[dIdx];
-              termOutput.style.opacity = "1";
-            }, 250);
-          }, 4800);
-        }
+  if (menuBtn && navDrawer) {
+    menuBtn.addEventListener("click", () => {
+      const isOpen = navDrawer.classList.contains("open");
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
       }
-
-      setTimeout(typeNextLine, 200);
-    }
-
-    if ("IntersectionObserver" in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              startTyping();
-              observer.disconnect();
-            }
-          });
-        },
-        { threshold: 0.2 }
-      );
-      observer.observe(termWrapper);
-    } else {
-      startTyping();
-    }
-  }
-  initBuilderTerminalTyping();
-
-  /* ============================================================
-     DYNAMIC SPECULAR SPOTLIGHT, PARALLAX & CARD TILTS
-     ============================================================ */
-  let rawMouseNormX = 0, rawMouseNormY = 0;
-  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-
-  function initSpecularTracking() {
-    const tiltCards = $$(".tilt-card");
-    const ringBuild = $(".ring-build");
-    const ringLearn = $(".ring-learn");
-    const ringRepeat = $(".ring-repeat");
-
-    window.addEventListener(
-      "mousemove",
-      (e) => {
-        rawMouseNormX = (e.clientX / window.innerWidth) * 2 - 1;
-        rawMouseNormY = (e.clientY / window.innerHeight) * 2 - 1;
-
-        if (isTouch) return;
-
-        // Parallax on Monolith Identity Core rings
-        if (ringBuild && ringLearn && ringRepeat) {
-          ringBuild.style.transform = `translate(${rawMouseNormX * 10}px, ${rawMouseNormY * 8}px)`;
-          ringLearn.style.transform = `translate(${rawMouseNormX * -8}px, ${rawMouseNormY * -6}px)`;
-          ringRepeat.style.transform = `translate(${rawMouseNormX * 6}px, ${rawMouseNormY * -4}px)`;
-        }
-
-        tiltCards.forEach((card) => {
-          const rect = card.getBoundingClientRect();
-          if (
-            e.clientX >= rect.left - 60 &&
-            e.clientX <= rect.right + 60 &&
-            e.clientY >= rect.top - 60 &&
-            e.clientY <= rect.bottom + 60
-          ) {
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty("--mouse-x", `${x}px`);
-            card.style.setProperty("--mouse-y", `${y}px`);
-
-            const maxTilt = parseFloat(card.dataset.tilt) || 6;
-            const cx = rect.width / 2;
-            const cy = rect.height / 2;
-            const rotX = -((y - cy) / cy) * maxTilt;
-            const rotY = ((x - cx) / cx) * maxTilt;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateZ(4px)`;
-          } else {
-            if (card.style.transform && card.style.transform !== "none") {
-              card.style.transform = "none";
-            }
-          }
-        });
-      },
-      { passive: true }
-    );
-
-    tiltCards.forEach((card) => {
-      card.addEventListener("mouseleave", () => {
-        card.style.transform = "none";
-      });
     });
   }
-  initSpecularTracking();
 
   /* ============================================================
-     MAGNETIC CTA BUTTONS (Smooth Spring Pull & Light Sweep)
-     ============================================================ */
-  function initMagneticButtons() {
-    if (isTouch) return;
-    const magneticElements = $$(
-      ".btn-glow-cyan, .cta-pill-glass, .btn-live, .btn-large, .magnetic-btn, .btn-source, .cta-contact-trigger"
-    );
-    magneticElements.forEach((btn) => {
-      btn.addEventListener("mousemove", (e) => {
-        const rect = btn.getBoundingClientRect();
-        const mx = e.clientX - rect.left - rect.width / 2;
-        const my = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${mx * 0.28}px, ${my * 0.28}px)`;
-      });
-      btn.addEventListener("mouseleave", () => {
-        btn.style.transform = "translate(0, 0)";
-      });
-    });
-  }
-  initMagneticButtons();
-
-  /* ============================================================
-     MINIMALIST CUSTOM CURSOR (Desktop)
+     6. RESTRAINED MINIMAL CURSOR & MAGNETIC BUTTONS (Desktop)
      ============================================================ */
   const cursorDot = $("#cursor-dot");
   const cursorRing = $("#cursor-ring");
-  const cursorGlow = $(".cursor-glow");
 
-  if (!isTouch && cursorDot && cursorRing) {
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let dotX = mouseX, dotY = mouseY;
-    let ringX = mouseX, ringY = mouseY;
+  let mouseX = window.innerWidth / 2;
+  let mouseY = window.innerHeight / 2;
+  let ringX = mouseX;
+  let ringY = mouseY;
 
-    window.addEventListener(
-      "mousemove",
-      (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        if (cursorGlow) {
-          cursorGlow.style.left = `${mouseX}px`;
-          cursorGlow.style.top = `${mouseY}px`;
-        }
-      },
-      { passive: true }
-    );
+  if (!isTouch && cursorDot && cursorRing && !prefersReducedMotion) {
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    }, { passive: true });
 
-    function animateCursorSystem() {
-      dotX = lerp(dotX, mouseX, 0.85);
-      dotY = lerp(dotY, mouseY, 0.85);
-      ringX = lerp(ringX, mouseX, 0.25);
-      ringY = lerp(ringY, mouseY, 0.25);
-
-      cursorDot.style.left = `${dotX}px`;
-      cursorDot.style.top = `${dotY}px`;
-      cursorRing.style.left = `${ringX}px`;
-      cursorRing.style.top = `${ringY}px`;
-
-      requestAnimationFrame(animateCursorSystem);
+    function renderCursor() {
+      ringX = lerp(ringX, mouseX, 0.18);
+      ringY = lerp(ringY, mouseY, 0.18);
+      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      requestAnimationFrame(renderCursor);
     }
-    animateCursorSystem();
+    requestAnimationFrame(renderCursor);
 
-    const interactiveElements = $$(
-      "a, button, input, .tilt-card, .terminal-tab, .stage-card, .project-card, .stack-card, .tracker-step, .strata-step"
-    );
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", () => {
-        if (cursorRing) cursorRing.classList.add("active");
+    // Magnetic interaction on buttons
+    const magneticBtns = $$(".magnetic-btn, .btn-primary, .btn-secondary, .nav-link");
+    magneticBtns.forEach((btn) => {
+      btn.addEventListener("mousemove", (e) => {
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) * 0.28;
+        const dy = (e.clientY - cy) * 0.28;
+        btn.style.transform = `translate3d(${dx.toFixed(2)}px, ${dy.toFixed(2)}px, 0)`;
+        cursorRing.classList.add("cursor-hover");
       });
-      el.addEventListener("mouseleave", () => {
-        if (cursorRing) cursorRing.classList.remove("active");
-      });
-    });
 
-    window.addEventListener("mousedown", () => {
-      if (cursorRing) cursorRing.classList.add("clicking");
+      btn.addEventListener("mouseleave", () => {
+        btn.style.transform = "translate3d(0, 0, 0)";
+        cursorRing.classList.remove("cursor-hover");
+      });
     });
-    window.addEventListener("mouseup", () => {
-      if (cursorRing) cursorRing.classList.remove("clicking");
-    });
+  } else {
+    if (cursorDot) cursorDot.style.display = "none";
+    if (cursorRing) cursorRing.style.display = "none";
   }
 
   /* ============================================================
-     STAGE CARDS INTERACTION
+     7. SIGNATURE 3D LIVING DIGITAL ARTIFACT (Three.js WebGL)
      ============================================================ */
-  const stageCards = $$(".stage-card");
-  stageCards.forEach((card) => {
-    card.addEventListener("click", () => {
-      stageCards.forEach((c) => c.classList.remove("active"));
-      card.classList.add("active");
-    });
-  });
+  let artifactShaderUniforms = {
+    transmission: 0.88,
+    roughness: 0.08,
+    ior: 1.55,
+    metalness: 0.15
+  };
 
-  /* ============================================================
-     AWARD-WINNING 3D WEBGL DIGITAL LABORATORY ENGINE
-     Complete 20-Point Specification Implementation
-     Runs in canvas background (z-index: 0) behind all content
-     ============================================================ */
+  let updateArtifactMaterial = null;
+  let highlightArtifactLayer = null;
+
   const canvasEl = $("#webgl-canvas");
-  if (canvasEl) initDigitalLaboratory(canvasEl);
+  if (canvasEl) {
+    initLivingDigitalArtifact(canvasEl);
+  }
 
-  function initDigitalLaboratory(canvas) {
+  function initLivingDigitalArtifact(canvas) {
     if (typeof THREE === "undefined") {
-      initFallback2D(canvas);
+      activateFallback();
       return;
     }
 
     try {
-      /* --- 1. Scene & Deep Atmosphere ----------------------------- */
+      // 7A. Scene & Camera Setup
       const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x050608, 0.0085);
+      scene.fog = new THREE.FogExp2(0x06070a, 0.012);
 
-      /* --- 2. Cinematic Perspective Camera ------------------------ */
       const camera = new THREE.PerspectiveCamera(
-        46,
+        42,
         window.innerWidth / window.innerHeight,
         0.1,
-        280
+        200
       );
-      camera.position.set(0, 0, 24);
+      camera.position.set(0, 0, 22);
 
-      /* --- 3. High Dynamic Range WebGL Renderer ------------------- */
+      // 7B. High-Performance WebGL Renderer with Capped DPR
       const renderer = new THREE.WebGLRenderer({
         canvas,
         alpha: true,
@@ -573,861 +298,725 @@
         powerPreference: "high-performance"
       });
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.35;
+      renderer.toneMappingExposure = 1.25;
 
-      /* --- 4. Master World Group ---------------------------------- */
-      const worldGroup = new THREE.Group();
-      scene.add(worldGroup);
-
-      /* --- 5. Volumetric Lighting Rig ----------------------------- */
-      const ambientLight = new THREE.AmbientLight(0x081226, 1.4);
+      // 7C. Physically Believable Lighting Rig
+      const ambientLight = new THREE.AmbientLight(0x08101e, 1.2);
       scene.add(ambientLight);
 
-      const keyLight = new THREE.DirectionalLight(0xffffff, 2.6);
-      keyLight.position.set(14, 18, 22);
+      const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
+      keyLight.position.set(12, 16, 20);
       scene.add(keyLight);
 
-      const rimCyan = new THREE.PointLight(0x38bdf8, 3.8, 75);
-      rimCyan.position.set(18, 6, 14);
-      scene.add(rimCyan);
+      const rimLightCyan = new THREE.PointLight(0x38bdf8, 3.2, 50);
+      rimLightCyan.position.set(14, 6, 12);
+      scene.add(rimLightCyan);
 
-      const backViolet = new THREE.PointLight(0x6366f1, 2.6, 65);
-      backViolet.position.set(-18, -8, 10);
-      scene.add(backViolet);
+      const softFillViolet = new THREE.PointLight(0x6366f1, 2.0, 45);
+      softFillViolet.position.set(-14, -8, 8);
+      scene.add(softFillViolet);
 
-      const cursorSpotlight = new THREE.PointLight(0x38bdf8, 3.4, 45);
-      cursorSpotlight.position.set(0, 0, 14);
-      scene.add(cursorSpotlight);
+      const cursorLight = new THREE.PointLight(0x38bdf8, 2.6, 32);
+      cursorLight.position.set(0, 0, 10);
+      scene.add(cursorLight);
 
-      /* ============================================================
-         6. THE HERO INTELLIGENCE CORE SYSTEM (Requirements 1, 4, 5)
-         - Central Idea Point Singularity
-         - Faceted Outer Glass Crystal Core
-         - 3 Thin Concentric Orbital Coordinate Rings
-         - 4 Orbital Satellite Nodes (UNDERSTAND, RESEARCH, CHALLENGE, BUILD)
-         ============================================================ */
+      // 7D. Master Artifact Container
+      const artifactGroup = new THREE.Group();
+      artifactGroup.position.set(4.2, 0, 0); // Positioned to complement left typography on hero
+      scene.add(artifactGroup);
+
+      // --------------------------------------------------------
+      // LAYER 1: INNER LUMINOUS INTELLIGENCE CORE
+      // --------------------------------------------------------
       const coreGroup = new THREE.Group();
-      coreGroup.position.set(0, 0, 0);
-      worldGroup.add(coreGroup);
+      artifactGroup.add(coreGroup);
 
-      // 6A. Central Singularity Core ("The Idea Point of Light")
-      const singularityGeo = new THREE.SphereGeometry(0.38, 24, 24);
-      const singularityMat = new THREE.MeshBasicMaterial({
-        color: 0xffffff,
-        transparent: true,
-        opacity: 1.0
+      const coreGeo = new THREE.OctahedronGeometry(0.75, 1);
+      const coreMat = new THREE.MeshStandardMaterial({
+        color: 0x38bdf8,
+        emissive: 0x0ea5e9,
+        emissiveIntensity: 0.85,
+        roughness: 0.2,
+        metalness: 0.4
       });
-      const singularityPoint = new THREE.Mesh(singularityGeo, singularityMat);
-      coreGroup.add(singularityPoint);
+      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+      coreGroup.add(coreMesh);
 
-      const singularityLight = new THREE.PointLight(0x38bdf8, 3.5, 24);
-      coreGroup.add(singularityLight);
+      const corePointLight = new THREE.PointLight(0x38bdf8, 3.0, 18);
+      coreGroup.add(corePointLight);
 
-      const coronaGeo = new THREE.RingGeometry(0.42, 0.95, 32);
-      const coronaMat = new THREE.MeshBasicMaterial({
+      // --------------------------------------------------------
+      // LAYER 2: CORE GEOMETRICAL LATTICE (Dark Polished Chrome)
+      // --------------------------------------------------------
+      const latticeGroup = new THREE.Group();
+      artifactGroup.add(latticeGroup);
+
+      const latticeGeo = new THREE.IcosahedronGeometry(1.65, 0);
+      const latticeWireGeo = new THREE.WireframeGeometry(latticeGeo);
+      const latticeWireMat = new THREE.LineBasicMaterial({
         color: 0x38bdf8,
         transparent: true,
-        opacity: 0.55,
-        side: THREE.DoubleSide,
+        opacity: 0.5,
         blending: THREE.AdditiveBlending
       });
-      const coronaMesh = new THREE.Mesh(coronaGeo, coronaMat);
-      coreGroup.add(coronaMesh);
+      const latticeLines = new THREE.LineSegments(latticeWireGeo, latticeWireMat);
+      latticeGroup.add(latticeLines);
 
-      // 6B. Faceted Futuristic Glass Crystal Intelligence Core
-      const crystalGeo = new THREE.IcosahedronGeometry(2.4, 1);
-      const crystalMat = new THREE.MeshPhysicalMaterial({
-        color: 0x07152b,
-        metalness: 0.15,
-        roughness: 0.05,
-        transmission: 0.88,
+      // --------------------------------------------------------
+      // LAYER 3: TRANSLUCENT SMOKED GLASS MONOLITH SHELLS
+      // --------------------------------------------------------
+      const glassGroup = new THREE.Group();
+      artifactGroup.add(glassGroup);
+
+      const glassGeo = new THREE.CylinderGeometry(2.3, 2.6, 3.8, 8, 1, true);
+      const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0x060f1c,
+        metalness: artifactShaderUniforms.metalness,
+        roughness: artifactShaderUniforms.roughness,
+        transmission: artifactShaderUniforms.transmission,
+        ior: artifactShaderUniforms.ior,
         reflectivity: 0.85,
-        ior: 1.55,
         transparent: true,
-        opacity: 0.72,
+        opacity: 0.78,
         side: THREE.DoubleSide,
         depthWrite: false
       });
-      const crystalMesh = new THREE.Mesh(crystalGeo, crystalMat);
-      coreGroup.add(crystalMesh);
+      const glassShell = new THREE.Mesh(glassGeo, glassMat);
+      glassGroup.add(glassShell);
 
-      const crystalEdgesGeo = new THREE.EdgesGeometry(crystalGeo);
-      const crystalEdgesMat = new THREE.LineBasicMaterial({
-        color: 0x38bdf8,
+      const glassEdgesGeo = new THREE.EdgesGeometry(glassGeo);
+      const glassEdgesMat = new THREE.LineBasicMaterial({
+        color: 0x93c5fd,
         transparent: true,
-        opacity: 0.85,
-        blending: THREE.AdditiveBlending
+        opacity: 0.45
       });
-      const crystalEdges = new THREE.LineSegments(crystalEdgesGeo, crystalEdgesMat);
-      coreGroup.add(crystalEdges);
+      const glassEdges = new THREE.LineSegments(glassEdgesGeo, glassEdgesMat);
+      glassGroup.add(glassEdges);
 
-      // 6C. 3 Thin Coordinate Orbital Rings
-      const orbitalRingsGroup = new THREE.Group();
-      orbitalRingsGroup.scale.set(1, 1, 1);
-      coreGroup.add(orbitalRingsGroup);
+      // --------------------------------------------------------
+      // LAYER 4: MODULAR ARCHITECTURAL LOGIC PLATES (Articulating)
+      // --------------------------------------------------------
+      const logicGroup = new THREE.Group();
+      artifactGroup.add(logicGroup);
 
-      function createOrbitalRing(radius, tube, colorHex, tiltX, tiltY) {
-        const ringGeo = new THREE.TorusGeometry(radius, tube, 12, 128);
+      const logicPlates = [];
+      const plateCount = 4;
+      for (let p = 0; p < plateCount; p++) {
+        const plateGeo = new THREE.BoxGeometry(3.6, 0.08, 1.8);
+        const plateMat = new THREE.MeshStandardMaterial({
+          color: 0x0a1626,
+          metalness: 0.85,
+          roughness: 0.18,
+          transparent: true,
+          opacity: 0.85
+        });
+        const plate = new THREE.Mesh(plateGeo, plateMat);
+        plate.position.y = (p - 1.5) * 0.95;
+        plate.rotation.y = (p * Math.PI) / 4;
+        logicGroup.add(plate);
+        logicPlates.push(plate);
+      }
+
+      // --------------------------------------------------------
+      // LAYER 5: FINE POLAR COORDINATE ARMATURE RINGS
+      // --------------------------------------------------------
+      const armatureGroup = new THREE.Group();
+      artifactGroup.add(armatureGroup);
+
+      function createPolarRing(radius, tiltX, tiltZ, colorHex = 0x38bdf8) {
+        const ringGeo = new THREE.TorusGeometry(radius, 0.018, 8, 120);
         const ringMat = new THREE.MeshBasicMaterial({
           color: colorHex,
           transparent: true,
-          opacity: 0.55,
+          opacity: 0.42,
           blending: THREE.AdditiveBlending
         });
         const ring = new THREE.Mesh(ringGeo, ringMat);
         ring.rotation.x = tiltX;
-        ring.rotation.y = tiltY;
-        orbitalRingsGroup.add(ring);
+        ring.rotation.z = tiltZ;
+        armatureGroup.add(ring);
         return ring;
       }
 
-      const ringInner = createOrbitalRing(3.8, 0.02, 0x38bdf8, Math.PI * 0.28, Math.PI * 0.15);
-      const ringMid = createOrbitalRing(5.2, 0.02, 0x00f0ff, -Math.PI * 0.32, Math.PI * 0.25);
-      const ringOuter = createOrbitalRing(6.6, 0.02, 0x818cf8, Math.PI * 0.12, -Math.PI * 0.35);
+      const ringInner = createPolarRing(3.4, Math.PI * 0.3, Math.PI * 0.15);
+      const ringOuter = createPolarRing(4.8, -Math.PI * 0.25, Math.PI * 0.35, 0x818cf8);
 
-      // 6D. 4 Orbital Satellite Systems (UNDERSTAND, RESEARCH, CHALLENGE, BUILD)
-      const orbitalNodes = [];
-      const nodeLabels = ["UNDERSTAND", "RESEARCH", "CHALLENGE", "BUILD"];
-      const nodeColors = [0x38bdf8, 0x00f0ff, 0xa78bfa, 0xb5ff4d];
-
-      for (let i = 0; i < 4; i++) {
-        const nodeGroup = new THREE.Group();
-        const nGeo = new THREE.OctahedronGeometry(0.3, 0);
-        const nMat = new THREE.MeshStandardMaterial({
-          color: nodeColors[i],
-          emissive: nodeColors[i],
-          emissiveIntensity: 0.5,
-          metalness: 0.5,
-          roughness: 0.2
-        });
-        const nMesh = new THREE.Mesh(nGeo, nMat);
-        nodeGroup.add(nMesh);
-
-        const lineGeo = new THREE.BufferGeometry();
-        const linePos = new Float32Array([0, 0, 0, 0, 0, 0]);
-        lineGeo.setAttribute("position", new THREE.BufferAttribute(linePos, 3));
-        const lineMat = new THREE.LineBasicMaterial({
-          color: nodeColors[i],
-          transparent: true,
-          opacity: 0.45,
-          blending: THREE.AdditiveBlending
-        });
-        const connector = new THREE.Line(lineGeo, lineMat);
-        worldGroup.add(connector);
-
-        nodeGroup.userData = {
-          name: nodeLabels[i],
-          color: nodeColors[i],
-          phase: i,
-          mesh: nMesh,
-          connector,
-          angle: (i / 4) * Math.PI * 2,
-          radius: 5.2
-        };
-
-        orbitalRingsGroup.add(nodeGroup);
-        orbitalNodes.push(nodeGroup);
-      }
-
-      /* ============================================================
-         7. ABOUT SECTION: 5 ARCHITECTURAL GLASS STRATA PANELS (Req 6)
-         ============================================================ */
-      const strataPanels = [];
-      const strataNames = ["PROBLEM", "RESEARCH", "TECHNOLOGY", "PRODUCT", "EXECUTION"];
-      const strataGroup = new THREE.Group();
-      worldGroup.add(strataGroup);
-
-      for (let k = 0; k < 5; k++) {
-        const pBoxGeo = new THREE.BoxGeometry(7.2, 4.2, 0.28);
-        const pBoxMat = new THREE.MeshPhysicalMaterial({
-          color: 0x081326,
-          metalness: 0.2,
-          roughness: 0.08,
-          transmission: 0.85,
-          transparent: true,
-          opacity: 0.5,
-          depthWrite: false
-        });
-        const pMesh = new THREE.Mesh(pBoxGeo, pBoxMat);
-
-        const pEdgeGeo = new THREE.EdgesGeometry(pBoxGeo);
-        const pEdgeMat = new THREE.LineBasicMaterial({
-          color: 0x38bdf8,
-          transparent: true,
-          opacity: 0.55,
-          blending: THREE.AdditiveBlending
-        });
-        const pEdges = new THREE.LineSegments(pEdgeGeo, pEdgeMat);
-
-        const panelG = new THREE.Group();
-        panelG.add(pMesh);
-        panelG.add(pEdges);
-
-        panelG.position.set((k - 2) * 3.2, (2 - k) * 0.9, -16 - k * 4.2);
-        panelG.rotation.set(0.12, (k - 2) * 0.08, 0);
-        panelG.userData = { name: strataNames[k], index: k, edges: pEdges };
-
-        strataGroup.add(panelG);
-        strataPanels.push(panelG);
-      }
-
-      /* ============================================================
-         8. TOOLKIT SECTION: 3D TECHNICAL GRID (9 Modules, Req 7)
-         ============================================================ */
-      const toolkitGroup = new THREE.Group();
-      toolkitGroup.position.set(0, -6, -38);
-      worldGroup.add(toolkitGroup);
-
-      const skillModules = [];
-      const skillNames = [
-        "Python", "Java", "C++",
-        "HTML", "CSS", "JavaScript",
-        "AI/ML", "Git/GitHub", "Product Thinking"
-      ];
-      const skillColors = [
-        0xb5ff4d, 0x38bdf8, 0x00f0ff,
-        0xf97316, 0x38bdf8, 0xfacc15,
-        0x818cf8, 0xec4899, 0x38bdf8
-      ];
-
-      for (let row = 0; row < 3; row++) {
-        for (let col = 0; col < 3; col++) {
-          const idx = row * 3 + col;
-          const sGeo = new THREE.BoxGeometry(3.6, 2.2, 0.22);
-          const sMat = new THREE.MeshPhysicalMaterial({
-            color: 0x060d1b,
-            metalness: 0.35,
-            roughness: 0.05,
-            transmission: 0.8,
-            transparent: true,
-            opacity: 0.55
-          });
-          const sMesh = new THREE.Mesh(sGeo, sMat);
-
-          const sEdgeGeo = new THREE.EdgesGeometry(sGeo);
-          const sEdgeMat = new THREE.LineBasicMaterial({
-            color: skillColors[idx],
-            transparent: true,
-            opacity: 0.55,
-            blending: THREE.AdditiveBlending
-          });
-          const sEdges = new THREE.LineSegments(sEdgeGeo, sEdgeMat);
-
-          const modG = new THREE.Group();
-          modG.add(sMesh);
-          modG.add(sEdges);
-
-          const posX = (col - 1) * 5.2;
-          const posY = (1 - row) * 3.4;
-          modG.position.set(posX, posY, 0);
-          modG.userData = {
-            name: skillNames[idx],
-            origX: posX,
-            origY: posY,
-            color: skillColors[idx],
-            edges: sEdges
-          };
-
-          toolkitGroup.add(modG);
-          skillModules.push(modG);
+      // Expose Shader Calibrator Hook (Lab Exp 02)
+      updateArtifactMaterial = function (params) {
+        if (params.transmission !== undefined) {
+          glassMat.transmission = params.transmission;
+          artifactShaderUniforms.transmission = params.transmission;
         }
-      }
+        if (params.roughness !== undefined) {
+          glassMat.roughness = params.roughness;
+          artifactShaderUniforms.roughness = params.roughness;
+        }
+        if (params.ior !== undefined) {
+          glassMat.ior = params.ior;
+          artifactShaderUniforms.ior = params.ior;
+        }
+      };
 
-      /* ============================================================
-         9. VALTORA SHOWCASE 3D PRODUCT FRAME (Requirement 8)
-         ============================================================ */
-      const valtoraGroup = new THREE.Group();
-      valtoraGroup.position.set(0, -4, -62);
-      worldGroup.add(valtoraGroup);
-
-      const vFrameGeo = new THREE.BoxGeometry(14.5, 8.5, 0.4);
-      const vFrameMat = new THREE.MeshPhysicalMaterial({
-        color: 0x091428,
-        metalness: 0.2,
-        roughness: 0.05,
-        transmission: 0.85,
-        transparent: true,
-        opacity: 0.65
-      });
-      const vFrameMesh = new THREE.Mesh(vFrameGeo, vFrameMat);
-      valtoraGroup.add(vFrameMesh);
-
-      const vFrameEdges = new THREE.LineSegments(
-        new THREE.EdgesGeometry(vFrameGeo),
-        new THREE.LineBasicMaterial({ color: 0xb5ff4d, transparent: true, opacity: 0.75, blending: THREE.AdditiveBlending })
-      );
-      valtoraGroup.add(vFrameEdges);
-
-      /* ============================================================
-         10. INTER-PROJECT SINGULARITY TRANSFORMATION POINT (Req 9)
-         ============================================================ */
-      const singularityPortalGroup = new THREE.Group();
-      singularityPortalGroup.position.set(0, -2, -78);
-      worldGroup.add(singularityPortalGroup);
-
-      const portalCore = new THREE.Mesh(
-        new THREE.SphereGeometry(0.65, 32, 32),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.85 })
-      );
-      singularityPortalGroup.add(portalCore);
-
-      const portalLight = new THREE.PointLight(0x38bdf8, 3.5, 45);
-      singularityPortalGroup.add(portalLight);
-
-      /* ============================================================
-         11. LIFEHUB SHOWCASE MODULAR FLOATING LAYERS (Requirement 9)
-         ============================================================ */
-      const lifehubGroup = new THREE.Group();
-      lifehubGroup.position.set(0, -3, -95);
-      worldGroup.add(lifehubGroup);
-
-      const lifehubLayers = [];
-      const lhColors = [0x38bdf8, 0x00f0ff, 0x818cf8, 0x38bdf8];
-
-      for (let l = 0; l < 4; l++) {
-        const lhGeo = new THREE.BoxGeometry(11.0 - l * 1.5, 6.5 - l * 0.9, 0.2);
-        const lhMat = new THREE.MeshPhysicalMaterial({
-          color: 0x08162e,
-          metalness: 0.15,
-          roughness: 0.06,
-          transmission: 0.82,
-          transparent: true,
-          opacity: 0.6
-        });
-        const lhMesh = new THREE.Mesh(lhGeo, lhMat);
-
-        const lhEdges = new THREE.LineSegments(
-          new THREE.EdgesGeometry(lhGeo),
-          new THREE.LineBasicMaterial({ color: lhColors[l], transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending })
-        );
-
-        const layerG = new THREE.Group();
-        layerG.add(lhMesh);
-        layerG.add(lhEdges);
-        layerG.position.set((l - 1.5) * 1.8, (l - 1.5) * 0.7, -l * 3.5);
-
-        lifehubGroup.add(layerG);
-        lifehubLayers.push(layerG);
-      }
-
-      /* ============================================================
-         11B. TELUGUVA AMBIENT EDITORIAL GLYPH PRISM (Warm Amber)
-         ============================================================ */
-      const teluguvaGroup = new THREE.Group();
-      teluguvaGroup.position.set(0, -2.5, -108);
-      worldGroup.add(teluguvaGroup);
-
-      const teluguvaRing = new THREE.Mesh(
-        new THREE.TorusGeometry(6.2, 0.06, 16, 64),
-        new THREE.MeshBasicMaterial({ color: 0xf59e0b, transparent: true, opacity: 0.25 })
-      );
-      teluguvaGroup.add(teluguvaRing);
-
-      const teluguvaLight = new THREE.PointLight(0xf59e0b, 1.8, 30);
-      teluguvaGroup.add(teluguvaLight);
-
-      /* ============================================================
-         12. JOURNEY 3D TRAJECTORY TIMELINE (Requirement 11)
-         ============================================================ */
-      const journeyTrajectoryGroup = new THREE.Group();
-      journeyTrajectoryGroup.position.set(0, -2, -138);
-      worldGroup.add(journeyTrajectoryGroup);
-
-      const splinePoints = [
-        new THREE.Vector3(-8, 3, -15),
-        new THREE.Vector3(-3, 0, -8),
-        new THREE.Vector3(2, -1, 0),
-        new THREE.Vector3(6, 2, 8),
-        new THREE.Vector3(10, 0, 16)
-      ];
-      const splineCurve = new THREE.CatmullRomCurve3(splinePoints);
-      const splineGeo = new THREE.BufferGeometry().setFromPoints(splineCurve.getPoints(80));
-      const splineLine = new THREE.Line(
-        splineGeo,
-        new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65, blending: THREE.AdditiveBlending })
-      );
-      journeyTrajectoryGroup.add(splineLine);
-
-      const milestoneGroup = new THREE.Group();
-      journeyTrajectoryGroup.add(milestoneGroup);
-      const milestoneMarkers = [];
-      const mCoords = [new THREE.Vector3(-4, 0.6, -9), new THREE.Vector3(1.5, -0.8, 0), new THREE.Vector3(7, 1.6, 9)];
-
-      for (let m = 0; m < 3; m++) {
-        const mMesh = new THREE.Mesh(
-          new THREE.OctahedronGeometry(0.48, 0),
-          new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x38bdf8, emissiveIntensity: 0.6 })
-        );
-        mMesh.position.copy(mCoords[m]);
-        milestoneGroup.add(mMesh);
-        milestoneMarkers.push(mMesh);
-      }
-
-      /* ============================================================
-         13. CONTACT SECTION: MONOLITHIC GLASS PRECISION RING (Req 12)
-         ============================================================ */
-      const contactRingGroup = new THREE.Group();
-      contactRingGroup.position.set(0, 0, -165);
-      worldGroup.add(contactRingGroup);
-
-      const contactRingGeo = new THREE.TorusGeometry(8.2, 0.28, 16, 128);
-      const contactRingMat = new THREE.MeshPhysicalMaterial({
-        color: 0x06152d,
-        metalness: 0.3,
-        roughness: 0.05,
-        transmission: 0.85,
-        transparent: true,
-        opacity: 0.68,
-        depthWrite: false
-      });
-      const contactRing = new THREE.Mesh(contactRingGeo, contactRingMat);
-      contactRingGroup.add(contactRing);
-
-      const contactRingEdges = new THREE.LineSegments(
-        new THREE.EdgesGeometry(contactRingGeo),
-        new THREE.LineBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.65, blending: THREE.AdditiveBlending })
-      );
-      contactRingGroup.add(contactRingEdges);
-
-      /* ============================================================
-         14. LIVING CYBERNETIC WAVE MATRIX & HORIZON DATA BEAMS
-         ============================================================ */
-      const waveSegX = 48;
-      const waveSegY = 48;
-      const waveGeo = new THREE.PlaneGeometry(84, 84, waveSegX, waveSegY);
-
-      const waveWireMat = new THREE.MeshBasicMaterial({
-        color: 0x0284c7,
-        wireframe: true,
-        transparent: true,
-        opacity: 0.22,
-        blending: THREE.AdditiveBlending
-      });
-      const waveMesh = new THREE.Mesh(waveGeo, waveWireMat);
-      waveMesh.rotation.x = -Math.PI * 0.44;
-      waveMesh.position.set(0, -9.5, -8);
-      worldGroup.add(waveMesh);
-
-      const beamCount = 8;
-      const beamSegments = [];
-      const beamColors = [0x38bdf8, 0x00f0ff, 0xb5ff4d, 0x818cf8];
-
-      for (let b = 0; b < beamCount; b++) {
-        const beamLen = 9 + Math.random() * 8;
-        const bGeo = new THREE.BufferGeometry();
-        const bPos = new Float32Array([0, 0, 0, 0, 0, beamLen]);
-        bGeo.setAttribute("position", new THREE.BufferAttribute(bPos, 3));
-
-        const beam = new THREE.Line(
-          bGeo,
-          new THREE.LineBasicMaterial({
-            color: beamColors[b % beamColors.length],
-            transparent: true,
-            opacity: 0.65,
-            blending: THREE.AdditiveBlending
-          })
-        );
-        const laneX = (b - Math.floor(beamCount / 2)) * 7.5;
-        const laneY = -9.2;
-        beam.position.set(laneX, laneY, -50 - Math.random() * 30);
-        beam.userData = { speed: 30 + Math.random() * 20, minZ: -70, maxZ: 14 };
-
-        worldGroup.add(beam);
-        beamSegments.push(beam);
-      }
-
-      /* ============================================================
-         15. INTERACTIVE QUANTUM PHOTON PARTICLES
-         ============================================================ */
-      const PARTICLE_COUNT = 320;
-      const pGeo = new THREE.BufferGeometry();
-      const pPos = new Float32Array(PARTICLE_COUNT * 3);
-      const pVels = new Float32Array(PARTICLE_COUNT * 3);
-
-      for (let p = 0; p < PARTICLE_COUNT; p++) {
-        pPos[p * 3] = (Math.random() - 0.5) * 60;
-        pPos[p * 3 + 1] = (Math.random() - 0.5) * 40;
-        pPos[p * 3 + 2] = (Math.random() - 0.5) * 36 - 6;
-        pVels[p * 3] = (Math.random() - 0.5) * 0.15;
-        pVels[p * 3 + 1] = 0.08 + Math.random() * 0.2;
-        pVels[p * 3 + 2] = (Math.random() - 0.5) * 0.1;
-      }
-
-      pGeo.setAttribute("position", new THREE.BufferAttribute(pPos, 3));
-      const quantumDust = new THREE.Points(
-        pGeo,
-        new THREE.PointsMaterial({
-          color: 0x38bdf8,
-          size: 0.11,
-          transparent: true,
-          opacity: 0.45,
-          blending: THREE.AdditiveBlending
-        })
-      );
-      scene.add(quantumDust);
-
-      /* ============================================================
-         16. WINDOW RESIZE HANDLER
-         ============================================================ */
-      window.addEventListener("resize", () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-      });
-
-      /* ============================================================
-         17. ANIMATION LOOP & CONTINUOUS SPATIAL CHOREOGRAPHY
-         ============================================================ */
-      let smoothMouseX = 0, smoothMouseY = 0;
-      let smvx = 0, smvy = 0;
-      let smoothScroll = 0;
-      const clock = new THREE.Clock();
-
-      function renderFrame() {
-        requestAnimationFrame(renderFrame);
-
-        const dt = clock.getDelta();
-        const t = clock.getElapsedTime();
-
-        // Smooth scroll interpolation
-        smoothScroll = lerp(smoothScroll, globalScrollProgress, 0.075);
-
-        // Mouse damping physics
-        smvx = (smvx + (rawMouseNormX - smoothMouseX) * 0.085) * 0.82;
-        smvy = (smvy + (rawMouseNormY - smoothMouseY) * 0.085) * 0.82;
-        smoothMouseX += smvx;
-        smoothMouseY += smvy;
-
-        // Cursor spotlight in 3D camera space
-        cursorSpotlight.position.x = smoothMouseX * 18;
-        cursorSpotlight.position.y = -smoothMouseY * 13;
-        cursorSpotlight.position.z = 12;
-
-        /* ============================================================
-           SPATIAL CAMERA CHOREOGRAPHY
-           ============================================================ */
-        let targetCamX = 0;
-        let targetCamY = 0;
-        let targetCamZ = 24;
-
-        if (smoothScroll < 0.15) {
-          const heroT = smoothScroll / 0.15;
-          targetCamZ = lerp(24, 6, heroT);
-          targetCamY = lerp(0, -0.6, heroT);
-          targetCamX = smoothMouseX * 1.5;
-        } else if (smoothScroll < 0.29) {
-          const s1T = (smoothScroll - 0.15) / 0.14;
-          targetCamZ = lerp(16, 12, s1T);
-          targetCamY = lerp(1.5, -0.8, s1T);
-          targetCamX = lerp(-2.5, 1.8, s1T);
-        } else if (smoothScroll < 0.43) {
-          const s2T = (smoothScroll - 0.29) / 0.14;
-          targetCamZ = lerp(8, -6, s2T);
-          targetCamX = lerp(-5.0, 4.0, s2T);
-          targetCamY = lerp(1.0, -1.2, s2T);
-        } else if (smoothScroll < 0.57) {
-          const s3T = (smoothScroll - 0.43) / 0.14;
-          targetCamZ = lerp(-20, -32, s3T);
-          targetCamX = lerp(2.5, -2.5, s3T);
-          targetCamY = lerp(-3.5, -5.5, s3T);
-        } else if (smoothScroll < 0.70) {
-          const s4T = (smoothScroll - 0.57) / 0.13;
-          targetCamZ = lerp(-46, -56, s4T);
-          targetCamX = lerp(-1.5, 1.2, s4T);
-          targetCamY = lerp(-4.0, -4.2, s4T);
-        } else if (smoothScroll < 0.81) {
-          const s4bT = (smoothScroll - 0.70) / 0.11;
-          targetCamZ = lerp(-68, -88, s4bT);
-          targetCamX = 0;
-          targetCamY = lerp(-2.5, -3.2, s4bT);
-        } else if (smoothScroll < 0.89) {
-          const s5T = (smoothScroll - 0.81) / 0.08;
-          targetCamZ = lerp(-102, -120, s5T);
-          targetCamX = lerp(3.0, -3.0, s5T);
-          targetCamY = lerp(-1.0, -2.5, s5T);
+      // Expose Stack Layer Resonance Hook (Section 21)
+      highlightArtifactLayer = function (layerName) {
+        if (layerName === "ai") {
+          coreMat.emissiveIntensity = 2.4;
+          corePointLight.intensity = 6.0;
+        } else if (layerName === "web") {
+          glassMat.opacity = 0.95;
+          glassEdgesMat.opacity = 0.9;
+        } else if (layerName === "tools") {
+          armatureGroup.scale.set(1.12, 1.12, 1.12);
+        } else if (layerName === "languages") {
+          latticeWireMat.opacity = 0.95;
         } else {
-          const s6T = (smoothScroll - 0.89) / 0.11;
-          targetCamZ = lerp(-140, -158, s6T);
-          targetCamX = 0;
-          targetCamY = 0;
+          // Reset
+          coreMat.emissiveIntensity = 0.85;
+          corePointLight.intensity = 3.0;
+          glassMat.opacity = 0.78;
+          glassEdgesMat.opacity = 0.45;
+          armatureGroup.scale.set(1, 1, 1);
+          latticeWireMat.opacity = 0.5;
+        }
+      };
+
+      // 7E. Target State Variables for Scroll Transformations
+      let targetArtifactPos = { x: 4.2, y: 0, z: 0 };
+      let targetArtifactRot = { x: 0.18, y: 0.35, z: 0 };
+      let targetGlassSeparation = 0;
+      let targetLogicSeparation = 1;
+
+      // Mouse Parallax Offsets
+      let targetMouseX = 0;
+      let targetMouseY = 0;
+      let smoothMouseX = 0;
+      let smoothMouseY = 0;
+
+      if (!isTouch && !prefersReducedMotion) {
+        window.addEventListener("mousemove", (e) => {
+          targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+          targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        }, { passive: true });
+      }
+
+      // Responsive Adjustments on Window Resize
+      function onWindowResize() {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        camera.aspect = width / height;
+
+        // Position artifact comfortably on smaller screens
+        if (width < 768) {
+          camera.position.set(0, 0, 26);
+          targetArtifactPos.x = 0;
+          targetArtifactPos.y = -2.2;
+        } else if (width < 1024) {
+          camera.position.set(0, 0, 24);
+          targetArtifactPos.x = 2.8;
+          targetArtifactPos.y = 0;
+        } else {
+          camera.position.set(0, 0, 22);
+          targetArtifactPos.x = 4.2;
+          targetArtifactPos.y = 0;
         }
 
-        camera.position.x = lerp(camera.position.x, targetCamX, 0.06);
-        camera.position.y = lerp(camera.position.y, targetCamY, 0.06);
-        camera.position.z = lerp(camera.position.z, targetCamZ, 0.06);
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+      window.addEventListener("resize", onWindowResize);
+      onWindowResize();
 
-        const targetRotY = -smoothMouseX * 0.035;
-        const targetRotX = -smoothMouseY * 0.024;
-        camera.rotation.y = lerp(camera.rotation.y, targetRotY, 0.05);
-        camera.rotation.x = lerp(camera.rotation.x, targetRotX, 0.05);
+      // Page Visibility API to Pause Loop When Inactive
+      let isDocumentVisible = true;
+      document.addEventListener("visibilitychange", () => {
+        isDocumentVisible = !document.hidden;
+      });
 
-        /* --- 18. ANIMATION OF 3D ELEMENTS ------------------------- */
+      // 7F. Main WebGL Animation Frame Loop
+      let clock = new THREE.Clock();
 
-        // A. Intelligence Core & Orbital Rings
-        coreGroup.rotation.y = t * 0.28 + smoothScroll * 4.0;
-        coreGroup.rotation.x = Math.sin(t * 0.25) * 0.08;
+      function animateWebGL() {
+        requestAnimationFrame(animateWebGL);
+        if (!isDocumentVisible) return;
 
-        ringInner.rotation.z = t * 0.35;
-        ringMid.rotation.z = -t * 0.28;
-        ringOuter.rotation.z = t * 0.22;
+        const elapsedTime = clock.getElapsedTime();
 
-        const pulse = 1.0 + Math.sin(t * 2.2) * 0.12;
-        singularityPoint.scale.set(pulse, pulse, pulse);
-        coronaMesh.scale.set(pulse * 1.1, pulse * 1.1, pulse * 1.1);
+        // Smooth Mouse Parallax
+        smoothMouseX = lerp(smoothMouseX, targetMouseX, 0.05);
+        smoothMouseY = lerp(smoothMouseY, targetMouseY, 0.05);
 
-        // B. Orbital Satellite Nodes & Laser Connectors
-        orbitalNodes.forEach((nodeG, idx) => {
-          const u = nodeG.userData;
-          const currAngle = u.angle + t * 0.45;
-          const nx = Math.cos(currAngle) * u.radius;
-          const ny = Math.sin(currAngle) * u.radius * 0.75;
-          const nz = Math.sin(currAngle) * u.radius * 0.4;
-          nodeG.position.set(nx, ny, nz);
+        cursorLight.position.x = smoothMouseX * 12;
+        cursorLight.position.y = -smoothMouseY * 8;
 
-          const cPos = u.connector.geometry.attributes.position.array;
-          cPos[0] = coreGroup.position.x;
-          cPos[1] = coreGroup.position.y;
-          cPos[2] = coreGroup.position.z;
-          cPos[3] = coreGroup.position.x + nx;
-          cPos[4] = coreGroup.position.y + ny;
-          cPos[5] = coreGroup.position.z + nz;
-          u.connector.geometry.attributes.position.needsUpdate = true;
+        // Update State Targets based on Active Section
+        const isMobile = window.innerWidth < 768;
 
-          const threshold = 0.16 + idx * 0.035;
-          const isActivated = smoothScroll >= threshold;
-          u.mesh.material.emissiveIntensity = isActivated ? 1.4 : 0.4;
-          u.connector.material.opacity = isActivated ? 0.75 : 0.25;
-        });
+        switch (currentSectionId) {
+          case "hero":
+            // State 0: IDEA / INTELLIGENCE (Compact, unified)
+            targetArtifactPos.x = isMobile ? 0 : 4.2;
+            targetArtifactPos.y = isMobile ? -2.2 : 0;
+            targetArtifactPos.z = 0;
+            targetArtifactRot.x = 0.2 + smoothMouseY * 0.15;
+            targetArtifactRot.y = elapsedTime * 0.12 + smoothMouseX * 0.2;
+            targetGlassSeparation = 0;
+            targetLogicSeparation = 1;
+            break;
 
-        // C. About Strata Panels Sequential Depth
-        strataPanels.forEach((p, idx) => {
-          p.position.y = (2 - idx) * 0.9 + Math.sin(t * 0.4 + idx) * 0.15;
-        });
+          case "work":
+            // State 1: MODULAR PROJECT FOCUS (Shifts into viewport depth)
+            targetArtifactPos.x = isMobile ? 0 : 5.4;
+            targetArtifactPos.y = isMobile ? -3.0 : -0.8;
+            targetArtifactPos.z = -4.5;
+            targetArtifactRot.x = 0.4 + smoothMouseY * 0.1;
+            targetArtifactRot.y = elapsedTime * 0.18 + smoothMouseX * 0.15;
+            targetGlassSeparation = 0.35;
+            targetLogicSeparation = 1.35;
+            break;
 
-        // D. Toolkit 3D Technical Grid
-        const stackProgress = smoothstep(0.42, 0.56, smoothScroll);
-        skillModules.forEach((mod, idx) => {
-          const actT = smoothstep(idx * 0.1, (idx + 1) * 0.1, stackProgress);
-          mod.rotation.y = Math.sin(t * 0.5 + idx) * 0.08 + actT * 0.15;
-          mod.position.z = actT * 1.2;
-        });
+          case "about":
+            // State 2: STRUCTURAL DISCLOSURE (Smoked shells glide open, revealing core)
+            targetArtifactPos.x = isMobile ? 0 : -4.8;
+            targetArtifactPos.y = isMobile ? -2.5 : 0.5;
+            targetArtifactPos.z = -2.0;
+            targetArtifactRot.x = 0.25;
+            targetArtifactRot.y = elapsedTime * 0.08;
+            targetGlassSeparation = 1.2;
+            targetLogicSeparation = 1.6;
+            break;
 
-        // E. VALTORA & Singularity Portal
-        const transProgress = smoothstep(0.68, 0.74, smoothScroll);
-        const vScale = clamp(1.0 - transProgress * 0.85, 0.15, 1.0);
-        valtoraGroup.scale.set(vScale, vScale, vScale);
+          case "lab":
+            // State 3: EXPERIMENTAL RESONANCE (Calibrating)
+            targetArtifactPos.x = isMobile ? 0 : 4.8;
+            targetArtifactPos.y = isMobile ? -2.2 : -0.4;
+            targetArtifactPos.z = -1.5;
+            targetArtifactRot.x = 0.35;
+            targetArtifactRot.y = elapsedTime * 0.15;
+            targetGlassSeparation = 0.6;
+            targetLogicSeparation = 1.25;
+            break;
 
-        const portalFlare = smoothstep(0.70, 0.75, smoothScroll) * (1.0 - smoothstep(0.76, 0.82, smoothScroll));
-        portalCore.scale.set(1.0 + portalFlare * 3.5, 1.0 + portalFlare * 3.5, 1.0 + portalFlare * 3.5);
-        portalLight.intensity = 3.5 + portalFlare * 4.0;
+          case "stack":
+            // State 4: TECHNICAL STRATIFICATION (Tiers separate distinctly)
+            targetArtifactPos.x = isMobile ? 0 : 0;
+            targetArtifactPos.y = isMobile ? -2.0 : -1.2;
+            targetArtifactPos.z = -3.0;
+            targetArtifactRot.x = 0.55;
+            targetArtifactRot.y = elapsedTime * 0.09;
+            targetGlassSeparation = 1.4;
+            targetLogicSeparation = 2.1;
+            break;
 
-        // F. LifeHub Floating Layers
-        const lhProgress = smoothstep(0.74, 0.82, smoothScroll);
-        lifehubLayers.forEach((layer, idx) => {
-          layer.position.x = (idx - 1.5) * 1.8 * lhProgress + Math.sin(t * 0.4 + idx) * 0.15;
-          layer.position.y = (idx - 1.5) * 0.7 * lhProgress + Math.cos(t * 0.35 + idx) * 0.15;
-        });
+          case "journey":
+            // State 5: PROGRESSION AXIS (Forward trajectory)
+            targetArtifactPos.x = isMobile ? 0 : -5.0;
+            targetArtifactPos.y = isMobile ? -2.0 : -0.5;
+            targetArtifactPos.z = -2.5;
+            targetArtifactRot.x = 0.3;
+            targetArtifactRot.y = elapsedTime * 0.12;
+            targetGlassSeparation = 0.5;
+            targetLogicSeparation = 1.4;
+            break;
 
-        // G. Journey Milestones
-        milestoneMarkers.forEach((m, idx) => {
-          m.rotation.y = t * 0.8 + idx;
-        });
-
-        // H. Contact Ring
-        contactRingGroup.rotation.z = t * 0.12;
-        contactRingGroup.rotation.y = Math.sin(t * 0.2) * 0.15;
-
-        // I. Data Beams
-        for (let b = 0; b < beamSegments.length; b++) {
-          const beam = beamSegments[b];
-          beam.position.z += beam.userData.speed * dt;
-          if (beam.position.z > beam.userData.maxZ) {
-            beam.position.z = beam.userData.minZ;
-          }
+          case "contact":
+            // State 6: REUNIFICATION & HARMONY (Converges back together)
+            targetArtifactPos.x = isMobile ? 0 : 0;
+            targetArtifactPos.y = isMobile ? -2.5 : 0;
+            targetArtifactPos.z = 1.0;
+            targetArtifactRot.x = 0.18;
+            targetArtifactRot.y = elapsedTime * 0.1;
+            targetGlassSeparation = 0;
+            targetLogicSeparation = 1;
+            break;
         }
 
-        // J. Living Wave Terrain
-        const posAttr = waveGeo.attributes.position;
-        const vertexCount = posAttr.count;
-        const mouseWaveX = smoothMouseX * 28;
-        const mouseWaveY = smoothMouseY * 24;
+        // Interpolate Master Container Transform
+        artifactGroup.position.x = lerp(artifactGroup.position.x, targetArtifactPos.x, 0.04);
+        artifactGroup.position.y = lerp(artifactGroup.position.y, targetArtifactPos.y, 0.04);
+        artifactGroup.position.z = lerp(artifactGroup.position.z, targetArtifactPos.z, 0.04);
 
-        for (let v = 0; v < vertexCount; v++) {
-          const u = posAttr.getX(v);
-          const w = posAttr.getY(v);
+        artifactGroup.rotation.x = lerp(artifactGroup.rotation.x, targetArtifactRot.x, 0.04);
+        artifactGroup.rotation.y = lerp(artifactGroup.rotation.y, targetArtifactRot.y, 0.04);
 
-          const wave1 = Math.sin(u * 0.08 + t * 0.75) * Math.cos(w * 0.08 + t * 0.55) * 2.8;
-          const wave2 = Math.sin((u + w) * 0.05 + t * 0.95) * 1.6;
+        // Core Subtle Breathing
+        const breathe = Math.sin(elapsedTime * 1.8) * 0.08 + 1.0;
+        coreGroup.scale.set(breathe, breathe, breathe);
 
-          const dx = u - mouseWaveX;
-          const dy = w - mouseWaveY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const ripple = Math.exp(-dist * 0.09) * Math.sin(dist * 0.45 - t * 4.2) * 2.2;
+        // Sub-Layer Articulations
+        latticeGroup.rotation.y = -elapsedTime * 0.15;
+        armatureGroup.rotation.z = elapsedTime * 0.08;
 
-          posAttr.setZ(v, wave1 + wave2 + ripple);
-        }
-        posAttr.needsUpdate = true;
-
-        // K. Quantum Particles
-        const pPositions = pGeo.attributes.position.array;
-        const cursorWorldX = smoothMouseX * 22;
-        const cursorWorldY = -smoothMouseY * 16;
-
-        for (let p = 0; p < PARTICLE_COUNT; p++) {
-          let px = pPositions[p * 3];
-          let py = pPositions[p * 3 + 1];
-          let pz = pPositions[p * 3 + 2];
-
-          py += pVels[p * 3 + 1] * dt * 3.2;
-          if (py > 22) {
-            py = -22;
-            px = (Math.random() - 0.5) * 60;
-          }
-
-          px += Math.sin(t * 0.35 + p) * 0.015;
-
-          const pdx = px - cursorWorldX;
-          const pdy = py - cursorWorldY;
-          const pDist = Math.sqrt(pdx * pdx + pdy * pdy);
-          if (pDist < 7.5) {
-            const push = (1.0 - pDist / 7.5) * 0.16;
-            px += pdx * push;
-            py += pdy * push;
-          }
-
-          pPositions[p * 3] = px;
-          pPositions[p * 3 + 1] = py;
-          pPositions[p * 3 + 2] = pz;
-        }
-        pGeo.attributes.position.needsUpdate = true;
+        // Shell & Logic Separation
+        glassShell.position.y = lerp(glassShell.position.y, targetGlassSeparation, 0.04);
+        logicPlates.forEach((plate, idx) => {
+          const baseHeight = (idx - 1.5) * 0.95;
+          plate.position.y = lerp(plate.position.y, baseHeight * targetLogicSeparation, 0.04);
+        });
 
         renderer.render(scene, camera);
       }
 
-      renderFrame();
+      animateWebGL();
 
     } catch (err) {
-      console.warn("Digital Laboratory WebGL fallback:", err);
-      initFallback2D(canvas);
+      console.warn("WebGL initialization failed, switching to clean fallback:", err);
+      activateFallback();
     }
   }
 
+  function activateFallback() {
+    if (canvasEl) canvasEl.style.display = "none";
+    const fallback = $("#webgl-fallback");
+    if (fallback) fallback.classList.add("active");
+  }
+
   /* ============================================================
-     2D CANVAS FALLBACK ENGINE
+     8. CASE STUDY MODAL DRAWER SYSTEM (Section 14)
      ============================================================ */
-  function initFallback2D(canvas) {
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    let w = (canvas.width = window.innerWidth);
-    let h = (canvas.height = window.innerHeight);
-    window.addEventListener("resize", () => {
-      w = canvas.width = window.innerWidth;
-      h = canvas.height = window.innerHeight;
+  const modalBackdrop = $("#case-study-modal");
+  const modalDrawer = $("#case-study-drawer");
+  const drawerContent = $("#drawer-dynamic-content");
+  const drawerCloseBtn = $("#drawer-close-btn");
+
+  function openCaseStudy(projectId) {
+    if (!window.PROJECTS || !modalBackdrop || !drawerContent) return;
+    const project = window.PROJECTS.find((p) => p.id === projectId);
+    if (!project) return;
+
+    const cs = project.caseStudy || {};
+
+    let sourceBtnHtml = "";
+    if (project.githubUrl) {
+      sourceBtnHtml = `
+        <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn secondary">
+          <svg viewBox="0 0 16 16" fill="currentColor" class="btn-icon" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8.01 8.01 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>VIEW REPOSITORY</span>
+        </a>
+      `;
+    }
+
+    drawerContent.innerHTML = `
+      <div class="modal-project-header">
+        <div class="modal-meta-row">
+          <span class="modal-num-badge">PROJECT ${project.number}</span>
+          <span class="modal-cat">${project.category}</span>
+          <span class="modal-year">${project.year}</span>
+        </div>
+        <h2 class="modal-title">${project.name}</h2>
+        <p class="modal-subtitle">${project.subtitle}</p>
+        <p class="modal-tagline">“${project.tagline}”</p>
+      </div>
+
+      <div class="modal-body-sections">
+        <section class="modal-cs-block">
+          <div class="cs-heading">01 // THE PROBLEM</div>
+          <p class="cs-text">${cs.problem || project.description}</p>
+        </section>
+
+        <section class="modal-cs-block">
+          <div class="cs-heading">02 // THE PRODUCT</div>
+          <p class="cs-text">${cs.product || ""}</p>
+        </section>
+
+        <section class="modal-cs-block">
+          <div class="cs-heading">03 // WHERE AI CONTRIBUTES</div>
+          <p class="cs-text">${cs.intelligence || ""}</p>
+        </section>
+
+        <section class="modal-cs-block">
+          <div class="cs-heading">04 // ENGINEERING IMPLEMENTATION</div>
+          <p class="cs-text">${cs.engineering || ""}</p>
+        </section>
+
+        <section class="modal-cs-block">
+          <div class="cs-heading">05 // REAL TECH STACK</div>
+          <p class="cs-text">${cs.stack || ""}</p>
+          <div class="modal-tech-pills">
+            ${(project.technologies || []).map((t) => `<span class="tech-pill">${t}</span>`).join("")}
+          </div>
+        </section>
+
+        <section class="modal-cs-block">
+          <div class="cs-heading">06 // INTERACTION &amp; EXPERIENCE</div>
+          <p class="cs-text">${cs.experience || ""}</p>
+        </section>
+      </div>
+
+      <div class="modal-footer-actions">
+        <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="modal-cta-btn primary">
+          <span>EXPLORE LIVE PRODUCT</span>
+          <svg viewBox="0 0 12 12" fill="none" class="btn-arrow" aria-hidden="true"><path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        ${sourceBtnHtml}
+      </div>
+    `;
+
+    modalBackdrop.classList.add("open");
+    modalBackdrop.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCaseStudy() {
+    if (!modalBackdrop) return;
+    modalBackdrop.classList.remove("open");
+    modalBackdrop.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+  }
+
+  // Attach Open Listeners to Case Study Buttons
+  $$("[data-open-study]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const pId = btn.getAttribute("data-open-study");
+      if (pId) openCaseStudy(pId);
     });
-    let t = 0;
-    function draw() {
-      ctx.fillStyle = "#050608";
-      ctx.fillRect(0, 0, w, h);
-      const cx = w / 2, cy = h / 2;
-      ctx.strokeStyle = `rgba(56,189,248,${0.05 + Math.sin(t * 0.02) * 0.02})`;
-      ctx.lineWidth = 1;
-      ctx.strokeRect(cx - 280 + Math.sin(t * 0.015) * 8, cy - 180, 560, 360);
-      ctx.strokeStyle = `rgba(148,163,184,${0.05 + Math.cos(t * 0.012) * 0.02})`;
-      ctx.strokeRect(cx - 160, cy - 120 + Math.cos(t * 0.018) * 6, 320, 240);
-      t++;
-      requestAnimationFrame(draw);
-    }
-    draw();
+  });
+
+  if (drawerCloseBtn) {
+    drawerCloseBtn.addEventListener("click", closeCaseStudy);
   }
 
-  /* ============================================================
-     PROJECTS REGISTRY & QUICK NAVIGATOR
-     ============================================================ */
-  window.PROJECTS = [
-    {
-      id: "valtora",
-      title: "VALTORA",
-      subtitle: "AI CO-FOUNDER",
-      tagline: "Turn an idea into a company.",
-      description: "An analytical AI co-founder designed to turn startup ideas into structured validation, strategy, architecture and execution.",
-      live: "https://valtora-swart.vercel.app/",
-      github: "https://github.com/gokul1599/valtora",
-      labels: ["AI", "STARTUP", "PRODUCT", "WEB"]
-    },
-    {
-      id: "lifehub",
-      title: "LIFEHUB",
-      subtitle: "PERSONAL LIFE SYSTEM",
-      tagline: "Your life. One intelligent space.",
-      description: "A digital life-management experience designed to bring schedules, reminders, expenses, weather and everyday organization into one intelligent workspace.",
-      live: "https://lifehub-sage.vercel.app/",
-      github: "https://github.com/gokul1599/lifehub",
-      labels: ["AI", "PRODUCTIVITY", "WEB", "SYSTEM"]
-    },
-    {
-      id: "teluguva",
-      title: "TELUGUVA",
-      subtitle: "TELUGU DIGITAL EXPERIENCE",
-      tagline: "English in. Telugu out. Understanding made simple.",
-      description: "An intelligent bilingual translation and accessibility platform that translates English documents, notices, and text into simple, natural conversational Telugu with instant voice narration.",
-      live: "https://teluguva.vercel.app",
-      labels: ["AI", "TRANSLATION", "ACCESSIBILITY", "WEB"]
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener("click", (e) => {
+      if (e.target === modalBackdrop) closeCaseStudy();
+    });
+  }
+
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (modalBackdrop && modalBackdrop.classList.contains("open")) {
+        closeCaseStudy();
+      }
+      if (navDrawer && navDrawer.classList.contains("open")) {
+        closeMobileMenu();
+      }
     }
-  ];
+  });
 
-  function initProjectNavigator() {
-    const dockItems = $$(".nav-dock-item");
-    if (!dockItems.length) return;
+  /* ============================================================
+     9. LABORATORY INTERACTIVE WORKBENCH (Section 19)
+     ============================================================ */
 
-    dockItems.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        const targetId = item.getAttribute("href");
-        if (targetId && targetId.startsWith("#")) {
-          e.preventDefault();
-          const targetEl = document.querySelector(targetId);
-          if (targetEl) {
-            const navOffset = 90;
-            const elementPosition = targetEl.getBoundingClientRect().top + window.scrollY;
-            window.scrollTo({
-              top: elementPosition - navOffset,
-              behavior: "smooth"
-            });
-          }
+  // --- Lab 01: Prompt Structure Analyzer -----------------------
+  const promptInput = $("#prompt-input");
+  const outRole = $("#out-role");
+  const outTokens = $("#out-tokens");
+  const presetBtns = $$(".preset-btn");
+
+  const promptPresets = {
+    venture: "ROLE: Senior Venture Architect\nCONTEXT: Early-stage developer building an AI co-founder.\nOBJECTIVE: Formulate a lean MVP specification focusing on unit economics and retention.\nCONSTRAINTS: Avoid premature scaling; emphasize client-side privacy.",
+    ocr: "ROLE: Bilingual Accessibility Linguist\nCONTEXT: Official technical circular drafted in dense English.\nOBJECTIVE: Translate into colloquial conversational Telugu with 0.8x speech pacing.\nCONSTRAINTS: Preserve technical terms while eliminating bureaucratic jargon.",
+    spatial: "ROLE: Spatial Graphics Engineer\nCONTEXT: 2D residential floor plan with double-height ceiling.\nOBJECTIVE: Generate bounding box parameters and physically accurate daylight ray bounces.\nCONSTRAINTS: Cap draw calls under 60; enforce PBR energy conservation."
+  };
+
+  function analyzePrompt(text) {
+    if (!text) return;
+    // Heuristic token estimation (approx 1.3 words per token)
+    const words = text.trim().split(/\s+/).filter(Boolean);
+    const tokens = Math.round(words.length * 1.32);
+    if (outTokens) outTokens.textContent = tokens;
+
+    // Detect Role header
+    const match = text.match(/ROLE:\s*([^\n\r]+)/i);
+    if (outRole) {
+      outRole.textContent = match ? match[1].trim() : "Custom Prompt Structure";
+    }
+  }
+
+  if (promptInput) {
+    promptInput.value = promptPresets.venture;
+    analyzePrompt(promptPresets.venture);
+
+    promptInput.addEventListener("input", (e) => {
+      analyzePrompt(e.target.value);
+    });
+
+    presetBtns.forEach((pBtn) => {
+      pBtn.addEventListener("click", () => {
+        presetBtns.forEach((b) => b.classList.remove("active"));
+        pBtn.classList.add("active");
+        const key = pBtn.getAttribute("data-preset");
+        if (key && promptPresets[key]) {
+          promptInput.value = promptPresets[key];
+          analyzePrompt(promptPresets[key]);
         }
       });
     });
+  }
 
-    // Subtle 3D cursor parallax on project preview frames (desktop only)
-    if (!isTouch) {
-      const frames = $$(".project-browser-frame");
-      frames.forEach((frame) => {
-        const parentCard = frame.closest(".project-card");
-        if (!parentCard) return;
+  // --- Lab 02: Refractive Material Shader Calibrator -----------
+  const sliderTrans = $("#slider-transmission");
+  const sliderRough = $("#slider-roughness");
+  const sliderIor = $("#slider-ior");
+  const valTrans = $("#val-transmission");
+  const valRough = $("#val-roughness");
+  const valIor = $("#val-ior");
+  const btnResetShader = $("#btn-reset-shader");
 
-        parentCard.addEventListener("mousemove", (e) => {
-          const rect = frame.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dx = (e.clientX - cx) / (rect.width / 2);
-          const dy = (e.clientY - cy) / (rect.height / 2);
-          const rotX = clamp(-dy * 3, -3, 3);
-          const rotY = clamp(dx * 4, -4, 4);
+  if (sliderTrans && sliderRough && sliderIor) {
+    sliderTrans.addEventListener("input", (e) => {
+      const val = parseFloat(e.target.value);
+      if (valTrans) valTrans.textContent = val.toFixed(2);
+      if (updateArtifactMaterial) updateArtifactMaterial({ transmission: val });
+    });
 
-          frame.style.transform = `perspective(1200px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale(1.015)`;
-        });
+    sliderRough.addEventListener("input", (e) => {
+      const val = parseFloat(e.target.value);
+      if (valRough) valRough.textContent = val.toFixed(2);
+      if (updateArtifactMaterial) updateArtifactMaterial({ roughness: val });
+    });
 
-        parentCard.addEventListener("mouseleave", () => {
-          frame.style.transform = "none";
-        });
+    sliderIor.addEventListener("input", (e) => {
+      const val = parseFloat(e.target.value);
+      if (valIor) valIor.textContent = val.toFixed(2);
+      if (updateArtifactMaterial) updateArtifactMaterial({ ior: val });
+    });
+
+    if (btnResetShader) {
+      btnResetShader.addEventListener("click", () => {
+        sliderTrans.value = 0.88;
+        sliderRough.value = 0.08;
+        sliderIor.value = 1.55;
+        if (valTrans) valTrans.textContent = "0.88";
+        if (valRough) valRough.textContent = "0.08";
+        if (valIor) valIor.textContent = "1.55";
+        if (updateArtifactMaterial) {
+          updateArtifactMaterial({ transmission: 0.88, roughness: 0.08, ior: 1.55 });
+        }
       });
     }
   }
 
-  initProjectNavigator();
+  // --- Lab 03: Kinetic Spring Physics --------------------------
+  const springStage = $("#spring-stage");
+  const springTarget = $("#spring-target");
+  const lblStiffness = $("#lbl-stiffness");
+  const lblDamping = $("#lbl-damping");
+  const springPresetBtns = $$(".spring-preset-btn");
 
-  if (window.PROJECTS && Array.isArray(window.PROJECTS)) {
-    console.log(`Gokul Labs: ${window.PROJECTS.length} verified projects loaded.`);
+  let springParams = { stiffness: 280, damping: 22, mass: 1 };
+  let springPos = { x: 0, y: 0 };
+  let springVel = { x: 0, y: 0 };
+  let isDraggingSpring = false;
+
+  if (springStage && springTarget) {
+    function updateSpringPhysics() {
+      if (!isDraggingSpring) {
+        // F = -k * x - c * v
+        const forceX = -springParams.stiffness * (springPos.x * 0.01) - springParams.damping * springVel.x;
+        const forceY = -springParams.stiffness * (springPos.y * 0.01) - springParams.damping * springVel.y;
+        
+        springVel.x += (forceX / springParams.mass) * 0.016;
+        springVel.y += (forceY / springParams.mass) * 0.016;
+
+        springPos.x += springVel.x;
+        springPos.y += springVel.y;
+
+        springTarget.style.transform = `translate3d(${springPos.x.toFixed(2)}px, ${springPos.y.toFixed(2)}px, 0)`;
+      }
+      requestAnimationFrame(updateSpringPhysics);
+    }
+    requestAnimationFrame(updateSpringPhysics);
+
+    springTarget.addEventListener("mousedown", (e) => {
+      isDraggingSpring = true;
+    });
+
+    window.addEventListener("mousemove", (e) => {
+      if (!isDraggingSpring) return;
+      const rect = springStage.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      springPos.x = clamp(e.clientX - cx, -110, 110);
+      springPos.y = clamp(e.clientY - cy, -60, 60);
+      springVel.x = 0;
+      springVel.y = 0;
+      springTarget.style.transform = `translate3d(${springPos.x}px, ${springPos.y}px, 0)`;
+    });
+
+    window.addEventListener("mouseup", () => {
+      isDraggingSpring = false;
+    });
+
+    springPresetBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        springPresetBtns.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        const s = parseFloat(btn.getAttribute("data-stiffness") || "280");
+        const d = parseFloat(btn.getAttribute("data-damping") || "22");
+        const m = parseFloat(btn.getAttribute("data-mass") || "1");
+        springParams = { stiffness: s, damping: d, mass: m };
+        if (lblStiffness) lblStiffness.textContent = s;
+        if (lblDamping) lblDamping.textContent = d;
+      });
+    });
   }
+
+  // --- Lab 04: State Pipeline Visualizer -----------------------
+  const pipelineNodes = $$(".pipeline-step-node");
+  const pipelineDetail = $("#pipeline-detail");
+
+  const pipelineStages = [
+    {
+      tag: "STAGE 01 // PROBLEM DEFINITION",
+      headline: "Idea &amp; Hypothesis Formulation",
+      copy: "Isolate friction, question default assumptions, and define quantifiable criteria for success before writing code."
+    },
+    {
+      tag: "STAGE 02 // MODEL & FEASIBILITY",
+      headline: "Intelligence &amp; Heuristic Architecture",
+      copy: "Select the optimal LLM prompts, client-side OCR libraries, or spatial geometric math models to solve the problem directly."
+    },
+    {
+      tag: "STAGE 03 // TYPE-SAFE IMPLEMENTATION",
+      headline: "Engineering, Clean Contracts &amp; Performance",
+      copy: "Construct modular React/Next.js/Three.js code with zero runtime errors, accessible DOM structure, and sub-100ms response targets."
+    },
+    {
+      tag: "STAGE 04 // POLISHED SHIP",
+      headline: "Product Deployment &amp; User Experience",
+      copy: "Host on production edge networks, test on real devices, collect user signals, and loop back into the next iteration."
+    }
+  ];
+
+  pipelineNodes.forEach((node, idx) => {
+    node.addEventListener("click", () => {
+      pipelineNodes.forEach((n) => n.classList.remove("active"));
+      node.classList.add("active");
+      const stageData = pipelineStages[idx];
+      if (stageData && pipelineDetail) {
+        pipelineDetail.innerHTML = `
+          <div class="box-tag">${stageData.tag}</div>
+          <h4 class="box-headline">${stageData.headline}</h4>
+          <p class="box-copy">${stageData.copy}</p>
+        `;
+      }
+    });
+  });
+
+  /* ============================================================
+     10. STACK LAYER RESONANCE WITH 3D ARTIFACT (Section 21)
+     ============================================================ */
+  const stackCards = $$(".stack-category-card");
+  stackCards.forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      const targetLayer = card.getAttribute("data-layer-target");
+      if (targetLayer && highlightArtifactLayer) {
+        highlightArtifactLayer(targetLayer);
+      }
+    });
+
+    card.addEventListener("mouseleave", () => {
+      if (highlightArtifactLayer) highlightArtifactLayer(null);
+    });
+  });
+
+  /* ============================================================
+     11. LOG INITIALIZATION STATUS
+     ============================================================ */
+  console.log("%cGOKUL LABS %cv7.0 — Living Digital Architecture Engine Active", 
+    "color: #38bdf8; font-weight: bold; font-family: monospace; font-size: 13px;",
+    "color: #94a3b8; font-family: monospace; font-size: 11px;"
+  );
 })();
