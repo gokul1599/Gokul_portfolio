@@ -9,8 +9,8 @@ const NOW_STATUS = {
   columns: [
     {
       label: "CURRENTLY BUILDING",
-      value: "Iterating on Valtora startup blueprints, LifeHub daily workspace, and Teluguva OCR workflows.",
-      detail: "Shipping continuous improvements across all three live products with real user testing."
+      value: "Iterating on Valtora startup blueprints, LifeHub daily workspace, Teluguva OCR workflows, and DevYatra geospatial cartography.",
+      detail: "Shipping continuous improvements across all four live products with real user testing."
     },
     {
       label: "CURRENTLY LEARNING",
