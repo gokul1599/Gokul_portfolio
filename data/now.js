@@ -9,23 +9,23 @@ const NOW_STATUS = {
   columns: [
     {
       label: "CURRENTLY BUILDING",
-      value: "Next-generation intelligent tool prototypes and accessibility interfaces.",
-      detail: "Focusing on products that solve real human friction through thoughtful engineering."
+      value: "Iterating on Valtora startup blueprints, LifeHub daily workspace, and Teluguva OCR workflows.",
+      detail: "Shipping continuous improvements across all three live products with real user testing."
     },
     {
       label: "CURRENTLY LEARNING",
-      value: "Advanced LLM orchestration and spatial WebGL graphics.",
-      detail: "Connecting theoretical AI concepts with low-latency browser experiences."
+      value: "Advanced LLM application architectures, Groq low-latency streaming, and WebGL Three.js spatial scenes.",
+      detail: "Deepening core computer science and AI foundations through BITS Pilani and Scaler coursework."
     },
     {
       label: "CURRENTLY EXPLORING",
-      value: "Practical AI applications and low-friction product ergonomics.",
-      detail: "Designing interfaces where intelligent models feel seamless and effortless."
+      value: "Multimodal interfaces, lightweight local-first web architectures, and seamless AI ergonomics.",
+      detail: "Studying how thoughtful interface craft makes complex AI systems feel effortless."
     },
     {
       label: "LOOKING FOR",
-      value: "Engineering internships, builder collaborations, and software teams.",
-      detail: "Open to challenging roles where strong frontend craft meets practical engineering."
+      value: "AI engineering internships, frontend/full-stack developer roles, and hackathon teams.",
+      detail: "Eager to contribute high visual craft and disciplined software execution to ambitious teams."
     }
   ]
 };

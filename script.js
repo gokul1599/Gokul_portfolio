@@ -462,13 +462,13 @@
 
       // Expose Stack Layer Resonance Hook
       highlightArtifactLayer = function (layerName) {
-        if (layerName === "ai") {
+        if (layerName === "ai" || layerName === "tools") {
           coreMat.emissiveIntensity = 2.4;
           corePointLight.intensity = 6.0;
-        } else if (layerName === "web") {
+        } else if (layerName === "frontend" || layerName === "web") {
           glassMat.opacity = 0.95;
           glassEdgesMat.opacity = 0.9;
-        } else if (layerName === "tools") {
+        } else if (layerName === "backend") {
           armatureGroup.scale.set(1.12, 1.12, 1.12);
         } else if (layerName === "languages") {
           latticeWireMat.opacity = 0.95;

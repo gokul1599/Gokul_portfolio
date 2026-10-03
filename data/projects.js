@@ -13,7 +13,7 @@ const PROJECTS = [
     id: "valtora",
     number: "01",
     name: "VALTORA",
-    subtitle: "AI CO-FOUNDER & VENTURE STRATEGIST",
+    subtitle: "AI-POWERED FULL-STACK APPLICATION",
     category: "AI · PRODUCT STRATEGY · FULL STACK",
     year: "2026",
     tagline: "Turn an idea into a company.",
