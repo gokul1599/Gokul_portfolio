@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TELUGUVA Case Study — Gokul Labs</title>
+  <meta name="description" content="Technical Case Study for TELUGUVA — Telugu-First Digital Platform & Accessible OCR built by Gokul Karpurapu.">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="case-study-page">
+  <header class="cs-topbar">
+    <div class="cs-topbar-inner">
+      <a href="../../#work" class="cs-back-btn">
+        <span class="arr">←</span>
+        <span>GOKUL LABS / SELECTED WORK</span>
+      </a>
+      <div class="cs-topbar-title">
+        <span class="cs-badge amber">PROJECT 03</span>
+        <span class="cs-name">TELUGUVA</span>
+      </div>
+      <div class="cs-topbar-actions">
+        <a href="https://github.com/gokul1599/teluguva" target="_blank" rel="noopener noreferrer" class="cs-action-btn">GITHUB ↗</a>
+        <a href="https://teluguva.vercel.app" target="_blank" rel="noopener noreferrer" class="cs-action-btn primary amber">LIVE PRODUCT ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="cs-container">
+    <section class="cs-hero">
+      <div class="cs-hero-meta">
+        <span class="cs-kicker amber">03 // CASE STUDY</span>
+        <span class="cs-category">TELUGU-FIRST DIGITAL PLATFORM &amp; OCR</span>
+      </div>
+      <h1 class="cs-headline">TELUGUVA</h1>
+      <p class="cs-tagline">“English in. Telugu out. Understanding made simple.”</p>
+      <p class="cs-lead">
+        An intelligent bilingual translation and accessibility platform that converts English documents, circulars, and notices into natural conversational Telugu with instant voice narration.
+      </p>
+
+      <div class="cs-meta-grid">
+        <div class="cs-meta-item">
+          <span class="m-lbl">ROLE</span>
+          <span class="m-val">Creator · Accessibility &amp; Frontend Engineer</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">TIMELINE</span>
+          <span class="m-val">2026 // Production Shipped</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">CORE STACK</span>
+          <span class="m-val">Next.js 16 · React 19 · TypeScript · Tesseract.js · Web Speech API</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">VERIFICATION</span>
+          <span class="m-val green">Live on Vercel Edge &amp; Public GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01: Overview & Problem -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">01</span>
+        <h2>THE PROBLEM &amp; CULTURAL PURPOSE</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          Official government circulars, doctor prescription directions, school WhatsApp circulars, and electricity bills arrive predominantly in dense English. For millions of Telugu speakers and elderly parents, this creates severe daily comprehension friction.
+        </p>
+        <p>
+          Standard translation tools fail in two ways: they produce archaic, heavily Sanskritized Telugu that sounds unnatural in daily conversation, and they fail to provide slow, patient audio pronunciation for elderly citizens with low literacy or deteriorating eyesight.
+        </p>
+        <p>
+          I built <strong>Teluguva</strong> to eliminate this barrier: a camera-enabled scanner that extracts text on the user's phone, translates it into warm, conversational Telugu, and reads it aloud with adjustable speeds.
+        </p>
+      </div>
+    </section>
+
+    <!-- 02: Transformation Pipeline -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">02</span>
+        <h2>MULTIMODAL ACCESSIBILITY PIPELINE</h2>
+      </div>
+      <div class="cs-flow-strip">
+        <div class="cs-flow-node">
+          <span class="n-step">01</span>
+          <span class="n-title">INPUT / OCR</span>
+          <p class="n-desc">Photo snap, PDF upload, or typed English text</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node">
+          <span class="n-step">02</span>
+          <span class="n-title">CONTEXT PARSER</span>
+          <p class="n-desc">Classifies document type &amp; key action dates</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node highlight amber">
+          <span class="n-step">03</span>
+          <span class="n-title">SIMPLE TELUGU</span>
+          <p class="n-desc">Converts formal jargon into spoken colloquial dialect</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node active amber">
+          <span class="n-step">04</span>
+          <span class="n-title">VOICE NARRATION</span>
+          <p class="n-desc">Streaming Web Speech synthesis at 0.75× &amp; 1.0× pacing</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03: System Architecture -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">03</span>
+        <h2>SYSTEM ARCHITECTURE</h2>
+      </div>
+      <div class="cs-arch-cards">
+        <div class="cs-arch-card">
+          <span class="a-badge amber">LAYER 01</span>
+          <h3>Client OCR Engine</h3>
+          <p>Tesseract.js Web Worker extracting English document text directly inside the browser sandbox without transmitting private bills to external cloud vision APIs.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge amber">LAYER 02</span>
+          <h3>Context Transformation</h3>
+          <p>Rule-based and LLM-assisted linguistic adapter substituting rigid textbook grammar with common Telugu loan words understood across Andhra Pradesh and Telangana.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge amber">LAYER 03</span>
+          <h3>Speech Synthesis (TTS)</h3>
+          <p>Native Web Speech API integration with customized prosody, pause insertion, and rate switching tailored for senior citizen auditory comfort.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge amber">LAYER 04</span>
+          <h3>Accessible Touch UI</h3>
+          <p>Built with Next.js 16 and Tailwind CSS v4 featuring 44px+ minimum touch buttons, high-contrast text ratios, and instant font scale toggle (A, A+, A++).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04: Engineering Decisions -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">04</span>
+        <h2>ENGINEERING DECISIONS</h2>
+      </div>
+      <div class="cs-decisions-grid">
+        <div class="cs-decision-item">
+          <h4>Why In-Browser OCR?</h4>
+          <p>Utility bills and clinic notices contain addresses, phone numbers, and patient details. Running Tesseract.js client-side ensures 100% data privacy and zero server infrastructure costs.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Why 'Simple Telugu' Mode?</h4>
+          <p>Formal Telugu translations are often as impenetrable to ordinary speakers as English. Replacing 'సమర్పించవలసిన రుసుము' with 'కట్టాల్సిన ఫీజు' makes the software immediately useful in real households.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Elderly UI Design Constraints</h4>
+          <p>Eliminated complex nested menus in favor of a clear dual-pane comparative view. Users can tap any individual English word to see its phonetic Telugu breakdown.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Next.js 16 with Turbopack</h4>
+          <p>Next.js 16 App Router enabled instant static shell delivery with zero client runtime overhead for non-interactive structural components.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05: Challenges & Lessons -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">05</span>
+        <h2>CHALLENGES &amp; LESSONS LEARNED</h2>
+      </div>
+      <div class="cs-challenges-box">
+        <div class="c-col">
+          <span class="c-kicker red">CHALLENGE</span>
+          <p>Elderly users often photographed crumpled bills under dim household lighting with camera motion blur, causing standard OCR models to produce gibberish.</p>
+        </div>
+        <div class="c-col">
+          <span class="c-kicker cyan">SOLUTION</span>
+          <p>Engineered an HTML5 Canvas image pre-processing filter that auto-boosts local contrast, applies threshold binarization, and warns the user if lighting is insufficient before processing.</p>
+        </div>
+        <div class="c-col">
+          <span class="c-kicker green">LESSON</span>
+          <p>Accessibility is not just software styling — it is understanding the physical environment and human constraints of the person holding the phone.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-footer-nav">
+      <div class="cs-footer-actions">
+        <a href="https://teluguva.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary amber-btn">
+          <span>EXPLORE LIVE PRODUCT ↗</span>
+        </a>
+        <a href="https://github.com/gokul1599/teluguva" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <span>VIEW GITHUB REPO ↗</span>
+        </a>
+      </div>
+
+      <div class="cs-next-bar">
+        <span class="next-lbl">NEXT PROJECT</span>
+        <a href="../devyatra/index.html" class="next-link">
+          <span>04 — DEVYATRA (AI Pilgrimage &amp; India Atlas)</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cs-site-footer">
+    <div class="cs-footer-inner">
+      <span>GOKUL LABS © 2026 · GOKUL KARPURAPU</span>
+      <a href="../../#work">RETURN TO SELECTED WORK ↑</a>
+    </div>
+  </footer>
+</body>
+</html>

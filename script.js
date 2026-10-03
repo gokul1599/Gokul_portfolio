@@ -25,6 +25,7 @@
 
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  let isReadModeActive = false;
 
   /* ============================================================
      2. ACCESSIBLE SCROLL REVEAL (Zero Content Blocking)
@@ -541,7 +542,7 @@
 
       function animateWebGL() {
         requestAnimationFrame(animateWebGL);
-        if (!isDocumentVisible) return;
+        if (!isDocumentVisible || isReadModeActive) return;
 
         const elapsedTime = clock.getElapsedTime();
 
@@ -770,12 +771,16 @@
     document.body.style.overflow = "";
   }
 
-  // Attach Open Listeners to Case Study Buttons
-  $$("[data-open-study]").forEach((btn) => {
-    btn.addEventListener("click", () => {
+  window.openCaseStudy = openCaseStudy;
+  window.closeCaseStudy = closeCaseStudy;
+
+  // Event delegation for all current and dynamic case study buttons
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-open-study]");
+    if (btn) {
       const pId = btn.getAttribute("data-open-study");
       if (pId) openCaseStudy(pId);
-    });
+    }
   });
 
   if (drawerCloseBtn) {
@@ -1037,9 +1042,490 @@
   initNowSection();
 
   /* ============================================================
-     12. LOG INITIALIZATION STATUS
+     12. DEVYATRA INTERACTIVE GEOSPATIAL ATLAS & AI PLANNER
      ============================================================ */
-  console.log("%cGOKUL LABS %cv8.5 — Living Digital Architecture Engine Active", 
+  function initDevYatraInteractive() {
+    const explorerBtn = $("#dy-tab-explorer-btn");
+    const plannerBtn = $("#dy-tab-planner-btn");
+    const explorerView = $("#dy-view-explorer");
+    const plannerView = $("#dy-view-planner");
+
+    if (explorerBtn && plannerBtn && explorerView && plannerView) {
+      explorerBtn.addEventListener("click", () => {
+        explorerBtn.classList.add("active");
+        explorerBtn.setAttribute("aria-selected", "true");
+        plannerBtn.classList.remove("active");
+        plannerBtn.setAttribute("aria-selected", "false");
+        explorerView.style.display = "grid";
+        plannerView.style.display = "none";
+      });
+
+      plannerBtn.addEventListener("click", () => {
+        plannerBtn.classList.add("active");
+        plannerBtn.setAttribute("aria-selected", "true");
+        explorerBtn.classList.remove("active");
+        explorerBtn.setAttribute("aria-selected", "false");
+        plannerView.style.display = "grid";
+        explorerView.style.display = "none";
+      });
+    }
+
+    const catChips = $$(".dy-cat-chip");
+    const categoryLabel = $("#dy-places-category-label");
+    const countLabel = $("#dy-places-count-label");
+    const placesList = $("#dy-places-list");
+    const placeInspector = $("#dy-place-inspector");
+
+    if (typeof window.DEVYATRA_PLACES === "undefined" || !placesList || !placeInspector) return;
+
+    let activeCategory = "SACRED";
+    let activePlaceId = "tirumala-venkateswara";
+
+    function renderPlacesList(category) {
+      const filtered = window.DEVYATRA_PLACES.filter((p) => p.category === category);
+      if (categoryLabel) {
+        const catObj = (window.DEVYATRA_CATEGORIES || []).find((c) => c.id === category);
+        categoryLabel.textContent = catObj ? `${catObj.label.toUpperCase()} ATLAS` : `${category} ATLAS`;
+      }
+      if (countLabel) {
+        countLabel.textContent = `${filtered.length} PLACES`;
+      }
+
+      placesList.innerHTML = filtered.map((place) => `
+        <button class="dy-place-item ${place.id === activePlaceId ? 'active' : ''}" data-place-id="${place.id}" type="button">
+          <span class="dy-item-name">${place.name}</span>
+          <span class="dy-item-sub">${place.district ? place.district + ', ' : ''}${place.state}</span>
+        </button>
+      `).join("");
+
+      $$(".dy-place-item", placesList).forEach((btn) => {
+        btn.addEventListener("click", () => {
+          activePlaceId = btn.getAttribute("data-place-id");
+          $$(".dy-place-item", placesList).forEach((b) => b.classList.toggle("active", b === btn));
+          const selected = window.DEVYATRA_PLACES.find((p) => p.id === activePlaceId);
+          if (selected) renderPlaceInspector(selected);
+        });
+      });
+    }
+
+    function renderPlaceInspector(p) {
+      if (!p) return;
+      const provStatus = (p.verificationStatus || "TRUSTED_SOURCE").toLowerCase();
+      const provTag = (p.verificationStatus || "TRUSTED_SOURCE").replace(/_/g, " ");
+
+      placeInspector.innerHTML = `
+        <div class="dy-insp-header">
+          <div class="dy-insp-title-box">
+            <h4>${p.name}</h4>
+            ${p.nativeName ? `<div class="dy-insp-native">${p.nativeName}</div>` : ""}
+            <div class="dy-insp-meta-chips">
+              <span class="dy-meta-chip">${p.state}</span>
+              ${p.district ? `<span class="dy-meta-chip">${p.district}</span>` : ""}
+              ${p.elevation ? `<span class="dy-meta-chip">Elev: ${p.elevation}</span>` : ""}
+              <span class="dy-meta-chip">${p.lat.toFixed(4)}°N, ${p.lng.toFixed(4)}°E</span>
+            </div>
+          </div>
+          <span class="dy-provenance-tag ${provStatus}">${provTag}</span>
+        </div>
+
+        <p class="dy-insp-body">${p.description}</p>
+
+        <div class="dy-insp-specs-grid">
+          <div class="dy-spec-item">
+            <span class="dy-spec-label">TRADITION / HERITAGE</span>
+            <span class="dy-spec-val">${p.tradition || "National Heritage Monument"}</span>
+          </div>
+          <div class="dy-spec-item">
+            <span class="dy-spec-label">ARCHITECTURE / GEOLOGY</span>
+            <span class="dy-spec-val">${p.architecture || "Natural Landform / Rock formation"}</span>
+          </div>
+          <div class="dy-spec-item">
+            <span class="dy-spec-label">ACCESS / TIMINGS</span>
+            <span class="dy-spec-val">${p.timings || "Open during regular daylight hours"}</span>
+          </div>
+          <div class="dy-spec-item">
+            <span class="dy-spec-label">PROTOCOL / DRESS CODE</span>
+            <span class="dy-spec-val">${p.dressCode || "Modest attire recommended"}</span>
+          </div>
+        </div>
+
+        ${p.highlights && p.highlights.length ? `
+          <div class="dy-insp-highlights">
+            <span class="dy-hl-label">SIGNIFICANT HIGHLIGHTS</span>
+            <ul class="dy-hl-list">
+              ${p.highlights.map((h) => `<li>${h}</li>`).join("")}
+            </ul>
+          </div>
+        ` : ""}
+
+        <div class="dy-insp-footer">
+          <span class="dy-source-meta">SOURCE: ${p.sourceName || "Official Gazette / Archaeological Survey"}</span>
+          ${p.sourceUrl ? `
+            <a href="${p.sourceUrl}" target="_blank" rel="noopener noreferrer" class="dy-source-link">
+              <span>OFFICIAL PORTAL</span>
+              <span>↗</span>
+            </a>
+          ` : ""}
+        </div>
+      `;
+    }
+
+    catChips.forEach((chip) => {
+      chip.addEventListener("click", () => {
+        catChips.forEach((c) => c.classList.remove("active"));
+        chip.classList.add("active");
+        activeCategory = chip.getAttribute("data-category") || "SACRED";
+        const matching = window.DEVYATRA_PLACES.filter((p) => p.category === activeCategory);
+        if (matching.length) {
+          activePlaceId = matching[0].id;
+          renderPlacesList(activeCategory);
+          renderPlaceInspector(matching[0]);
+        }
+      });
+    });
+
+    renderPlacesList("SACRED");
+    const initialPlace = window.DEVYATRA_PLACES.find((p) => p.id === "tirumala-venkateswara") || window.DEVYATRA_PLACES[0];
+    renderPlaceInspector(initialPlace);
+
+    // AI Pilgrimage Planner Simulator
+    const generateBtn = $("#dy-generate-route-btn");
+    const citySelect = $("#dy-plan-city");
+    const intentSelect = $("#dy-plan-intent");
+    const planPills = $$(".plan-pill");
+    const routeTitle = $("#dy-route-title");
+    const routeTimeline = $("#dy-route-timeline");
+
+    let planDays = 3;
+    planPills.forEach((p) => {
+      p.addEventListener("click", () => {
+        planPills.forEach((b) => b.classList.remove("active"));
+        p.classList.add("active");
+        planDays = parseInt(p.getAttribute("data-days") || "3", 10);
+      });
+    });
+
+    function generateItinerary() {
+      if (!routeTimeline) return;
+      const city = citySelect ? citySelect.value : "Hyderabad";
+      const intent = intentSelect ? intentSelect.value : "jyotirlinga";
+
+      if (routeTitle) {
+        routeTitle.textContent = `${planDays}-Day ${intent.toUpperCase()} Circuit from ${city}`;
+      }
+
+      let relevantPlaces = [];
+      if (intent === "jyotirlinga") {
+        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "SACRED" && (p.tradition.includes("Shaivite") || p.tradition.includes("Jyotirlinga")));
+      } else if (intent === "vaishnavite") {
+        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "SACRED" && (p.tradition.includes("Vaishnavite") || p.tradition.includes("Divya Desam")));
+      } else if (intent === "heritage") {
+        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "HERITAGE" || p.category === "CAVES");
+      } else {
+        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "HILLS" || p.category === "WATERFALLS" || p.category === "LAKES" || p.category === "NATURE");
+      }
+
+      if (relevantPlaces.length === 0) {
+        relevantPlaces = window.DEVYATRA_PLACES.slice(0, planDays);
+      }
+
+      const stops = relevantPlaces.slice(0, planDays);
+
+      routeTimeline.innerHTML = stops.map((s, idx) => `
+        <div class="route-stop-card">
+          <span class="route-day-badge">DAY 0${idx + 1}</span>
+          <div class="route-details">
+            <h5 class="route-stop-title">${s.name}</h5>
+            <p class="route-stop-desc">${s.description.substring(0, 140)}...</p>
+            <div class="route-stop-meta">
+              <span>📍 ${s.state} (${s.lat.toFixed(2)}°N, ${s.lng.toFixed(2)}°E)</span>
+              <span>⏰ ${s.timings.substring(0, 30)}</span>
+              <span>🛡️ ${s.verificationStatus}</span>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    if (generateBtn) {
+      generateBtn.addEventListener("click", generateItinerary);
+      generateItinerary();
+    }
+  }
+  initDevYatraInteractive();
+
+  /* ============================================================
+     13. COMMAND PALETTE CONTROLLER (Cmd+K / Ctrl+K)
+     ============================================================ */
+  function initCommandPalette() {
+    const paletteBackdrop = $("#command-palette");
+    const cmdInput = $("#cmd-input");
+    const cmdResults = $("#cmd-results");
+    const triggerBtn = $("#cmd-trigger-btn");
+
+    if (!paletteBackdrop || !cmdInput || !cmdResults) return;
+
+    const commands = [
+      { group: "Navigation", icon: "🏠", title: "Hero Introduction", desc: "Jump to overview & core statement", action: () => scrollToSection("hero") },
+      { group: "Navigation", icon: "💼", title: "Selected Work (04 Builds)", desc: "Jump to Valtora, LifeHub, Teluguva, DevYatra", action: () => scrollToSection("work") },
+      { group: "Navigation", icon: "👤", title: "About the Builder", desc: "Background, mindset, education & philosophy", action: () => scrollToSection("about") },
+      { group: "Navigation", icon: "🔬", title: "Digital Laboratory", desc: "Interactive workbenches and prototypes", action: () => scrollToSection("lab") },
+      { group: "Navigation", icon: "⚡", title: "Technical Stack", desc: "Modern frontend, backend, 3D and AI models", action: () => scrollToSection("stack") },
+      { group: "Navigation", icon: "🧭", title: "Journey & Milestones", desc: "Timeline, Scaler, BITS Pilani & now", action: () => scrollToSection("journey") },
+      { group: "Navigation", icon: "✉️", title: "Contact", desc: "Get in touch for internships & opportunities", action: () => scrollToSection("contact") },
+
+      { group: "Projects", icon: "💡", title: "Valtora", desc: "AI analytical co-founder for startup validation", action: () => { openCaseStudy("valtora"); closePalette(); } },
+      { group: "Projects", icon: "📋", title: "LifeHub", desc: "Personal daily operating system & dashboard", action: () => { openCaseStudy("lifehub"); closePalette(); } },
+      { group: "Projects", icon: "🗣️", title: "Teluguva", desc: "Bilingual English to conversational Telugu with OCR", action: () => { openCaseStudy("teluguva"); closePalette(); } },
+      { group: "Projects", icon: "🏛️", title: "DevYatra", desc: "Sacred heritage geospatial atlas & AI planner", action: () => { openCaseStudy("devyatra"); closePalette(); } },
+
+      { group: "Case Studies", icon: "📄", title: "Valtora Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/valtora/index.html"; } },
+      { group: "Case Studies", icon: "📄", title: "LifeHub Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/lifehub/index.html"; } },
+      { group: "Case Studies", icon: "📄", title: "Teluguva Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/teluguva/index.html"; } },
+      { group: "Case Studies", icon: "📄", title: "DevYatra Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/devyatra/index.html"; } },
+
+      { group: "Actions", icon: "⏱️", title: "Recruiter 30s Quick Scan", desc: "Dense executive summary of candidate credentials", action: () => { if (window.openRecruiterModal) window.openRecruiterModal(); closePalette(); } },
+      { group: "Actions", icon: "✦", title: "Toggle Experience / Read Mode", desc: "Switch between 3D WebGL and minimal reader mode", action: () => { if (window.toggleExperienceMode) window.toggleExperienceMode(); closePalette(); } },
+      { group: "Actions", icon: "📑", title: "View Resume", desc: "Open verified ATS-friendly resume", action: () => { window.open("assets/resume/resume.html", "_blank"); closePalette(); } },
+      { group: "Actions", icon: "🐙", title: "Open GitHub Profile", desc: "github.com/gokul1599", action: () => { window.open("https://github.com/gokul1599", "_blank"); closePalette(); } }
+    ];
+
+    let selectedIndex = 0;
+    let filteredCommands = [...commands];
+
+    function openPalette() {
+      paletteBackdrop.classList.add("open");
+      paletteBackdrop.setAttribute("aria-hidden", "false");
+      cmdInput.value = "";
+      filterCommands("");
+      cmdInput.focus();
+      document.body.style.overflow = "hidden";
+    }
+
+    function closePalette() {
+      paletteBackdrop.classList.remove("open");
+      paletteBackdrop.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function scrollToSection(id) {
+      const el = $(`#${id}`);
+      if (el) {
+        closePalette();
+        const headerOffset = 76;
+        const pos = el.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: pos - headerOffset, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      }
+    }
+
+    function renderResults() {
+      if (filteredCommands.length === 0) {
+        cmdResults.innerHTML = `
+          <div style="padding: 24px; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 12px;">
+            No commands or projects matching query.
+          </div>
+        `;
+        return;
+      }
+
+      let html = "";
+      let currentGroup = "";
+      filteredCommands.forEach((cmd, idx) => {
+        if (cmd.group !== currentGroup) {
+          currentGroup = cmd.group;
+          html += `<div class="cmd-group-label">${currentGroup}</div>`;
+        }
+        html += `
+          <div class="cmd-item ${idx === selectedIndex ? 'active' : ''}" data-cmd-idx="${idx}" role="option">
+            <div class="cmd-item-left">
+              <span class="cmd-item-icon">${cmd.icon}</span>
+              <div class="cmd-item-info">
+                <span class="cmd-item-title">${cmd.title}</span>
+                <span class="cmd-item-desc">${cmd.desc}</span>
+              </div>
+            </div>
+            <span class="cmd-item-tag">${cmd.group}</span>
+          </div>
+        `;
+      });
+      cmdResults.innerHTML = html;
+
+      $$(".cmd-item", cmdResults).forEach((item) => {
+        item.addEventListener("click", () => {
+          const idx = parseInt(item.getAttribute("data-cmd-idx") || "0", 10);
+          if (filteredCommands[idx]) filteredCommands[idx].action();
+        });
+      });
+    }
+
+    function filterCommands(query) {
+      const q = query.trim().toLowerCase();
+      if (!q) {
+        filteredCommands = [...commands];
+      } else {
+        filteredCommands = commands.filter((c) =>
+          c.title.toLowerCase().includes(q) ||
+          c.desc.toLowerCase().includes(q) ||
+          c.group.toLowerCase().includes(q)
+        );
+      }
+      selectedIndex = 0;
+      renderResults();
+    }
+
+    cmdInput.addEventListener("input", (e) => {
+      filterCommands(e.target.value);
+    });
+
+    cmdInput.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        selectedIndex = (selectedIndex + 1) % filteredCommands.length;
+        renderResults();
+        ensureActiveItemVisible();
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        selectedIndex = (selectedIndex - 1 + filteredCommands.length) % filteredCommands.length;
+        renderResults();
+        ensureActiveItemVisible();
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (filteredCommands[selectedIndex]) {
+          filteredCommands[selectedIndex].action();
+        }
+      } else if (e.key === "Escape") {
+        closePalette();
+      }
+    });
+
+    function ensureActiveItemVisible() {
+      const activeEl = $(".cmd-item.active", cmdResults);
+      if (activeEl) {
+        activeEl.scrollIntoView({ block: "nearest" });
+      }
+    }
+
+    if (triggerBtn) {
+      triggerBtn.addEventListener("click", openPalette);
+    }
+
+    paletteBackdrop.addEventListener("click", (e) => {
+      if (e.target === paletteBackdrop) closePalette();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        if (paletteBackdrop.classList.contains("open")) {
+          closePalette();
+        } else {
+          openPalette();
+        }
+      }
+    });
+  }
+  initCommandPalette();
+
+  /* ============================================================
+     14. EXPERIENCE MODE VS. READ MODE CONTROLLER
+     ============================================================ */
+  function initModeToggle() {
+    const modeBtn = $("#mode-toggle-btn");
+    const modeLabel = $("#mode-label");
+
+    function applyMode(mode) {
+      if (mode === "read") {
+        isReadModeActive = true;
+        document.documentElement.setAttribute("data-mode", "read");
+        if (modeLabel) modeLabel.textContent = "READ MODE";
+        localStorage.setItem("gl_mode", "read");
+      } else {
+        isReadModeActive = false;
+        document.documentElement.setAttribute("data-mode", "experience");
+        if (modeLabel) modeLabel.textContent = "EXPERIENCE";
+        localStorage.setItem("gl_mode", "experience");
+      }
+    }
+
+    const savedMode = localStorage.getItem("gl_mode") || "experience";
+    applyMode(savedMode);
+
+    if (modeBtn) {
+      modeBtn.addEventListener("click", () => {
+        applyMode(isReadModeActive ? "experience" : "read");
+      });
+    }
+
+    window.toggleExperienceMode = function () {
+      applyMode(isReadModeActive ? "experience" : "read");
+    };
+  }
+  initModeToggle();
+
+  /* ============================================================
+     15. RECRUITER 30-SECOND QUICK SCAN DRAWER
+     ============================================================ */
+  function initRecruiterQuickView() {
+    const recruiterModal = $("#recruiter-modal");
+    const quickBtn = $("#recruiter-quick-btn");
+    const closeBtn = $("#recruiter-close-btn");
+
+    function openRecruiterModal() {
+      if (!recruiterModal) return;
+      recruiterModal.classList.add("open");
+      recruiterModal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeRecruiterModal() {
+      if (!recruiterModal) return;
+      recruiterModal.classList.remove("open");
+      recruiterModal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    window.openRecruiterModal = openRecruiterModal;
+    window.closeRecruiterModal = closeRecruiterModal;
+
+    if (quickBtn) quickBtn.addEventListener("click", openRecruiterModal);
+    if (closeBtn) closeBtn.addEventListener("click", closeRecruiterModal);
+
+    if (recruiterModal) {
+      recruiterModal.addEventListener("click", (e) => {
+        if (e.target === recruiterModal) closeRecruiterModal();
+      });
+    }
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && recruiterModal && recruiterModal.classList.contains("open")) {
+        closeRecruiterModal();
+      }
+    });
+  }
+  initRecruiterQuickView();
+
+  /* ============================================================
+     16. FLOATING BACK TO TOP BUTTON
+     ============================================================ */
+  function initBackToTop() {
+    const btn = $("#back-to-top");
+    if (!btn) return;
+
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY || document.documentElement.scrollTop;
+      btn.classList.toggle("visible", scrollY > 500);
+    }, { passive: true });
+
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+    });
+  }
+  initBackToTop();
+
+  /* ============================================================
+     17. LOG INITIALIZATION STATUS
+     ============================================================ */
+  console.log("%cGOKUL LABS %cv9.0 — Living Digital Architecture Engine Active (04 Products)", 
     "color: #38bdf8; font-weight: bold; font-family: monospace; font-size: 13px;",
     "color: #94a3b8; font-family: monospace; font-size: 11px;"
   );

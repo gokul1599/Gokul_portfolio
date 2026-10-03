@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DEVYATRA Case Study — Gokul Labs</title>
+  <meta name="description" content="Technical Case Study for DEVYATRA — AI Pilgrimage & India Geospatial Discovery Platform built by Gokul Karpurapu.">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+</head>
+<body class="case-study-page">
+  <header class="cs-topbar">
+    <div class="cs-topbar-inner">
+      <a href="../../#work" class="cs-back-btn">
+        <span class="arr">←</span>
+        <span>GOKUL LABS / SELECTED WORK</span>
+      </a>
+      <div class="cs-topbar-title">
+        <span class="cs-badge emerald">PROJECT 04</span>
+        <span class="cs-name">DEVYATRA</span>
+      </div>
+      <div class="cs-topbar-actions">
+        <a href="https://github.com/gokul1599/DEVYATRA" target="_blank" rel="noopener noreferrer" class="cs-action-btn">GITHUB ↗</a>
+        <a href="https://templeora.vercel.app" target="_blank" rel="noopener noreferrer" class="cs-action-btn primary emerald">LIVE PRODUCT ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="cs-container">
+    <section class="cs-hero">
+      <div class="cs-hero-meta">
+        <span class="cs-kicker emerald">04 // CASE STUDY</span>
+        <span class="cs-category">AI PILGRIMAGE + INDIA DISCOVERY PLATFORM</span>
+      </div>
+      <h1 class="cs-headline">DEVYATRA</h1>
+      <p class="cs-tagline">“Discover India's sacred heritage and natural wonders through geospatial intelligence.”</p>
+      <p class="cs-lead">
+        An interactive geospatial exploration platform for discovering India's temples, sacred destinations, heritage locations, caves, waterfalls, and nature trails, combined with multi-tier source verification and a context-scoped AI pilgrimage planner.
+      </p>
+
+      <div class="cs-meta-grid">
+        <div class="cs-meta-item">
+          <span class="m-lbl">ROLE</span>
+          <span class="m-val">Creator · Full-Stack &amp; Geospatial Builder</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">TIMELINE</span>
+          <span class="m-val">2026 // Production Shipped</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">CORE STACK</span>
+          <span class="m-val">Next.js 16 · React 19 · MapLibre GL · Neon PostgreSQL · Prisma ORM · Groq AI</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">VERIFICATION</span>
+          <span class="m-val green">Live on Vercel Edge &amp; Public GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 01: Overview & Problem -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">01</span>
+        <h2>THE PROBLEM &amp; GEOSPATIAL PURPOSE</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          Planning sacred pilgrimages and heritage explorations across India is a chronically frustrating ordeal. Information is fragmented across outdated regional tourism portals, conflicting Darshan hours, unverified dress codes, and commercial travel blogs with broken coordinates.
+        </p>
+        <p>
+          Travelers who wish to plan journeys that respectfully combine sacred temples, ancient rock-cut caves, UNESCO monuments, and natural waterfalls face an absence of source-grounded tools. Furthermore, general-purpose AI chat assistants routinely hallucinate opening hours, invent imaginary darshan ticket links, and suggest physically impossible mountain itineraries.
+        </p>
+        <p>
+          I engineered <strong>DevYatra</strong> to provide a grounded, truthful alternative: an atlas of India spanning all 36 states and union territories across 9 distinct geographic vectors (Temples, Heritage, Caves, Hills, Waterfalls, Lakes, Nature, Beaches, Wildlife), backed by a context-scoped AI route planner that refuses to hallucinate unverified facts.
+        </p>
+      </div>
+    </section>
+
+    <!-- 02: Exploration Vectors -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">02</span>
+        <h2>9 GEOGRAPHIC DISCOVERY VECTORS</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          DevYatra organizes destinations into 9 strictly typed and source-attributed categories, allowing users to discover both major monuments and lesser-known geographical treasures:
+        </p>
+      </div>
+      <div class="cs-decisions-grid">
+        <div class="cs-decision-item">
+          <h4>🏛️ Temples &amp; Shrines</h4>
+          <p>Ancient Shaivite Jyotirlingas, Vaishnavite Divya Desams, Shakti Peethas, and medieval stone sanctuaries with verified Darshan windows.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>🏰 Heritage &amp; Forts</h4>
+          <p>UNESCO World Heritage monuments, medieval Rajput and Kakatiya granite citadels, Mughal palaces, and architectural ruins.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>🗿 Caves &amp; Monoliths</h4>
+          <p>Ancient basalt Buddhist chaityas, monolithic excavations like Kailasa at Ellora, and natural karstic speleothems at Borra.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>⛰️ Hills &amp; Passes</h4>
+          <p>Western Ghats shola peaks, tea valley highlands, Nilgiri biosphere ridges, and Himalayan trans-mountain passes up to 5,300m.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>🌊 Waterfalls</h4>
+          <p>Spectacular multi-tier cascades, segmented monsoon torrents like Jog Falls, and deepest rainforest plunge basins like Nohkalikai.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>⛵ Lakes &amp; Wetlands</h4>
+          <p>High-altitude saline lakes at 4,350m (Pangong Tso), Ramsar wetland lagoons (Chilika), and floating phumdis (Loktak Lake).</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>🌿 Nature &amp; Canyons</h4>
+          <p>Indigenous living root bridges, deep granite river canyons (Gandikota), alpine flower sanctuaries, and seasonal salt deserts.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>🏖️ Beaches &amp; Coast</h4>
+          <p>Blue Flag certified coastlines, sacred pilgrim sea ghats, laterite geo-heritage cliffs, and tranquil island atolls.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>🐅 Wildlife Reserves</h4>
+          <p>Project Tiger reserves, the world's primary habitat for the One-horned Rhino, and the last sanctuary of wild Asiatic Lions at Gir.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03: System Architecture -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">03</span>
+        <h2>SYSTEM ARCHITECTURE</h2>
+      </div>
+      <div class="cs-arch-cards">
+        <div class="cs-arch-card">
+          <span class="a-badge emerald">LAYER 01</span>
+          <h3>Explorer UI &amp; MapLibre</h3>
+          <p>Next.js 16 and React 19 client with MapLibre GL vector maps, custom dark cartography tiles, and responsive mobile bottom sheets.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge emerald">LAYER 02</span>
+          <h3>Geospatial Database</h3>
+          <p>Serverless PostgreSQL on Neon managed via Prisma ORM with spatial index coordinates, state/district taxonomy, and relational joins.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge emerald">LAYER 03</span>
+          <h3>Provenance Engine</h3>
+          <p>Multi-tier data classification tagging records as GOVERNMENT_SOURCE, VERIFIED_OFFICIAL, TRUSTED_SOURCE, or UNVERIFIED with last-checked timestamps.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge emerald">LAYER 04</span>
+          <h3>Context-Scoped AI Planner</h3>
+          <p>Groq API LLM planner restricted to database-verified destinations, computing realistic day-by-day travel legs and Darshan timings.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04: Engineering Decisions -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">04</span>
+        <h2>ENGINEERING DECISIONS</h2>
+      </div>
+      <div class="cs-decisions-grid">
+        <div class="cs-decision-item">
+          <h4>Why Neon Serverless PostgreSQL + Prisma?</h4>
+          <p>Geospatial relationships (State → District → Sub-district → Shrines) demand strict relational integrity. Neon scales compute to zero during idle periods while providing instant query performance.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Why MapLibre GL over Google Maps SDK?</h4>
+          <p>MapLibre GL is completely open-source, lightweight, eliminates expensive per-load commercial API billing, and supports fully customizable dark obsidian map themes that match the studio aesthetic.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Zero-Hallucination AI Architecture</h4>
+          <p>AI models often fabricate opening hours or fake online booking URLs. DevYatra forces the Groq AI engine to select stops only from existing database rows with verified ground truth.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Transparent Provenance Tags</h4>
+          <p>Rather than claiming 100% false perfection, DevYatra labels source provenance honestly: government gazette records, verified temple board notices, and approximate coordinates are clearly marked.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05: Challenges & Lessons -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">05</span>
+        <h2>CHALLENGES &amp; LESSONS LEARNED</h2>
+      </div>
+      <div class="cs-challenges-box">
+        <div class="c-col">
+          <span class="c-kicker red">CHALLENGE</span>
+          <p>Displaying hundreds of geographic markers on mobile devices caused severe thread lock and sluggish scrolling during zoom gestures.</p>
+        </div>
+        <div class="c-col">
+          <span class="c-kicker cyan">SOLUTION</span>
+          <p>Implemented supercluster vector clustering on MapLibre and decoupled the active place drawer state using lightweight client-side spatial bounding box filters.</p>
+        </div>
+        <div class="c-col">
+          <span class="c-kicker green">LESSON</span>
+          <p>In geospatial software, performance depends heavily on data hierarchy: filter coarsely at the regional level before streaming detailed coordinates to the client.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-footer-nav">
+      <div class="cs-footer-actions">
+        <a href="https://templeora.vercel.app" target="_blank" rel="noopener noreferrer" class="btn-primary emerald-btn">
+          <span>EXPLORE LIVE PRODUCT ↗</span>
+        </a>
+        <a href="https://github.com/gokul1599/DEVYATRA" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <span>VIEW GITHUB REPO ↗</span>
+        </a>
+      </div>
+
+      <div class="cs-next-bar">
+        <span class="next-lbl">NEXT PROJECT</span>
+        <a href="../valtora/index.html" class="next-link">
+          <span>01 — VALTORA (AI Product Intelligence)</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cs-site-footer">
+    <div class="cs-footer-inner">
+      <span>GOKUL LABS © 2026 · GOKUL KARPURAPU</span>
+      <a href="../../#work">RETURN TO SELECTED WORK ↑</a>
+    </div>
+  </footer>
+</body>
+</html>
