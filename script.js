@@ -947,6 +947,11 @@
       isDraggingSpring = true;
     });
 
+    springTarget.addEventListener("touchstart", (e) => {
+      isDraggingSpring = true;
+      e.preventDefault();
+    }, { passive: false });
+
     window.addEventListener("mousemove", (e) => {
       if (!isDraggingSpring) return;
       const rect = springStage.getBoundingClientRect();
@@ -959,7 +964,23 @@
       springTarget.style.transform = `translate3d(${springPos.x}px, ${springPos.y}px, 0)`;
     });
 
+    window.addEventListener("touchmove", (e) => {
+      if (!isDraggingSpring || !e.touches || !e.touches[0]) return;
+      const rect = springStage.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      springPos.x = clamp(e.touches[0].clientX - cx, -90, 90);
+      springPos.y = clamp(e.touches[0].clientY - cy, -50, 50);
+      springVel.x = 0;
+      springVel.y = 0;
+      springTarget.style.transform = `translate3d(${springPos.x}px, ${springPos.y}px, 0)`;
+    }, { passive: true });
+
     window.addEventListener("mouseup", () => {
+      isDraggingSpring = false;
+    });
+
+    window.addEventListener("touchend", () => {
       isDraggingSpring = false;
     });
 
@@ -1780,6 +1801,55 @@
     }
   }
   initDigitalGokul();
+
+  /* ============================================================
+     16B. EMAIL COPY TO CLIPBOARD HANDLER
+     ============================================================ */
+  function initEmailCopy() {
+    const btn = $("#btn-copy-email");
+    if (!btn) return;
+
+    btn.addEventListener("click", () => {
+      const email = btn.getAttribute("data-email") || "gokulkarpurapu.1599@gmail.com";
+      const copyText = btn.querySelector(".copy-text");
+      const copyFeedback = btn.querySelector(".copy-feedback");
+
+      function showSuccess() {
+        btn.classList.add("copied");
+        if (copyText) copyText.style.display = "none";
+        if (copyFeedback) copyFeedback.style.display = "inline";
+
+        setTimeout(() => {
+          btn.classList.remove("copied");
+          if (copyText) copyText.style.display = "inline";
+          if (copyFeedback) copyFeedback.style.display = "none";
+        }, 2200);
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(showSuccess).catch(() => {
+          fallbackCopy(email);
+          showSuccess();
+        });
+      } else {
+        fallbackCopy(email);
+        showSuccess();
+      }
+    });
+
+    function fallbackCopy(text) {
+      const t = document.createElement("textarea");
+      t.value = text;
+      t.setAttribute("readonly", "");
+      t.style.position = "absolute";
+      t.style.left = "-9999px";
+      document.body.appendChild(t);
+      t.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(t);
+    }
+  }
+  initEmailCopy();
 
   /* ============================================================
      17. FLOATING BACK TO TOP BUTTON

@@ -3248,7 +3248,7 @@ input[type="range"] {
 
 .contact-channels-matrix {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
   border-top: 1px solid var(--border-subtle);
   padding-top: 40px;
@@ -3256,7 +3256,7 @@ input[type="range"] {
 .channel-unit {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   text-align: left;
 }
 .ch-label {
@@ -3264,6 +3264,12 @@ input[type="range"] {
   font-size: 10px;
   color: var(--text-muted);
   letter-spacing: 0.08em;
+}
+.ch-email-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 .ch-link {
   font-family: var(--font-mono);
@@ -3273,6 +3279,31 @@ input[type="range"] {
 }
 .ch-link:hover {
   color: var(--accent-cyan);
+}
+.btn-copy-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.btn-copy-email:hover {
+  background: var(--accent-cyan);
+  color: #06070a;
+}
+.btn-copy-email.copied {
+  background: rgba(74, 222, 128, 0.15);
+  border-color: rgba(74, 222, 128, 0.4);
+  color: #4ade80;
 }
 
 /* --------------------------------------------------------------------------
