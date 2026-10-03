@@ -26,11 +26,36 @@
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
   let isReadModeActive = false;
-  let isDigitalGokulSpeaking = false;
-  window.isDigitalGokulSpeaking = false;
-  window.setDigitalGokulSpeaking = function (speaking) {
-    isDigitalGokulSpeaking = !!speaking;
-    window.isDigitalGokulSpeaking = isDigitalGokulSpeaking;
+
+  /* ============================================================
+     CENTRALIZED SCROLL LOCK & ACCESSIBLE FOCUS MANAGER
+     Tracks active modals/drawers using a Set. Only restores scrolling
+     when all overlays have unlocked. Restores trigger focus on close.
+     ============================================================ */
+  const ScrollLock = {
+    locks: new Set(),
+    lastFocused: new Map(),
+    lock(id) {
+      if (document.activeElement) {
+        this.lastFocused.set(id, document.activeElement);
+      }
+      this.locks.add(id);
+      document.body.style.overflow = "hidden";
+    },
+    unlock(id) {
+      this.locks.delete(id);
+      if (this.locks.size === 0) {
+        document.body.style.overflow = "";
+      }
+      const prev = this.lastFocused.get(id);
+      if (prev && typeof prev.focus === "function") {
+        try { prev.focus(); } catch (err) {}
+      }
+      this.lastFocused.delete(id);
+    },
+    isLocked() {
+      return this.locks.size > 0;
+    }
   };
 
   /* ============================================================
@@ -131,12 +156,27 @@
       });
     }
 
-    // Work Section Sequential Active Tracking for Dock Navigator
-    if (projectCards.length >= 3) {
+    // Project Navigator Dock Visibility (Visible exclusively within Work section)
+    const workSection = $("#work");
+    const navDock = $("#project-nav-dock");
+    if (workSection && navDock) {
+      const workRect = workSection.getBoundingClientRect();
+      const inWork = workRect.top <= window.innerHeight * 0.45 && workRect.bottom >= window.innerHeight * 0.15;
+      navDock.classList.toggle("visible", inWork);
+    }
+
+    // Work Section Sequential Active Tracking for Dock Navigator (closest to viewport center)
+    if (projectCards.length > 0) {
+      const viewportCenter = window.innerHeight / 2;
+      let minDistance = Infinity;
       let activeProjIndex = 0;
+
       projectCards.forEach((pc, idx) => {
         const pRect = pc.getBoundingClientRect();
-        if (pRect.top <= window.innerHeight * 0.55 && pRect.bottom >= window.innerHeight * 0.15) {
+        const cardCenter = pRect.top + pRect.height / 2;
+        const dist = Math.abs(cardCenter - viewportCenter);
+        if (dist < minDistance) {
+          minDistance = dist;
           activeProjIndex = idx;
         }
       });
@@ -189,7 +229,7 @@
     menuBtn.setAttribute("aria-expanded", "true");
     navDrawer.classList.add("open");
     navDrawer.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    ScrollLock.lock("mobile-nav");
   }
 
   function closeMobileMenu() {
@@ -198,7 +238,7 @@
     menuBtn.setAttribute("aria-expanded", "false");
     navDrawer.classList.remove("open");
     navDrawer.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    ScrollLock.unlock("mobile-nav");
   }
 
   if (menuBtn && navDrawer) {
@@ -652,19 +692,11 @@
         artifactGroup.rotation.x = lerp(artifactGroup.rotation.x, targetArtifactRot.x, 0.04);
         artifactGroup.rotation.y = lerp(artifactGroup.rotation.y, targetArtifactRot.y, 0.04);
 
-        // Core Subtle Breathing & Digital Gokul Speech Coupling
+        // Core Subtle Ambient Breathing
         const breathe = Math.sin(elapsedTime * 1.5) * 0.05 + 1.0;
-        if (isDigitalGokulSpeaking) {
-          const vocalVibration = Math.sin(elapsedTime * 9) * 0.07;
-          coreGroup.scale.set(breathe + vocalVibration, breathe + vocalVibration, breathe + vocalVibration);
-          if (corePointLight) {
-            corePointLight.intensity = 3.5 + Math.sin(elapsedTime * 12) * 1.0;
-          }
-        } else {
-          coreGroup.scale.set(breathe, breathe, breathe);
-          if (corePointLight) {
-            corePointLight.intensity = 3.0;
-          }
+        coreGroup.scale.set(breathe, breathe, breathe);
+        if (corePointLight) {
+          corePointLight.intensity = 3.0;
         }
 
         // Sub-Layer Micro-Articulations (Subtle & slow, not spinning)
@@ -778,14 +810,17 @@
 
     modalBackdrop.classList.add("open");
     modalBackdrop.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    ScrollLock.lock("case-study-modal");
+    if (drawerCloseBtn) {
+      setTimeout(() => drawerCloseBtn.focus(), 50);
+    }
   }
 
   function closeCaseStudy() {
     if (!modalBackdrop) return;
     modalBackdrop.classList.remove("open");
     modalBackdrop.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    ScrollLock.unlock("case-study-modal");
   }
 
   window.openCaseStudy = openCaseStudy;
@@ -828,6 +863,10 @@
   // --- Lab 01: Prompt Structure Analyzer -----------------------
   const promptInput = $("#prompt-input");
   const outRole = $("#out-role");
+  const outContext = $("#out-context");
+  const outObjective = $("#out-objective");
+  const outConstraints = $("#out-constraints");
+  const outWords = $("#out-words");
   const outTokens = $("#out-tokens");
   const presetBtns = $$(".preset-btn");
 
@@ -838,15 +877,21 @@
   };
 
   function analyzePrompt(text) {
-    if (!text) return;
-    const words = text.trim().split(/\s+/).filter(Boolean);
+    if (typeof text !== "string") return;
+    const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean) : [];
     const tokens = Math.round(words.length * 1.32);
+    if (outWords) outWords.textContent = words.length;
     if (outTokens) outTokens.textContent = tokens;
 
-    const match = text.match(/ROLE:\s*([^\n\r]+)/i);
-    if (outRole) {
-      outRole.textContent = match ? match[1].trim() : "Custom Structure";
-    }
+    const roleMatch = text.match(/ROLE:\s*([^\n\r]+)/i);
+    const contextMatch = text.match(/CONTEXT:\s*([^\n\r]+)/i);
+    const objMatch = text.match(/OBJECTIVE:\s*([^\n\r]+)/i);
+    const constMatch = text.match(/CONSTRAINTS:\s*([^\n\r]+)/i);
+
+    if (outRole) outRole.textContent = roleMatch ? roleMatch[1].trim() : (words.length ? "Custom Structure" : "—");
+    if (outContext) outContext.textContent = contextMatch ? contextMatch[1].trim() : (words.length ? "Implicit from query" : "—");
+    if (outObjective) outObjective.textContent = objMatch ? objMatch[1].trim() : (words.length ? "General inquiry" : "—");
+    if (outConstraints) outConstraints.textContent = constMatch ? constMatch[1].trim() : (words.length ? "Standard system rules" : "—");
   }
 
   if (promptInput) {
@@ -1016,7 +1061,7 @@
     {
       tag: "STAGE 03 // TYPE-SAFE IMPLEMENTATION",
       headline: "Engineering, Clean Contracts &amp; Performance",
-      copy: "Construct modular React/Next.js/Three.js code with zero runtime errors, accessible DOM structure, and sub-100ms response targets."
+      copy: "Construct modular React/Next.js/Three.js code with zero runtime errors, accessible DOM structure, and responsive interaction performance."
     },
     {
       tag: "STAGE 04 // POLISHED SHIP",
@@ -1210,8 +1255,12 @@
 
     catChips.forEach((chip) => {
       chip.addEventListener("click", () => {
-        catChips.forEach((c) => c.classList.remove("active"));
+        catChips.forEach((c) => {
+          c.classList.remove("active");
+          c.setAttribute("aria-pressed", "false");
+        });
         chip.classList.add("active");
+        chip.setAttribute("aria-pressed", "true");
         activeCategory = chip.getAttribute("data-category") || "SACRED";
         const matching = window.DEVYATRA_PLACES.filter((p) => p.category === activeCategory);
         if (matching.length) {
@@ -1237,8 +1286,12 @@
     let planDays = 3;
     planPills.forEach((p) => {
       p.addEventListener("click", () => {
-        planPills.forEach((b) => b.classList.remove("active"));
+        planPills.forEach((b) => {
+          b.classList.remove("active");
+          b.setAttribute("aria-pressed", "false");
+        });
         p.classList.add("active");
+        p.setAttribute("aria-pressed", "true");
         planDays = parseInt(p.getAttribute("data-days") || "3", 10);
       });
     });
@@ -1254,9 +1307,9 @@
 
       let relevantPlaces = [];
       if (intent === "jyotirlinga") {
-        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "SACRED" && (p.tradition.includes("Shaivite") || p.tradition.includes("Jyotirlinga")));
+        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "SACRED" && p.tradition && (p.tradition.includes("Shaivite") || p.tradition.includes("Jyotirlinga")));
       } else if (intent === "vaishnavite") {
-        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "SACRED" && (p.tradition.includes("Vaishnavite") || p.tradition.includes("Divya Desam")));
+        relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "SACRED" && p.tradition && (p.tradition.includes("Vaishnavite") || p.tradition.includes("Divya Desam")));
       } else if (intent === "heritage") {
         relevantPlaces = window.DEVYATRA_PLACES.filter((p) => p.category === "HERITAGE" || p.category === "CAVES");
       } else {
@@ -1274,11 +1327,11 @@
           <span class="route-day-badge">DAY 0${idx + 1}</span>
           <div class="route-details">
             <h5 class="route-stop-title">${s.name}</h5>
-            <p class="route-stop-desc">${s.description.substring(0, 140)}...</p>
+            <p class="route-stop-desc">${(s.description || "").substring(0, 140)}...</p>
             <div class="route-stop-meta">
-              <span>📍 ${s.state} (${s.lat.toFixed(2)}°N, ${s.lng.toFixed(2)}°E)</span>
-              <span>⏰ ${s.timings.substring(0, 30)}</span>
-              <span>🛡️ ${s.verificationStatus}</span>
+              <span>📍 ${s.state} (${(s.lat || 0).toFixed(2)}°N, ${(s.lng || 0).toFixed(2)}°E)</span>
+              <span>⏰ ${(s.timings || "Standard visiting hours").substring(0, 30)}</span>
+              <span>🛡️ ${s.verificationStatus || "VERIFIED"}</span>
             </div>
           </div>
         </div>
@@ -1319,28 +1372,27 @@
     if (!paletteBackdrop || !cmdInput || !cmdResults) return;
 
     const commands = [
-      { group: "Navigation", icon: "🏠", title: "Hero Introduction", desc: "Jump to overview & core statement", action: () => scrollToSection("hero") },
-      { group: "Navigation", icon: "💼", title: "Selected Work (04 Builds)", desc: "Jump to Valtora, LifeHub, Teluguva, DevYatra", action: () => scrollToSection("work") },
-      { group: "Navigation", icon: "👤", title: "About the Builder", desc: "Background, mindset, education & philosophy", action: () => scrollToSection("about") },
-      { group: "Navigation", icon: "🔬", title: "Digital Laboratory", desc: "Interactive workbenches and prototypes", action: () => scrollToSection("lab") },
-      { group: "Navigation", icon: "⚡", title: "Technical Stack", desc: "Modern frontend, backend, 3D and AI models", action: () => scrollToSection("stack") },
-      { group: "Navigation", icon: "🧭", title: "Journey & Milestones", desc: "Timeline, Scaler, BITS Pilani & now", action: () => scrollToSection("journey") },
-      { group: "Navigation", icon: "✉️", title: "Contact", desc: "Get in touch for internships & opportunities", action: () => scrollToSection("contact") },
+      // --- NAVIGATION ---
+      { group: "Navigation", icon: "🏠", title: "Hero Introduction", desc: "Top of portfolio & identity statement", keywords: "hero home gokul karpurapu intro", action: () => scrollToSection("hero") },
+      { group: "Navigation", icon: "💼", title: "Selected Work (04 Builds)", desc: "Jump directly to Valtora, LifeHub, Teluguva, DevYatra", keywords: "work projects apps builds products portfolio", action: () => scrollToSection("work") },
+      { group: "Navigation", icon: "👤", title: "About the Builder", desc: "Background, mindset, education & philosophy", keywords: "about bio profile scaler bits pilani student", action: () => scrollToSection("about") },
+      { group: "Navigation", icon: "🔬", title: "Digital Laboratory", desc: "Interactive workbenches and prototypes", keywords: "lab experiments prompt shader spring physics pipeline visualizer", action: () => scrollToSection("lab") },
+      { group: "Navigation", icon: "⚡", title: "Technical Stack", desc: "Modern frontend, backend, 3D, and AI models", keywords: "stack skills tech tools technologies languages frameworks", action: () => scrollToSection("stack") },
+      { group: "Navigation", icon: "🧭", title: "Journey & Milestones", desc: "Timeline, Scaler, BITS Pilani & now", keywords: "journey timeline experience milestones history education", action: () => scrollToSection("journey") },
+      { group: "Navigation", icon: "✉️", title: "Contact & Connect", desc: "Get in touch for internships & opportunities", keywords: "contact email hire connect message linkedin github", action: () => scrollToSection("contact") },
 
-      { group: "Projects", icon: "💡", title: "Valtora", desc: "AI analytical co-founder for startup validation", action: () => { openCaseStudy("valtora"); closePalette(); } },
-      { group: "Projects", icon: "📋", title: "LifeHub", desc: "Personal daily operating system & dashboard", action: () => { openCaseStudy("lifehub"); closePalette(); } },
-      { group: "Projects", icon: "🗣️", title: "Teluguva", desc: "Bilingual English to conversational Telugu with OCR", action: () => { openCaseStudy("teluguva"); closePalette(); } },
-      { group: "Projects", icon: "🏛️", title: "DevYatra", desc: "Sacred heritage geospatial atlas & AI planner", action: () => { openCaseStudy("devyatra"); closePalette(); } },
+      // --- PROJECTS ---
+      { group: "Projects", icon: "💡", title: "Valtora", desc: "AI analytical co-founder for startup validation & sizing", keywords: "valtora startup venture market sizing cofounder groq llm case study", action: () => { openCaseStudy("valtora"); closePalette(); } },
+      { group: "Projects", icon: "📋", title: "LifeHub", desc: "Personal daily operating system & dashboard", keywords: "lifehub dashboard habits productivity finance calendar offline localstorage case study", action: () => { openCaseStudy("lifehub"); closePalette(); } },
+      { group: "Projects", icon: "🗣️", title: "Teluguva", desc: "Bilingual English to conversational Telugu with OCR", keywords: "teluguva telugu ocr tesseract translation audio speech accessibility case study", action: () => { openCaseStudy("teluguva"); closePalette(); } },
+      { group: "Projects", icon: "🏛️", title: "DevYatra / Templeora", desc: "Sacred heritage geospatial atlas & pilgrimage route planner", keywords: "devyatra templeora temples sacred atlas maps gis route planner itinerary case study", action: () => { openCaseStudy("devyatra"); closePalette(); } },
 
-      { group: "Case Studies", icon: "📄", title: "Valtora Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/valtora/index.html"; } },
-      { group: "Case Studies", icon: "📄", title: "LifeHub Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/lifehub/index.html"; } },
-      { group: "Case Studies", icon: "📄", title: "Teluguva Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/teluguva/index.html"; } },
-      { group: "Case Studies", icon: "📄", title: "DevYatra Full Case Study", desc: "Read in-depth architectural breakdown", action: () => { window.location.href = "work/devyatra/index.html"; } },
-
-      { group: "Actions", icon: "⏱️", title: "Recruiter 30s Quick Scan", desc: "Dense executive summary of candidate credentials", action: () => { if (window.openRecruiterModal) window.openRecruiterModal(); closePalette(); } },
-      { group: "Actions", icon: "✦", title: "Toggle Experience / Read Mode", desc: "Switch between 3D WebGL and minimal reader mode", action: () => { if (window.toggleExperienceMode) window.toggleExperienceMode(); closePalette(); } },
-      { group: "Actions", icon: "📑", title: "View Resume", desc: "Open verified ATS-friendly resume", action: () => { window.open("assets/resume/resume.html", "_blank"); closePalette(); } },
-      { group: "Actions", icon: "🐙", title: "Open GitHub Profile", desc: "github.com/gokul1599", action: () => { window.open("https://github.com/gokul1599", "_blank"); closePalette(); } }
+      // --- ACTIONS ---
+      { group: "Actions", icon: "⏱️", title: "Recruiter 30s Quick Scan", desc: "Dense executive summary of candidate credentials", keywords: "recruiter scan 30s summary resume candidate hire overview", action: () => { if (window.openRecruiterModal) window.openRecruiterModal(); closePalette(); } },
+      { group: "Actions", icon: "✦", title: "Toggle Experience / Read Mode", desc: "Switch between 3D WebGL and minimal reader mode", keywords: "mode read experience 3d toggle dark light theme switch", action: () => { if (window.toggleExperienceMode) window.toggleExperienceMode(); closePalette(); } },
+      { group: "Actions", icon: "📑", title: "View Verified Resume", desc: "Open print & ATS-ready developer resume", keywords: "resume cv pdf print credentials profile", action: () => { window.open("assets/resume/resume.html", "_blank"); closePalette(); } },
+      { group: "Actions", icon: "🐙", title: "Open GitHub Profile", desc: "github.com/gokul1599", keywords: "github git code repository repo source open source", action: () => { window.open("https://github.com/gokul1599", "_blank"); closePalette(); } },
+      { group: "Actions", icon: "✉️", title: "Send Direct Email", desc: "gokulkarpurapu.1599@gmail.com", keywords: "email mail send reach out contact get in touch", action: () => { window.location.href = "mailto:gokulkarpurapu.1599@gmail.com"; closePalette(); } }
     ];
 
     let selectedIndex = 0;
@@ -1351,14 +1403,14 @@
       paletteBackdrop.setAttribute("aria-hidden", "false");
       cmdInput.value = "";
       filterCommands("");
-      cmdInput.focus();
-      document.body.style.overflow = "hidden";
+      ScrollLock.lock("command-palette");
+      setTimeout(() => cmdInput.focus(), 30);
     }
 
     function closePalette() {
       paletteBackdrop.classList.remove("open");
       paletteBackdrop.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
+      ScrollLock.unlock("command-palette");
     }
 
     function scrollToSection(id) {
@@ -1419,7 +1471,8 @@
         filteredCommands = commands.filter((c) =>
           c.title.toLowerCase().includes(q) ||
           c.desc.toLowerCase().includes(q) ||
-          c.group.toLowerCase().includes(q)
+          c.group.toLowerCase().includes(q) ||
+          (c.keywords && c.keywords.toLowerCase().includes(q))
         );
       }
       selectedIndex = 0;
@@ -1431,6 +1484,10 @@
     });
 
     cmdInput.addEventListener("keydown", (e) => {
+      if (filteredCommands.length === 0) {
+        if (e.key === "Escape") closePalette();
+        return;
+      }
       if (e.key === "ArrowDown") {
         e.preventDefault();
         selectedIndex = (selectedIndex + 1) % filteredCommands.length;
@@ -1527,14 +1584,17 @@
       if (!recruiterModal) return;
       recruiterModal.classList.add("open");
       recruiterModal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
+      ScrollLock.lock("recruiter-modal");
+      if (closeBtn) {
+        setTimeout(() => closeBtn.focus(), 50);
+      }
     }
 
     function closeRecruiterModal() {
       if (!recruiterModal) return;
       recruiterModal.classList.remove("open");
       recruiterModal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
+      ScrollLock.unlock("recruiter-modal");
     }
 
     window.openRecruiterModal = openRecruiterModal;

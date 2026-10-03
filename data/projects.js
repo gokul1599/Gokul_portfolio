@@ -41,7 +41,7 @@ const PROJECTS = [
     engineeringDecisions: [
       {
         topic: "Why Groq with Llama 3 / Mixtral?",
-        rationale: "Early-stage venture ideation requires fast iteration. Groq's LPUs deliver token generation at ~300+ tokens/sec, reducing user wait time from 15s to sub-2s for dense blueprint synthesis."
+        rationale: "Early-stage venture ideation requires fast iteration. Optimized inference around Groq provides responsive interactive blueprint generation without long waiting periods."
       },
       {
         topic: "Why Appwrite for Backend?",
@@ -93,7 +93,7 @@ const PROJECTS = [
     workflow: ["PLAN", "MANAGE", "REMEMBER", "UNDERSTAND", "ACT"],
     architecture: [
       { step: "USER CONTEXT", role: "Daily routine, timezone, active tasks & financial limit preferences" },
-      { step: "REACT 19 CLIENT", role: "High-performance modular dashboard with sub-100ms client interactions" },
+      { step: "REACT 19 CLIENT", role: "High-performance modular dashboard with responsive client interactions" },
       { step: "ZUSTAND 5 STORE", role: "Decoupled state management synchronizing tasks, schedules & expenses" },
       { step: "LOCAL STORAGE & CACHE", role: "Offline-first resilience ensuring uninterrupted access during network drops" },
       { step: "OPEN-METEO & UTILITIES", role: "Live local weather telemetry and contextual time-based greetings" },
@@ -102,7 +102,7 @@ const PROJECTS = [
     engineeringDecisions: [
       {
         topic: "Why React 19 + Vite over heavyweight frameworks?",
-        rationale: "LifeHub is a daily dashboard tool that users open dozens of times a day. Instant client-side hydration and sub-50ms tab switching via Vite were prioritized over server-rendered overhead."
+        rationale: "LifeHub is a daily dashboard tool that users open repeatedly. Instant client-side hydration and rapid tab switching via Vite were prioritized over server-rendered overhead."
       },
       {
         topic: "Why Zustand 5 over Redux or React Context?",
@@ -119,7 +119,7 @@ const PROJECTS = [
     ],
     challenges: {
       problem: "Synchronizing live time-based greetings, dynamic weather APIs, expense budgets, and multi-category task lists without causing perceptible UI stutter on lower-end mobile devices.",
-      solution: "Decoupled the time and weather polling loops from UI state using requestIdleCallback and selective memoized components, ensuring 60fps animations across all screen sizes.",
+      solution: "Decoupled the time and weather polling loops from UI state using requestIdleCallback and selective memoized components, ensuring smooth responsiveness across screen sizes.",
       lesson: "High-frequency dashboard elements (like live ticking clocks and task filters) must be isolated into self-contained leaf components to preserve client render budgets."
     },
     caseStudy: {
@@ -127,7 +127,7 @@ const PROJECTS = [
       why: "Personal organization is chronically fragmented across disconnected calendar apps, standalone to-do lists, manual expense notes, and browser bookmarks, creating daily cognitive clutter.",
       how: "Architected a single-pane dashboard with unified state synchronization, allowing users to glance at their day, log expenditures, update tasks, and track routines in seconds.",
       intelligence: "Contextual heuristic algorithms that track daily routines, evaluate completion velocity across commitments, calculate expense burn rates, and surface timely daily priorities.",
-      engineering: "Built with React 19, TypeScript, and Vite for sub-100ms client interactions; state management orchestrated with Zustand 5; styled with Tailwind CSS v4 design tokens.",
+      engineering: "Built with React 19, TypeScript, and Vite for responsive client interactions; state management orchestrated with Zustand 5; styled with Tailwind CSS v4 design tokens.",
       stack: "React 19, TypeScript, Tailwind CSS v4, Zustand 5, Vite, React Router DOM 7, Vercel Edge Hosting.",
       experience: "Live digital clock and day counter, agenda timeline with task status indicators, categorized expense tracker with immediate balance summaries, and local weather glance."
     }
@@ -163,7 +163,7 @@ const PROJECTS = [
     engineeringDecisions: [
       {
         topic: "Why Client-Side Tesseract.js over Cloud Vision APIs?",
-        rationale: "Documents like utility bills and medical slips contain sensitive personal data. Client-side OCR keeps processing on the user's device, improves privacy, and incurs zero API cost."
+        rationale: "Documents like utility bills and medical slips contain sensitive personal data. Client-side OCR keeps processing on the user's device, improves privacy, and avoids cloud API operational overhead."
       },
       {
         topic: "Why 'Simple Telugu' over Literal Dictionary Translation?",
@@ -185,7 +185,7 @@ const PROJECTS = [
     },
     caseStudy: {
       what: "Teluguva is an intelligent bilingual accessibility platform that translates dense English communications, circulars, bills, and notices into clear conversational Telugu with audio narration.",
-      why: "Official government circulars, doctor prescriptions, school WhatsApp notices, and utility bills arrive in complex English, creating severe comprehension barriers for millions of Telugu speakers and elderly parents.",
+      why: "Official government circulars, doctor prescriptions, school WhatsApp notices, and utility bills arrive in complex English, creating real comprehension barriers for native Telugu speakers and elderly family members.",
       how: "Constructed a multimodal input pipeline (typed text, photo upload, document scan via OCR) paired with a specialized 'Simple Telugu Mode' that replaces formal literary jargon with everyday conversational speech.",
       intelligence: "Context-aware linguistic transformation tuned for colloquial clarity and situational nuance, paired with client-side OCR image text extraction and speech synthesis pacing.",
       engineering: "Built on Next.js 16 (App Router) and React 19; client-side Tesseract.js for in-browser OCR image extraction without server latency; Web Speech API integration with 0.75× and 1× playback pacing.",
@@ -196,20 +196,20 @@ const PROJECTS = [
   {
     id: "devyatra",
     number: "04",
-    name: "DEVYATRA",
-    subtitle: "AI PILGRIMAGE + INDIA DISCOVERY PLATFORM",
-    category: "GEOSPATIAL · AI PILGRIMAGE · INDIA ATLAS",
+    name: "DEVYATRA / TEMPLEORA",
+    subtitle: "SACRED HERITAGE & GEOSPATIAL ATLAS (TEMPLEORA-POWERED)",
+    category: "GEOSPATIAL · SACRED HERITAGE · INDIA ATLAS",
     year: "2026",
-    tagline: "Discover India's sacred heritage and natural wonders through geospatial intelligence.",
-    description: "An interactive platform for discovering India's temples, sacred destinations, heritage locations, caves, waterfalls, and nature trails, combined with source-verified metadata and an AI-assisted pilgrimage route planner.",
-    liveUrl: "https://templeora.vercel.app",
+    tagline: "India's sacred heritage and geography, mapped with verified provenance.",
+    description: "An interactive geospatial platform cataloging India's temples, sacred destinations, UNESCO heritage monuments, caves, waterfalls, and nature trails, combined with source-verified provenance and an intelligent pilgrimage route planner.",
+    liveUrl: "https://templeora.vercel.app/",
     githubUrl: "https://github.com/gokul1599/DEVYATRA",
     caseStudyPath: "work/devyatra/index.html",
     accentColor: "#10b981",
     technologies: ["Next.js 16 (App Router)", "React 19", "Tailwind CSS v4", "MapLibre GL", "Neon PostgreSQL", "Prisma ORM", "Groq AI", "Vercel"],
     transformation: {
       from: "FRAGMENTED DATA",
-      core: "GEOSPATIAL AI",
+      core: "GEOSPATIAL ATLAS",
       to: "GUIDED JOURNEY"
     },
     workflow: ["DISCOVER", "EXPLORE", "VERIFY", "PLAN", "TRAVEL"],
@@ -218,8 +218,8 @@ const PROJECTS = [
       { step: "DESTINATION ATLAS", role: "Grounded geospatial database spanning 36 states and union territories in Neon PostgreSQL" },
       { step: "MAPLIBRE CARTOGRAPHY", role: "Vector tile map rendering with interactive coordinate clustering & spatial bounds" },
       { step: "VERIFICATION ENGINE", role: "Multi-tier provenance classifying GOVERNMENT_SOURCE, VERIFIED_OFFICIAL, TRUSTED_SOURCE, UNVERIFIED" },
-      { step: "CONTEXT-SCOPED AI PLANNER", role: "Groq inference synthesizing personalized multi-day itineraries without hallucinated timings" },
-      { step: "TRAVEL BLUEPRINT", role: "Optimized route sequence, opening windows, cultural etiquette & live weather integration" }
+      { step: "CONTEXT-SCOPED PLANNER", role: "Rule-informed routing engine synthesizing personalized multi-day itineraries without hallucinated timings" },
+      { step: "TRAVEL BLUEPRINT", role: "Optimized route sequence, opening windows, cultural etiquette & verified location records" }
     ],
     engineeringDecisions: [
       {
@@ -231,8 +231,8 @@ const PROJECTS = [
         rationale: "MapLibre GL provides sovereign, open-source vector map rendering with high frame rates, zero vendor lock-in, and custom cinematic dark styling matching the studio design language."
       },
       {
-        topic: "Strict Zero-Hallucination AI Rules",
-        rationale: "Pilgrimage planning involves sacred timings (Aarti, Darshan, temple gate closings) where incorrect AI assumptions cause real physical disruption. The AI planner is strictly context-scoped: it only builds routes using verified database facts."
+        topic: "Strict Zero-Hallucination Route Planning",
+        rationale: "Pilgrimage planning involves sacred timings (Aarti, Darshan, temple gate closings) where incorrect assumptions cause real physical disruption. The route planner is strictly context-scoped: it only builds routes using verified database facts."
       },
       {
         topic: "Transparent Multi-Tier Verification Layer",
@@ -245,13 +245,13 @@ const PROJECTS = [
       lesson: "In data-dense geospatial platforms, honesty about data provenance and gaps builds substantially higher trust than presenting an illusion of total completeness."
     },
     caseStudy: {
-      what: "DevYatra is an AI-powered India temple, sacred destination, and geographical heritage explorer that bridges thousands of years of cultural geography with modern interactive mapping and intelligent pilgrimage route synthesis.",
+      what: "DevYatra is a Templeora-powered sacred destination and geographical heritage explorer that bridges cultural geography with modern interactive mapping and pilgrimage route synthesis.",
       why: "Planning pilgrimage journeys in India is chronically overwhelmed by fragmented websites, conflicting Darshan hours, unverified dress code rules, and lack of cohesive multi-destination route logic.",
-      how: "Built a hierarchical exploration engine spanning all 36 Indian states and union territories, categorized into 9 distinct exploration vectors (Temples, Heritage, Caves, Hills, Waterfalls, Lakes, Nature, Beaches, Wildlife) paired with an AI itinerary engine.",
-      intelligence: "Context-scoped LLM route planner that takes departure city, spiritual intent, and travel duration to calculate optimal daily stops, Darshan windows, and logistics without hallucinating timings.",
+      how: "Built a hierarchical exploration engine spanning all 36 Indian states and union territories, categorized into 9 distinct exploration vectors (Temples, Heritage, Caves, Hills, Waterfalls, Lakes, Nature, Beaches, Wildlife) paired with an itinerary engine.",
+      intelligence: "Context-scoped route planner that takes departure city, spiritual intent, and travel duration to calculate optimal daily stops, Darshan windows, and logistics from grounded records.",
       engineering: "Engineered on Next.js 16 (App Router), React 19, Tailwind CSS v4, MapLibre GL vector mapping, Neon PostgreSQL, and Prisma ORM.",
       stack: "Next.js 16, React 19, Tailwind CSS v4, MapLibre GL, Neon PostgreSQL, Prisma ORM, Groq AI, Vercel.",
-      experience: "Interactive India geospatial explorer with instant category filtering, real coordinate pins, detailed destination drawers with verified sources, and an AI Pilgrimage Planner generating structured travel itineraries."
+      experience: "Interactive India geospatial explorer with instant category filtering, real coordinate pins, detailed destination drawers with verified sources, and a pilgrimage route planner generating structured travel itineraries."
     }
   }
 ];

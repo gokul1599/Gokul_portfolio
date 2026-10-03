@@ -877,6 +877,13 @@ input, textarea {
   transform: translateY(-50%);
   z-index: 900;
   display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+.project-nav-dock.visible {
+  opacity: 1;
+  pointer-events: auto;
 }
 .nav-dock-track {
   display: flex;
@@ -3282,6 +3289,27 @@ input[type="range"] {
 /* --------------------------------------------------------------------------
    16. RESPONSIVE BREAKPOINTS (Desktop, Laptop, Tablet, Mobile)
    -------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .available-badge {
+    display: none;
+  }
+}
+
+@media (max-width: 1100px) {
+  .mode-toggle-btn {
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .nav-desktop {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
 @media (max-width: 1120px) {
   .hero-container {
     grid-template-columns: 1fr;

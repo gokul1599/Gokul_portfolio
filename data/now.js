@@ -9,23 +9,23 @@ const NOW_STATUS = {
   columns: [
     {
       label: "CURRENTLY BUILDING",
-      value: "Iterating on Valtora startup blueprints, LifeHub daily workspace, Teluguva OCR workflows, and DevYatra geospatial cartography.",
-      detail: "Shipping continuous improvements across all four live products with real user testing."
+      value: "AI/product experiences, productivity systems, language accessibility systems, and geospatial experiences.",
+      detail: "Iterating on Valtora venture blueprints, LifeHub daily workspace, Teluguva OCR, and DevYatra / Templeora sacred atlas."
     },
     {
       label: "CURRENTLY LEARNING",
-      value: "Advanced LLM application architectures, Groq low-latency streaming, and WebGL Three.js spatial scenes.",
-      detail: "Deepening core computer science and AI foundations through BITS Pilani and Scaler coursework."
+      value: "JavaScript, Python, AI application development, and foundational software engineering.",
+      detail: "Deepening core computer science and AI foundations through BITS Pilani and Scaler School of Technology coursework."
     },
     {
       label: "CURRENTLY EXPLORING",
-      value: "Multimodal interfaces, lightweight local-first web architectures, and seamless AI ergonomics.",
-      detail: "Studying how thoughtful interface craft makes complex AI systems feel effortless."
+      value: "WebGL spatial interactions, AI workflows, frontend architecture, and automation.",
+      detail: "Studying how thoughtful interface craft and reliable engineering make complex digital systems feel effortless."
     },
     {
       label: "LOOKING FOR",
-      value: "AI engineering internships, frontend/full-stack developer roles, and hackathon teams.",
-      detail: "Eager to contribute high visual craft and disciplined software execution to ambitious teams."
+      value: "AI engineering internships, frontend/full-stack developer opportunities, and collaborative builds.",
+      detail: "Eager to contribute strong interface craft and disciplined software execution to ambitious engineering teams."
     }
   ]
 };

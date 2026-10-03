@@ -42,8 +42,8 @@ Studying Computer Science at **BITS Pilani** (B.Sc. CS) and **Scaler School of T
 - **Case Study**: [/work/teluguva/](work/teluguva/)
 - **Tech Stack**: Next.js 16, React 19, TypeScript, Tesseract.js OCR, Web Speech API, Tailwind CSS v4
 
-### 4. [DevYatra](https://templeora.vercel.app/) — Sacred Heritage & Geospatial Atlas
-- **Tagline**: *“India's sacred heritage and geography, mapped with provenance.”*
+### 4. [DEVYATRA / TEMPLEORA](https://templeora.vercel.app/) — Sacred Heritage & Geospatial Atlas
+- **Tagline**: *“India's sacred heritage and geography, mapped with provenance (Templeora-powered).”*
 - **Description**: A production-grade geospatial platform cataloging ancient temples, UNESCO heritage monuments, caves, waterfalls, and sacred geography across India — featuring verified provenance tiers, exact coordinates, and an intelligent pilgrimage route synthesizer.
 - **Live App**: [https://templeora.vercel.app/](https://templeora.vercel.app/)
 - **Repository**: [https://github.com/gokul1599/DEVYATRA](https://github.com/gokul1599/DEVYATRA)
@@ -59,8 +59,8 @@ Studying Computer Science at **BITS Pilani** (B.Sc. CS) and **Scaler School of T
 - **Global Command Palette (`Cmd+K` / `Ctrl+K`)**: Rapid keyboard search and jump interface across all sections, projects, case studies, and quick actions.
 - **Recruiter 30-Second Quick View**: High-density executive scan summarizing academic credentials, 4 live products, tech proficiencies, and direct contacts.
 - **Dedicated Case Study Routes**: Standalone deep dives with system architecture, problem breakdowns, engineering trade-offs, and lessons learned (`/work/valtora`, `/work/lifehub`, `/work/teluguva`, `/work/devyatra`).
-- **DevYatra Interactive Atlas**: Live filter across 9 geographic categories with source provenance attribution (`GOVERNMENT_SOURCE`, `VERIFIED_OFFICIAL`, `TRUSTED_SOURCE`, `UNVERIFIED`) and interactive AI pilgrimage planner simulator.
-- **Zero Framework Bloat**: Custom vanilla CSS & JavaScript engine delivering sub-100ms interactions and zero hydration lag.
+- **DevYatra Interactive Atlas**: Live filter across 9 geographic categories with source provenance attribution (`GOVERNMENT_SOURCE`, `VERIFIED_OFFICIAL`, `TRUSTED_SOURCE`, `UNVERIFIED`) and interactive pilgrimage route planner simulator.
+- **Zero Framework Bloat**: Custom vanilla CSS & JavaScript engine delivering responsive interactions, lightweight bundles, and zero hydration lag.
 - **Hosting & Edge**: Vercel Production Edge.
 - **Studio Repository**: [https://github.com/gokul1599/gokul-labs](https://github.com/gokul1599/gokul-labs)
 
@@ -68,7 +68,7 @@ Studying Computer Science at **BITS Pilani** (B.Sc. CS) and **Scaler School of T
 
 ## 📬 Contact & Links
 
-- **Email**: [gokulkarpurapu@gmail.com](mailto:gokulkarpurapu@gmail.com)
+- **Email**: [gokulkarpurapu.1599@gmail.com](mailto:gokulkarpurapu.1599@gmail.com)
 - **LinkedIn**: [linkedin.com/in/gokul-karpurapu](https://www.linkedin.com/in/gokul-karpurapu-8b234141b/)
 - **GitHub**: [github.com/gokul1599](https://github.com/gokul1599)
 - **Resume**: [gokul-labs.vercel.app/assets/resume/resume.html](https://gokul-labs.vercel.app/assets/resume/resume.html)
