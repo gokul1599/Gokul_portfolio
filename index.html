@@ -89,14 +89,14 @@
       <!-- Header Utilities -->
       <div class="header-actions">
         <!-- Command Palette Trigger (Cmd+K / Ctrl+K) -->
-        <button class="cmd-trigger-btn magnetic-btn" id="cmd-trigger-btn" aria-label="Open Command Palette (Cmd+K)" title="Command Palette (Cmd+K / Ctrl+K)">
+        <button class="cmd-trigger-btn magnetic-btn" id="cmd-trigger-btn" aria-label="Open Command Palette (Ctrl+K)" title="Command Palette (Ctrl+K / ⌘K)">
           <span class="cmd-icon-svg">
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
               <circle cx="6.5" cy="6.5" r="4.5"/>
               <path d="M10 10l4 4" stroke-linecap="round"/>
             </svg>
           </span>
-          <span class="cmd-kbd-badge"><kbd>⌘</kbd><kbd>K</kbd></span>
+          <span class="cmd-kbd-badge" id="cmd-kbd-badge"><kbd id="cmd-key-symbol">Ctrl</kbd><kbd>K</kbd></span>
         </button>
 
         <!-- Experience Mode / Read Mode Toggle -->
@@ -231,8 +231,104 @@
           </div>
         </div>
 
-        <!-- Hero Right Column: Spatial Zone for 3D Living Digital Artifact -->
-        <div class="hero-artifact-hud" aria-hidden="true"></div>
+        <!-- Hero Right Column: Spatial Zone for 3D Living Digital Artifact & Digital Gokul Voice -->
+        <div class="hero-artifact-hud" id="hero-artifact-hud">
+          <div class="digital-gokul-card" id="digital-gokul-card" aria-label="Digital Gokul Voice Introduction">
+            <!-- Card Top Status Header -->
+            <div class="dg-header">
+              <div class="dg-status">
+                <span class="dg-status-dot" id="dg-status-dot"></span>
+                <span class="dg-status-title">DIGITAL GOKUL</span>
+              </div>
+              <span class="dg-transparency-tag">AI-GENERATED INTRO</span>
+            </div>
+
+            <!-- Profile Identity Grid -->
+            <div class="dg-profile-row">
+              <div class="dg-portrait-frame">
+                <img src="assets/gokul-portrait.jpg" alt="Portrait of Gokul Karpurapu" class="dg-portrait-img" id="dg-portrait-img" width="76" height="76" loading="eager" />
+                <div class="dg-voice-ring" id="dg-voice-ring" aria-hidden="true"></div>
+              </div>
+              <div class="dg-identity-col">
+                <div class="dg-name-row">
+                  <span class="dg-name">Gokul Karpurapu</span>
+                  <span class="dg-verified-badge" title="Verified Creator Identity">✓</span>
+                </div>
+                <span class="dg-role">AI Developer · Product Builder</span>
+                <div class="dg-duration-row">
+                  <span class="dg-dur-pill">16.6s Voice Intro</span>
+                  <span class="dg-dur-pill mono">44.1 kHz WAV</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Primary Action Trigger -->
+            <div class="dg-action-row">
+              <button type="button" class="btn-introduce magnetic-btn" id="btn-introduce" aria-label="Introduce Yourself - Play Gokul Voice Introduction">
+                <span class="intro-btn-pulse" aria-hidden="true"></span>
+                <svg viewBox="0 0 24 24" fill="currentColor" class="intro-icon" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" id="intro-btn-icon-path"/>
+                </svg>
+                <span id="intro-btn-label">INTRODUCE YOURSELF</span>
+              </button>
+            </div>
+
+            <!-- Synchronized Captions Dock -->
+            <div class="digital-captions-dock" id="digital-captions-dock" aria-live="polite">
+              <div class="captions-meta-bar">
+                <span class="captions-label">LIVE CAPTIONS</span>
+                <span class="captions-time" id="captions-time-code">00:00 / 00:16</span>
+              </div>
+              <p class="digital-caption-text" id="digital-caption-text">
+                Click “Introduce Yourself” to hear Gokul introduce GOKUL LABS and his engineering philosophy.
+              </p>
+              <div class="captions-progress-bar">
+                <span class="captions-progress-fill" id="captions-progress-fill" style="width: 0%;"></span>
+              </div>
+            </div>
+
+            <!-- Audio Waveform Visualizer Canvas -->
+            <div class="dg-waveform-box" aria-hidden="true">
+              <canvas id="dg-waveform-canvas" width="280" height="28"></canvas>
+            </div>
+
+            <!-- Playback Controls Bar -->
+            <div class="dg-controls-bar">
+              <button type="button" class="dg-ctrl-btn" id="ctrl-mute-btn" aria-label="Mute Voice Audio" title="Mute Audio">
+                <span id="ctrl-mute-icon">🔊</span>
+                <span class="ctrl-btn-text">Mute</span>
+              </button>
+              <button type="button" class="dg-ctrl-btn" id="ctrl-replay-btn" aria-label="Replay Voice Introduction" title="Replay">
+                <span>↺</span>
+                <span class="ctrl-btn-text">Replay</span>
+              </button>
+              <button type="button" class="dg-ctrl-btn" id="ctrl-skip-btn" aria-label="Skip Voice Audio" title="Skip">
+                <span>⏭</span>
+                <span class="ctrl-btn-text">Skip</span>
+              </button>
+              <button type="button" class="dg-ctrl-btn" id="ctrl-transcript-btn" aria-expanded="false" aria-controls="intro-transcript-drawer" title="Toggle Full Spoken Transcript">
+                <span>≡</span>
+                <span class="ctrl-btn-text">Transcript</span>
+              </button>
+            </div>
+
+            <!-- Native Audio Element with verified audio file -->
+            <audio id="gokul-intro-audio" preload="metadata" src="assets/audio/gokul-intro.wav"></audio>
+
+            <!-- Collapsible Accessible Transcript Drawer -->
+            <div class="intro-transcript-drawer" id="intro-transcript-drawer" aria-hidden="true">
+              <div class="transcript-drawer-content">
+                <div class="transcript-header-row">
+                  <span class="transcript-tag">FULL SPOKEN TRANSCRIPT</span>
+                  <span class="transcript-duration">16.6s</span>
+                </div>
+                <blockquote class="transcript-quote">
+                  “Hey, I'm Gokul. I'm a computer science student focused on AI and software. I like taking ideas, understanding the problem behind them, and turning them into products people can actually use. Welcome to GOKUL LABS.”
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Hero Bottom Editorial Status Bar -->
@@ -559,22 +655,22 @@
                     <div class="lh-tasks-grid">
                       <div class="lh-task-item done">
                         <span class="check-box">✓</span>
-                        <span class="task-text">Study Neural Network Optimization</span>
+                        <span class="task-text">Review project plan</span>
                       </div>
                       <div class="lh-task-item active">
                         <span class="check-box">●</span>
-                        <span class="task-text">Ship Gokul Labs Architecture Upgrade</span>
+                        <span class="task-text">Complete assignment</span>
                       </div>
                       <div class="lh-task-item">
                         <span class="check-box">○</span>
-                        <span class="task-text">Calibrate Teluguva OCR Document Parser</span>
+                        <span class="task-text">Call project partner</span>
                       </div>
                     </div>
 
                     <div class="lh-footer-modules">
                       <div class="lh-sub-card">
                         <span class="sub-label">EXPENSES TODAY</span>
-                        <span class="sub-val">$18.50 Coffee/Books · $45 Cloud</span>
+                        <span class="sub-val">$18.50 Books · $45 Cloud Tools</span>
                       </div>
                       <div class="lh-sub-card">
                         <span class="sub-label">WEATHER</span>
@@ -743,7 +839,7 @@
                   <div class="project-brand-mark dy-mark">🏛️</div>
                   <div>
                     <h3 class="project-title">DEVYATRA</h3>
-                    <div class="project-subtitle">SACRED HERITAGE &amp; GEOSPATIAL ATLAS</div>
+                    <div class="project-subtitle">SACRED HERITAGE &amp; GEOSPATIAL ATLAS / TEMPLEORA</div>
                   </div>
                 </div>
 
@@ -1556,9 +1652,11 @@
             </div>
             <div class="bw-right">
               <div class="bw-stack-list">
-                <span class="bw-tag">Next.js / Modern Web Stack</span>
+                <span class="bw-tag">HTML5 Semantics</span>
+                <span class="bw-tag">Modern CSS Architecture</span>
+                <span class="bw-tag">Vanilla ES6+ JavaScript</span>
                 <span class="bw-tag">Three.js / WebGL</span>
-                <span class="bw-tag">Vanilla CSS Architecture</span>
+                <span class="bw-tag">Web Audio API &amp; Waveforms</span>
                 <span class="bw-tag">Vercel Edge Platform</span>
               </div>
               <a href="https://github.com/gokul1599/gokul-labs" target="_blank" rel="noopener noreferrer" class="bw-repo-link magnetic-btn">
