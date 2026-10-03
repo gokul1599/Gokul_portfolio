@@ -1,11 +1,11 @@
 /**
- * GOKUL LABS — Project Registry & Case Study Architecture v10.0
+ * GOKUL LABS — Project Registry & Case Study Architecture v9.0
  * Verified product data for Gokul Karpurapu's portfolio.
  * 
  * Strict Content Rule:
  *  - 100% genuine information from verified builds.
  *  - Zero fabricated metrics, fake users, or invented repositories.
- *  - Three flagship products in Selected Work: VALTORA, LIFEHUB, TELUGUVA.
+ *  - Four core products: VALTORA, LIFEHUB, TELUGUVA, DEVYATRA.
  *  - Structured WHAT / WHY / HOW / ARCHITECTURE / DECISIONS / AI FLOW / CHALLENGES schema.
  */
 

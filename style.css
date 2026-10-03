@@ -790,351 +790,76 @@ input, textarea {
   color: var(--accent-cyan);
 }
 
-/* Hero Right HUD & Digital Gokul Introduction */
+/* Hero Right HUD Orientation Card */
 .hero-artifact-hud {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
   pointer-events: none;
 }
-
-.digital-gokul-card {
-  pointer-events: auto;
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  background: rgba(10, 14, 23, 0.78);
-  border: 1px solid rgba(56, 189, 248, 0.22);
-  border-radius: var(--radius-lg, 16px);
-  overflow: hidden;
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(56, 189, 248, 0.08);
-  transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+.artifact-hud-card {
+  max-width: 320px;
+  background: var(--surface-panel);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
-
-.digital-gokul-card:hover {
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.75), 0 0 50px rgba(56, 189, 248, 0.14);
-}
-
-.digital-gokul-card.is-speaking {
-  border-color: rgba(56, 189, 248, 0.55);
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8), 0 0 60px rgba(56, 189, 248, 0.22);
-}
-
-.digital-gokul-media-wrap {
-  position: relative;
-  width: 100%;
-  height: 290px;
-  background: #080d17;
-  overflow: hidden;
-}
-
-.digital-gokul-portrait {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 18%;
-  display: block;
-  filter: contrast(1.05) brightness(0.92);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
-}
-
-.digital-gokul-card.is-speaking .digital-gokul-portrait {
-  filter: contrast(1.1) brightness(1.02);
-  transform: scale(1.025);
-}
-
-.digital-gokul-backdrop-glow {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
-  pointer-events: none;
-  mix-blend-mode: screen;
-}
-
-.digital-gokul-vignette {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(8, 12, 20, 0.2) 0%, transparent 40%, rgba(8, 12, 20, 0.85) 88%, rgba(8, 12, 20, 0.98) 100%),
-              radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.6) 100%);
-  pointer-events: none;
-}
-
-.digital-gokul-waveform {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 48px;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.digital-intro-badge {
-  position: absolute;
-  top: 14px;
-  right: 14px;
+.hud-card-header {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(8, 12, 20, 0.85);
-  border: 1px solid rgba(56, 189, 248, 0.3);
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--accent-cyan);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 4;
+  gap: 8px;
+  margin-bottom: 12px;
 }
-
-.digital-intro-dot {
+.hud-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background-color: var(--accent-cyan);
   box-shadow: 0 0 8px var(--accent-cyan);
-  animation: introDotPulse 2s infinite ease-in-out;
 }
-
-@keyframes introDotPulse {
-  0%, 100% { opacity: 0.4; transform: scale(0.9); }
-  50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 12px var(--accent-cyan); }
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
 }
-
-/* Idle Overlay with Introduce Yourself Trigger */
-.digital-gokul-overlay {
-  position: absolute;
-  inset: 0;
+.hud-phase-indicator {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: rgba(8, 12, 20, 0.35);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  z-index: 5;
+  margin-bottom: 10px;
 }
-
-.digital-gokul-card.is-speaking .digital-gokul-overlay {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.digital-gokul-kicker {
+.phase-code {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  color: #e2e8f0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
-}
-
-.btn-introduce-yourself {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.28), rgba(99, 102, 241, 0.28));
-  border: 1px solid rgba(56, 189, 248, 0.55);
-  color: #ffffff;
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  padding: 10px 18px;
-  border-radius: 999px;
-  cursor: pointer;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 16px rgba(56, 189, 248, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.btn-introduce-yourself:hover {
-  background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(99, 102, 241, 0.4));
-  border-color: rgba(56, 189, 248, 0.8);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.5), 0 0 24px rgba(56, 189, 248, 0.45);
-  transform: translateY(-2px);
-}
-
-.btn-intro-icon {
-  font-size: 10px;
   color: var(--accent-cyan);
 }
-
-/* Captions Dock */
-.digital-gokul-captions-dock {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 14px;
-  background: linear-gradient(180deg, rgba(8, 12, 20, 0.7) 0%, rgba(8, 12, 20, 0.95) 100%);
-  border-top: 1px solid rgba(56, 189, 248, 0.15);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  min-height: 48px;
-  display: flex;
-  align-items: center;
-  z-index: 6;
-  opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-}
-
-.digital-gokul-card.is-speaking .digital-gokul-captions-dock,
-.digital-gokul-card.has-captions .digital-gokul-captions-dock {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.caption-text {
-  font-family: var(--font-body);
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: #f8fafc;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
-  display: block;
-  width: 100%;
-  animation: captionGlow 0.3s ease-out;
-}
-
-@keyframes captionGlow {
-  0% { opacity: 0.6; transform: translateY(2px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* Playback Controls Toolbar */
-.digital-gokul-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 16px;
-  background: rgba(13, 18, 30, 0.96);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.controls-status {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.speaking-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--text-muted);
-  transition: all 0.3s ease;
-}
-
-.digital-gokul-card.is-speaking .speaking-indicator {
-  background: #10b981;
-  box-shadow: 0 0 10px #10b981;
-  animation: speakingPulse 1.2s infinite ease-in-out;
-}
-
-@keyframes speakingPulse {
-  0%, 100% { transform: scale(0.9); opacity: 0.7; }
-  50% { transform: scale(1.3); opacity: 1; }
-}
-
-.status-label {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
-
-.digital-gokul-card.is-speaking .status-label {
-  color: var(--accent-cyan);
-}
-
-.controls-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ctrl-btn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #cbd5e1;
-  font-size: 11px;
-  font-family: var(--font-mono);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.ctrl-btn:hover {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: rgba(56, 189, 248, 0.4);
-  color: #ffffff;
-}
-
-.ctrl-btn.transcript-toggle {
-  border-radius: 6px;
-  width: 34px;
+.phase-name {
+  font-family: var(--font-display);
+  font-size: 16px;
   font-weight: 700;
-  font-size: 9.5px;
-  letter-spacing: 0.06em;
+  color: var(--text-primary);
 }
-
-.ctrl-btn.transcript-toggle.active {
-  background: rgba(56, 189, 248, 0.25);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
-}
-
-/* Accessible Transcript Drawer */
-.digital-transcript-drawer {
-  padding: 14px 16px;
-  background: rgba(8, 12, 20, 0.96);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 12.5px;
-  line-height: 1.55;
+.hud-desc {
+  font-size: 13px;
   color: var(--text-secondary);
-  animation: transcriptSlideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  line-height: 1.5;
+  margin-bottom: 16px;
 }
-
-.digital-transcript-drawer[hidden] {
-  display: none !important;
-}
-
-@keyframes transcriptSlideDown {
-  0% { opacity: 0; transform: translateY(-6px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-.transcript-header {
+.hud-interactive-hint {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
+  gap: 8px;
   font-family: var(--font-mono);
   font-size: 10px;
-  letter-spacing: 0.08em;
   color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 10px;
 }
-
-.transcript-content {
-  margin: 0;
-  color: #e2e8f0;
-  font-style: italic;
+.hint-arrow {
+  color: var(--accent-cyan);
 }
 
 /* Hero Bottom Bar */
@@ -3594,12 +3319,7 @@ input[type="range"] {
     gap: 32px;
   }
   .hero-artifact-hud {
-    justify-content: center;
-    margin-top: 20px;
-  }
-  .digital-gokul-card {
-    max-width: 100%;
-    margin: 0 auto;
+    justify-content: flex-start;
   }
   .stack-categories-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -3735,13 +3455,6 @@ input[type="range"] {
   .drawer-content-scroll {
     padding: 32px 20px;
   }
-  .digital-gokul-media-wrap {
-    height: 250px;
-  }
-  .btn-introduce-yourself {
-    font-size: 11px;
-    padding: 8px 14px;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -3764,13 +3477,6 @@ input[type="range"] {
   }
   .webgl-fallback-emblem {
     display: grid !important;
-  }
-  .digital-gokul-portrait {
-    transform: none !important;
-    filter: contrast(1.05) brightness(0.95) !important;
-  }
-  .digital-intro-dot, .speaking-indicator {
-    animation: none !important;
   }
   .custom-cursor-dot, .custom-cursor-ring {
     display: none !important;
