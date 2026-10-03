@@ -95,38 +95,10 @@ const PROJECTS = [
       stack: "Next.js 16 (App Router), React 19, TypeScript, Tesseract.js OCR, Web Speech API, Tailwind CSS v4, Vercel.",
       experience: "Clean dual-pane comparative layout, drag-and-drop document scanner with OCR status indicators, audio playback controls with adjustable reading speeds, and font size scaling (A, A+, A++) for elderly readability."
     }
-  },
-  {
-    id: "gokul-labs",
-    number: "04",
-    name: "GOKUL LABS",
-    subtitle: "DEVELOPER PORTFOLIO & DIGITAL STUDIO",
-    category: "PERSONAL STUDIO · INTERACTIVE · WEB SYSTEMS",
-    year: "2026",
-    tagline: "A personal digital studio where ideas become products.",
-    description: "A focused developer portfolio and living digital architecture platform presenting selected projects, technical stack, learning trajectory, and contact systems with an intentional, restrained developer experience.",
-    liveUrl: "https://gokul-labs.vercel.app/",
-    githubUrl: "https://github.com/gokul1599/gokul-labs",
-    accentColor: "#38bdf8",
-    technologies: ["Next.js / Modern Web Stack", "Three.js / WebGL", "JavaScript", "Responsive Design", "Vercel"],
-    transformation: {
-      from: "RAW CODE",
-      core: "LIVING ARTIFACT",
-      to: "STUDIO PLATFORM"
-    },
-    workflow: ["ARCHITECTURE", "3D ARTIFACT", "VERIFIED BUILDS", "PRODUCTION EDGE"],
-    caseStudy: {
-      what: "Gokul Labs is a personal digital studio and developer portfolio engineered to showcase real-world projects, technical exploration, and product philosophy with high visual craft.",
-      why: "Standard developer portfolios often rely on generic templates, distracting animations, or unverified claims. Gokul Labs proves capabilities through live verified products and restrained, intentional design.",
-      how: "Engineered an editorial digital environment featuring a restrained 3D digital artifact, an interactive Laboratory workbench with 4 real-time experiments, and deep architectural case studies.",
-      intelligence: "Heuristic prompt tokenizer analysis, dynamic shader material calibration, and harmonic spring physics simulation integrated into real-time web prototypes.",
-      engineering: "Custom Three.js WebGL scene with scroll-synchronized geometry targets, zero artificial telemetry bloat, and sub-second edge deployment on Vercel.",
-      stack: "Next.js / Modern Web Stack, Three.js, WebGL, CSS Architecture, Vercel Edge Hosting.",
-      experience: "Disciplined obsidian aesthetic, desktop project quick-navigator, interactive case study drawers, and real-time interactive laboratory modules."
-    }
   }
 ];
 
 if (typeof window !== "undefined") {
   window.PROJECTS = PROJECTS;
 }
+

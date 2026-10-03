@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Coordinate Not Found | GOKUL LABS</title>
+  <meta name="description" content="The requested page could not be located in the Gokul Labs digital studio registry.">
+  <meta name="theme-color" content="#06070a">
+  
+  <!-- Modern Vector Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2306070a' stroke='%2338bdf8' stroke-width='1.5'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='900' fill='%2338bdf8' text-anchor='middle'%3EG%3C/text%3E%3C/svg%3E">
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg-primary: #06070a;
+      --surface-panel: rgba(13, 16, 23, 0.75);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(56, 189, 248, 0.35);
+      --accent-cyan: #38bdf8;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --font-display: 'Space Grotesk', system-ui, sans-serif;
+      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .ambient-bloom {
+      position: fixed;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.07) 0%, rgba(99, 102, 241, 0.04) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Minimal Header */
+    .error-header {
+      padding: 28px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .brand-sig {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .brand-monogram {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      padding: 4px 8px;
+      border: 1px solid var(--border-accent);
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    /* Main Error Container */
+    .error-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .error-card {
+      max-width: 640px;
+      width: 100%;
+      background: var(--surface-panel);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 56px 48px;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+
+    .error-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--accent-cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .error-code {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 12vw, 110px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      background: linear-gradient(180deg, #ffffff 30%, rgba(255, 255, 255, 0.25) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .error-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 14px;
+    }
+
+    .error-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin: 0 auto 36px auto;
+    }
+
+    .error-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .btn-return {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 700;
+      color: #06070a;
+      background: #ffffff;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-return:hover {
+      background: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(56, 189, 248, 0.35);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      padding: 12px 22px;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .quick-projects-strip {
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quick-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .quick-links-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .quick-chip {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .quick-chip:hover {
+      color: var(--accent-cyan);
+      border-color: var(--border-accent);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    /* Minimal Footer */
+    .error-footer {
+      padding: 24px;
+      text-align: center;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 10;
+    }
+
+    @media (max-width: 600px) {
+      .error-card {
+        padding: 40px 24px;
+      }
+      .error-actions {
+        flex-direction: column;
+      }
+      .btn-return, .btn-outline {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-bloom" aria-hidden="true"></div>
+
+  <header class="error-header">
+    <a href="index.html" class="brand-sig">
+      <span class="brand-monogram">GL</span>
+      <span class="brand-title">GOKUL LABS</span>
+    </a>
+  </header>
+
+  <main class="error-main">
+    <div class="error-card">
+      <div class="error-kicker">
+        <span>◆</span>
+        <span>SYSTEM COORDINATE EXCEPTION</span>
+      </div>
+
+      <div class="error-code">404</div>
+
+      <h1 class="error-title">EXPERIMENT NOT FOUND</h1>
+
+      <p class="error-desc">
+        The requested digital coordinate or experiment does not exist in the Gokul Labs architecture registry. Return to the studio home to explore verified products.
+      </p>
+
+      <div class="error-actions">
+        <a href="index.html" class="btn-return">
+          <span>RETURN TO STUDIO</span>
+          <span>→</span>
+        </a>
+        <a href="index.html#work" class="btn-outline">
+          <span>SELECTED WORK</span>
+        </a>
+        <a href="assets/resume/resume.html" class="btn-outline">
+          <span>VIEW RESUME</span>
+        </a>
+      </div>
+
+      <div class="quick-projects-strip">
+        <span class="quick-label">VERIFIED LIVE BUILDS:</span>
+        <div class="quick-links-row">
+          <a href="https://valtora-swart.vercel.app/" target="_blank" rel="noopener noreferrer" class="quick-chip">VALTORA ↗</a>
+          <a href="https://lifehub-sage.vercel.app/" target="_blank" rel="noopener noreferrer" class="quick-chip">LIFEHUB ↗</a>
+          <a href="https://teluguva.vercel.app" target="_blank" rel="noopener noreferrer" class="quick-chip">TELUGUVA ↗</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="error-footer">
+    GOKUL LABS © 2026 Gokul Karpurapu · AI Developer &amp; Product Builder
+  </footer>
+</body>
+</html>

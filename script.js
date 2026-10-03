@@ -125,7 +125,7 @@
     }
 
     // Work Section Sequential Active Tracking for Dock Navigator
-    if (projectCards.length >= 4) {
+    if (projectCards.length >= 3) {
       let activeProjIndex = 0;
       projectCards.forEach((pc, idx) => {
         const pRect = pc.getBoundingClientRect();
