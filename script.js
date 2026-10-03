@@ -267,6 +267,11 @@
 
   let updateArtifactMaterial = null;
   let highlightArtifactLayer = null;
+  let isDigitalGokulSpeaking = false;
+
+  window.setDigitalGokulSpeaking = function (speaking) {
+    isDigitalGokulSpeaking = !!speaking;
+  };
 
   const canvasEl = $("#webgl-canvas");
   if (canvasEl) {
@@ -462,7 +467,9 @@
       };
 
       // Expose Stack Layer Resonance Hook
+      let highlightArtifactLayerActive = false;
       highlightArtifactLayer = function (layerName) {
+        highlightArtifactLayerActive = !!layerName;
         if (layerName === "ai" || layerName === "tools") {
           coreMat.emissiveIntensity = 2.4;
           corePointLight.intensity = 6.0;
@@ -660,6 +667,18 @@
           const baseHeight = (idx - 1.5) * 0.95;
           plate.position.y = lerp(plate.position.y, baseHeight * targetLogicSeparation, 0.04);
         });
+
+        // Digital Gokul Introduction Speech Response (Soft, Understated Pulse)
+        if (isDigitalGokulSpeaking) {
+          const speechPulse = Math.sin(elapsedTime * 3.2) * 0.5 + 0.5;
+          corePointLight.intensity = lerp(corePointLight.intensity, 3.2 + speechPulse * 1.8, 0.12);
+          coreMat.emissiveIntensity = lerp(coreMat.emissiveIntensity, 1.2 + speechPulse * 0.7, 0.12);
+          rimLightCyan.intensity = lerp(rimLightCyan.intensity, 3.4 + speechPulse * 1.0, 0.12);
+        } else if (!highlightArtifactLayerActive) {
+          corePointLight.intensity = lerp(corePointLight.intensity, 3.0, 0.06);
+          coreMat.emissiveIntensity = lerp(coreMat.emissiveIntensity, 0.85, 0.06);
+          rimLightCyan.intensity = lerp(rimLightCyan.intensity, 3.2, 0.06);
+        }
 
         renderer.render(scene, camera);
       }
@@ -1523,9 +1542,233 @@
   initBackToTop();
 
   /* ============================================================
-     17. LOG INITIALIZATION STATUS
+     17. DIGITAL GOKUL INTRODUCTION CONTROLLER
      ============================================================ */
-  console.log("%cGOKUL LABS %cv9.0 — Living Digital Architecture Engine Active (04 Products)", 
+  function initDigitalGokul() {
+    const card = $("#digital-gokul-card");
+    const introBtn = $("#btn-introduce");
+    const audio = $("#gokul-intro-audio");
+    const captionText = $("#digital-caption-text");
+    const statusLbl = $("#playback-status-lbl");
+    const muteBtn = $("#ctrl-mute-btn");
+    const muteIcon = $("#ctrl-mute-icon");
+    const replayBtn = $("#ctrl-replay-btn");
+    const skipBtn = $("#ctrl-skip-btn");
+    const transcriptBtn = $("#ctrl-transcript-btn");
+    const transcriptDrawer = $("#intro-transcript-drawer");
+    const waveformCanvas = $("#digital-gokul-waveform");
+
+    if (!card || !introBtn) return;
+
+    const INTRO_CAPTIONS = [
+      { start: 0.0, end: 1.8, text: "Hey, I'm Gokul." },
+      { start: 1.8, end: 5.6, text: "I'm a computer science student focused on AI and software." },
+      { start: 5.6, end: 10.2, text: "I like taking ideas, understanding the problem behind them," },
+      { start: 10.2, end: 14.2, text: "and turning them into products people can actually use." },
+      { start: 14.2, end: 17.5, text: "Welcome to GOKUL LABS." }
+    ];
+
+    let isPlaying = false;
+    let animFrameWave = null;
+    let fallbackTimer = null;
+    let waveCtx = waveformCanvas ? waveformCanvas.getContext("2d") : null;
+
+    function resizeWaveform() {
+      if (!waveformCanvas) return;
+      waveformCanvas.width = waveformCanvas.offsetWidth || 360;
+      waveformCanvas.height = waveformCanvas.offsetHeight || 48;
+    }
+    resizeWaveform();
+    window.addEventListener("resize", resizeWaveform, { passive: true });
+
+    function drawWaveform(time) {
+      if (!waveCtx || !waveformCanvas) return;
+      waveCtx.clearRect(0, 0, waveformCanvas.width, waveformCanvas.height);
+
+      if (!isPlaying) return;
+
+      const bars = 24;
+      const width = waveformCanvas.width;
+      const height = waveformCanvas.height;
+      const barWidth = 3;
+      const gap = (width - bars * barWidth) / (bars + 1);
+
+      for (let i = 0; i < bars; i++) {
+        const x = gap + i * (barWidth + gap);
+        const wave = Math.sin(time * 0.006 + i * 0.4) * Math.cos(time * 0.003 - i * 0.2);
+        const norm = Math.abs(wave);
+        const barHeight = Math.max(4, norm * (height * 0.75));
+        const y = height - barHeight - 4;
+
+        waveCtx.fillStyle = i % 2 === 0 ? "rgba(56, 189, 248, 0.7)" : "rgba(99, 102, 241, 0.6)";
+        waveCtx.fillRect(x, y, barWidth, barHeight);
+      }
+
+      animFrameWave = requestAnimationFrame(drawWaveform);
+    }
+
+    function updateCaptions(currentTime) {
+      if (!captionText) return;
+      const currentSegment = INTRO_CAPTIONS.find(
+        (seg) => currentTime >= seg.start && currentTime <= seg.end
+      );
+
+      if (currentSegment) {
+        if (captionText.textContent !== currentSegment.text) {
+          captionText.textContent = currentSegment.text;
+        }
+        card.classList.add("has-captions");
+      }
+    }
+
+    function startSpeakingState() {
+      isPlaying = true;
+      card.classList.add("is-speaking");
+      card.classList.add("has-captions");
+      if (statusLbl) statusLbl.textContent = "Speaking · 16s";
+      if (window.setDigitalGokulSpeaking) window.setDigitalGokulSpeaking(true);
+      if (waveformCanvas) {
+        cancelAnimationFrame(animFrameWave);
+        animFrameWave = requestAnimationFrame(drawWaveform);
+      }
+    }
+
+    function stopSpeakingState(completed = false) {
+      isPlaying = false;
+      card.classList.remove("is-speaking");
+      if (window.setDigitalGokulSpeaking) window.setDigitalGokulSpeaking(false);
+      if (animFrameWave) cancelAnimationFrame(animFrameWave);
+      if (waveCtx && waveformCanvas) {
+        waveCtx.clearRect(0, 0, waveformCanvas.width, waveformCanvas.height);
+      }
+      if (statusLbl) {
+        statusLbl.textContent = completed ? "Introduction Complete" : "16s Introduction";
+      }
+      if (introBtn) {
+        const textSpan = introBtn.querySelector("span:not(.btn-intro-icon)");
+        if (textSpan) textSpan.textContent = "REPLAY INTRO";
+      }
+      setTimeout(() => {
+        if (!isPlaying) {
+          card.classList.remove("has-captions");
+        }
+      }, 3500);
+    }
+
+    function runTimedCaptionFallback() {
+      let elapsed = 0;
+      clearInterval(fallbackTimer);
+      fallbackTimer = setInterval(() => {
+        elapsed += 0.25;
+        updateCaptions(elapsed);
+        if (elapsed >= 17.5) {
+          clearInterval(fallbackTimer);
+          stopSpeakingState(true);
+        }
+      }, 250);
+    }
+
+    function fallbackVoiceOrCaptions() {
+      if ("speechSynthesis" in window && (!audio || !audio.src)) {
+        const script = "Hey, I'm Gokul. I'm a computer science student focused on AI and software. I like taking ideas, understanding the problem behind them, and turning them into products people can actually use. Welcome to GOKUL LABS.";
+        const utter = new SpeechSynthesisUtterance(script);
+        utter.rate = 0.95;
+        utter.pitch = 1.0;
+        utter.onend = () => stopSpeakingState(true);
+        utter.onerror = () => runTimedCaptionFallback();
+        window.speechSynthesis.speak(utter);
+        runTimedCaptionFallback();
+      } else {
+        runTimedCaptionFallback();
+      }
+    }
+
+    function playIntroduction() {
+      startSpeakingState();
+
+      if (audio && audio.src) {
+        audio.currentTime = 0;
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              // Playing audio
+            })
+            .catch(() => {
+              fallbackVoiceOrCaptions();
+            });
+        }
+      } else {
+        fallbackVoiceOrCaptions();
+      }
+    }
+
+    if (audio) {
+      audio.addEventListener("timeupdate", () => {
+        if (isPlaying) {
+          updateCaptions(audio.currentTime);
+        }
+      });
+
+      audio.addEventListener("ended", () => {
+        stopSpeakingState(true);
+      });
+
+      audio.addEventListener("pause", () => {
+        if (audio.currentTime > 0 && !audio.ended && isPlaying) {
+          stopSpeakingState(false);
+        }
+      });
+    }
+
+    introBtn.addEventListener("click", () => {
+      playIntroduction();
+    });
+
+    if (replayBtn) {
+      replayBtn.addEventListener("click", () => {
+        playIntroduction();
+      });
+    }
+
+    if (muteBtn && audio) {
+      muteBtn.addEventListener("click", () => {
+        audio.muted = !audio.muted;
+        if (muteIcon) muteIcon.textContent = audio.muted ? "🔇" : "🔊";
+        muteBtn.title = audio.muted ? "Unmute" : "Mute";
+        muteBtn.setAttribute("aria-label", audio.muted ? "Unmute" : "Mute");
+      });
+    }
+
+    if (skipBtn) {
+      skipBtn.addEventListener("click", () => {
+        if (audio) {
+          audio.pause();
+          audio.currentTime = 0;
+        }
+        if (window.speechSynthesis) window.speechSynthesis.cancel();
+        clearInterval(fallbackTimer);
+        stopSpeakingState(false);
+        if (statusLbl) statusLbl.textContent = "Intro Skipped";
+      });
+    }
+
+    if (transcriptBtn && transcriptDrawer) {
+      transcriptBtn.addEventListener("click", () => {
+        const isExpanded = transcriptBtn.getAttribute("aria-expanded") === "true";
+        transcriptBtn.setAttribute("aria-expanded", String(!isExpanded));
+        transcriptBtn.classList.toggle("active", !isExpanded);
+        transcriptDrawer.hidden = isExpanded;
+      });
+    }
+  }
+  initDigitalGokul();
+
+  /* ============================================================
+     18. LOG INITIALIZATION STATUS
+     ============================================================ */
+  console.log("%cGOKUL LABS %cv10.0 — Living Digital Architecture Engine Active (03 Products + Digital Gokul)", 
     "color: #38bdf8; font-weight: bold; font-family: monospace; font-size: 13px;",
     "color: #94a3b8; font-family: monospace; font-size: 11px;"
   );
