@@ -38,6 +38,56 @@
   
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="style.css">
+
+  <!-- Structured Data / JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://gokul-labs.vercel.app/#person",
+        "name": "Gokul Karpurapu",
+        "jobTitle": "AI Developer · Product Builder",
+        "url": "https://gokul-labs.vercel.app",
+        "email": "mailto:gokulkarpurapu@gmail.com",
+        "sameAs": [
+          "https://x.com/gokul_k_12",
+          "https://github.com/gokul1599",
+          "https://www.linkedin.com/in/gokul-karpurapu-8b234141b/"
+        ],
+        "knowsAbout": [
+          "Artificial Intelligence",
+          "Product Engineering",
+          "Full-Stack Web Development",
+          "Prompt Engineering",
+          "Three.js",
+          "React",
+          "Next.js"
+        ],
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "BITS Pilani"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Scaler School of Technology"
+          }
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://gokul-labs.vercel.app/#website",
+        "url": "https://gokul-labs.vercel.app",
+        "name": "GOKUL LABS",
+        "publisher": {
+          "@id": "https://gokul-labs.vercel.app/#person"
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body class="theme-dark">
   <!-- Skip Link for Accessibility -->
