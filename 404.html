@@ -10,10 +10,10 @@
   <!-- Modern Vector Favicon -->
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-  <!-- Typography -->
+  <!-- Editorial Typography Matrix -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     *, *::before, *::after {
@@ -31,9 +31,16 @@
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
-      --font-display: 'Space Grotesk', system-ui, sans-serif;
-      --font-body: 'Plus Jakarta Sans', system-ui, sans-serif;
-      --font-mono: 'DM Mono', monospace;
+      --font-hero: "Space Grotesk", system-ui, -apple-system, sans-serif;
+      --font-work: "Sora", system-ui, -apple-system, sans-serif;
+      --font-editorial: "Instrument Serif", Georgia, serif;
+      --font-lab: "IBM Plex Mono", monospace;
+      --font-stack: "Manrope", system-ui, sans-serif;
+      --font-journey: "DM Sans", system-ui, sans-serif;
+      --font-meta: "DM Mono", monospace;
+      --font-display: var(--font-hero);
+      --font-body: var(--font-journey);
+      --font-mono: var(--font-meta);
     }
 
     body {
