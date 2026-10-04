@@ -1392,7 +1392,8 @@
       { group: "Actions", icon: "✦", title: "Toggle Experience / Read Mode", desc: "Switch between 3D WebGL and minimal reader mode", keywords: "mode read experience 3d toggle dark light theme switch", action: () => { if (window.toggleExperienceMode) window.toggleExperienceMode(); closePalette(); } },
       { group: "Actions", icon: "📑", title: "View Verified Resume", desc: "Open print & ATS-ready developer resume", keywords: "resume cv pdf print credentials profile", action: () => { window.open("assets/resume/resume.html", "_blank"); closePalette(); } },
       { group: "Actions", icon: "🐙", title: "Open GitHub Profile", desc: "github.com/gokul1599", keywords: "github git code repository repo source open source", action: () => { window.open("https://github.com/gokul1599", "_blank"); closePalette(); } },
-      { group: "Actions", icon: "✉️", title: "Send Direct Email", desc: "gokulkarpurapu.1599@gmail.com", keywords: "email mail send reach out contact get in touch", action: () => { window.location.href = "mailto:gokulkarpurapu.1599@gmail.com"; closePalette(); } }
+      { group: "Actions", icon: "🐦", title: "Open X / Twitter", desc: "x.com/gokul_k_12", keywords: "x twitter social profile tweets", action: () => { window.open("https://x.com/gokul_k_12", "_blank"); closePalette(); } },
+      { group: "Actions", icon: "✉️", title: "Send Direct Email", desc: "gokulkarpurapu@gmail.com", keywords: "email mail send reach out contact get in touch", action: () => { window.location.href = "mailto:gokulkarpurapu@gmail.com"; closePalette(); } }
     ];
 
     let selectedIndex = 0;
@@ -1627,7 +1628,7 @@
     if (!btn) return;
 
     btn.addEventListener("click", () => {
-      const email = btn.getAttribute("data-email") || "gokulkarpurapu.1599@gmail.com";
+      const email = btn.getAttribute("data-email") || "gokulkarpurapu@gmail.com";
       const copyText = btn.querySelector(".copy-text");
       const copyFeedback = btn.querySelector(".copy-feedback");
 

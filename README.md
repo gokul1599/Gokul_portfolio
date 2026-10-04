@@ -68,7 +68,8 @@ Studying Computer Science at **BITS Pilani** (B.Sc. CS) and **Scaler School of T
 
 ## 📬 Contact & Links
 
-- **Email**: [gokulkarpurapu.1599@gmail.com](mailto:gokulkarpurapu.1599@gmail.com)
+- **Email**: [gokulkarpurapu@gmail.com](mailto:gokulkarpurapu@gmail.com)
+- **X (Twitter)**: [x.com/gokul_k_12](https://x.com/gokul_k_12)
 - **LinkedIn**: [linkedin.com/in/gokul-karpurapu](https://www.linkedin.com/in/gokul-karpurapu-8b234141b/)
 - **GitHub**: [github.com/gokul1599](https://github.com/gokul1599)
 - **Resume**: [gokul-labs.vercel.app/assets/resume/resume.html](https://gokul-labs.vercel.app/assets/resume/resume.html)
