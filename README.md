@@ -24,7 +24,7 @@ Studying Computer Science at **BITS Pilani** (B.Sc. CS) and **Scaler School of T
 - **Live App**: [https://valtora-swart.vercel.app/](https://valtora-swart.vercel.app/)
 - **Repository**: [https://github.com/gokul1599/valtora](https://github.com/gokul1599/valtora)
 - **Case Study**: [/work/valtora/](work/valtora/)
-- **Tech Stack**: React, TypeScript, Tailwind CSS, LLM Integration, Vercel
+- **Tech Stack**: Next.js 16, React 19, Prisma 7, TypeScript, Tailwind CSS, Groq AI, Vercel
 
 ### 2. [LifeHub](https://lifehub-sage.vercel.app/) — Personal Operating System
 - **Tagline**: *“Your life. One intelligent space.”*

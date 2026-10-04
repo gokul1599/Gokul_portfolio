@@ -23,7 +23,7 @@ const PROJECTS = [
     githubUrl: "https://github.com/gokul1599/valtora",
     caseStudyPath: "work/valtora/index.html",
     accentColor: "#38bdf8",
-    technologies: ["React 18", "TypeScript", "Tailwind CSS", "Appwrite", "Groq AI", "Zod", "Vercel"],
+    technologies: ["Next.js 16", "React 19", "Prisma 7", "TypeScript", "Tailwind CSS", "Groq AI", "Zod", "Vercel"],
     transformation: {
       from: "IDEA",
       core: "INTELLIGENCE",
@@ -32,8 +32,8 @@ const PROJECTS = [
     workflow: ["IDEA", "UNDERSTANDING", "CHALLENGE", "ROADMAP", "ACTION"],
     architecture: [
       { step: "USER INPUT", role: "Early startup thesis & problem formulation" },
-      { step: "REACT CLIENT", role: "Interactive state engine with challenge workflows & re-roll triggers" },
-      { step: "APPWRITE BACKEND", role: "Secure session authentication, user workspaces & document storage" },
+      { step: "NEXT.JS CLIENT", role: "Interactive state engine with challenge workflows & structured input forms" },
+      { step: "PRISMA ORM & DB", role: "Type-safe database layer with structured persistence for venture blueprints" },
       { step: "GROQ LLM ENGINE", role: "Low-latency inference for market sizing, moat analysis & risk evaluation" },
       { step: "ZOD VALIDATION", role: "Strict schema enforcement preventing malformed blueprints and prompt leaks" },
       { step: "VENTURE BLUEPRINT", role: "Actionable 90-day milestone roadmap & target customer profile" }
@@ -44,8 +44,8 @@ const PROJECTS = [
         rationale: "Early-stage venture ideation requires fast iteration. Optimized inference around Groq provides responsive interactive blueprint generation without long waiting periods."
       },
       {
-        topic: "Why Appwrite for Backend?",
-        rationale: "Integrated authentication, secure document storage, and database access controls out of the box, allowing rapid full-stack iteration without maintaining complex custom database servers."
+        topic: "Why Prisma 7 & Next.js Full Stack?",
+        rationale: "Next.js App Router combined with Prisma ORM provides end-to-end type safety, unified API routes for Groq streaming, and clean relational data modeling for venture workspaces."
       },
       {
         topic: "Why Zod for Schema Validation?",
@@ -66,8 +66,8 @@ const PROJECTS = [
       why: "First-time founders frequently struggle with unstructured brainstorming, premature scaling, and lack of objective stress-testing before writing code, wasting months on unvalidated hypotheses.",
       how: "Created a guided 5-stage analytical pipeline (Idea, Understanding, Challenge, Roadmap, Action) that prompts founders through structured discovery, market sizing, and distribution modeling.",
       intelligence: "Employs disciplined LLM prompting pipelines to analyze problem-solution fit, model addressable market scopes (TAM/SAM), map competitive differentiation vectors, and challenge weak assumptions.",
-      engineering: "Engineered with React and TypeScript for predictable state transitions, high-contrast dark aesthetic with Tailwind CSS, and optimized edge streaming response handling on Vercel.",
-      stack: "React 18, TypeScript, Tailwind CSS, Appwrite, Groq API, Zod Validation, Lucide Icons, Vercel Edge Hosting.",
+      engineering: "Engineered with Next.js 16 and React 19 for predictable state transitions, Prisma 7 for structured persistence, high-contrast dark aesthetic with Tailwind CSS, and optimized edge streaming response handling on Vercel.",
+      stack: "Next.js 16, React 19, Prisma 7, TypeScript, Tailwind CSS, Groq API, Zod Validation, jose, Vercel Edge Hosting.",
       experience: "A focused, dark-mode terminal canvas with interactive pipeline progress rails, real-time blueprint synthesis, risk engine cards, and actionable 90-day execution roadmaps."
     }
   },

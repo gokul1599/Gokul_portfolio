@@ -1134,22 +1134,37 @@
     const plannerView = $("#dy-view-planner");
 
     if (explorerBtn && plannerBtn && explorerView && plannerView) {
-      explorerBtn.addEventListener("click", () => {
-        explorerBtn.classList.add("active");
-        explorerBtn.setAttribute("aria-selected", "true");
-        plannerBtn.classList.remove("active");
-        plannerBtn.setAttribute("aria-selected", "false");
-        explorerView.style.display = "grid";
-        plannerView.style.display = "none";
-      });
+      function switchDevYatraTab(tab) {
+        if (tab === "explorer") {
+          explorerBtn.classList.add("active");
+          explorerBtn.setAttribute("aria-selected", "true");
+          plannerBtn.classList.remove("active");
+          plannerBtn.setAttribute("aria-selected", "false");
+          explorerView.style.display = "grid";
+          plannerView.style.display = "none";
+        } else {
+          plannerBtn.classList.add("active");
+          plannerBtn.setAttribute("aria-selected", "true");
+          explorerBtn.classList.remove("active");
+          explorerBtn.setAttribute("aria-selected", "false");
+          plannerView.style.display = "grid";
+          explorerView.style.display = "none";
+        }
+      }
 
-      plannerBtn.addEventListener("click", () => {
-        plannerBtn.classList.add("active");
-        plannerBtn.setAttribute("aria-selected", "true");
-        explorerBtn.classList.remove("active");
-        explorerBtn.setAttribute("aria-selected", "false");
-        plannerView.style.display = "grid";
-        explorerView.style.display = "none";
+      explorerBtn.addEventListener("click", () => switchDevYatraTab("explorer"));
+      plannerBtn.addEventListener("click", () => switchDevYatraTab("planner"));
+
+      const dyTabs = [explorerBtn, plannerBtn];
+      dyTabs.forEach((tab, index) => {
+        tab.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+            e.preventDefault();
+            const nextIndex = (index + 1) % dyTabs.length;
+            dyTabs[nextIndex].focus();
+            dyTabs[nextIndex].click();
+          }
+        });
       });
     }
 
@@ -1257,9 +1272,11 @@
       chip.addEventListener("click", () => {
         catChips.forEach((c) => {
           c.classList.remove("active");
+          c.setAttribute("aria-selected", "false");
           c.setAttribute("aria-pressed", "false");
         });
         chip.classList.add("active");
+        chip.setAttribute("aria-selected", "true");
         chip.setAttribute("aria-pressed", "true");
         activeCategory = chip.getAttribute("data-category") || "SACRED";
         const matching = window.DEVYATRA_PLACES.filter((p) => p.category === activeCategory);
@@ -1275,7 +1292,7 @@
     const initialPlace = window.DEVYATRA_PLACES.find((p) => p.id === "tirumala-venkateswara") || window.DEVYATRA_PLACES[0];
     renderPlaceInspector(initialPlace);
 
-    // AI Pilgrimage Planner Simulator
+    // Pilgrimage Route Planner Simulator (Portfolio Demo)
     const generateBtn = $("#dy-generate-route-btn");
     const citySelect = $("#dy-plan-city");
     const intentSelect = $("#dy-plan-intent");
@@ -1382,18 +1399,18 @@
       { group: "Navigation", icon: "✉️", title: "Contact & Connect", desc: "Get in touch for internships & opportunities", keywords: "contact email hire connect message linkedin github", action: () => scrollToSection("contact") },
 
       // --- PROJECTS ---
-      { group: "Projects", icon: "💡", title: "Valtora", desc: "AI analytical co-founder for startup validation & sizing", keywords: "valtora startup venture market sizing cofounder groq llm case study", action: () => { openCaseStudy("valtora"); closePalette(); } },
-      { group: "Projects", icon: "📋", title: "LifeHub", desc: "Personal daily operating system & dashboard", keywords: "lifehub dashboard habits productivity finance calendar offline localstorage case study", action: () => { openCaseStudy("lifehub"); closePalette(); } },
-      { group: "Projects", icon: "🗣️", title: "Teluguva", desc: "Bilingual English to conversational Telugu with OCR", keywords: "teluguva telugu ocr tesseract translation audio speech accessibility case study", action: () => { openCaseStudy("teluguva"); closePalette(); } },
-      { group: "Projects", icon: "🏛️", title: "DevYatra / Templeora", desc: "Sacred heritage geospatial atlas & pilgrimage route planner", keywords: "devyatra templeora temples sacred atlas maps gis route planner itinerary case study", action: () => { openCaseStudy("devyatra"); closePalette(); } },
+      { group: "Projects", icon: "💡", title: "Valtora", desc: "AI analytical co-founder for startup validation & sizing", keywords: "valtora startup venture market sizing cofounder groq llm case study", action: () => { closePalette(); openCaseStudy("valtora"); } },
+      { group: "Projects", icon: "📋", title: "LifeHub", desc: "Personal daily operating system & dashboard", keywords: "lifehub dashboard habits productivity finance calendar offline localstorage case study", action: () => { closePalette(); openCaseStudy("lifehub"); } },
+      { group: "Projects", icon: "🗣️", title: "Teluguva", desc: "Bilingual English to conversational Telugu with OCR", keywords: "teluguva telugu ocr tesseract translation audio speech accessibility case study", action: () => { closePalette(); openCaseStudy("teluguva"); } },
+      { group: "Projects", icon: "🏛️", title: "DevYatra / Templeora", desc: "Sacred heritage geospatial atlas & pilgrimage route planner", keywords: "devyatra templeora temples sacred atlas maps gis route planner itinerary case study", action: () => { closePalette(); openCaseStudy("devyatra"); } },
 
       // --- ACTIONS ---
-      { group: "Actions", icon: "⏱️", title: "Recruiter 30s Quick Scan", desc: "Dense executive summary of candidate credentials", keywords: "recruiter scan 30s summary resume candidate hire overview", action: () => { if (window.openRecruiterModal) window.openRecruiterModal(); closePalette(); } },
-      { group: "Actions", icon: "✦", title: "Toggle Experience / Read Mode", desc: "Switch between 3D WebGL and minimal reader mode", keywords: "mode read experience 3d toggle dark light theme switch", action: () => { if (window.toggleExperienceMode) window.toggleExperienceMode(); closePalette(); } },
-      { group: "Actions", icon: "📑", title: "View Verified Resume", desc: "Open print & ATS-ready developer resume", keywords: "resume cv pdf print credentials profile", action: () => { window.open("assets/resume/resume.html", "_blank"); closePalette(); } },
-      { group: "Actions", icon: "🐙", title: "Open GitHub Profile", desc: "github.com/gokul1599", keywords: "github git code repository repo source open source", action: () => { window.open("https://github.com/gokul1599", "_blank"); closePalette(); } },
-      { group: "Actions", icon: "🐦", title: "Open X / Twitter", desc: "x.com/gokul_k_12", keywords: "x twitter social profile tweets", action: () => { window.open("https://x.com/gokul_k_12", "_blank"); closePalette(); } },
-      { group: "Actions", icon: "✉️", title: "Send Direct Email", desc: "gokulkarpurapu@gmail.com", keywords: "email mail send reach out contact get in touch", action: () => { window.location.href = "mailto:gokulkarpurapu@gmail.com"; closePalette(); } }
+      { group: "Actions", icon: "⏱️", title: "Recruiter 30s Quick Scan", desc: "Dense executive summary of candidate credentials", keywords: "recruiter scan 30s summary resume candidate hire overview", action: () => { closePalette(); if (window.openRecruiterModal) window.openRecruiterModal(); } },
+      { group: "Actions", icon: "✦", title: "Toggle Experience / Read Mode", desc: "Switch between 3D WebGL and minimal reader mode", keywords: "mode read experience 3d toggle dark light theme switch", action: () => { closePalette(); if (window.toggleExperienceMode) window.toggleExperienceMode(); } },
+      { group: "Actions", icon: "📑", title: "View Verified Resume", desc: "Open print & ATS-ready developer resume", keywords: "resume cv pdf print credentials profile", action: () => { closePalette(); window.open("assets/resume/resume.html", "_blank"); } },
+      { group: "Actions", icon: "🐙", title: "Open GitHub Profile", desc: "github.com/gokul1599", keywords: "github git code repository repo source open source", action: () => { closePalette(); window.open("https://github.com/gokul1599", "_blank"); } },
+      { group: "Actions", icon: "🐦", title: "Open X / Twitter", desc: "x.com/gokul_k_12", keywords: "x twitter social profile tweets", action: () => { closePalette(); window.open("https://x.com/gokul_k_12", "_blank"); } },
+      { group: "Actions", icon: "✉️", title: "Send Direct Email", desc: "gokulkarpurapu@gmail.com", keywords: "email mail send reach out contact get in touch", action: () => { closePalette(); window.location.href = "mailto:gokulkarpurapu@gmail.com"; } }
     ];
 
     let selectedIndex = 0;

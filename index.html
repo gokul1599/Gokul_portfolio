@@ -392,11 +392,12 @@
 
                 <!-- Verified Technologies -->
                 <div class="project-tech-tags">
-                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">Next.js 16</span>
+                  <span class="tech-tag">React 19</span>
+                  <span class="tech-tag">Prisma 7</span>
                   <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">Groq AI</span>
                   <span class="tech-tag">Tailwind CSS</span>
-                  <span class="tech-tag">LLM Integration</span>
-                  <span class="tech-tag">Vercel</span>
                 </div>
 
                 <!-- Action CTAs -->
@@ -823,7 +824,7 @@
                 </div>
               </div>
 
-              <!-- Right: Interactive Geospatial / AI Planner Visual Canvas -->
+              <!-- Right: Interactive Geospatial Route Planner Visual Canvas -->
               <div class="project-visual-pane">
                 <div class="project-browser-frame devyatra-preview-frame">
                   <div class="browser-chrome">
@@ -844,61 +845,61 @@
                         <span class="dy-mode-dot"></span>
                         <span class="dy-mode-title">DEVYATRA ATLAS</span>
                       </div>
-                      <div class="dy-tab-toggles" role="tablist">
-                        <button type="button" class="dy-tab-btn active" id="dy-tab-explorer-btn" data-view="explorer" role="tab" aria-selected="true" aria-label="Switch to Geospatial Atlas view">
+                      <div class="dy-tab-toggles" role="tablist" aria-label="DevYatra Views">
+                        <button type="button" class="dy-tab-btn active" id="dy-tab-explorer-btn" data-view="explorer" role="tab" aria-selected="true" aria-controls="dy-view-explorer" aria-label="Switch to Geospatial Atlas view">
                           <span>🗺️ GEOSPATIAL ATLAS</span>
                         </button>
-                        <button type="button" class="dy-tab-btn" id="dy-tab-planner-btn" data-view="planner" role="tab" aria-selected="false" aria-label="Switch to Pilgrimage Route Planner view">
+                        <button type="button" class="dy-tab-btn" id="dy-tab-planner-btn" data-view="planner" role="tab" aria-selected="false" aria-controls="dy-view-planner" aria-label="Switch to Pilgrimage Route Planner view">
                           <span>⚡ PILGRIMAGE ROUTE PLANNER</span>
                         </button>
                       </div>
                     </div>
 
                     <!-- VIEW 1: GEOSPATIAL EXPLORER -->
-                    <div class="dy-view-container active" id="dy-view-explorer">
+                    <div class="dy-view-container active" id="dy-view-explorer" role="tabpanel" aria-labelledby="dy-tab-explorer-btn">
                       <!-- Category Filter Strip -->
                       <div class="dy-categories-strip" role="tablist" aria-label="Geographic Categories">
-                        <button class="dy-cat-chip active" data-category="SACRED" type="button" aria-label="Filter by Sacred Temples (8 places)">
+                        <button class="dy-cat-chip active" data-category="SACRED" type="button" role="tab" aria-selected="true" aria-controls="dy-places-list" aria-label="Filter by Sacred Temples (8 places)">
                           <span class="cat-icon">🏛️</span>
                           <span class="cat-name">Temples</span>
                           <span class="cat-count">8</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="HERITAGE" type="button" aria-label="Filter by Heritage monuments (6 places)">
+                        <button class="dy-cat-chip" data-category="HERITAGE" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Heritage monuments (6 places)">
                           <span class="cat-icon">🏰</span>
                           <span class="cat-name">Heritage</span>
                           <span class="cat-count">6</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="CAVES" type="button" aria-label="Filter by Caves (5 places)">
+                        <button class="dy-cat-chip" data-category="CAVES" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Caves (5 places)">
                           <span class="cat-icon">🗿</span>
                           <span class="cat-name">Caves</span>
                           <span class="cat-count">5</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="HILLS" type="button" aria-label="Filter by Sacred Hills (4 places)">
+                        <button class="dy-cat-chip" data-category="HILLS" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Hills (4 places)">
                           <span class="cat-icon">⛰️</span>
                           <span class="cat-name">Hills</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="WATERFALLS" type="button" aria-label="Filter by Sacred Waterfalls (5 places)">
+                        <button class="dy-cat-chip" data-category="WATERFALLS" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Waterfalls (5 places)">
                           <span class="cat-icon">🌊</span>
                           <span class="cat-name">Waterfalls</span>
                           <span class="cat-count">5</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="LAKES" type="button" aria-label="Filter by Glacial and Sacred Lakes (4 places)">
+                        <button class="dy-cat-chip" data-category="LAKES" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Glacial and Sacred Lakes (4 places)">
                           <span class="cat-icon">⛵</span>
                           <span class="cat-name">Lakes</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="NATURE" type="button" aria-label="Filter by Sacred Nature sites (4 places)">
+                        <button class="dy-cat-chip" data-category="NATURE" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Nature sites (4 places)">
                           <span class="cat-icon">🌿</span>
                           <span class="cat-name">Nature</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="BEACHES" type="button" aria-label="Filter by Coastal and Beach shrines (4 places)">
+                        <button class="dy-cat-chip" data-category="BEACHES" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Coastal and Beach shrines (4 places)">
                           <span class="cat-icon">🏖️</span>
                           <span class="cat-name">Beaches</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="WILDLIFE" type="button" aria-label="Filter by Wildlife and Biosphere Sanctuaries (4 places)">
+                        <button class="dy-cat-chip" data-category="WILDLIFE" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Wildlife and Biosphere Sanctuaries (4 places)">
                           <span class="cat-icon">🐅</span>
                           <span class="cat-name">Wildlife</span>
                           <span class="cat-count">4</span>
@@ -924,9 +925,13 @@
                     </div>
 
                     <!-- VIEW 2: PILGRIMAGE ROUTE PLANNER -->
-                    <div class="dy-view-container" id="dy-view-planner" style="display: none;">
+                    <div class="dy-view-container" id="dy-view-planner" role="tabpanel" aria-labelledby="dy-tab-planner-btn" style="display: none;">
                       <div class="dy-planner-workbench">
                         <div class="dy-planner-controls">
+                          <div class="planner-disclaimer" role="note">
+                            Interactive portfolio demonstration synthesizing travel sequences from the curated 40-site DevYatra provenance dataset.
+                          </div>
+
                           <div class="planner-field">
                             <label class="field-label">DEPARTURE HUB</label>
                             <select id="dy-plan-city" class="planner-select">
@@ -965,9 +970,9 @@
                         </div>
 
                         <!-- Route Output Timeline -->
-                        <div class="dy-planner-output" id="dy-planner-output" aria-live="polite">
+                        <div class="dy-planner-output" id="dy-planner-output" role="region" aria-label="Generated Pilgrimage Itinerary" aria-live="polite">
                           <div class="dy-output-header">
-                            <span class="out-badge">SYNTHESIZED ITINERARY</span>
+                            <span class="out-badge">PILGRIMAGE ROUTE PLANNER · PORTFOLIO DEMO</span>
                             <span class="out-title" id="dy-route-title">3-Day Sacred Circuit</span>
                           </div>
                           <div class="dy-route-timeline" id="dy-route-timeline">
@@ -1776,7 +1781,7 @@
                 <span class="rec-pnum">01</span>
                 <div>
                   <span class="rec-pname">VALTORA</span>
-                  <span class="rec-pstack">React · TypeScript · Tailwind · LLM APIs</span>
+                  <span class="rec-pstack">Next.js 16 · React 19 · Prisma 7 · Groq AI</span>
                 </div>
               </div>
               <p class="rec-pdesc">AI analytical co-founder turning raw startup hypotheses into structured validation, sizing, and architecture.</p>
@@ -1792,7 +1797,7 @@
                 <span class="rec-pnum">02</span>
                 <div>
                   <span class="rec-pname">LIFEHUB</span>
-                  <span class="rec-pstack">React · TypeScript · CSS Grid · LocalStorage</span>
+                  <span class="rec-pstack">React 19 · Zustand 5 · Tailwind v4 · LocalStorage</span>
                 </div>
               </div>
               <p class="rec-pdesc">Personal daily operating workspace centralizing schedule, finances, habit tracking, and focus in an offline-first dashboard.</p>
@@ -1827,7 +1832,7 @@
                   <span class="rec-pstack">Next.js 16 · MapLibre GL · Prisma ORM · Neon DB</span>
                 </div>
               </div>
-              <p class="rec-pdesc">Sacred heritage and geospatial atlas cataloging India's ancient temples, UNESCO sites, and caves with source provenance &amp; AI route planner.</p>
+              <p class="rec-pdesc">Sacred heritage and geospatial atlas cataloging India's ancient temples, UNESCO sites, and caves with source provenance &amp; pilgrimage route planner.</p>
               <div class="rec-plinks">
                 <a href="https://templeora.vercel.app/" target="_blank" rel="noopener noreferrer">Live App ↗</a>
                 <a href="https://github.com/gokul1599/DEVYATRA" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
