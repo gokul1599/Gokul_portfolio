@@ -62,7 +62,7 @@ Studying Computer Science at **BITS Pilani** (B.Sc. CS) and **Scaler School of T
 - **DevYatra Interactive Atlas**: Live filter across 9 geographic categories with source provenance attribution (`GOVERNMENT_SOURCE`, `VERIFIED_OFFICIAL`, `TRUSTED_SOURCE`, `UNVERIFIED`) and interactive pilgrimage route planner simulator.
 - **Zero Framework Bloat**: Custom vanilla CSS & JavaScript engine delivering responsive interactions, lightweight bundles, and zero hydration lag.
 - **Hosting & Edge**: Vercel Production Edge.
-- **Studio Repository**: [https://github.com/gokul1599/gokul-labs](https://github.com/gokul1599/gokul-labs)
+- **Studio Repository**: [https://github.com/gokul1599/Gokul_portfolio](https://github.com/gokul1599/Gokul_portfolio)
 
 ---
 
