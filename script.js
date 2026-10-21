@@ -58,6 +58,24 @@
     }
   };
 
+  // Keep keyboard navigation inside the most recently opened dialog.
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Tab") return;
+    const id = Array.from(ScrollLock.locks).pop();
+    const dialog = id === "mobile-nav" ? document.getElementById("navbar") : id && document.getElementById(id);
+    if (!dialog || (id !== "mobile-nav" && dialog.getAttribute("role") !== "dialog")) return;
+    const focusable = Array.from(dialog.querySelectorAll('a[href], button, input, select, textarea, [tabindex]'))
+      .filter((el) => !el.disabled && el.tabIndex >= 0 && el.getClientRects().length > 0);
+    if (!focusable.length) { event.preventDefault(); return; }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const outside = !dialog.contains(document.activeElement);
+    if (outside || (event.shiftKey && document.activeElement === first) || (!event.shiftKey && document.activeElement === last)) {
+      event.preventDefault();
+      (event.shiftKey ? last : first).focus();
+    }
+  });
+
   /* ============================================================
      2. ACCESSIBLE SCROLL REVEAL (Zero Content Blocking)
      ============================================================ */
@@ -152,7 +170,10 @@
     if (foundSection !== currentSectionId) {
       currentSectionId = foundSection;
       navLinks.forEach((link) => {
-        link.classList.toggle("active", link.getAttribute("data-nav") === currentSectionId);
+        const active = link.getAttribute("data-nav") === currentSectionId;
+        link.classList.toggle("active", active);
+        if (active) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       });
     }
 
@@ -230,7 +251,13 @@
     navDrawer.classList.add("open");
     navDrawer.setAttribute("aria-hidden", "false");
     ScrollLock.lock("mobile-nav");
+    const firstLink = navDrawer.querySelector("a");
+    if (firstLink) firstLink.focus();
   }
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 960 && navDrawer && navDrawer.classList.contains("open")) closeMobileMenu();
+  });
 
   function closeMobileMenu() {
     if (!menuBtn || !navDrawer) return;
@@ -255,50 +282,15 @@
   /* ============================================================
      6. RESTRAINED MINIMAL CURSOR & MAGNETIC BUTTONS (Desktop)
      ============================================================ */
-  const cursorDot = $("#cursor-dot");
-  const cursorRing = $("#cursor-ring");
-
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
-  let ringX = mouseX;
-  let ringY = mouseY;
-
-  if (!isTouch && cursorDot && cursorRing && !prefersReducedMotion) {
-    window.addEventListener("mousemove", (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    }, { passive: true });
-
-    function renderCursor() {
-      ringX = lerp(ringX, mouseX, 0.18);
-      ringY = lerp(ringY, mouseY, 0.18);
-      cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-      requestAnimationFrame(renderCursor);
-    }
-    requestAnimationFrame(renderCursor);
-
-    // Magnetic interaction on buttons
-    const magneticBtns = $$(".magnetic-btn, .btn-primary, .btn-secondary, .nav-link");
-    magneticBtns.forEach((btn) => {
-      btn.addEventListener("mousemove", (e) => {
+  // Preserve the native cursor. Magnetic buttons run only during pointer input.
+  if (!isTouch && !prefersReducedMotion) {
+    $$(".magnetic-btn").forEach((btn) => {
+      btn.addEventListener("pointermove", (event) => {
         const rect = btn.getBoundingClientRect();
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-        const dx = (e.clientX - cx) * 0.28;
-        const dy = (e.clientY - cy) * 0.28;
-        btn.style.transform = `translate3d(${dx.toFixed(2)}px, ${dy.toFixed(2)}px, 0)`;
-        cursorRing.classList.add("cursor-hover");
+        btn.style.transform = `translate(${((event.clientX - rect.left - rect.width / 2) * .1).toFixed(1)}px, ${((event.clientY - rect.top - rect.height / 2) * .1).toFixed(1)}px)`;
       });
-
-      btn.addEventListener("mouseleave", () => {
-        btn.style.transform = "translate3d(0, 0, 0)";
-        cursorRing.classList.remove("cursor-hover");
-      });
+      btn.addEventListener("pointerleave", () => { btn.style.transform = ""; });
     });
-  } else {
-    if (cursorDot) cursorDot.style.display = "none";
-    if (cursorRing) cursorRing.style.display = "none";
   }
 
   /* ============================================================
@@ -320,411 +312,10 @@
   }
 
   function initLivingDigitalArtifact(canvas) {
-    if (typeof THREE === "undefined") {
-      activateFallback();
-      return;
-    }
-
-    try {
-      // 7A. Scene & Camera Setup
-      const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x06070a, 0.012);
-
-      const camera = new THREE.PerspectiveCamera(
-        42,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        200
-      );
-      camera.position.set(0, 0, 22);
-
-      // 7B. High-Performance WebGL Renderer with Capped DPR
-      const renderer = new THREE.WebGLRenderer({
-        canvas,
-        alpha: true,
-        antialias: true,
-        powerPreference: "high-performance"
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.25;
-
-      // 7C. Physically Believable Lighting Rig
-      const ambientLight = new THREE.AmbientLight(0x08101e, 1.2);
-      scene.add(ambientLight);
-
-      const keyLight = new THREE.DirectionalLight(0xffffff, 2.2);
-      keyLight.position.set(12, 16, 20);
-      scene.add(keyLight);
-
-      const rimLightCyan = new THREE.PointLight(0x38bdf8, 3.2, 50);
-      rimLightCyan.position.set(14, 6, 12);
-      scene.add(rimLightCyan);
-
-      const softFillViolet = new THREE.PointLight(0x6366f1, 2.0, 45);
-      softFillViolet.position.set(-14, -8, 8);
-      scene.add(softFillViolet);
-
-      const cursorLight = new THREE.PointLight(0x38bdf8, 2.6, 32);
-      cursorLight.position.set(0, 0, 10);
-      scene.add(cursorLight);
-
-      // 7D. Master Artifact Container
-      const artifactGroup = new THREE.Group();
-      artifactGroup.position.set(4.0, 0, 0); // Positioned to complement left typography on hero
-      scene.add(artifactGroup);
-
-      // --------------------------------------------------------
-      // LAYER 1: INNER LUMINOUS INTELLIGENCE CORE
-      // --------------------------------------------------------
-      const coreGroup = new THREE.Group();
-      artifactGroup.add(coreGroup);
-
-      const coreGeo = new THREE.OctahedronGeometry(0.75, 1);
-      const coreMat = new THREE.MeshStandardMaterial({
-        color: 0x38bdf8,
-        emissive: 0x0ea5e9,
-        emissiveIntensity: 0.85,
-        roughness: 0.2,
-        metalness: 0.4
-      });
-      const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-      coreGroup.add(coreMesh);
-
-      const corePointLight = new THREE.PointLight(0x38bdf8, 3.0, 18);
-      coreGroup.add(corePointLight);
-
-      // --------------------------------------------------------
-      // LAYER 2: CORE GEOMETRICAL LATTICE (Dark Polished Chrome)
-      // --------------------------------------------------------
-      const latticeGroup = new THREE.Group();
-      artifactGroup.add(latticeGroup);
-
-      const latticeGeo = new THREE.IcosahedronGeometry(1.65, 0);
-      const latticeWireGeo = new THREE.WireframeGeometry(latticeGeo);
-      const latticeWireMat = new THREE.LineBasicMaterial({
-        color: 0x38bdf8,
-        transparent: true,
-        opacity: 0.5,
-        blending: THREE.AdditiveBlending
-      });
-      const latticeLines = new THREE.LineSegments(latticeWireGeo, latticeWireMat);
-      latticeGroup.add(latticeLines);
-
-      // --------------------------------------------------------
-      // LAYER 3: TRANSLUCENT SMOKED GLASS MONOLITH SHELLS
-      // --------------------------------------------------------
-      const glassGroup = new THREE.Group();
-      artifactGroup.add(glassGroup);
-
-      const glassGeo = new THREE.CylinderGeometry(2.3, 2.6, 3.8, 8, 1, true);
-      const glassMat = new THREE.MeshPhysicalMaterial({
-        color: 0x060f1c,
-        metalness: artifactShaderUniforms.metalness,
-        roughness: artifactShaderUniforms.roughness,
-        transmission: artifactShaderUniforms.transmission,
-        ior: artifactShaderUniforms.ior,
-        reflectivity: 0.85,
-        transparent: true,
-        opacity: 0.78,
-        side: THREE.DoubleSide,
-        depthWrite: false
-      });
-      const glassShell = new THREE.Mesh(glassGeo, glassMat);
-      glassGroup.add(glassShell);
-
-      const glassEdgesGeo = new THREE.EdgesGeometry(glassGeo);
-      const glassEdgesMat = new THREE.LineBasicMaterial({
-        color: 0x93c5fd,
-        transparent: true,
-        opacity: 0.45
-      });
-      const glassEdges = new THREE.LineSegments(glassEdgesGeo, glassEdgesMat);
-      glassGroup.add(glassEdges);
-
-      // --------------------------------------------------------
-      // LAYER 4: MODULAR ARCHITECTURAL LOGIC PLATES (Articulating)
-      // --------------------------------------------------------
-      const logicGroup = new THREE.Group();
-      artifactGroup.add(logicGroup);
-
-      const logicPlates = [];
-      const plateCount = 4;
-      for (let p = 0; p < plateCount; p++) {
-        const plateGeo = new THREE.BoxGeometry(3.6, 0.08, 1.8);
-        const plateMat = new THREE.MeshStandardMaterial({
-          color: 0x0a1626,
-          metalness: 0.85,
-          roughness: 0.18,
-          transparent: true,
-          opacity: 0.85
-        });
-        const plate = new THREE.Mesh(plateGeo, plateMat);
-        plate.position.y = (p - 1.5) * 0.95;
-        plate.rotation.y = (p * Math.PI) / 4;
-        logicGroup.add(plate);
-        logicPlates.push(plate);
-      }
-
-      // --------------------------------------------------------
-      // LAYER 5: FINE POLAR COORDINATE ARMATURE RINGS
-      // --------------------------------------------------------
-      const armatureGroup = new THREE.Group();
-      artifactGroup.add(armatureGroup);
-
-      function createPolarRing(radius, tiltX, tiltZ, colorHex = 0x38bdf8) {
-        const ringGeo = new THREE.TorusGeometry(radius, 0.018, 8, 120);
-        const ringMat = new THREE.MeshBasicMaterial({
-          color: colorHex,
-          transparent: true,
-          opacity: 0.42,
-          blending: THREE.AdditiveBlending
-        });
-        const ring = new THREE.Mesh(ringGeo, ringMat);
-        ring.rotation.x = tiltX;
-        ring.rotation.z = tiltZ;
-        armatureGroup.add(ring);
-        return ring;
-      }
-
-      const ringInner = createPolarRing(3.4, Math.PI * 0.3, Math.PI * 0.15);
-      const ringOuter = createPolarRing(4.8, -Math.PI * 0.25, Math.PI * 0.35, 0x818cf8);
-
-      // Expose Shader Calibrator Hook (Lab Exp 02)
-      updateArtifactMaterial = function (params) {
-        if (params.transmission !== undefined) {
-          glassMat.transmission = params.transmission;
-          artifactShaderUniforms.transmission = params.transmission;
-        }
-        if (params.roughness !== undefined) {
-          glassMat.roughness = params.roughness;
-          artifactShaderUniforms.roughness = params.roughness;
-        }
-        if (params.ior !== undefined) {
-          glassMat.ior = params.ior;
-          artifactShaderUniforms.ior = params.ior;
-        }
-      };
-
-      // Expose Stack Layer Resonance Hook
-      highlightArtifactLayer = function (layerName) {
-        if (layerName === "ai" || layerName === "tools") {
-          coreMat.emissiveIntensity = 2.4;
-          corePointLight.intensity = 6.0;
-        } else if (layerName === "frontend" || layerName === "web") {
-          glassMat.opacity = 0.95;
-          glassEdgesMat.opacity = 0.9;
-        } else if (layerName === "backend") {
-          armatureGroup.scale.set(1.12, 1.12, 1.12);
-        } else if (layerName === "languages") {
-          latticeWireMat.opacity = 0.95;
-        } else {
-          // Reset
-          coreMat.emissiveIntensity = 0.85;
-          corePointLight.intensity = 3.0;
-          glassMat.opacity = 0.78;
-          glassEdgesMat.opacity = 0.45;
-          armatureGroup.scale.set(1, 1, 1);
-          latticeWireMat.opacity = 0.5;
-        }
-      };
-
-      // 7E. Target State Variables for Scroll Transformations
-      // RESTRAINED MOTION: The artifact is almost still at rest, evolving calmly through scroll
-      let targetArtifactPos = { x: 4.0, y: 0, z: 0 };
-      let targetArtifactRot = { x: 0.15, y: 0.35, z: 0 };
-      let targetGlassSeparation = 0;
-      let targetLogicSeparation = 1;
-
-      // Mouse Parallax Offsets
-      let targetMouseX = 0;
-      let targetMouseY = 0;
-      let smoothMouseX = 0;
-      let smoothMouseY = 0;
-
-      if (!isTouch && !prefersReducedMotion) {
-        window.addEventListener("mousemove", (e) => {
-          targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-          targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        }, { passive: true });
-      }
-
-      // Responsive Adjustments on Window Resize
-      function onWindowResize() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        camera.aspect = width / height;
-
-        // Position artifact comfortably on smaller screens
-        if (width < 768) {
-          camera.position.set(0, 0, 26);
-          targetArtifactPos.x = 0;
-          targetArtifactPos.y = -2.0;
-        } else if (width < 1024) {
-          camera.position.set(0, 0, 24);
-          targetArtifactPos.x = 2.6;
-          targetArtifactPos.y = 0;
-        } else {
-          camera.position.set(0, 0, 22);
-          targetArtifactPos.x = 4.0;
-          targetArtifactPos.y = 0;
-        }
-
-        camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
-      }
-      window.addEventListener("resize", onWindowResize);
-      onWindowResize();
-
-      // Page Visibility API to Pause Loop When Inactive
-      let isDocumentVisible = true;
-      document.addEventListener("visibilitychange", () => {
-        isDocumentVisible = !document.hidden;
-      });
-
-      // 7F. Main WebGL Animation Frame Loop
-      let clock = new THREE.Clock();
-
-      function animateWebGL() {
-        requestAnimationFrame(animateWebGL);
-        if (!isDocumentVisible || isReadModeActive) return;
-
-        const elapsedTime = clock.getElapsedTime();
-
-        // Smooth Mouse Parallax
-        smoothMouseX = lerp(smoothMouseX, targetMouseX, 0.05);
-        smoothMouseY = lerp(smoothMouseY, targetMouseY, 0.05);
-
-        cursorLight.position.x = smoothMouseX * 12;
-        cursorLight.position.y = -smoothMouseY * 8;
-
-        // Extremely gentle architectural resting breath (NOT endless screensaver spin)
-        const idleBreathe = Math.sin(elapsedTime * 0.45) * 0.035;
-
-        // Update State Targets based on Active Section
-        const isMobile = window.innerWidth < 768;
-
-        switch (currentSectionId) {
-          case "hero":
-            // State 0: IDEA / INTELLIGENCE (Compact, unified, resting calmly)
-            targetArtifactPos.x = isMobile ? 0 : 4.0;
-            targetArtifactPos.y = isMobile ? -2.0 : 0;
-            targetArtifactPos.z = 0;
-            targetArtifactRot.x = 0.15 + smoothMouseY * 0.1;
-            targetArtifactRot.y = 0.35 + smoothMouseX * 0.15 + idleBreathe;
-            targetGlassSeparation = 0;
-            targetLogicSeparation = 1;
-            break;
-
-          case "work":
-            // State 1: MODULAR PROJECT FOCUS (Shifts into viewport depth)
-            targetArtifactPos.x = isMobile ? 0 : 5.0;
-            targetArtifactPos.y = isMobile ? -2.5 : -0.5;
-            targetArtifactPos.z = -3.5;
-            targetArtifactRot.x = 0.25 + smoothMouseY * 0.08;
-            targetArtifactRot.y = 0.65 + smoothMouseX * 0.12 + idleBreathe;
-            targetGlassSeparation = 0.3;
-            targetLogicSeparation = 1.25;
-            break;
-
-          case "about":
-            // State 2: STRUCTURAL DISCLOSURE (Smoked shells glide open, revealing core)
-            targetArtifactPos.x = isMobile ? 0 : -4.2;
-            targetArtifactPos.y = isMobile ? -2.2 : 0.4;
-            targetArtifactPos.z = -1.8;
-            targetArtifactRot.x = 0.2 + smoothMouseY * 0.06;
-            targetArtifactRot.y = 1.05 + smoothMouseX * 0.1 + idleBreathe;
-            targetGlassSeparation = 0.9;
-            targetLogicSeparation = 1.5;
-            break;
-
-          case "lab":
-            // State 3: EXPERIMENTAL RESONANCE
-            targetArtifactPos.x = isMobile ? 0 : 4.5;
-            targetArtifactPos.y = isMobile ? -2.0 : -0.3;
-            targetArtifactPos.z = -1.5;
-            targetArtifactRot.x = 0.28 + smoothMouseY * 0.08;
-            targetArtifactRot.y = 1.45 + smoothMouseX * 0.12 + idleBreathe;
-            targetGlassSeparation = 0.5;
-            targetLogicSeparation = 1.2;
-            break;
-
-          case "stack":
-            // State 4: TECHNICAL STRATIFICATION (Tiers separate distinctly)
-            targetArtifactPos.x = isMobile ? 0 : 0;
-            targetArtifactPos.y = isMobile ? -1.8 : -1.0;
-            targetArtifactPos.z = -2.5;
-            targetArtifactRot.x = 0.45 + smoothMouseY * 0.06;
-            targetArtifactRot.y = 1.95 + smoothMouseX * 0.1 + idleBreathe;
-            targetGlassSeparation = 1.2;
-            targetLogicSeparation = 1.8;
-            break;
-
-          case "journey":
-            // State 5: PROGRESSION AXIS (Forward trajectory)
-            targetArtifactPos.x = isMobile ? 0 : -4.5;
-            targetArtifactPos.y = isMobile ? -1.8 : -0.4;
-            targetArtifactPos.z = -2.0;
-            targetArtifactRot.x = 0.22 + smoothMouseY * 0.06;
-            targetArtifactRot.y = 2.45 + smoothMouseX * 0.1 + idleBreathe;
-            targetGlassSeparation = 0.4;
-            targetLogicSeparation = 1.3;
-            break;
-
-          case "contact":
-            // State 6: REUNIFICATION & HARMONY (All layers converge back into one object)
-            targetArtifactPos.x = isMobile ? 0 : 0;
-            targetArtifactPos.y = isMobile ? -2.0 : 0;
-            targetArtifactPos.z = 0.5;
-            targetArtifactRot.x = 0.15 + smoothMouseY * 0.08;
-            targetArtifactRot.y = 3.14 + smoothMouseX * 0.12 + idleBreathe;
-            targetGlassSeparation = 0;
-            targetLogicSeparation = 1;
-            break;
-        }
-
-        // Interpolate Master Container Transform
-        artifactGroup.position.x = lerp(artifactGroup.position.x, targetArtifactPos.x, 0.04);
-        artifactGroup.position.y = lerp(artifactGroup.position.y, targetArtifactPos.y, 0.04);
-        artifactGroup.position.z = lerp(artifactGroup.position.z, targetArtifactPos.z, 0.04);
-
-        artifactGroup.rotation.x = lerp(artifactGroup.rotation.x, targetArtifactRot.x, 0.04);
-        artifactGroup.rotation.y = lerp(artifactGroup.rotation.y, targetArtifactRot.y, 0.04);
-
-        // Core Subtle Ambient Breathing
-        const breathe = Math.sin(elapsedTime * 1.5) * 0.05 + 1.0;
-        coreGroup.scale.set(breathe, breathe, breathe);
-        if (corePointLight) {
-          corePointLight.intensity = 3.0;
-        }
-
-        // Sub-Layer Micro-Articulations (Subtle & slow, not spinning)
-        latticeGroup.rotation.y = -elapsedTime * 0.03;
-        armatureGroup.rotation.z = elapsedTime * 0.015;
-
-        // Shell & Logic Separation
-        glassShell.position.y = lerp(glassShell.position.y, targetGlassSeparation, 0.04);
-        logicPlates.forEach((plate, idx) => {
-          const baseHeight = (idx - 1.5) * 0.95;
-          plate.position.y = lerp(plate.position.y, baseHeight * targetLogicSeparation, 0.04);
-        });
-
-        renderer.render(scene, camera);
-      }
-
-      animateWebGL();
-
-    } catch (err) {
-      console.warn("WebGL initialization failed, switching to clean fallback:", err);
-      activateFallback();
-    }
-  }
-
-  function activateFallback() {
-    if (canvasEl) canvasEl.style.display = "none";
-    const fallback = $("#webgl-fallback");
-    if (fallback) fallback.classList.add("active");
+    if (!window.createCrystalInstallation) return;
+    const installation = window.createCrystalInstallation(canvas);
+    updateArtifactMaterial = (params) => installation.update(params);
+    highlightArtifactLayer = (layer) => installation.highlight(layer);
   }
 
   /* ============================================================
@@ -971,22 +562,41 @@
   let isDraggingSpring = false;
 
   if (springStage && springTarget) {
+    let springFrame = 0;
+    function wakeSpring() {
+      if (!springFrame && !document.hidden) springFrame = requestAnimationFrame(updateSpringPhysics);
+    }
     function updateSpringPhysics() {
-      if (!isDraggingSpring) {
+      springFrame = 0;
+      if (isDraggingSpring || document.hidden) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        springPos = { x: 0, y: 0 }; springVel = { x: 0, y: 0 };
+      } else {
         const forceX = -springParams.stiffness * (springPos.x * 0.01) - springParams.damping * springVel.x;
         const forceY = -springParams.stiffness * (springPos.y * 0.01) - springParams.damping * springVel.y;
-        
-        springVel.x += (forceX / springParams.mass) * 0.016;
-        springVel.y += (forceY / springParams.mass) * 0.016;
-
-        springPos.x += springVel.x;
-        springPos.y += springVel.y;
-
-        springTarget.style.transform = `translate3d(${springPos.x.toFixed(2)}px, ${springPos.y.toFixed(2)}px, 0)`;
+        springVel.x += (forceX / springParams.mass) * .016;
+        springVel.y += (forceY / springParams.mass) * .016;
+        springPos.x += springVel.x; springPos.y += springVel.y;
       }
-      requestAnimationFrame(updateSpringPhysics);
+      const moving = Math.abs(springPos.x) + Math.abs(springPos.y) + Math.abs(springVel.x) + Math.abs(springVel.y) > .05;
+      if (!moving) { springPos = { x: 0, y: 0 }; springVel = { x: 0, y: 0 }; }
+      springTarget.style.transform = `translate3d(${springPos.x.toFixed(2)}px, ${springPos.y.toFixed(2)}px, 0)`;
+      if (moving) wakeSpring();
     }
-    requestAnimationFrame(updateSpringPhysics);
+    springTarget.tabIndex = 0;
+    springTarget.setAttribute("role", "button");
+    springTarget.setAttribute("aria-label", "Spring physics demo. Use arrow keys to move and release.");
+    springTarget.addEventListener("keydown", (event) => {
+      const directions = { ArrowLeft: [-60, 0], ArrowRight: [60, 0], ArrowUp: [0, -40], ArrowDown: [0, 40] };
+      if (!directions[event.key]) return;
+      event.preventDefault();
+      [springPos.x, springPos.y] = directions[event.key];
+      wakeSpring();
+    });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) { cancelAnimationFrame(springFrame); springFrame = 0; }
+      else wakeSpring();
+    });
 
     springTarget.addEventListener("mousedown", () => {
       isDraggingSpring = true;
@@ -1023,10 +633,12 @@
 
     window.addEventListener("mouseup", () => {
       isDraggingSpring = false;
+      wakeSpring();
     });
 
     window.addEventListener("touchend", () => {
       isDraggingSpring = false;
+      wakeSpring();
     });
 
     springPresetBtns.forEach((btn) => {
@@ -1443,6 +1055,7 @@
 
     function renderResults() {
       if (filteredCommands.length === 0) {
+        cmdInput.removeAttribute("aria-activedescendant");
         cmdResults.innerHTML = `
           <div style="padding: 24px; text-align: center; color: var(--text-muted); font-family: var(--font-mono); font-size: 12px;">
             No commands or projects matching query.
@@ -1459,7 +1072,7 @@
           html += `<div class="cmd-group-label">${currentGroup}</div>`;
         }
         html += `
-          <div class="cmd-item ${idx === selectedIndex ? 'active' : ''}" data-cmd-idx="${idx}" role="option">
+          <div class="cmd-item ${idx === selectedIndex ? 'active' : ''}" id="cmd-option-${idx}" data-cmd-idx="${idx}" role="option" aria-selected="${idx === selectedIndex}">
             <div class="cmd-item-left">
               <span class="cmd-item-icon">${cmd.icon}</span>
               <div class="cmd-item-info">
@@ -1472,6 +1085,7 @@
         `;
       });
       cmdResults.innerHTML = html;
+      cmdInput.setAttribute("aria-activedescendant", `cmd-option-${selectedIndex}`);
 
       $$(".cmd-item", cmdResults).forEach((item) => {
         item.addEventListener("click", () => {
@@ -1566,16 +1180,17 @@
         isReadModeActive = true;
         document.documentElement.setAttribute("data-mode", "read");
         if (modeLabel) modeLabel.textContent = "READ MODE";
-        localStorage.setItem("gl_mode", "read");
+        try { localStorage.setItem("gl_mode", "read"); } catch (_) { /* Storage can be unavailable. */ }
       } else {
         isReadModeActive = false;
         document.documentElement.setAttribute("data-mode", "experience");
         if (modeLabel) modeLabel.textContent = "EXPERIENCE";
-        localStorage.setItem("gl_mode", "experience");
+        try { localStorage.setItem("gl_mode", "experience"); } catch (_) { /* Keep the mode usable without persistence. */ }
       }
     }
 
-    const savedMode = localStorage.getItem("gl_mode") || "experience";
+    let savedMode = "experience";
+    try { savedMode = localStorage.getItem("gl_mode") || savedMode; } catch (_) { /* Use the default when storage is blocked. */ }
     applyMode(savedMode);
 
     if (modeBtn) {

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 660" fill="none">
+<defs><radialGradient id="halo"><stop stop-color="#48beff" stop-opacity=".5"/><stop offset="1" stop-color="#064370" stop-opacity="0"/></radialGradient><linearGradient id="glass" x1="160" y1="190" x2="450" y2="450" gradientUnits="userSpaceOnUse"><stop stop-color="#9ee8ff" stop-opacity=".2"/><stop offset=".5" stop-color="#0a466a" stop-opacity=".12"/><stop offset="1" stop-color="#91dfff" stop-opacity=".35"/></linearGradient><linearGradient id="base"><stop stop-color="#153248"/><stop offset="1" stop-color="#02070e"/></linearGradient><radialGradient id="core"><stop stop-color="#efffff"/><stop offset=".55" stop-color="#72d9ff"/><stop offset="1" stop-color="#167da6"/></radialGradient></defs>
+<ellipse cx="320" cy="320" rx="265" ry="290" fill="url(#halo)" opacity=".45"/>
+<path d="M320 20V565" stroke="#6fdcff" opacity=".2"/>
+<path d="M84 550v24c0 55 472 55 472 0v-24" fill="url(#base)" stroke="#255475"/>
+<ellipse cx="320" cy="550" rx="236" ry="43" fill="#091824" stroke="#79d9ff" stroke-opacity=".8"/>
+<ellipse cx="320" cy="550" rx="139" ry="23" stroke="#63caff" stroke-opacity=".5"/>
+<ellipse cx="320" cy="550" rx="85" ry="12" fill="url(#halo)"/>
+<g stroke="#a8e6ff" stroke-width="1.2"><path d="m170 190 150-60 150 60v230l-150 65-150-65Z" fill="url(#glass)"/><path d="m170 190 150 66 150-66M320 256v229"/><path d="M320 130v230l-150 60m150-60 150 60" opacity=".3"/></g>
+<g stroke="#53b9f5" stroke-opacity=".55"><path d="m320 224 84 60 20 84-104 58-96-58 12-84Zm0 0 0 202m-84-142 188 84m-200 0 180-84m-168 0 84 142 84-142-180 84 96-144 104 144-188-84Z"/></g>
+<path d="m320 275 42 35-7 58-35 28-39-36 5-55Z" fill="url(#core)"/><path d="m286 305 69 63-35-93v121l42-86-81 50" stroke="#d5faff" stroke-opacity=".6"/>
+<g stroke="#8bc9e6" stroke-opacity=".5"><ellipse cx="320" cy="310" rx="265" ry="95" transform="rotate(22 320 310)"/><ellipse cx="320" cy="310" rx="262" ry="111" transform="rotate(-38 320 310)"/></g>
+<g fill="#9de5ff"><circle cx="82" cy="260" r="4"/><circle cx="533" cy="225" r="6"/><circle cx="320" cy="130" r="3"/><circle cx="320" cy="550" r="3"/><circle cx="457" cy="100" r="1"/><circle cx="202" cy="120" r="1"/><circle cx="483" cy="480" r="1"/></g>
+</svg>

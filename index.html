@@ -34,10 +34,12 @@
   <!-- Editorial Typography Matrix: Space Grotesk, Sora, Instrument Serif, IBM Plex Mono, Manrope, DM Sans, DM Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="premium.css">
+  <link rel="stylesheet" href="cinematic.css">
 
   <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
@@ -96,24 +98,9 @@
   <!-- Scroll Progress Indicator -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Interactive 3D WebGL Canvas Backdrop for Signature Digital Artifact -->
-  <canvas id="webgl-canvas" aria-label="Interactive 3D Living Digital Artifact"></canvas>
-
-  <!-- WebGL Fallback Container (for devices without WebGL or reduced-motion) -->
-  <div id="webgl-fallback" class="webgl-fallback-emblem" aria-hidden="true">
-    <div class="fallback-glass-monolith">
-      <div class="fallback-core-pulse"></div>
-      <div class="fallback-frame-ring"></div>
-    </div>
-  </div>
-
   <!-- Ambient Light Bloom & Noise Overlay -->
   <div class="ambient-light-bloom" aria-hidden="true"></div>
   <div class="noise-overlay" aria-hidden="true"></div>
-
-  <!-- Restrained Minimal Cursor (Desktop only, touch-disabled) -->
-  <div class="custom-cursor-dot" id="cursor-dot" aria-hidden="true"></div>
-  <div class="custom-cursor-ring" id="cursor-ring" aria-hidden="true"></div>
 
   <!-- HEADER & PRIMARY NAVIGATION (Desktop + Mobile) -->
   <header class="site-header" id="navbar">
@@ -220,7 +207,7 @@
         <div class="hero-text-pane">
           <!-- Subtle Editorial Kicker -->
           <div class="hero-meta-kicker reveal">
-            <span class="section-idx">01 // INTRODUCTION</span>
+            <span class="section-idx">01 / INTRODUCTION</span>
             <span class="meta-separator">—</span>
             <span class="hero-badge">AI DEVELOPER · PRODUCT BUILDER</span>
           </div>
@@ -232,15 +219,17 @@
 
           <!-- Main Core Statement (Huge Editorial Scale) -->
           <h1 class="hero-headline reveal">
-            <span>I BUILD</span><br>
-            <span class="headline-gradient">INTELLIGENT</span><br>
-            <span>EXPERIENCES.</span>
+            <span>I build</span><br>
+            <span class="headline-gradient">intelligent</span><br>
+            <span>experiences.</span>
           </h1>
 
           <!-- Concise Supporting Copy -->
           <p class="hero-subtext reveal">
-            I build software and digital products while exploring AI, engineering, and real-world problem solving.
+            From an early idea to a product you can use. I bring together thoughtful interfaces, software engineering, and practical AI.
           </p>
+
+          <p class="studio-availability"><span aria-hidden="true"></span>Open to internships &amp; collaborations</p>
 
           <!-- Core Transformation Sequence Pill -->
           <div class="hero-doctrine-strip reveal" aria-label="Brand narrative transformation">
@@ -284,17 +273,21 @@
         </div>
 
         <!-- Hero Right Column: Spatial Zone for 3D Living Digital Artifact -->
-        <div class="hero-artifact-hud" id="hero-artifact-hud" aria-hidden="true"></div>
+        <div class="hero-artifact-hud" id="hero-artifact-hud" role="img" aria-label="A floating crystalline cube with a luminous AI core and orbital rings above a lit pedestal">
+          <img class="crystal-fallback" src="assets/crystal-fallback.svg" alt="" width="640" height="660" aria-hidden="true">
+          <canvas id="webgl-canvas" aria-hidden="true"></canvas>
+          <span class="artifact-caption" aria-hidden="true"><span>FIG. 01 / INTELLIGENCE, IN FORM</span><span>Ideas, taking shape.</span></span>
+        </div>
       </div>
 
       <!-- Hero Bottom Editorial Status Bar -->
       <div class="hero-bottom-bar">
         <div class="bar-left">
           <span class="bar-diamond">◆</span>
-          <span class="bar-tag">CSE — AI &amp; MACHINE LEARNING</span>
+          <span class="bar-tag">SCROLL TO EXPLORE</span>
         </div>
         <div class="bar-center">
-          <span class="bar-scroll-text">SCROLL TO VIEW WORK</span>
+          <span class="bar-scroll-text">SCROLL TO EXPLORE</span>
           <span class="bar-scroll-line"></span>
         </div>
         <div class="bar-right">
@@ -307,6 +300,14 @@
     <!-- ============================================================
          SECTION 02: SELECTED WORK (CINEMATIC PROJECT SEQUENCE)
          ============================================================ -->
+    <nav class="selected-index" aria-label="Selected project index">
+      <div class="index-intro"><span>INDEPENDENTLY BUILT</span><strong>Four ideas. Out in the world.</strong></div>
+      <a href="#project-valtora"><span>01 / AI STRATEGY</span><strong>Valtora <span aria-hidden="true">↗</span></strong></a>
+      <a href="#project-lifehub"><span>02 / PRODUCTIVITY</span><strong>LifeHub <span aria-hidden="true">↗</span></strong></a>
+      <a href="#project-teluguva"><span>03 / ACCESSIBILITY</span><strong>Teluguva <span aria-hidden="true">↗</span></strong></a>
+      <a href="#project-devyatra"><span>04 / EXPLORATION</span><strong>DevYatra <span aria-hidden="true">↗</span></strong></a>
+    </nav>
+
     <section class="section-wrapper" id="work" aria-label="Selected Projects">
       <div class="section-container">
         <!-- Section Header Meta -->
@@ -319,7 +320,7 @@
         <!-- Section Title Row -->
         <div class="section-title-row reveal">
           <div class="title-col">
-            <h2 class="section-heading">PRODUCTS I<br><span class="gradient-text">BUILT.</span></h2>
+            <h2 class="section-heading">Selected work.<br><span class="gradient-text">Built with purpose.</span></h2>
             <p class="section-subtext">
               “Ideas, built into experiences.”
             </p>
@@ -1183,7 +1184,7 @@
             </div>
             <h3 class="exp-title">REFRACTIVE MATERIAL CALIBRATOR</h3>
             <p class="exp-desc">
-              Adjust transmission, roughness, and IOR. Values directly alter the 3D artifact in real time.
+              Adjust the installation’s transmission, roughness, and IOR. Return to the hero to inspect your material.
             </p>
 
             <div class="exp-interactive-body">
@@ -1674,7 +1675,7 @@
   <!-- ============================================================
        CASE STUDY MODAL DRAWER
        ============================================================ -->
-  <div class="case-study-modal-backdrop" id="case-study-modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="case-study-modal-backdrop" id="case-study-modal" aria-label="Project case study" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="case-study-drawer" id="case-study-drawer">
       <!-- Drawer Close Button -->
       <button class="drawer-close-btn" id="drawer-close-btn" aria-label="Close case study">
@@ -1692,17 +1693,17 @@
   <!-- ============================================================
        COMMAND PALETTE (Cmd+K / Ctrl+K)
        ============================================================ -->
-  <div class="cmd-palette-backdrop" id="command-palette" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="cmd-palette-backdrop" id="command-palette" aria-label="Command palette" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="cmd-palette-modal">
       <div class="cmd-input-wrap">
         <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" class="cmd-search-icon" aria-hidden="true">
           <circle cx="8.5" cy="8.5" r="5.5"/>
           <path d="M13 13l4 4" stroke-linecap="round"/>
         </svg>
-        <input type="text" id="cmd-input" class="cmd-input" placeholder="Type a command, project, or section (e.g. valtora, devyatra, read mode)..." autocomplete="off" spellcheck="false" />
+        <input type="text" id="cmd-input" class="cmd-input" role="combobox" aria-label="Search commands and projects" aria-autocomplete="list" aria-controls="cmd-results" aria-expanded="true" placeholder="Type a command, project, or section (e.g. valtora, devyatra, read mode)..." autocomplete="off" spellcheck="false" />
         <span class="cmd-esc-hint">ESC</span>
       </div>
-      <div class="cmd-results" id="cmd-results" role="listbox">
+      <div class="cmd-results" id="cmd-results" role="listbox" aria-label="Commands and projects">
         <!-- Injected and filtered via script.js -->
       </div>
       <div class="cmd-footer">
@@ -1719,7 +1720,7 @@
   <!-- ============================================================
        RECRUITER 30-SECOND QUICK VIEW DRAWER
        ============================================================ -->
-  <div class="recruiter-modal-backdrop" id="recruiter-modal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="recruiter-modal-backdrop" id="recruiter-modal" aria-label="Recruiter quick summary" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="recruiter-drawer" id="recruiter-drawer">
       <div class="recruiter-drawer-header">
         <div class="recruiter-header-badge">
@@ -1898,9 +1899,10 @@
   <script src="data/now.js"></script>
 
   <!-- Three.js Library -->
-  <script src="vendor/three.min.js"></script>
+  <script src="cinematic-scene.js"></script>
 
   <!-- Core Interactive Digital Laboratory Engine -->
   <script src="script.js"></script>
+  <script src="cinematic-motion.js"></script>
 </body>
 </html>

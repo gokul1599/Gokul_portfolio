@@ -512,6 +512,14 @@
     /* -------------------------------------------------------------
        PRINT ENGINE STYLES (Strict A4 Exact 1-Page Output)
        ------------------------------------------------------------- */
+    @media screen and (max-width: 825px) {
+      .resume-sheet { width: 100%; height: auto; max-height: none; padding: 24px 20px; overflow: visible; }
+      .resume-content { height: auto; gap: 16px; }
+      .toolbar-left, .toolbar-right, .theme-selector { flex-wrap: wrap; }
+      .edu-item, .skill-row { flex-wrap: wrap; }
+      .contact-item, .contact-link { min-width: 0; overflow-wrap: anywhere; }
+    }
+
     @media print {
       @page {
         size: A4 portrait;
@@ -554,9 +562,9 @@
     <div class="toolbar-left">
       <span class="toolbar-title">View Mode:</span>
       <div class="theme-selector">
-        <button class="theme-btn active" onclick="setTheme('default')">Header Canopy</button>
-        <button class="theme-btn" onclick="setTheme('cinematic')">Cinematic Studio</button>
-        <button class="theme-btn" onclick="setTheme('ats')">ATS Clean White</button>
+        <button class="theme-btn active" onclick="setTheme('default', this)">Header Canopy</button>
+        <button class="theme-btn" onclick="setTheme('cinematic', this)">Cinematic Studio</button>
+        <button class="theme-btn" onclick="setTheme('ats', this)">ATS Clean White</button>
       </div>
     </div>
     <div class="toolbar-right">
@@ -765,18 +773,18 @@
   </main>
 
   <script>
-    function setTheme(theme) {
+    function setTheme(theme, button) {
       document.body.classList.remove('theme-ats', 'theme-cinematic');
       document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
       
       if (theme === 'ats') {
         document.body.classList.add('theme-ats');
-        event.target.classList.add('active');
+        button.classList.add('active');
       } else if (theme === 'cinematic') {
         document.body.classList.add('theme-cinematic');
-        event.target.classList.add('active');
+        button.classList.add('active');
       } else {
-        event.target.classList.add('active');
+        button.classList.add('active');
       }
     }
   </script>
