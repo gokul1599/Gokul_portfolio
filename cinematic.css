@@ -61,11 +61,15 @@ html,body { background:#030b12; }
 .hero-subtext { font-size:clamp(15px,1.28vw,19px); max-width:510px; line-height:1.75; margin-bottom:25px; }
 .studio-availability { font-size:12px; color:#bbd5df; margin-bottom:24px; }
 .studio-availability > span { background:#65e8bd; box-shadow:0 0 10px #65e8bd88; }
-.hero-cta-group { gap:12px; }
-.hero-cta-group .btn-primary,.hero-cta-group .btn-secondary { font:10px var(--font-meta); padding:12px 17px; min-height:44px; border-radius:4px; }
-.hero-cta-group .btn-secondary { border-color:#9acee42b; background:#0b233133; }
-.hero-cta-group .btn-tertiary { font:10px var(--font-meta); padding:12px 17px; min-height:44px; border-radius:4px; color:#8aa9ba; display:inline-flex; align-items:center; gap:6px; }
-.hero-cta-group .btn-tertiary:hover { color:#fff; }
+.hero-cta-group { gap:12px; align-items:center; }
+.hero-cta-group .btn-primary { font:11px var(--font-meta); padding:13px 22px; min-height:44px; border-radius:6px; background:#f5f3ea; color:#030b12; font-weight:600; letter-spacing:.08em; box-shadow:0 4px 20px rgba(103,216,255,.22); transition:all .25s ease; }
+.hero-cta-group .btn-primary:hover { background:#67d8ff; color:#020b12; box-shadow:0 6px 28px rgba(103,216,255,.45); transform:translateY(-1px); }
+.hero-cta-group .btn-resume-cta { font:11px var(--font-meta); padding:13px 20px; min-height:44px; border-radius:6px; background:rgba(11,35,49,.6); border:1px solid rgba(103,216,255,.35); color:#c2eeff; font-weight:500; letter-spacing:.08em; transition:all .25s ease; }
+.hero-cta-group .btn-resume-cta:hover { background:rgba(103,216,255,.16); border-color:#67d8ff; color:#fff; transform:translateY(-1px); }
+.hero-cta-group .btn-github-cta { font:10px var(--font-meta); padding:11px 16px; min-height:40px; border-radius:6px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1); color:#8aa9ba; letter-spacing:.06em; transition:all .2s ease; }
+.hero-cta-group .btn-github-cta:hover { background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.25); color:#f5f3ea; }
+.hero-cta-group .btn-contact-cta { font:10px var(--font-meta); padding:11px 16px; min-height:40px; border-radius:6px; background:transparent; border:1px solid transparent; color:#728c9b; letter-spacing:.06em; display:inline-flex; align-items:center; gap:6px; transition:all .2s ease; }
+.hero-cta-group .btn-contact-cta:hover { color:#c2eeff; }
 .hero-artifact-hud { position:relative; display:block; min-height:0; height:600px; width:100%; align-self:center; z-index:1; pointer-events:auto; }
 .hero-artifact-hud #webgl-canvas { position:absolute; inset:0; width:100%; height:100%; opacity:0; z-index:1; pointer-events:none; transition:opacity .8s; }
 .crystal-fallback { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; opacity:1; transition:opacity .8s; }

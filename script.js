@@ -277,6 +277,27 @@
         openMobileMenu();
       }
     });
+
+    const mBtnCmd = $("#m-btn-cmd");
+    const mBtnRecruiter = $("#m-btn-recruiter");
+    const mBtnMode = $("#m-btn-mode");
+    if (mBtnCmd) {
+      mBtnCmd.addEventListener("click", () => {
+        closeMobileMenu();
+        if (window.openCommandPalette) window.openCommandPalette();
+      });
+    }
+    if (mBtnRecruiter) {
+      mBtnRecruiter.addEventListener("click", () => {
+        closeMobileMenu();
+        if (window.openRecruiterModal) window.openRecruiterModal();
+      });
+    }
+    if (mBtnMode) {
+      mBtnMode.addEventListener("click", () => {
+        if (window.toggleExperienceMode) window.toggleExperienceMode();
+      });
+    }
   }
 
   /* ============================================================
@@ -1044,6 +1065,9 @@
       paletteBackdrop.setAttribute("aria-hidden", "true");
       ScrollLock.unlock("command-palette");
     }
+
+    window.openCommandPalette = openPalette;
+    window.closeCommandPalette = closePalette;
 
     function scrollToSection(id) {
       const el = $(`#${id}`);

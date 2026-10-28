@@ -231,8 +231,8 @@ const PROJECTS = [
         rationale: "MapLibre GL provides sovereign, open-source vector map rendering with high frame rates, zero vendor lock-in, and custom cinematic dark styling matching the studio design language."
       },
       {
-        topic: "Strict Zero-Hallucination Route Planning",
-        rationale: "Pilgrimage planning involves sacred timings (Aarti, Darshan, temple gate closings) where incorrect assumptions cause real physical disruption. The route planner is strictly context-scoped: it only builds routes using verified database facts."
+        topic: "Context-Grounded Route Planning",
+        rationale: "Pilgrimage planning involves sacred timings (Aarti, Darshan, temple gate closings) where incorrect assumptions cause real disruption. The route planner is context-scoped: it only builds itineraries using grounded database records, preventing unverified suggestions."
       },
       {
         topic: "Transparent Multi-Tier Verification Layer",
