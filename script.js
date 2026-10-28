@@ -313,6 +313,8 @@
 
   function initLivingDigitalArtifact(canvas) {
     if (!window.createCrystalInstallation) return;
+    // Cap device pixel ratio to max 1.75 for rendering performance and battery optimization:
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
     const installation = window.createCrystalInstallation(canvas);
     updateArtifactMaterial = (params) => installation.update(params);
     highlightArtifactLayer = (layer) => installation.highlight(layer);

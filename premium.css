@@ -8,10 +8,6 @@
   --accent-cyan: #a4c9d7;
   --accent-cyan-light: #c7e2ea;
   --accent-cyan-subtle: rgba(164, 201, 215, .08);
-  --font-work: var(--font-hero);
-  --font-stack: var(--font-hero);
-  --font-journey: var(--font-hero);
-  --font-lab: var(--font-meta);
   --surface-panel: rgba(16, 21, 28, .94);
 }
 body { font-weight: 400; }
@@ -39,9 +35,9 @@ body { font-weight: 400; }
 .hero-subtext { font-size: 16px; max-width: 440px; line-height: 1.8; margin-bottom: 22px; }
 .studio-availability { display: flex; align-items: center; gap: 9px; font-size: 12px; color: #b9c5bf; margin: 0 0 28px; }
 .studio-availability > span { width: 6px; height: 6px; border-radius: 50%; background: #a9c9b5; box-shadow: 0 0 0 4px #a9c9b510; }
-.hero-doctrine-strip { display: none; }
+.hero-doctrine-strip { display: inline-flex; margin-bottom: 24px; }
 .hero-cta-group { gap: 12px; flex-wrap: wrap; }
-.hero-cta-group .btn-secondary:nth-of-type(3), .hero-cta-group .btn-tertiary { display: none; }
+.hero-cta-group .btn-secondary, .hero-cta-group .btn-tertiary { display: inline-flex; }
 .btn-primary, .btn-secondary { border-radius: 8px; padding: 16px 23px; font-size: 11px; letter-spacing: .06em; }
 .btn-primary { background: var(--text-primary); box-shadow: none; }
 .btn-primary:hover { background: #c7e2ea; box-shadow: 0 8px 30px #a4c9d715; }

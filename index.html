@@ -34,7 +34,7 @@
   <!-- Editorial Typography Matrix: Space Grotesk, Sora, Instrument Serif, IBM Plex Mono, Manrope, DM Sans, DM Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400&family=IBM+Plex+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&family=Sora:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Core Stylesheet -->
   <link rel="stylesheet" href="style.css">
@@ -274,7 +274,7 @@
 
         <!-- Hero Right Column: Spatial Zone for 3D Living Digital Artifact -->
         <div class="hero-artifact-hud" id="hero-artifact-hud" role="img" aria-label="A floating crystalline cube with a luminous AI core and orbital rings above a lit pedestal">
-          <img class="crystal-fallback" src="assets/crystal-fallback.svg" alt="" width="640" height="660" aria-hidden="true">
+          <img class="crystal-fallback webgl-fallback-emblem" id="crystal-fallback" src="assets/crystal-fallback.svg" alt="3D Crystal Emblem Fallback" width="640" height="660" aria-hidden="true">
           <canvas id="webgl-canvas" aria-hidden="true"></canvas>
           <span class="artifact-caption" aria-hidden="true"><span>FIG. 01 / INTELLIGENCE, IN FORM</span><span>Ideas, taking shape.</span></span>
         </div>
@@ -859,48 +859,48 @@
                     <!-- VIEW 1: GEOSPATIAL EXPLORER -->
                     <div class="dy-view-container active" id="dy-view-explorer" role="tabpanel" aria-labelledby="dy-tab-explorer-btn">
                       <!-- Category Filter Strip -->
-                      <div class="dy-categories-strip" role="tablist" aria-label="Geographic Categories">
-                        <button class="dy-cat-chip active" data-category="SACRED" type="button" role="tab" aria-selected="true" aria-controls="dy-places-list" aria-label="Filter by Sacred Temples (8 places)">
+                      <div class="dy-categories-strip" role="group" aria-label="Geographic Categories">
+                        <button class="dy-cat-chip active" data-category="SACRED" type="button" aria-pressed="true" aria-controls="dy-places-list" aria-label="Filter by Sacred Temples (8 places)">
                           <span class="cat-icon">🏛️</span>
                           <span class="cat-name">Temples</span>
                           <span class="cat-count">8</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="HERITAGE" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Heritage monuments (6 places)">
+                        <button class="dy-cat-chip" data-category="HERITAGE" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Heritage monuments (6 places)">
                           <span class="cat-icon">🏰</span>
                           <span class="cat-name">Heritage</span>
                           <span class="cat-count">6</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="CAVES" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Caves (5 places)">
+                        <button class="dy-cat-chip" data-category="CAVES" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Caves (5 places)">
                           <span class="cat-icon">🗿</span>
                           <span class="cat-name">Caves</span>
                           <span class="cat-count">5</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="HILLS" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Hills (4 places)">
+                        <button class="dy-cat-chip" data-category="HILLS" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Hills (4 places)">
                           <span class="cat-icon">⛰️</span>
                           <span class="cat-name">Hills</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="WATERFALLS" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Waterfalls (5 places)">
+                        <button class="dy-cat-chip" data-category="WATERFALLS" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Waterfalls (5 places)">
                           <span class="cat-icon">🌊</span>
                           <span class="cat-name">Waterfalls</span>
                           <span class="cat-count">5</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="LAKES" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Glacial and Sacred Lakes (4 places)">
+                        <button class="dy-cat-chip" data-category="LAKES" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Glacial and Sacred Lakes (4 places)">
                           <span class="cat-icon">⛵</span>
                           <span class="cat-name">Lakes</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="NATURE" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Nature sites (4 places)">
+                        <button class="dy-cat-chip" data-category="NATURE" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Sacred Nature sites (4 places)">
                           <span class="cat-icon">🌿</span>
                           <span class="cat-name">Nature</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="BEACHES" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Coastal and Beach shrines (4 places)">
+                        <button class="dy-cat-chip" data-category="BEACHES" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Coastal and Beach shrines (4 places)">
                           <span class="cat-icon">🏖️</span>
                           <span class="cat-name">Beaches</span>
                           <span class="cat-count">4</span>
                         </button>
-                        <button class="dy-cat-chip" data-category="WILDLIFE" type="button" role="tab" aria-selected="false" aria-controls="dy-places-list" aria-label="Filter by Wildlife and Biosphere Sanctuaries (4 places)">
+                        <button class="dy-cat-chip" data-category="WILDLIFE" type="button" aria-pressed="false" aria-controls="dy-places-list" aria-label="Filter by Wildlife and Biosphere Sanctuaries (4 places)">
                           <span class="cat-icon">🐅</span>
                           <span class="cat-name">Wildlife</span>
                           <span class="cat-count">4</span>
