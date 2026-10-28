@@ -118,7 +118,6 @@
           <li><a href="#hero" class="nav-link active" data-nav="hero">HERO</a></li>
           <li><a href="#work" class="nav-link" data-nav="work">WORK</a></li>
           <li><a href="#about" class="nav-link" data-nav="about">ABOUT</a></li>
-          <li><a href="#lab" class="nav-link" data-nav="lab">LAB</a></li>
           <li><a href="#stack" class="nav-link" data-nav="stack">STACK</a></li>
           <li><a href="#journey" class="nav-link" data-nav="journey">JOURNEY</a></li>
           <li><a href="#contact" class="nav-link" data-nav="contact">CONTACT</a></li>
@@ -177,10 +176,9 @@
           <li><a href="#hero" class="mobile-nav-link" data-nav="hero"><span class="m-num">01</span><span class="m-text">HERO</span></a></li>
           <li><a href="#work" class="mobile-nav-link" data-nav="work"><span class="m-num">02</span><span class="m-text">SELECTED WORK</span></a></li>
           <li><a href="#about" class="mobile-nav-link" data-nav="about"><span class="m-num">03</span><span class="m-text">ABOUT THE BUILDER</span></a></li>
-          <li><a href="#lab" class="mobile-nav-link" data-nav="lab"><span class="m-num">04</span><span class="m-text">LAB</span></a></li>
-          <li><a href="#stack" class="mobile-nav-link" data-nav="stack"><span class="m-num">05</span><span class="m-text">STACK</span></a></li>
-          <li><a href="#journey" class="mobile-nav-link" data-nav="journey"><span class="m-num">06</span><span class="m-text">JOURNEY &amp; NOW</span></a></li>
-          <li><a href="#contact" class="mobile-nav-link" data-nav="contact"><span class="m-num">07</span><span class="m-text">CONTACT</span></a></li>
+          <li><a href="#stack" class="mobile-nav-link" data-nav="stack"><span class="m-num">04</span><span class="m-text">STACK</span></a></li>
+          <li><a href="#journey" class="mobile-nav-link" data-nav="journey"><span class="m-num">05</span><span class="m-text">JOURNEY &amp; NOW</span></a></li>
+          <li><a href="#contact" class="mobile-nav-link" data-nav="contact"><span class="m-num">06</span><span class="m-text">CONTACT</span></a></li>
         </ul>
         <div class="mobile-drawer-utilities">
           <button type="button" class="mobile-util-btn" id="m-btn-cmd">
@@ -1130,178 +1128,12 @@
 
 
     <!-- ============================================================
-         SECTION 04: LAB — EXPERIMENTAL WORKBENCH (COMPACT & PURPOSEFUL)
-         ============================================================ -->
-    <section class="section-wrapper lab-section-compact" id="lab" aria-label="Laboratory Experiments">
-      <div class="section-container">
-        <div class="section-header-meta reveal">
-          <span class="section-number">04</span>
-          <span class="section-tag">LABORATORY</span>
-          <span class="section-line"></span>
-        </div>
-
-        <div class="section-title-row reveal">
-          <div>
-            <h2 class="section-heading">THE<br><span class="gradient-text">LAB.</span></h2>
-            <p class="section-subtext">
-              “Experiments, prototypes, explorations, and things I'm learning by building.”
-            </p>
-          </div>
-          <div class="lab-status-badge">
-            <span class="pulse-beacon amber"></span>
-            <span>4 WORKING PROTOTYPES</span>
-          </div>
-        </div>
-
-        <!-- 4 Interactive Lab Modules Grid (Refined & Compact) -->
-        <div class="lab-experiments-grid">
-
-          <!-- Lab 01: Prompt Structure & Tokenizer Analyzer -->
-          <div class="lab-module-card reveal tilt-card" id="exp-prompt">
-            <div class="module-header">
-              <span class="exp-code">EXP-01 // NLP</span>
-            </div>
-            <h3 class="exp-title">PROMPT STRUCTURE ANALYZER</h3>
-            <p class="exp-desc">
-              Deconstructs system instructions into semantic components (Role, Context, Objective, Constraints) with live token estimation.
-            </p>
-
-            <div class="exp-interactive-body">
-              <div class="preset-pills">
-                <span class="preset-label">PRESETS:</span>
-                <button class="preset-btn active" data-preset="venture">Venture</button>
-                <button class="preset-btn" data-preset="ocr">OCR</button>
-                <button class="preset-btn" data-preset="spatial">Spatial</button>
-              </div>
-
-              <textarea class="prompt-input-area" id="prompt-input" rows="3" aria-label="Interactive prompt analyzer text"></textarea>
-
-              <div class="prompt-breakdown-output" id="prompt-output">
-                <div class="output-role-chip"><span class="chip-k">ROLE:</span> <span id="out-role">Venture Architect</span></div>
-                <div class="output-role-chip"><span class="chip-k">CONTEXT:</span> <span id="out-context">Early-stage founder exploring venture hypotheses.</span></div>
-                <div class="output-role-chip"><span class="chip-k">OBJECTIVE:</span> <span id="out-objective">Formulate a lean MVP specification.</span></div>
-                <div class="output-role-chip"><span class="chip-k">CONSTRAINTS:</span> <span id="out-constraints">Avoid premature scaling; validate client-side privacy.</span></div>
-                <div class="output-meta-chips">
-                  <span><strong id="out-words">32</strong> WORDS</span>
-                  <span>~<strong id="out-tokens">42</strong> EST. TOKENS</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Lab 02: Refractive Material Shader Calibrator -->
-          <div class="lab-module-card reveal tilt-card" id="exp-material">
-            <div class="module-header">
-              <span class="exp-code">EXP-02 // WEBGL</span>
-            </div>
-            <h3 class="exp-title">REFRACTIVE MATERIAL CALIBRATOR</h3>
-            <p class="exp-desc">
-              Adjust the installation’s transmission, roughness, and IOR. Return to the hero to inspect your material.
-            </p>
-
-            <div class="exp-interactive-body">
-              <div class="slider-row">
-                <div class="slider-meta">
-                  <span class="sl-name">TRANSMISSION</span>
-                  <span class="sl-val" id="val-transmission">0.88</span>
-                </div>
-                <input type="range" id="slider-transmission" min="0" max="1" step="0.02" value="0.88" aria-label="Transmission slider">
-              </div>
-
-              <div class="slider-row">
-                <div class="slider-meta">
-                  <span class="sl-name">ROUGHNESS</span>
-                  <span class="sl-val" id="val-roughness">0.08</span>
-                </div>
-                <input type="range" id="slider-roughness" min="0" max="0.5" step="0.02" value="0.08" aria-label="Roughness slider">
-              </div>
-
-              <div class="slider-row">
-                <div class="slider-meta">
-                  <span class="sl-name">IOR</span>
-                  <span class="sl-val" id="val-ior">1.55</span>
-                </div>
-                <input type="range" id="slider-ior" min="1.0" max="2.4" step="0.05" value="1.55" aria-label="IOR slider">
-              </div>
-
-              <button class="btn-reset-shader" id="btn-reset-shader">RESET OPTICS</button>
-            </div>
-          </div>
-
-          <!-- Lab 03: Kinetic Magnetic Spring Physics -->
-          <div class="lab-module-card reveal tilt-card" id="exp-physics">
-            <div class="module-header">
-              <span class="exp-code">EXP-03 // INTERACTION</span>
-            </div>
-            <h3 class="exp-title">KINETIC SPRING PHYSICS</h3>
-            <p class="exp-desc">
-              Damped harmonic oscillation simulation testing mass, stiffness, and damping for tactile UI responses.
-            </p>
-
-            <div class="exp-interactive-body">
-              <div class="spring-presets">
-                <button class="spring-preset-btn active" data-stiffness="280" data-damping="22" data-mass="1">Snappy</button>
-                <button class="spring-preset-btn" data-stiffness="120" data-damping="14" data-mass="1.2">Ethereal</button>
-                <button class="spring-preset-btn" data-stiffness="200" data-damping="35" data-mass="1.5">Damped</button>
-              </div>
-
-              <div class="spring-test-stage" id="spring-stage" title="Click or drag to test spring physics">
-                <div class="spring-node" id="spring-target">
-                  <span>DRAG</span>
-                </div>
-                <div class="spring-crosshair" aria-hidden="true">+</div>
-              </div>
-
-              <div class="spring-readout">
-                <span>STIFFNESS: <strong id="lbl-stiffness">280</strong></span>
-                <span>DAMPING: <strong id="lbl-damping">22</strong></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Lab 04: State Pipeline Visualizer -->
-          <div class="lab-module-card reveal tilt-card" id="exp-pipeline">
-            <div class="module-header">
-              <span class="exp-code">EXP-04 // WORKFLOW</span>
-            </div>
-            <h3 class="exp-title">TRANSFORMATION PIPELINE</h3>
-            <p class="exp-desc">
-              Visual state machine tracking the lifecycle: IDEA → INTELLIGENCE → CODE → PRODUCT. Click stages to inspect.
-            </p>
-
-            <div class="exp-interactive-body">
-              <div class="state-pipeline-nodes">
-                <button class="pipeline-step-node active" data-stage="0">IDEA</button>
-                <span class="step-connector">→</span>
-                <button class="pipeline-step-node" data-stage="1">INTEL</button>
-                <span class="step-connector">→</span>
-                <button class="pipeline-step-node" data-stage="2">CODE</button>
-                <span class="step-connector">→</span>
-                <button class="pipeline-step-node" data-stage="3">PRODUCT</button>
-              </div>
-
-              <div class="pipeline-detail-box" id="pipeline-detail">
-                <div class="box-tag">STAGE 01 // PROBLEM DEFINITION</div>
-                <h4 class="box-headline">Idea &amp; Hypothesis Formulation</h4>
-                <p class="box-copy">
-                  Isolate friction, question default assumptions, and define clear success criteria before writing code.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ============================================================
-         SECTION 05: STACK — COMPACT & CREDIBLE ("WORKING WITH")
+         SECTION 04: STACK — COMPACT & CREDIBLE ("WORKING WITH")
          ============================================================ -->
     <section class="section-wrapper" id="stack" aria-label="Technical Skills">
       <div class="section-container">
         <div class="section-header-meta reveal">
-          <span class="section-number">05</span>
+          <span class="section-number">04</span>
           <span class="section-tag">TECHNICAL STACK</span>
           <span class="section-line"></span>
         </div>
@@ -1395,7 +1227,7 @@
     <section class="section-wrapper" id="journey" aria-label="Journey and Status">
       <div class="section-container">
         <div class="section-header-meta reveal">
-          <span class="section-number">06</span>
+          <span class="section-number">05</span>
           <span class="section-tag">JOURNEY &amp; NOW</span>
           <span class="section-line"></span>
         </div>
@@ -1518,7 +1350,7 @@
     <section class="section-wrapper contact-section" id="contact" aria-label="Contact and Connect">
       <div class="section-container">
         <div class="section-header-meta reveal">
-          <span class="section-number">07</span>
+          <span class="section-number">06</span>
           <span class="section-tag">CONNECT</span>
           <span class="section-line"></span>
         </div>
@@ -1904,10 +1736,9 @@
     </svg>
   </button>
 
-  <!-- Project Registry, DevYatra Atlas, Laboratory & Live Status Data -->
+  <!-- Project Registry, DevYatra Atlas & Live Status Data -->
   <script src="data/projects.js"></script>
   <script src="data/devyatra_places.js"></script>
-  <script src="data/lab.js"></script>
   <script src="data/now.js"></script>
 
   <!-- Three.js Library -->

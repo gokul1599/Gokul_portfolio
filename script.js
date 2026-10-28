@@ -4,9 +4,8 @@
  * Production-Grade Interactive System:
  *  - Signature 3D Living Digital Artifact (Three.js WebGL)
  *  - Restrained, Purposeful Motion (Almost still at rest, controlled scroll evolution)
- *  - Scroll-Driven Architectural State Machine (Hero -> Work -> About -> Lab -> Stack -> Journey -> Contact)
+ *  - Scroll-Driven Architectural State Machine (Hero -> Work -> About -> Stack -> Journey -> Contact)
  *  - Interactive Case Study Drawer Architecture (What, Why, How, Intelligence, Engineering, Experience)
- *  - Laboratory Interactive Workbench (Prompt Analyzer, Shader Calibrator, Spring Physics, Pipeline Visualizer)
  *  - Technical Stack Layer Resonance
  *  - Performance & Battery Optimization (DPR capped at 1.75, Page Visibility pausing, WebGL Fallback, prefers-reduced-motion)
  */
@@ -80,7 +79,7 @@
      2. ACCESSIBLE SCROLL REVEAL (Zero Content Blocking)
      ============================================================ */
   function initScrollReveal() {
-    const reveals = $$(".reveal, .reveal-fade, .project-card, .stack-category-card, .timeline-entry, .lab-module-card");
+    const reveals = $$(".reveal, .reveal-fade, .project-card, .stack-category-card, .timeline-entry");
     
     // Ensure all content is immediately accessible and visible
     reveals.forEach((el) => {
@@ -470,255 +469,6 @@
     }
   });
 
-  /* ============================================================
-     9. LABORATORY INTERACTIVE WORKBENCH
-     ============================================================ */
-
-  // --- Lab 01: Prompt Structure Analyzer -----------------------
-  const promptInput = $("#prompt-input");
-  const outRole = $("#out-role");
-  const outContext = $("#out-context");
-  const outObjective = $("#out-objective");
-  const outConstraints = $("#out-constraints");
-  const outWords = $("#out-words");
-  const outTokens = $("#out-tokens");
-  const presetBtns = $$(".preset-btn");
-
-  const promptPresets = {
-    venture: "ROLE: Venture Architect\nCONTEXT: Early-stage founder exploring venture hypotheses.\nOBJECTIVE: Formulate a lean MVP specification focusing on unit economics and retention.\nCONSTRAINTS: Avoid premature scaling; validate client-side privacy.",
-    ocr: "ROLE: Bilingual Accessibility Linguist\nCONTEXT: Official technical circular drafted in dense English.\nOBJECTIVE: Translate into colloquial conversational Telugu with 0.8x speech pacing.\nCONSTRAINTS: Preserve technical terms while eliminating bureaucratic jargon.",
-    spatial: "ROLE: Spatial Graphics Engineer\nCONTEXT: 2D residential floor plan with double-height ceiling.\nOBJECTIVE: Generate bounding box parameters and physically accurate daylight reflections.\nCONSTRAINTS: Cap draw calls under 60; enforce PBR energy conservation."
-  };
-
-  function analyzePrompt(text) {
-    if (typeof text !== "string") return;
-    const words = text.trim() ? text.trim().split(/\s+/).filter(Boolean) : [];
-    const tokens = Math.round(words.length * 1.32);
-    if (outWords) outWords.textContent = words.length;
-    if (outTokens) outTokens.textContent = tokens;
-
-    const roleMatch = text.match(/ROLE:\s*([^\n\r]+)/i);
-    const contextMatch = text.match(/CONTEXT:\s*([^\n\r]+)/i);
-    const objMatch = text.match(/OBJECTIVE:\s*([^\n\r]+)/i);
-    const constMatch = text.match(/CONSTRAINTS:\s*([^\n\r]+)/i);
-
-    if (outRole) outRole.textContent = roleMatch ? roleMatch[1].trim() : (words.length ? "Custom Structure" : "—");
-    if (outContext) outContext.textContent = contextMatch ? contextMatch[1].trim() : (words.length ? "Implicit from query" : "—");
-    if (outObjective) outObjective.textContent = objMatch ? objMatch[1].trim() : (words.length ? "General inquiry" : "—");
-    if (outConstraints) outConstraints.textContent = constMatch ? constMatch[1].trim() : (words.length ? "Standard system rules" : "—");
-  }
-
-  if (promptInput) {
-    promptInput.value = promptPresets.venture;
-    analyzePrompt(promptPresets.venture);
-
-    promptInput.addEventListener("input", (e) => {
-      analyzePrompt(e.target.value);
-    });
-
-    presetBtns.forEach((pBtn) => {
-      pBtn.addEventListener("click", () => {
-        presetBtns.forEach((b) => b.classList.remove("active"));
-        pBtn.classList.add("active");
-        const key = pBtn.getAttribute("data-preset");
-        if (key && promptPresets[key]) {
-          promptInput.value = promptPresets[key];
-          analyzePrompt(promptPresets[key]);
-        }
-      });
-    });
-  }
-
-  // --- Lab 02: Refractive Material Shader Calibrator -----------
-  const sliderTrans = $("#slider-transmission");
-  const sliderRough = $("#slider-roughness");
-  const sliderIor = $("#slider-ior");
-  const valTrans = $("#val-transmission");
-  const valRough = $("#val-roughness");
-  const valIor = $("#val-ior");
-  const btnResetShader = $("#btn-reset-shader");
-
-  if (sliderTrans && sliderRough && sliderIor) {
-    sliderTrans.addEventListener("input", (e) => {
-      const val = parseFloat(e.target.value);
-      if (valTrans) valTrans.textContent = val.toFixed(2);
-      if (updateArtifactMaterial) updateArtifactMaterial({ transmission: val });
-    });
-
-    sliderRough.addEventListener("input", (e) => {
-      const val = parseFloat(e.target.value);
-      if (valRough) valRough.textContent = val.toFixed(2);
-      if (updateArtifactMaterial) updateArtifactMaterial({ roughness: val });
-    });
-
-    sliderIor.addEventListener("input", (e) => {
-      const val = parseFloat(e.target.value);
-      if (valIor) valIor.textContent = val.toFixed(2);
-      if (updateArtifactMaterial) updateArtifactMaterial({ ior: val });
-    });
-
-    if (btnResetShader) {
-      btnResetShader.addEventListener("click", () => {
-        sliderTrans.value = 0.88;
-        sliderRough.value = 0.08;
-        sliderIor.value = 1.55;
-        if (valTrans) valTrans.textContent = "0.88";
-        if (valRough) valRough.textContent = "0.08";
-        if (valIor) valIor.textContent = "1.55";
-        if (updateArtifactMaterial) {
-          updateArtifactMaterial({ transmission: 0.88, roughness: 0.08, ior: 1.55 });
-        }
-      });
-    }
-  }
-
-  // --- Lab 03: Kinetic Spring Physics --------------------------
-  const springStage = $("#spring-stage");
-  const springTarget = $("#spring-target");
-  const lblStiffness = $("#lbl-stiffness");
-  const lblDamping = $("#lbl-damping");
-  const springPresetBtns = $$(".spring-preset-btn");
-
-  let springParams = { stiffness: 280, damping: 22, mass: 1 };
-  let springPos = { x: 0, y: 0 };
-  let springVel = { x: 0, y: 0 };
-  let isDraggingSpring = false;
-
-  if (springStage && springTarget) {
-    let springFrame = 0;
-    function wakeSpring() {
-      if (!springFrame && !document.hidden) springFrame = requestAnimationFrame(updateSpringPhysics);
-    }
-    function updateSpringPhysics() {
-      springFrame = 0;
-      if (isDraggingSpring || document.hidden) return;
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        springPos = { x: 0, y: 0 }; springVel = { x: 0, y: 0 };
-      } else {
-        const forceX = -springParams.stiffness * (springPos.x * 0.01) - springParams.damping * springVel.x;
-        const forceY = -springParams.stiffness * (springPos.y * 0.01) - springParams.damping * springVel.y;
-        springVel.x += (forceX / springParams.mass) * .016;
-        springVel.y += (forceY / springParams.mass) * .016;
-        springPos.x += springVel.x; springPos.y += springVel.y;
-      }
-      const moving = Math.abs(springPos.x) + Math.abs(springPos.y) + Math.abs(springVel.x) + Math.abs(springVel.y) > .05;
-      if (!moving) { springPos = { x: 0, y: 0 }; springVel = { x: 0, y: 0 }; }
-      springTarget.style.transform = `translate3d(${springPos.x.toFixed(2)}px, ${springPos.y.toFixed(2)}px, 0)`;
-      if (moving) wakeSpring();
-    }
-    springTarget.tabIndex = 0;
-    springTarget.setAttribute("role", "button");
-    springTarget.setAttribute("aria-label", "Spring physics demo. Use arrow keys to move and release.");
-    springTarget.addEventListener("keydown", (event) => {
-      const directions = { ArrowLeft: [-60, 0], ArrowRight: [60, 0], ArrowUp: [0, -40], ArrowDown: [0, 40] };
-      if (!directions[event.key]) return;
-      event.preventDefault();
-      [springPos.x, springPos.y] = directions[event.key];
-      wakeSpring();
-    });
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) { cancelAnimationFrame(springFrame); springFrame = 0; }
-      else wakeSpring();
-    });
-
-    springTarget.addEventListener("mousedown", () => {
-      isDraggingSpring = true;
-    });
-
-    springTarget.addEventListener("touchstart", (e) => {
-      isDraggingSpring = true;
-      e.preventDefault();
-    }, { passive: false });
-
-    window.addEventListener("mousemove", (e) => {
-      if (!isDraggingSpring) return;
-      const rect = springStage.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      springPos.x = clamp(e.clientX - cx, -90, 90);
-      springPos.y = clamp(e.clientY - cy, -50, 50);
-      springVel.x = 0;
-      springVel.y = 0;
-      springTarget.style.transform = `translate3d(${springPos.x}px, ${springPos.y}px, 0)`;
-    });
-
-    window.addEventListener("touchmove", (e) => {
-      if (!isDraggingSpring || !e.touches || !e.touches[0]) return;
-      const rect = springStage.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      springPos.x = clamp(e.touches[0].clientX - cx, -90, 90);
-      springPos.y = clamp(e.touches[0].clientY - cy, -50, 50);
-      springVel.x = 0;
-      springVel.y = 0;
-      springTarget.style.transform = `translate3d(${springPos.x}px, ${springPos.y}px, 0)`;
-    }, { passive: true });
-
-    window.addEventListener("mouseup", () => {
-      isDraggingSpring = false;
-      wakeSpring();
-    });
-
-    window.addEventListener("touchend", () => {
-      isDraggingSpring = false;
-      wakeSpring();
-    });
-
-    springPresetBtns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        springPresetBtns.forEach((b) => b.classList.remove("active"));
-        btn.classList.add("active");
-        const s = parseFloat(btn.getAttribute("data-stiffness") || "280");
-        const d = parseFloat(btn.getAttribute("data-damping") || "22");
-        const m = parseFloat(btn.getAttribute("data-mass") || "1");
-        springParams = { stiffness: s, damping: d, mass: m };
-        if (lblStiffness) lblStiffness.textContent = s;
-        if (lblDamping) lblDamping.textContent = d;
-      });
-    });
-  }
-
-  // --- Lab 04: State Pipeline Visualizer -----------------------
-  const pipelineNodes = $$(".pipeline-step-node");
-  const pipelineDetail = $("#pipeline-detail");
-
-  const pipelineStages = [
-    {
-      tag: "STAGE 01 // PROBLEM DEFINITION",
-      headline: "Idea &amp; Hypothesis Formulation",
-      copy: "Isolate friction, question default assumptions, and define clear success criteria before writing code."
-    },
-    {
-      tag: "STAGE 02 // MODEL & FEASIBILITY",
-      headline: "Intelligence &amp; Architecture",
-      copy: "Select the optimal LLM prompts, client-side OCR libraries, or spatial geometric math models to solve the problem directly."
-    },
-    {
-      tag: "STAGE 03 // TYPE-SAFE IMPLEMENTATION",
-      headline: "Engineering, Clean Contracts &amp; Performance",
-      copy: "Construct modular React/Next.js/Three.js code with zero runtime errors, accessible DOM structure, and responsive interaction performance."
-    },
-    {
-      tag: "STAGE 04 // POLISHED SHIP",
-      headline: "Product Deployment &amp; User Experience",
-      copy: "Host on production edge networks, test on real devices, collect user signals, and iterate into the next version."
-    }
-  ];
-
-  pipelineNodes.forEach((node, idx) => {
-    node.addEventListener("click", () => {
-      pipelineNodes.forEach((n) => n.classList.remove("active"));
-      node.classList.add("active");
-      const stageData = pipelineStages[idx];
-      if (stageData && pipelineDetail) {
-        pipelineDetail.innerHTML = `
-          <div class="box-tag">${stageData.tag}</div>
-          <h4 class="box-headline">${stageData.headline}</h4>
-          <p class="box-copy">${stageData.copy}</p>
-        `;
-      }
-    });
-  });
 
   /* ============================================================
      10. STACK LAYER RESONANCE WITH 3D ARTIFACT
@@ -1028,7 +778,6 @@
       { group: "Navigation", icon: "🏠", title: "Hero Introduction", desc: "Top of portfolio & identity statement", keywords: "hero home gokul karpurapu intro", action: () => scrollToSection("hero") },
       { group: "Navigation", icon: "💼", title: "Selected Work (04 Builds)", desc: "Jump directly to Valtora, LifeHub, Teluguva, DevYatra", keywords: "work projects apps builds products portfolio", action: () => scrollToSection("work") },
       { group: "Navigation", icon: "👤", title: "About the Builder", desc: "Background, mindset, education & philosophy", keywords: "about bio profile scaler bits pilani student", action: () => scrollToSection("about") },
-      { group: "Navigation", icon: "🔬", title: "Digital Laboratory", desc: "Interactive workbenches and prototypes", keywords: "lab experiments prompt shader spring physics pipeline visualizer", action: () => scrollToSection("lab") },
       { group: "Navigation", icon: "⚡", title: "Technical Stack", desc: "Modern frontend, backend, 3D, and AI models", keywords: "stack skills tech tools technologies languages frameworks", action: () => scrollToSection("stack") },
       { group: "Navigation", icon: "🧭", title: "Journey & Milestones", desc: "Timeline, Scaler, BITS Pilani & now", keywords: "journey timeline experience milestones history education", action: () => scrollToSection("journey") },
       { group: "Navigation", icon: "✉️", title: "Contact & Connect", desc: "Get in touch for internships & opportunities", keywords: "contact email hire connect message linkedin github", action: () => scrollToSection("contact") },
