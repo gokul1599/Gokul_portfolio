@@ -65,26 +65,26 @@
       installation.position.y = .55;
       const cube = new T.Group(); installation.add(cube);
       cube.rotation.set(.12, Math.PI / 4, 0);
-      const glass = new T.MeshPhysicalMaterial({ color: 0x80bbdf, metalness: .12, roughness: .08,
+      const glass = new T.MeshPhysicalMaterial({ color: 0x9edb42, metalness: .12, roughness: .08,
         transmission: .88, ior: 1.55, transparent: true, opacity: .38, depthWrite: false, side: T.DoubleSide });
       const cubeGeometry = new T.BoxGeometry(3.25, 3.25, 3.25);
       cube.add(new T.Mesh(cubeGeometry, glass));
-      const edgeMat = new T.LineBasicMaterial({ color: 0xb8e8ff, transparent: true, opacity: .72 });
+      const edgeMat = new T.LineBasicMaterial({ color: 0xd9f99d, transparent: true, opacity: .72 });
       cube.add(new T.LineSegments(new T.EdgesGeometry(cubeGeometry), edgeMat));
       // Inset, quieter edges give the glass a readable thickness.
       const innerEdge = new T.LineSegments(new T.EdgesGeometry(new T.BoxGeometry(3.13,3.13,3.13)),
-        new T.LineBasicMaterial({color:0x419acf,transparent:true,opacity:.25})); cube.add(innerEdge);
-      const coreMat = new T.MeshStandardMaterial({ color: 0x3196c9, emissive: 0x058fe6, emissiveIntensity: .75,
+        new T.LineBasicMaterial({color:0x65a30d,transparent:true,opacity:.25})); cube.add(innerEdge);
+      const coreMat = new T.MeshStandardMaterial({ color: 0x4d7c0f, emissive: 0x84cc16, emissiveIntensity: .75,
         metalness: .15, roughness: .23, flatShading: true });
       const core = new T.Mesh(new T.IcosahedronGeometry(.66, 1), coreMat); installation.add(core);
       const lattice = new T.LineSegments(new T.WireframeGeometry(new T.IcosahedronGeometry(1.24, 1)),
-        new T.LineBasicMaterial({ color:0x60ccff, transparent:true, opacity:.34, blending:T.AdditiveBlending }));
+        new T.LineBasicMaterial({ color:0xa3e635, transparent:true, opacity:.34, blending:T.AdditiveBlending }));
       installation.add(lattice);
       // A procedural radial texture produces soft light without a postprocessing pass.
       const glowCanvas = document.createElement('canvas'); glowCanvas.width = glowCanvas.height = 128;
       const ctx = glowCanvas.getContext('2d'); const gradient = ctx.createRadialGradient(64,64,0,64,64,64);
-      gradient.addColorStop(0,'rgba(150,232,255,.8)'); gradient.addColorStop(.18,'rgba(44,173,255,.32)');
-      gradient.addColorStop(.55,'rgba(24,119,255,.08)'); gradient.addColorStop(1,'rgba(0,64,255,0)');
+      gradient.addColorStop(0,'rgba(190,242,100,.85)'); gradient.addColorStop(.18,'rgba(163,230,53,.35)');
+      gradient.addColorStop(.55,'rgba(101,163,13,.08)'); gradient.addColorStop(1,'rgba(0,0,0,0)');
       ctx.fillStyle=gradient;ctx.fillRect(0,0,128,128);
       const glowTexture = new T.CanvasTexture(glowCanvas);
       const glow = new T.Sprite(new T.SpriteMaterial({map:glowTexture,transparent:true,depthWrite:false,blending:T.AdditiveBlending}));
@@ -94,36 +94,36 @@
         const group = new T.Group(); group.rotation.set(.65+i*.65,.25+i*.45,.2+i*.55); installation.add(group);
         const radius=2.7+i*.3;
         const ring=new T.Mesh(new T.TorusGeometry(radius,.007,4,compact?90:160),
-          new T.MeshBasicMaterial({color:i===1?0xe2efff:0x68b8dc,transparent:true,opacity:i===1?.5:.28}));
+          new T.MeshBasicMaterial({color:i===1?0xffffff:0x84cc16,transparent:true,opacity:i===1?.55:.3}));
         group.add(ring);
         const satellite=new T.Mesh(new T.SphereGeometry(i===0?.09:.055,12,8),
-          new T.MeshStandardMaterial({color:0xc3eaff,emissive:0x178bcc,emissiveIntensity:.65,metalness:.7,roughness:.15}));
+          new T.MeshStandardMaterial({color:0xecfccb,emissive:0xa3e635,emissiveIntensity:.7,metalness:.7,roughness:.15}));
         group.add(satellite); orbital.push({group,satellite,radius,phase:i*2.2});
       }
-      const pedestalMat=new T.MeshStandardMaterial({color:0x081320,metalness:.85,roughness:.25});
+      const pedestalMat=new T.MeshStandardMaterial({color:0x05080c,metalness:.85,roughness:.25});
       const pedestal=new T.Mesh(new T.CylinderGeometry(3.1,3.15,.35,compact?64:100),pedestalMat);
       pedestal.position.y=-2.5; objects.add(pedestal);
       const top=new T.Mesh(new T.CylinderGeometry(2.93,2.93,.035,compact?64:100),
-        new T.MeshStandardMaterial({color:0x07111b,metalness:.85,roughness:.22}));
+        new T.MeshStandardMaterial({color:0x030507,metalness:.85,roughness:.22}));
       top.position.y=-2.3;objects.add(top);
       for (const radius of [2.97,1.65,.65]) {
         const ring=new T.Mesh(new T.TorusGeometry(radius,radius>2?.015:.006,6,100),
-          new T.MeshBasicMaterial({color:0x50cfff,transparent:true,opacity:radius>2?.9:.45}));
+          new T.MeshBasicMaterial({color:0xa3e635,transparent:true,opacity:radius>2?.9:.45}));
         ring.rotation.x=Math.PI/2;ring.position.y=-2.275;objects.add(ring);
       }
       const floorGlow=new T.Sprite(new T.SpriteMaterial({map:glowTexture,transparent:true,opacity:.38,depthWrite:false,blending:T.AdditiveBlending}));
       floorGlow.scale.set(8,1.4,1);floorGlow.position.set(0,-2.7,0);objects.add(floorGlow);
-      const beam=new T.Mesh(new T.CylinderGeometry(.018,.04,7.5,8,1,true),new T.MeshBasicMaterial({color:0x70d3ff,transparent:true,opacity:.13,depthWrite:false,blending:T.AdditiveBlending}));
+      const beam=new T.Mesh(new T.CylinderGeometry(.018,.04,7.5,8,1,true),new T.MeshBasicMaterial({color:0xa3e635,transparent:true,opacity:.13,depthWrite:false,blending:T.AdditiveBlending}));
       beam.position.y=1.2;objects.add(beam);
       const count=compact?36:100, positions=new Float32Array(count*3);
       // Deterministic particle distribution keeps the composition reproducible.
       for(let i=0;i<count;i++){const a=i*2.39996,r=1.5+(i%17)/6;positions[i*3]=Math.cos(a)*r;positions[i*3+1]=(i%23)/3.2-3;positions[i*3+2]=Math.sin(a)*r*.65;}
       const particleGeo=new T.BufferGeometry();particleGeo.setAttribute('position',new T.BufferAttribute(positions,3));
-      const particles=new T.Points(particleGeo,new T.PointsMaterial({color:0x6fc9f3,size:compact?.022:.018,transparent:true,opacity:.55,blending:T.AdditiveBlending,depthWrite:false}));objects.add(particles);
-      scene.add(new T.AmbientLight(0x6997c7,.8));
-      const key=new T.DirectionalLight(0xd8efff,2.5);key.position.set(3,6,5);scene.add(key);
-      const rim=new T.PointLight(0x279bff,3,20);rim.position.set(-3,2,3);scene.add(rim);
-      const innerLight=new T.PointLight(0x49d6ff,2,8);installation.add(innerLight);
+      const particles=new T.Points(particleGeo,new T.PointsMaterial({color:0xbef264,size:compact?.022:.018,transparent:true,opacity:.55,blending:T.AdditiveBlending,depthWrite:false}));objects.add(particles);
+      scene.add(new T.AmbientLight(0x1a2e12,.8));
+      const key=new T.DirectionalLight(0xffffff,2.5);key.position.set(3,6,5);scene.add(key);
+      const rim=new T.PointLight(0xa3e635,3,20);rim.position.set(-3,2,3);scene.add(rim);
+      const innerLight=new T.PointLight(0xbef264,2.2,8);installation.add(innerLight);
       let pointerX=0,pointerY=0,x=0,y=0,baseCameraZ=13.8;
       listen(host,'pointermove',event=>{if(event.pointerType==='touch')return;const r=host.getBoundingClientRect();pointerX=(event.clientX-r.left)/r.width-.5;pointerY=(event.clientY-r.top)/r.height-.5;},{passive:true});
       listen(host,'pointerleave',()=>{pointerX=pointerY=0;});

@@ -1098,7 +1098,7 @@
      17. LOG INITIALIZATION STATUS
      ============================================================ */
   console.log("%cGOKUL LABS %cv9.0 — Living Digital Architecture Engine Active (04 Products)", 
-    "color: #38bdf8; font-weight: bold; font-family: monospace; font-size: 13px;",
+    "color: #a3e635; font-weight: bold; font-family: monospace; font-size: 13px;",
     "color: #94a3b8; font-family: monospace; font-size: 11px;"
   );
 })();
