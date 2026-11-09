@@ -25,19 +25,19 @@
       --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
       --font-mono: 'DM Mono', ui-monospace, SFMono-Regular, monospace;
       
-      /* Theme 1: Header Canopy Dark (Default / Recommended) */
-      --bg-canvas: #090b10;
-      --header-bg: #0f1420;
-      --header-border: #38bdf8;
+      /* Theme 1: Header Canopy Dark (Default / Recommended — Midnight Black & Lime Green) */
+      --bg-canvas: #030507;
+      --header-bg: #070c06;
+      --header-border: #a3e635;
       --text-head: #ffffff;
-      --text-sub: #38bdf8;
-      --text-body: #cbd5e1;
+      --text-sub: #a3e635;
+      --text-body: #e2e8f0;
       --text-muted: #94a3b8;
       --text-bold: #ffffff;
-      --rule-color: #1e293b;
-      --link-color: #38bdf8;
-      --tag-bg: rgba(56, 189, 248, 0.1);
-      --tag-border: rgba(56, 189, 248, 0.25);
+      --rule-color: rgba(255, 255, 255, 0.12);
+      --link-color: #a3e635;
+      --tag-bg: rgba(163, 230, 53, 0.12);
+      --tag-border: rgba(163, 230, 53, 0.35);
     }
 
     body.theme-ats {
@@ -45,33 +45,33 @@
       --header-bg: #f8fafc;
       --header-border: #cbd5e1;
       --text-head: #0f172a;
-      --text-sub: #2563eb;
+      --text-sub: #3f6212;
       --text-body: #334155;
       --text-muted: #64748b;
       --text-bold: #0f172a;
       --rule-color: #e2e8f0;
-      --link-color: #2563eb;
-      --tag-bg: rgba(37, 99, 235, 0.08);
-      --tag-border: rgba(37, 99, 235, 0.2);
+      --link-color: #3f6212;
+      --tag-bg: rgba(101, 163, 13, 0.08);
+      --tag-border: rgba(101, 163, 13, 0.25);
     }
 
     body.theme-cinematic {
-      --bg-canvas: #06070a;
-      --header-bg: #0b0f17;
-      --header-border: #38bdf8;
+      --bg-canvas: #030507;
+      --header-bg: #080d05;
+      --header-border: #a3e635;
       --text-head: #ffffff;
-      --text-sub: #7dd3fc;
-      --text-body: #cbd5e1;
+      --text-sub: #bef264;
+      --text-body: #e2e8f0;
       --text-muted: #94a3b8;
       --text-bold: #ffffff;
-      --rule-color: #182030;
-      --link-color: #38bdf8;
-      --tag-bg: rgba(56, 189, 248, 0.12);
-      --tag-border: rgba(56, 189, 248, 0.3);
+      --rule-color: rgba(163, 230, 53, 0.2);
+      --link-color: #a3e635;
+      --tag-bg: rgba(163, 230, 53, 0.14);
+      --tag-border: rgba(163, 230, 53, 0.4);
     }
 
     body {
-      background-color: #030407;
+      background-color: #030507;
       font-family: var(--font-body);
       color: var(--text-body);
       line-height: 1.45;
@@ -89,9 +89,9 @@
     .controls-toolbar {
       width: 100%;
       max-width: 794px;
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(8, 12, 6, 0.9);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(163, 230, 53, 0.25);
       border-radius: 12px;
       padding: 12px 20px;
       margin-bottom: 24px;
@@ -100,7 +100,7 @@
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     .toolbar-left {
@@ -120,7 +120,7 @@
     .theme-selector {
       display: flex;
       gap: 6px;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       padding: 4px;
       border-radius: 8px;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -140,8 +140,8 @@
     }
 
     .theme-btn.active, .theme-btn:hover {
-      background: rgba(56, 189, 248, 0.2);
-      color: #fff;
+      background: rgba(163, 230, 53, 0.22);
+      color: #ffffff;
     }
 
     .toolbar-right {
@@ -166,13 +166,13 @@
     }
 
     .btn-print {
-      background: #38bdf8;
-      color: #000;
-      border-color: #38bdf8;
+      background: #a3e635;
+      color: #030507;
+      border-color: #a3e635;
     }
     .btn-print:hover {
-      background: #7dd3fc;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+      background: #bef264;
+      box-shadow: 0 0 15px rgba(163, 230, 53, 0.45);
     }
 
     .btn-dl {
@@ -181,7 +181,8 @@
     }
     .btn-dl:hover {
       background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.3);
+      border-color: rgba(163, 230, 53, 0.4);
+      color: #ffffff;
     }
 
     /* -------------------------------------------------------------
