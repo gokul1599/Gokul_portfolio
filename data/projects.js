@@ -1,18 +1,80 @@
 /**
- * GOKUL LABS — Project Registry & Case Study Architecture v9.0
+ * GOKUL LABS — Project Registry & Case Study Architecture v10.0
  * Verified product data for Gokul Karpurapu's portfolio.
  * 
  * Strict Content Rule:
  *  - 100% genuine information from verified builds.
  *  - Zero fabricated metrics, fake users, or invented repositories.
- *  - Four core products: VALTORA, LIFEHUB, TELUGUVA, DEVYATRA.
+ *  - Five core products: AHEADGUARD AI, VALTORA, LIFEHUB, TELUGUVA, DEVYATRA.
  *  - Structured WHAT / WHY / HOW / ARCHITECTURE / DECISIONS / AI FLOW / CHALLENGES schema.
  */
 
 const PROJECTS = [
   {
-    id: "valtora",
+    id: "aheadguard",
     number: "01",
+    name: "AHEADGUARD AI",
+    subtitle: "EVIDENCE-FIRST DIGITAL TRUST & RECRUITMENT SAFETY PLATFORM",
+    category: "AI · DIGITAL TRUST · CYBERSECURITY · FULL STACK",
+    year: "2026",
+    tagline: "Trust, verified before action.",
+    description: "A pre-action digital safety platform that investigates suspicious links, recruitment offers, recruiter identities, job vacancies, and payment requests before users take potentially harmful actions.",
+    liveUrl: "https://aheadguard-ai.vercel.app/",
+    githubUrl: "https://github.com/gokul1599/AheadGuard-Ai",
+    caseStudyPath: "work/aheadguard/index.html",
+    accentColor: "#a3e635",
+    technologies: ["Next.js 15", "React 19", "TypeScript", "Neon PostgreSQL", "TinyFish Browser", "Server-Sent Events", "Chrome Extension MV3", "Zod", "Vitest", "Vercel"],
+    transformation: {
+      from: "SUSPICIOUS OFFER",
+      core: "EVIDENCE INVESTIGATION",
+      to: "VERIFIED SAFETY"
+    },
+    workflow: ["CLAIM EXTRACTION", "SECURITY PREFLIGHT", "TINYFISH RESEARCH", "CLAIM VERIFICATION", "EVIDENCE LEDGER", "RISK ENGINE", "ACTION PREVIEW"],
+    architecture: [
+      { step: "INPUT NORMALIZATION", role: "Parses and sanitizes URLs, offer messages, recruiter handles, job descriptions, and payment prompts" },
+      { step: "SECURITY PREFLIGHT", role: "Strict SSRF defense, private network / localhost loopback blocking, payload size bounds & protocol validation" },
+      { step: "STRUCTURED CLAIM EXTRACTION", role: "Extracts employer, role, recruiter identity, stipend, UPI & selection claims across 12 structured categories" },
+      { step: "TINYFISH READ-ONLY BROWSER", role: "Automated remote browser investigation streaming live DOM research via Server-Sent Events without executing unsafe actions" },
+      { step: "MULTI-SOURCE VERIFICATION", role: "Enforces strict domain boundaries, ATS tenant alignment, job requisition matching & corporate policy conflict checks" },
+      { step: "EVIDENCE LEDGER & TRUSTGRAPH", role: "Separates observed facts from model inferences; maps cross-channel relationships between phones, emails, domains, and UPI IDs" },
+      { step: "DETERMINISTIC 4-TIER RISK ENGINE", role: "Evaluates HIGH RISK, SUSPICIOUS, UNKNOWN, and LOW OBSERVED RISK with Action Preview consequence modeling" }
+    ],
+    engineeringDecisions: [
+      {
+        topic: "Why Deterministic Risk Policies over Pure LLM Scoring?",
+        rationale: "Safety decisions cannot rely on unconstrained probabilistic LLM output. AheadGuard uses hard deterministic rules for critical signals (e.g. upfront recruitment fees, private IP targets, domain mismatches) while using AI strictly for structured claim extraction."
+      },
+      {
+        topic: "Why Read-Only TinyFish Browser Automation?",
+        rationale: "Investigating potentially malicious recruitment portals requires live web inspection. TinyFish provides sandboxed remote browser navigation that streams DOM insights via SSE while treating all external page content as untrusted input."
+      },
+      {
+        topic: "Why Server-Sent Events (SSE) for Real-Time Telemetry?",
+        rationale: "Multi-stage investigations take several seconds across claim parsing, remote browsing, and cross-referencing. SSE provides a single lightweight HTTP stream that updates users step-by-step without polling overhead."
+      },
+      {
+        topic: "Why Strict SSRF Preflight & Private IP Isolation?",
+        rationale: "Allowing users to input arbitrary URLs to be investigated creates severe SSRF risks. AheadGuard validates protocols, resolves DNS targets, and blocks all RFC 1918 private ranges, 127.0.0.1 loopbacks, and cloud metadata endpoints before fetching."
+      }
+    ],
+    challenges: {
+      problem: "Deceptive recruitment operations combine lookalike domains spoofing corporate ATS portals with high-pressure payment demands over Telegram or UPI, evading static URL blocklists.",
+      solution: "Engineered a multi-phase verification pipeline that decouples claimed identity from domain provenance, checks ATS tenant endpoints, and evaluates upfront registration fees as immediate high-risk triggers.",
+      lesson: "In digital trust architecture, strictly separating directly observed facts from model interpretations is essential — confidence without demonstrable evidence creates dangerous false assurance."
+    },
+    caseStudy: {
+      what: "AheadGuard AI is an evidence-first digital trust and recruitment safety platform that investigates suspicious links, job offers, recruiter identities, and payment demands before users act.",
+      why: "Sophisticated recruitment fraud increasingly uses lookalike corporate career portals, stolen recruiter personas, and upfront processing fees across Telegram and WhatsApp, deceiving job seekers before standard security tools detect malicious domains.",
+      how: "Constructed an end-to-end verification engine combining structured claim extraction across 12 categories, sandboxed read-only browser research via TinyFish, multi-source provenance verification, an immutable evidence ledger, and a deterministic four-tier risk policy.",
+      intelligence: "Deterministic risk evaluation classifying HIGH RISK, SUSPICIOUS, UNKNOWN, and LOW OBSERVED RISK without hallucinations, paired with TrustGraph entity relationship correlation and Action Preview consequence analysis.",
+      engineering: "Built on Next.js 15 App Router and React 19; Neon Serverless PostgreSQL for persistence; Server-Sent Events for real-time investigation streaming; Chrome Extension MV3 with local evidence caching; strict SSRF loopback defense and safe error redaction.",
+      stack: "Next.js 15, React 19, TypeScript, Neon Serverless PostgreSQL, TinyFish Browser, Server-Sent Events, Chrome Extension MV3, Zod, Vitest, Tailwind CSS, Vercel.",
+      experience: "A focused, dark-mode digital trust cockpit featuring live URL/text intake, real-time investigation progress streaming, four-tier risk badge with clear rationale, evidence ledger contrasting observed facts with model interpretation, TrustGraph entity map, and Action Preview consequence breakdown."
+    }
+  },
+  {
+    id: "valtora",
+    number: "02",
     name: "VALTORA",
     subtitle: "AI PRODUCT INTELLIGENCE PLATFORM",
     category: "AI · PRODUCT STRATEGY · FULL STACK",
@@ -73,7 +135,7 @@ const PROJECTS = [
   },
   {
     id: "lifehub",
-    number: "02",
+    number: "03",
     name: "LIFEHUB",
     subtitle: "PERSONAL PRODUCTIVITY + LIFE MANAGEMENT PLATFORM",
     category: "PRODUCTIVITY · WEB SYSTEM · UX CRAFT",
@@ -134,7 +196,7 @@ const PROJECTS = [
   },
   {
     id: "teluguva",
-    number: "03",
+    number: "04",
     name: "TELUGUVA",
     subtitle: "TELUGU-FIRST DIGITAL PLATFORM & OCR",
     category: "AI · ACCESSIBILITY · LANGUAGE EXPERIENCE",
@@ -195,7 +257,7 @@ const PROJECTS = [
   },
   {
     id: "devyatra",
-    number: "04",
+    number: "05",
     name: "DEVYATRA / TEMPLEORA",
     subtitle: "SACRED HERITAGE & GEOSPATIAL ATLAS (TEMPLEORA-POWERED)",
     category: "GEOSPATIAL · SACRED HERITAGE · INDIA ATLAS",

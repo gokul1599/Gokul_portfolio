@@ -98,7 +98,7 @@ html,body { background:#030507; }
 .project-card { border:0; border-top:1px solid rgba(163,230,53,.25); border-radius:0; padding:48px 0 0; box-shadow:none; background:none; overflow:visible; backdrop-filter:none; }
 .project-card:hover { box-shadow:none; border-color:rgba(163,230,53,.5); }
 .project-card::before { content:"01"; position:absolute; right:0; top:5px; font:11px var(--font-meta); letter-spacing:.1em; color:#a3e635; }
-#project-lifehub::before { content:"02"; } #project-teluguva::before { content:"03"; } #project-devyatra::before { content:"04"; }
+#project-aheadguard::before { content:"01"; } #project-valtora::before { content:"02"; } #project-lifehub::before { content:"03"; } #project-teluguva::before { content:"04"; } #project-devyatra::before { content:"05"; }
 .project-inner-grid { grid-template-columns:.85fr 1.25fr; gap:64px; }
 .project-info-pane { min-width:0; }
 .project-title { font-size:clamp(32px,4vw,54px); font-weight:500; }
@@ -115,6 +115,10 @@ html,body { background:#030507; }
 #project-devyatra .project-inner-grid { grid-template-columns:1fr; gap:30px; }
 #project-devyatra .project-info-pane { max-width:750px; }
 #project-devyatra .project-browser-frame { border-color:rgba(163,230,53,.35); }
+.aheadguard-theme .project-browser-frame { border-color:rgba(163,230,53,.4); box-shadow:0 20px 60px #00000088,0 0 80px rgba(163,230,53,.1); }
+.product-preview-img { width:100%; height:auto; display:block; object-fit:cover; border-radius:0 0 6px 6px; }
+.project-brand-mark.ag-mark { background:rgba(163,230,53,.15); color:#a3e635; border:1px solid rgba(163,230,53,.4); }
+.btn-live.lime-btn:hover { background:#a3e635; color:#030507; box-shadow:0 4px 20px rgba(163,230,53,.4); }
 #about { background:#06080b; }
 #about .section-heading { font-size:clamp(50px,6vw,84px); text-transform:none; }
 .about-profile-card { border:1px solid rgba(255,255,255,.12); border-radius:3px; background:#080d05; }
@@ -247,4 +251,74 @@ html[data-mode="read"] .hero-artifact-hud { opacity:.65; }
   .brand-title { font-size:10px; }
   .header-actions { gap:4px; }
   .header-resume-btn { padding-inline:8px; }
+}
+
+/* ============================================================
+   CASE STUDY MOBILE RESPONSIVENESS & FLOW STRIP
+   ============================================================ */
+.cs-flow-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 2px;
+}
+.cs-flow-node {
+  background: #06090e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px 20px;
+  min-width: 140px;
+  flex-shrink: 0;
+}
+.cs-flow-node.highlight {
+  border-color: rgba(163, 230, 53, 0.4);
+  background: rgba(163, 230, 53, 0.05);
+}
+.cs-flow-node.active {
+  border-color: #a3e635;
+  background: rgba(163, 230, 53, 0.1);
+}
+.cs-flow-arr {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.n-step {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #a3e635;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+.n-title {
+  font-family: var(--font-work);
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 4px;
+}
+.n-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .case-study-page { overflow-x: hidden; }
+  .cs-topbar { padding: 10px 16px; overflow-x: hidden; }
+  .cs-topbar-inner { flex-wrap: nowrap; gap: 8px; justify-content: space-between; }
+  .cs-topbar-title { display: none; }
+  .cs-topbar-actions { margin-left: auto; gap: 6px; flex-shrink: 0; }
+  .cs-action-btn { padding: 6px 10px; font-size: 10px; }
+  .cs-back-btn span:last-child { display: none; }
+  .cs-back-btn::after { content: "WORK"; font-family: var(--font-mono); font-size: 11px; }
+  .cs-flow-strip { gap: 8px; }
+  .cs-flow-node { min-width: 125px; padding: 12px 14px; }
+  .cs-hero-meta { flex-wrap: wrap; gap: 8px; }
 }

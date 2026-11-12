@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AheadGuard AI Case Study — Gokul Labs</title>
+  <meta name="description" content="Technical Case Study for AheadGuard AI — Evidence-First Digital Trust & Recruitment Safety Platform engineered by Gokul Karpurapu.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@gokul_k_12">
+  <meta name="twitter:creator" content="@gokul_k_12">
+  <meta name="twitter:title" content="AheadGuard AI Case Study — Gokul Labs">
+  <meta name="twitter:description" content="Technical Case Study for AheadGuard AI — Evidence-First Digital Trust & Recruitment Safety Platform engineered by Gokul Karpurapu.">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="../../premium.css">
+  <link rel="stylesheet" href="../../cinematic.css">
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400&family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Case Study Custom Layout & Visual Enhancements */
+    .cs-hero { border-bottom: 1px solid rgba(163, 230, 53, 0.25); }
+    .cs-badge.lime { background: rgba(163, 230, 53, 0.15); color: #a3e635; border-color: rgba(163, 230, 53, 0.4); }
+    .cs-action-btn.primary.lime { background: #a3e635; color: #030507; font-weight: 700; }
+    .cs-action-btn.primary.lime:hover { background: #bef264; box-shadow: 0 4px 20px rgba(163, 230, 53, 0.4); }
+    .cs-screenshot-frame {
+      margin: 36px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(163, 230, 53, 0.25);
+      background: #06090d;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 50px rgba(163, 230, 53, 0.05);
+    }
+    .cs-screenshot-frame img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .cs-screenshot-caption {
+      padding: 14px 20px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(3, 5, 7, 0.9);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .cs-screenshot-caption .tag {
+      color: #a3e635;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+    .cs-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin: 28px 0;
+    }
+    @media (max-width: 860px) {
+      .cs-grid-2 { grid-template-columns: 1fr; }
+    }
+    .cs-card-panel {
+      background: #06090e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      padding: 24px;
+    }
+    .cs-card-panel h3 {
+      font-family: var(--font-work);
+      font-size: 18px;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+    .cs-card-panel p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+    .risk-tier-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .risk-tier-card {
+      border-left: 4px solid;
+      background: #06090e;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+    }
+    .risk-tier-card.tier-high { border-left-color: #ef4444; }
+    .risk-tier-card.tier-suspicious { border-left-color: #f59e0b; }
+    .risk-tier-card.tier-unknown { border-left-color: #94a3b8; }
+    .risk-tier-card.tier-low { border-left-color: #a3e635; }
+    .tier-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .tier-name {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+    .tier-high .tier-name { color: #ef4444; }
+    .tier-suspicious .tier-name { color: #f59e0b; }
+    .tier-unknown .tier-name { color: #94a3b8; }
+    .tier-low .tier-name { color: #a3e635; }
+    .tier-desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .integration-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+    }
+    .status-live { background: rgba(163, 230, 53, 0.15); color: #a3e635; border: 1px solid rgba(163, 230, 53, 0.3); }
+    .status-tested { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .status-configured { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .disclaimer-banner {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 24px 0;
+      font-size: 13px;
+      line-height: 1.6;
+      color: #fbbf24;
+      font-family: var(--font-mono);
+    }
+  </style>
+</head>
+<body class="case-study-page">
+  <!-- Case Study Sticky Topbar -->
+  <header class="cs-topbar">
+    <div class="cs-topbar-inner">
+      <a href="../../#work" class="cs-back-btn">
+        <span class="arr">←</span>
+        <span>GOKUL LABS / SELECTED WORK</span>
+      </a>
+      <div class="cs-topbar-title">
+        <span class="cs-badge lime">PROJECT 01</span>
+        <span class="cs-name">AHEADGUARD AI</span>
+      </div>
+      <div class="cs-topbar-actions">
+        <a href="https://github.com/gokul1599/AheadGuard-Ai" target="_blank" rel="noopener noreferrer" class="cs-action-btn">GITHUB ↗</a>
+        <a href="https://aheadguard-ai.vercel.app/" target="_blank" rel="noopener noreferrer" class="cs-action-btn primary lime">LIVE PRODUCT ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="cs-container">
+    <!-- SECTION 01: HERO -->
+    <section class="cs-hero">
+      <div class="cs-hero-meta">
+        <span class="cs-kicker lime">01 // CASE STUDY</span>
+        <span class="cs-category">AI · DIGITAL TRUST · CYBERSECURITY · FULL STACK</span>
+      </div>
+      <h1 class="cs-headline">AHEADGUARD AI</h1>
+      <p class="cs-tagline">“Check before you trust.”</p>
+      <p class="cs-lead">
+        A pre-action digital safety platform that investigates suspicious links, recruitment offers, recruiter identities, job vacancies, and payment requests before users take potentially irreversible actions.
+      </p>
+
+      <!-- Key Metadata Grid -->
+      <div class="cs-meta-grid">
+        <div class="cs-meta-item">
+          <span class="m-lbl">ROLE</span>
+          <span class="m-val">Creator · AI &amp; Systems Engineer</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">TIMELINE</span>
+          <span class="m-val">2026 // Production Shipped</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">CORE STACK</span>
+          <span class="m-val">Next.js 15 · React 19 · Neon DB · TinyFish · SSE · MV3</span>
+        </div>
+        <div class="cs-meta-item">
+          <span class="m-lbl">VERIFICATION</span>
+          <span class="m-val green">Live on Vercel · Neon Connected</span>
+        </div>
+      </div>
+
+      <!-- Main Visual Screenshot Frame -->
+      <div class="cs-screenshot-frame">
+        <img src="../../assets/projects/aheadguard/aheadguard-dashboard.png" alt="AheadGuard AI live web dashboard interface with investigation controls, TrustGraph, and recent audits" />
+        <div class="cs-screenshot-caption">
+          <span>AHEADGUARD AI — PRODUCTION COCKPIT &amp; INTAKE INTERFACE</span>
+          <span class="tag">LIVE INTERFACE · AHEADGUARD-AI.VERCEL.APP</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 02: THE PROBLEM -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">02</span>
+        <h2>THE PROBLEM &amp; RECRUITMENT FRAUD TAXONOMY</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          Digital recruitment fraud has evolved from crude spam into sophisticated, highly coordinated deception pipelines. Attackers deploy lookalike domains spoofing corporate career portals, impersonate real engineering recruiters using stolen LinkedIn identities, and route communications through Telegram channels or WhatsApp business handles.
+        </p>
+        <p>
+          Job seekers — particularly students and early-career engineers — are pressured into paying upfront "document processing fees", "laptop insurance deposits", or "training registration costs" before discovering that the job requisition never existed.
+        </p>
+        <p>
+          Standard antivirus scanners and URL reputation databases fail against this attack surface because:
+        </p>
+        <ul style="margin: 16px 0 20px 24px; color: var(--text-secondary); line-height: 1.8;">
+          <li><strong>The URL itself is often clean:</strong> Attackers often host forms on legitimate Google Forms, Typeform, or fresh unclassified domains with valid SSL certificates.</li>
+          <li><strong>The fraud resides in the semantic claim:</strong> The danger is not malicious JavaScript; it is the claim that an applicant must wire ₹4,500 via UPI for a "confirmed internship offer letter".</li>
+          <li><strong>Identity fragmentation:</strong> A genuine company name is combined with a mismatched recruiter email domain (e.g. <code>recruiter@company-careers-portal.com</code> vs <code>company.com</code>).</li>
+        </ul>
+        <p>
+          Checking a link in isolation is fundamentally insufficient: an investigation must evaluate the job offer, recruiter identity, applicant tracking system (ATS) tenant alignment, and payment requests holistically.
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 03: THE SOLUTION -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">03</span>
+        <h2>THE SOLUTION: PRE-ACTION DIGITAL TRUST</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          <strong>AheadGuard AI</strong> introduces a <em>pre-action verification paradigm</em>. Instead of alerting a user after malware has executed or credentials have leaked, AheadGuard investigates digital offers before the user clicks deceptive links, transfers funds, or discloses personal identity documents.
+        </p>
+        <div class="cs-grid-2">
+          <div class="cs-card-panel">
+            <h3>Evidence-First Investigation</h3>
+            <p>Every finding is backed by directly observed facts: HTTP status codes, TLS certificate issuers, domain age, ATS tenant boundaries, and explicit extracted text. Model interpretations are strictly partitioned from ground truth.</p>
+          </div>
+          <div class="cs-card-panel">
+            <h3>Deterministic Safety Rules</h3>
+            <p>Safety evaluations do not depend on probabilistic LLM mood or arbitrary temperature. Hard policy boundaries classify upfront fees, private network targets, and domain mismatches with absolute algorithmic consistency.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 04: INVESTIGATION ARCHITECTURE -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">04</span>
+        <h2>END-TO-END INVESTIGATION ARCHITECTURE</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          The platform executes a disciplined 7-stage pipeline when evaluating untrusted recruitment offers and digital links:
+        </p>
+      </div>
+
+      <div class="cs-flow-strip">
+        <div class="cs-flow-node">
+          <span class="n-step">01</span>
+          <span class="n-title">INPUT</span>
+          <p class="n-desc">URL, offer letter text, recruiter email, or payment prompt</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node">
+          <span class="n-step">02</span>
+          <span class="n-title">PREFLIGHT</span>
+          <p class="n-desc">SSRF defense, RFC 1918 blocking, loopback isolation</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node highlight">
+          <span class="n-step">03</span>
+          <span class="n-title">EXTRACTION</span>
+          <p class="n-desc">12-category structured claim decomposition via Zod</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node">
+          <span class="n-step">04</span>
+          <span class="n-title">TINYFISH</span>
+          <p class="n-desc">Read-only remote browser inspection over SSE</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node">
+          <span class="n-step">05</span>
+          <span class="n-title">LEDGER</span>
+          <p class="n-desc">Partitioning observed facts from model inferences</p>
+        </div>
+        <div class="cs-flow-arr">→</div>
+        <div class="cs-flow-node active">
+          <span class="n-step">06</span>
+          <span class="n-title">RISK ENGINE</span>
+          <p class="n-desc">Deterministic 4-tier policy &amp; Action Preview</p>
+        </div>
+      </div>
+
+      <!-- Investigation in Action Screenshot -->
+      <div class="cs-screenshot-frame">
+        <img src="../../assets/projects/aheadguard/aheadguard-investigation.png" alt="AheadGuard AI live multi-stage investigation progress running with Server-Sent Events" />
+        <div class="cs-screenshot-caption">
+          <span>LIVE INVESTIGATION TELEMETRY — REAL-TIME SERVER-SENT EVENTS (SSE) STREAMING</span>
+          <span class="tag">REAL TIME · NON-BLOCKING PIPELINE</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05: RISK INTELLIGENCE & FOUR-TIER MODEL -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">05</span>
+        <h2>RISK INTELLIGENCE &amp; FOUR-TIER EVALUATION</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          Unlike tools that provide opaque, arbitrary "threat scores" (e.g. 73/100), AheadGuard AI evaluates claims against four deterministic categories with transparent evidentiary rationale:
+        </p>
+
+        <div class="risk-tier-row">
+          <div class="risk-tier-card tier-high">
+            <div class="tier-header">
+              <span class="tier-name">HIGH RISK</span>
+              <span class="integration-status-pill status-live">CRITICAL THREAT SIGNALS</span>
+            </div>
+            <p class="tier-desc">
+              Triggered when explicit fraudulent patterns are detected: upfront fee requests, private/internal IP address targets (SSRF attempt), confirmed lookalike domain impersonation, or direct contradictions with corporate recruitment policies.
+            </p>
+          </div>
+
+          <div class="risk-tier-card tier-suspicious">
+            <div class="tier-header">
+              <span class="tier-name">SUSPICIOUS</span>
+              <span class="integration-status-pill status-configured">ANOMALIES DETECTED</span>
+            </div>
+            <p class="tier-desc">
+              Triggered by behavioral discrepancies: recruiter claiming enterprise status while using free generic email providers (Gmail, Outlook), newly registered domains (&lt;30 days old), or unverified third-party interview links.
+            </p>
+          </div>
+
+          <div class="risk-tier-card tier-unknown">
+            <div class="tier-header">
+              <span class="tier-name">UNKNOWN</span>
+              <span class="integration-status-pill status-tested">INSUFFICIENT EVIDENCE</span>
+            </div>
+            <p class="tier-desc">
+              Preserves technical humility. Assigned when target websites sit behind impenetrable bot-mitigation firewalls, private authentication walls, or when submitted data lacks corroborating public records.
+            </p>
+          </div>
+
+          <div class="risk-tier-card tier-low">
+            <div class="tier-header">
+              <span class="tier-name">LOW OBSERVED RISK</span>
+              <span class="integration-status-pill status-live">NO ADVERSARIAL SIGNALS FOUND</span>
+            </div>
+            <p class="tier-desc">
+              Assigned when all observed facts align with verified authoritative sources: official corporate career domain, matching ATS requisition ID, valid corporate MX records, and absence of payment solicitations.
+            </p>
+          </div>
+        </div>
+
+        <div class="disclaimer-banner">
+          ⚠️ <strong>SAFETY COMPLIANCE NOTICE:</strong> "LOW OBSERVED RISK" is never presented as an absolute guarantee of safety. It reflects that within the boundaries of the investigation window and available public signals, no adversarial patterns or policy violations were detected.
+        </div>
+
+        <!-- High Risk Scenario Screenshot -->
+        <div class="cs-screenshot-frame">
+          <img src="../../assets/projects/aheadguard/aheadguard-risk-high.png" alt="AheadGuard AI High Risk detection screen highlighting upfront recruitment fee violation" />
+          <div class="cs-screenshot-caption">
+            <span>UPFRONT RECRUITMENT FEE SCAM DETECTION — DETERMINISTIC POLICY TRIGGER</span>
+            <span class="tag">HIGH RISK CLASSIFICATION · ZERO DRIFT</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 06: EVIDENCE LEDGER & TRUSTGRAPH -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">06</span>
+        <h2>EVIDENCE LEDGER &amp; TRUSTGRAPH ENTITY CORRELATION</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          Two foundational systems govern how AheadGuard prevents hallucinations and surfaces organized intelligence:
+        </p>
+        <div class="cs-grid-2">
+          <div class="cs-card-panel">
+            <h3>The Evidence Ledger</h3>
+            <p>Every report includes an immutable ledger that cleanly separates <strong>Directly Observed Facts</strong> (e.g. <em>Domain registered 14 days ago via Namecheap</em>) from <strong>Model Interpretations</strong> (e.g. <em>Short domain age correlates with temporary disposable recruitment campaigns</em>). Users can audit the exact provenance of every claim.</p>
+          </div>
+          <div class="cs-card-panel">
+            <h3>TrustGraph Entity Mapping</h3>
+            <p>TrustGraph maps cross-channel relationships between phone numbers, email addresses, root domains, UPI payment identifiers, and corporate brand marks. It identifies when disjointed recruitment solicitations on WhatsApp share identical payment addresses.</p>
+          </div>
+        </div>
+
+        <!-- Evidence Ledger Screenshot -->
+        <div class="cs-screenshot-frame">
+          <img src="../../assets/projects/aheadguard/aheadguard-evidence-ledger.png" alt="AheadGuard AI Evidence Ledger displaying ground truth facts versus model interpretation" />
+          <div class="cs-screenshot-caption">
+            <span>EVIDENCE LEDGER — GROUND TRUTH FACTS PARTITIONED FROM INFERENCES</span>
+            <span class="tag">AUDIT TRAIL · TRANSPARENT PROVENANCE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07: SECURITY ENGINEERING & SSRF DEFENSE -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">07</span>
+        <h2>SECURITY ENGINEERING &amp; ADVERSARIAL DEFENSE</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          Building a platform that takes arbitrary URLs and text from untrusted users requires defensive engineering at every network boundary:
+        </p>
+        <div class="cs-arch-cards">
+          <div class="cs-arch-card">
+            <span class="a-badge">DEFENSE 01</span>
+            <h3>Preflight SSRF Prevention</h3>
+            <p>Resolves DNS before initiating requests. Rejects all RFC 1918 private IPv4 blocks (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16), 127.0.0.0/8 loopbacks, IPv6 site-local addresses, and cloud instance metadata services (169.254.169.254).</p>
+          </div>
+          <div class="cs-arch-card">
+            <span class="a-badge">DEFENSE 02</span>
+            <h3>Untrusted DOM Isolation</h3>
+            <p>HTML content extracted via TinyFish browser automation is treated as untrusted data. Strips executable script blocks, sanitizes HTML entities, and enforces character payload bounds before passing text to extraction engines.</p>
+          </div>
+          <div class="cs-arch-card">
+            <span class="a-badge">DEFENSE 03</span>
+            <h3>Prompt Injection Isolation</h3>
+            <p>User-submitted offer strings and scraped website text are quarantined in delimited evaluation wrappers with negative guidance instructing the model to analyze claims strictly without interpreting injected commands.</p>
+          </div>
+          <div class="cs-arch-card">
+            <span class="a-badge">DEFENSE 04</span>
+            <h3>Safe Error Redaction</h3>
+            <p>Production API exceptions redact internal connection strings, third-party authentication tokens, and infrastructure topologies, providing clean, user-safe error diagnostics.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 08: INTEGRATIONS & STATUS MATRIX -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">08</span>
+        <h2>INTEGRATION STATUS MATRIX (TECHNICAL HONESTY)</h2>
+      </div>
+      <div class="cs-prose">
+        <p>
+          In alignment with Gokul Labs' strict technical honesty standards, the following matrix distinguishes production-deployed features from configured extensions:
+        </p>
+
+        <div class="cs-table-scroll-wrapper" style="width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 24px 0;">
+          <table style="width: 100%; min-width: 520px; border-collapse: collapse; font-family: var(--font-mono); font-size: 13px;">
+            <thead>
+              <tr style="border-bottom: 2px solid rgba(163, 230, 53, 0.3); text-align: left; color: #a3e635;">
+                <th style="padding: 12px 16px;">COMPONENT</th>
+                <th style="padding: 12px 16px;">STATUS</th>
+                <th style="padding: 12px 16px;">DESCRIPTION &amp; BOUNDARIES</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <td style="padding: 12px 16px; font-weight: 600; color: #ffffff;">Web Cockpit</td>
+                <td style="padding: 12px 16px;"><span class="integration-status-pill status-live">DEPLOYED</span></td>
+                <td style="padding: 12px 16px; color: var(--text-secondary);">Production application live on Vercel with responsive desktop and mobile viewports.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <td style="padding: 12px 16px; font-weight: 600; color: #ffffff;">Neon PostgreSQL</td>
+                <td style="padding: 12px 16px;"><span class="integration-status-pill status-live">CONNECTED</span></td>
+                <td style="padding: 12px 16px; color: var(--text-secondary);">Serverless relational database storing persistent audit trails, trust reports, and entity nodes.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <td style="padding: 12px 16px; font-weight: 600; color: #ffffff;">TinyFish Research</td>
+                <td style="padding: 12px 16px;"><span class="integration-status-pill status-live">CONNECTED</span></td>
+                <td style="padding: 12px 16px; color: var(--text-secondary);">Read-only automated browser exploration streaming DOM observations over Server-Sent Events.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <td style="padding: 12px 16px; font-weight: 600; color: #ffffff;">Telegram Webhook</td>
+                <td style="padding: 12px 16px;"><span class="integration-status-pill status-live">CONNECTED</span></td>
+                <td style="padding: 12px 16px; color: var(--text-secondary);">Direct bot webhook receiving forwarded job offers and returning instant risk summaries.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <td style="padding: 12px 16px; font-weight: 600; color: #ffffff;">Chrome Extension MV3</td>
+                <td style="padding: 12px 16px;"><span class="integration-status-pill status-tested">TESTED LOCALLY</span></td>
+                <td style="padding: 12px 16px; color: var(--text-secondary);">Manifest V3 extension tested in Developer Mode with active-tab inspection; not published to Web Store.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <td style="padding: 12px 16px; font-weight: 600; color: #ffffff;">Discord Webhook</td>
+                <td style="padding: 12px 16px;"><span class="integration-status-pill status-tested">IMPLEMENTED</span></td>
+                <td style="padding: 12px 16px; color: var(--text-secondary);">Webhook handler for posting threat alerts and community verification requests.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                <td style="padding: 12px 16px; font-weight: 600; color: #ffffff;">Social Webhooks</td>
+                <td style="padding: 12px 16px;"><span class="integration-status-pill status-configured">CONFIGURED</span></td>
+                <td style="padding: 12px 16px; color: var(--text-secondary);">Architecture &amp; payloads configured; live messaging gated on Meta business verification.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Chrome Extension Screenshot -->
+        <div class="cs-screenshot-frame">
+          <img src="../../assets/projects/aheadguard/aheadguard-chrome-extension.png" alt="AheadGuard AI Chrome Extension popup interface showing quick domain analysis and live tab status" />
+          <div class="cs-screenshot-caption">
+            <span>CHROME EXTENSION MANIFEST V3 — ACTIVE TAB PRE-ACTION SAFETY INSPECTION</span>
+            <span class="tag">MANIFEST V3 · LOCAL STORAGE CACHE</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 09: TECHNICAL STACK -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">09</span>
+        <h2>VERIFIED TECHNOLOGY STACK</h2>
+      </div>
+      <div class="cs-arch-cards">
+        <div class="cs-arch-card">
+          <span class="a-badge">FRAMEWORK</span>
+          <h3>Next.js 15 App Router &amp; React 19</h3>
+          <p>React Server Components for rapid initial layout delivery, unified Edge API routes for Server-Sent Events, and client state machines for live investigation telemetry.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge">DATABASE</span>
+          <h3>Neon Serverless PostgreSQL</h3>
+          <p>Connection pooling, auto-scaling to zero compute when idle, and structured relational persistence for audit ledgers, TrustGraph entities, and investigation reports.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge">STREAMING</span>
+          <h3>Server-Sent Events (SSE)</h3>
+          <p>Unidirectional HTTP streaming pushing phase transitions, active claim validations, and partial DOM insights to the user interface in real time.</p>
+        </div>
+        <div class="cs-arch-card">
+          <span class="a-badge">TESTING &amp; VALIDATION</span>
+          <h3>TypeScript, Zod &amp; Vitest</h3>
+          <p>End-to-end type safety, runtime schema enforcement for 12 claim categories, and automated regression testing across deterministic risk rule boundaries.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 10: ENGINEERING CHALLENGES & DECISIONS -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">10</span>
+        <h2>KEY ENGINEERING DECISIONS &amp; CHALLENGES</h2>
+      </div>
+      <div class="cs-decisions-grid">
+        <div class="cs-decision-item">
+          <h4>Why Deterministic Risk Policy over Pure LLM Scoring?</h4>
+          <p>LLMs are probabilistic and prone to hallucinated benevolence. A prompt that returns "Suspicious" today might return "Safe" tomorrow on identical input. AheadGuard uses pure deterministic functions for scoring: upfront fees or private IP targets trigger HIGH RISK unconditionally.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Why Read-Only TinyFish Browser Automation?</h4>
+          <p>Scam landing pages frequently employ JavaScript cloaking, bot-fingerprinting defenses, and multi-hop redirects that simple <code>fetch()</code> requests cannot navigate. TinyFish executes real browser rendering in a sandboxed remote container without executing risky client-side actions.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Resolving the Lookalike Domain Problem</h4>
+          <p>Attackers register domains like <code>amazon-recruiting-jobs.com</code> to deceive candidates. AheadGuard decomposes URLs using public suffix lists, cross-references corporate WHOIS registration ages, and verifies whether the applicant tracking system is genuine.</p>
+        </div>
+        <div class="cs-decision-item">
+          <h4>Streaming Telemetry via Server-Sent Events</h4>
+          <p>Deep investigations involving remote browser navigation require 6 to 12 seconds. By streaming progressive status updates over SSE, users observe each claim being verified in real time, dramatically improving perceived responsiveness and trust.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 11: RESULTS & CURRENT LIMITATIONS -->
+    <section class="cs-section">
+      <div class="cs-sec-head">
+        <span class="cs-num">11</span>
+        <h2>RESULTS &amp; CURRENT TECHNICAL LIMITATIONS</h2>
+      </div>
+      <div class="cs-challenges-box">
+        <div class="c-col">
+          <span class="c-kicker cyan">VERIFIED RESULTS</span>
+          <p>Deployed live to production on Vercel with Neon PostgreSQL. Successfully processes complex multi-tier recruitment scams, exposes upfront payment traps, and streams investigation progress over SSE.</p>
+        </div>
+        <div class="c-col">
+          <span class="c-kicker red">ACTIVE LIMITATIONS</span>
+          <p>Cannot access closed private encrypted chats without user submission. The Chrome Extension requires manual loading in Developer Mode until published on the Web Store. Novel offline-only fraud without digital footprint falls back to UNKNOWN.</p>
+        </div>
+        <div class="c-col">
+          <span class="c-kicker green">LESSON LEARNED</span>
+          <p>In safety engineering, technical honesty builds far greater trust than claiming 100% prevention. Explicitly communicating uncertainty is an engineering feature, not a deficiency.</p>
+        </div>
+      </div>
+
+      <!-- Mobile Viewport Screenshot -->
+      <div class="cs-screenshot-frame">
+        <img src="../../assets/projects/aheadguard/aheadguard-mobile.png" alt="AheadGuard AI mobile responsive view showing compact risk card and evidence summary" />
+        <div class="cs-screenshot-caption">
+          <span>RESPONSIVE MOBILE VIEWPORT — ON-THE-GO DIGITAL TRUST ON ANY DEVICE</span>
+          <span class="tag">TOUCH FIRST · ZERO HORIZONTAL OVERFLOW</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 12: FINAL PROJECT LINKS & NEXT PROJECT -->
+    <section class="cs-footer-nav">
+      <div class="cs-footer-actions">
+        <a href="https://aheadguard-ai.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-primary lime-btn">
+          <span>EXPLORE LIVE PRODUCT ↗</span>
+        </a>
+        <a href="https://github.com/gokul1599/AheadGuard-Ai" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <span>VIEW GITHUB REPO ↗</span>
+        </a>
+      </div>
+
+      <div class="cs-next-bar">
+        <span class="next-lbl">NEXT PROJECT</span>
+        <a href="../valtora/index.html" class="next-link">
+          <span>02 — VALTORA (AI Product Intelligence Platform)</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="cs-site-footer">
+    <div class="cs-footer-inner">
+      <span>GOKUL LABS © 2026 · GOKUL KARPURAPU</span>
+      <a href="../../#work">RETURN TO SELECTED WORK ↑</a>
+    </div>
+  </footer>
+</body>
+</html>

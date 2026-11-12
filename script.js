@@ -776,13 +776,14 @@
     const commands = [
       // --- NAVIGATION ---
       { group: "Navigation", icon: "🏠", title: "Hero Introduction", desc: "Top of portfolio & identity statement", keywords: "hero home gokul karpurapu intro", action: () => scrollToSection("hero") },
-      { group: "Navigation", icon: "💼", title: "Selected Work (04 Builds)", desc: "Jump directly to Valtora, LifeHub, Teluguva, DevYatra", keywords: "work projects apps builds products portfolio", action: () => scrollToSection("work") },
+      { group: "Navigation", icon: "💼", title: "Selected Work (05 Builds)", desc: "Jump directly to AheadGuard AI, Valtora, LifeHub, Teluguva, DevYatra", keywords: "work projects apps builds products portfolio aheadguard", action: () => scrollToSection("work") },
       { group: "Navigation", icon: "👤", title: "About the Builder", desc: "Background, mindset, education & philosophy", keywords: "about bio profile scaler bits pilani student", action: () => scrollToSection("about") },
       { group: "Navigation", icon: "⚡", title: "Technical Stack", desc: "Modern frontend, backend, 3D, and AI models", keywords: "stack skills tech tools technologies languages frameworks", action: () => scrollToSection("stack") },
       { group: "Navigation", icon: "🧭", title: "Journey & Milestones", desc: "Timeline, Scaler, BITS Pilani & now", keywords: "journey timeline experience milestones history education", action: () => scrollToSection("journey") },
       { group: "Navigation", icon: "✉️", title: "Contact & Connect", desc: "Get in touch for internships & opportunities", keywords: "contact email hire connect message linkedin github", action: () => scrollToSection("contact") },
 
       // --- PROJECTS ---
+      { group: "Projects", icon: "🛡️", title: "AheadGuard AI", desc: "Evidence-first digital trust & recruitment safety platform", keywords: "aheadguard ai digital trust cybersecurity scam fraud tinyfish sse neon case study", action: () => { closePalette(); openCaseStudy("aheadguard"); } },
       { group: "Projects", icon: "💡", title: "Valtora", desc: "AI analytical co-founder for startup validation & sizing", keywords: "valtora startup venture market sizing cofounder groq llm case study", action: () => { closePalette(); openCaseStudy("valtora"); } },
       { group: "Projects", icon: "📋", title: "LifeHub", desc: "Personal daily operating system & dashboard", keywords: "lifehub dashboard habits productivity finance calendar offline localstorage case study", action: () => { closePalette(); openCaseStudy("lifehub"); } },
       { group: "Projects", icon: "🗣️", title: "Teluguva", desc: "Bilingual English to conversational Telugu with OCR", keywords: "teluguva telugu ocr tesseract translation audio speech accessibility case study", action: () => { closePalette(); openCaseStudy("teluguva"); } },
